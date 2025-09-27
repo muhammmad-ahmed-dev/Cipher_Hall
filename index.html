@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title & Meta -->
+    <title>CipherHall | Learn Cybersecurity & Ethical Hacking Online</title>
+    <meta
+      name="description"
+      content="Learn cybersecurity online with CipherHall. Hands-on ethical hacking, penetration testing, and cloud security courses for beginners and professionals."
+    />
+<link rel="canonical" href="https://www.cipherhall.com/" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Exo+2:wght@700;800;900&display=swap" as="style">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+ @font-face{font-family:"Font Awesome 6 Brands";font-style:normal;font-weight:400;font-display:block;src:url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-brands-400.woff2) format("woff2"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-brands-400.ttf) format("truetype")}@font-face{font-family:"Font Awesome 6 Free";font-style:normal;font-weight:400;font-display:block;src:url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-regular-400.woff2) format("woff2"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-regular-400.ttf) format("truetype")}@font-face{font-family:"Font Awesome 6 Free";font-style:normal;font-weight:900;font-display:block;src:url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2) format("woff2"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.ttf) format("truetype")}.intro-data-particle{position:absolute;width:4px;height:4px;background:var(--color-green);border-radius:50%;animation:8s linear infinite intro-float-particle;opacity:.6}.intro-data-particle:first-child{top:20%;left:10%;animation-delay:0s}.intro-data-particle:nth-child(2){top:60%;left:20%;animation-delay:2s}.intro-data-particle:nth-child(3){top:40%;right:15%;animation-delay:4s}.intro-data-particle:nth-child(4){top:80%;right:25%;animation-delay:6s}@keyframes intro-float-particle{0%{transform:translateY(0) scale(1);opacity:0}10%,90%{opacity:.6}100%{transform:translateY(-100px) scale(.5);opacity:0}}@media screen and (max-width:768px){#hero,#main-header{display:flex}#main-header .logo{font-size:1.3rem}*{box-sizing:border-box}body{font-size:14px;line-height:1.6;padding:0;margin:0}section{padding-left:15px;padding-right:15px}#main-header{padding:15px;min-height:65px;align-items:center;justify-content:space-between;flex-wrap:wrap;row-gap:10px;padding-top:max(12px,env(safe-area-inset-top));padding-left:max(15px,env(safe-area-inset-left));padding-right:max(15px,env(safe-area-inset-right))}#main-header nav{display:none;position:fixed;top:65px;left:0;width:100%;background:rgba(5,5,5,.98);backdrop-filter:blur(15px);border-bottom:1px solid rgba(0,255,65,.3);padding:0;flex-direction:column;z-index:999;max-height:calc(100vh - 65px);overflow-y:auto}#main-header nav a{display:block;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;font-size:1rem;margin:0}.header-controls{gap:8px;flex-shrink:0}.btn-nav{padding:8px 12px;font-size:.8rem;white-space:nowrap}.music-dropdown-content{left:2px;min-width:200px;max-height:250px;overflow-y:auto;-webkit-overflow-scrolling:touch}#hero{height:100vh;min-height:650px;padding:0 10px;align-items:center;justify-content:center}.hero-content{max-width:100%;padding:0;text-align:center;margin-top:65px}.hero-title{font-size:2.2rem!important;line-height:1.2;margin-bottom:1.5rem;padding:0 10px}.hero-subtitle{font-size:.95rem;margin-bottom:2rem;padding:0 15px;line-height:1.6}.hero-buttons{flex-direction:column;gap:12px;align-items:center;padding:0 20px}.hero-buttons .btn{width:100%;max-width:280px;text-align:center;padding:14px 20px;font-size:.9rem;min-height:50px;display:flex;align-items:center;justify-content:center}.shape{opacity:.03}.shape1,.shape4{width:60px;height:60px}.shape2{width:80px;height:80px}.shape3{width:50px;height:50px}.auth-tabs{margin-bottom:1.2rem}.contact-form input{padding:12px;font-size:16px;border-radius:6px;min-height:44px}.auth-tab,.btn-google{font-size:.9rem}.modal-content{padding:1.5rem;max-width:95%;width:95%;margin:20px;border-radius:12px}.close{top:.8rem;right:1rem;font-size:1.8rem}.auth-tab{padding:.8rem}.auth-form input,.btn-google{padding:12px;min-height:44px}.auth-form h2{font-size:1.2rem;margin-bottom:1.5rem}.auth-form input{font-size:16px;margin-bottom:1rem;border-radius:6px}.divider{margin:1.5rem 0}.btn{touch-action:manipulation}.btn{margin:8px 0;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation}.hero-shapes,.intro-data-particle{display:none}@media (prefers-contrast:high){.btn{border-width:2px}}@media (prefers-reduced-motion:reduce){*,::after,::before{animation-duration:0s!important;animation-iteration-count:1!important}html{scroll-behavior:auto}}.btn,a[href],button,input{min-height:44px;min-width:44px}p{line-height:1.6;letter-spacing:.01em}.hero-subtitle{color:#e0e0e0}}.fa-solid,.fab,.fas{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:var(--fa-display,inline-block);font-style:normal;font-variant:normal;line-height:1;text-rendering:auto}.fa-solid,.fas{font-family:"Font Awesome 6 Free"}.fab{font-family:"Font Awesome 6 Brands"}.fa-2x{font-size:2em}.fa-spin{-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}@media (prefers-reduced-motion:reduce){.fa-spin{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}.fa-stop-circle:before{content:"\f28d"}.fa-arrow-right:before{content:"\f061"}.fa-terminal:before{content:"\f120"}.fa-shield-virus:before{content:"\e06c"}.fa-chevron-down:before{content:"\f078"}.fa-spinner:before{content:"\f110"}.fa-music:before{content:"\f001"}:host,:root{--fa-style-family-brands:"Font Awesome 6 Brands";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}.fab{font-weight:400}.fa-google:before{content:"\f1a0"}:host,:root{--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Free"}:host,:root{--fa-style-family-classic:"Font Awesome 6 Free";--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Free"}.fa-solid,.fas{font-weight:900}.btn,.btn-nav{text-decoration:none}#main-header nav a,.btn,body{position:relative}body{background-color:var(--color-black)}#hero,.btn{overflow:hidden}#hero{text-align:center}body::before{inset:0}#main-header .logo,#main-header nav a,.btn,.btn-nav,.dropdown-content a{text-decoration:none}:root{--color-black:#050505;--color-dark-grey:#111111;--color-green:#00ff41;--color-red:#ff073a;--color-white:#f0f0f0;--font-primary:"Exo 2",sans-serif;--font-secondary:"Roboto Mono",monospace}body{color:var(--color-white)}html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}body{font-family:var(--font-secondary);font-family:Orbitron,monospace;background:#000;color:#00ff41;min-height:100vh;padding:20px;overflow-x:hidden;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--color-dark-grey)}::-webkit-scrollbar-thumb{background:var(--color-green);border-radius:8px}::-webkit-scrollbar-thumb:hover{background:#00e63a}#main-header .logo i,.btn-nav{color:var(--color-green)}.btn{display:inline-block;padding:2px 18px;font-family:var(--font-secondary);font-weight:700;border-radius:4px;z-index:1;margin:5px 0;min-height:44px;display:inline-flex;align-items:center;justify-content:center}#main-header .logo,.hero-title{font-family:var(--font-primary)}.btn-nav{background:0 0;border:1.5px solid var(--color-green);padding:.5rem 1.25rem;border-radius:.5rem;font-weight:600;font-size:.95rem;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;width:auto;min-width:fit-content}.btn-primary,.btn-secondary{color:var(--color-black);background-color:var(--color-green)}.btn-primary{border:2px solid var(--color-green)}#main-header .logo,#main-header nav a,.glitch,.hero-subtitle{color:var(--color-white)}#main-header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 5%;z-index:1000;background:rgba(5,5,5,.6);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,255,65,.2)}#main-header .logo{font-size:1.8rem;font-weight:800}#main-header .logo i{margin-right:8px}#main-header nav a{font-size:1rem}#main-header nav a::after{content:"";position:absolute;width:0;height:2px;bottom:-5px;left:50%;transform:translateX(-50%);background-color:var(--color-green)}.header-controls{display:flex;align-items:center;gap:15px}.music-dropdown,.nav-dropdown{position:relative;display:inline-block}.music-dropdown-content{display:none;position:absolute;right:0;background-color:var(--color-dark-grey);min-width:200px;box-shadow:0 8px 16px 0 rgba(0,0,0,.2);z-index:1;border-radius:8px;border:1px solid rgba(0,255,65,.2);padding:10px}#hero,.glitch,.hero-content{position:relative}.music-dropdown-content a{color:var(--color-white);padding:12px 16px;text-decoration:none;display:flex;justify-content:space-between;align-items:center;border-radius:4px}#hero{height:100vh;display:flex;align-items:center;justify-content:center}#hero::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,transparent,var(--color-black) 80%);z-index:-1}.hero-content{max-width:800px;z-index:2}.hero-title{font-size:4.5rem;font-weight:900;line-height:1.1;margin-bottom:20px}.glitch{animation:1s linear infinite alternate-reverse glitch-skew}.glitch::after,.glitch::before{content:attr(data-text);position:absolute;top:0;width:100%;height:100%;background:var(--color-black);overflow:hidden}.glitch::before{left:2px;text-shadow:-2px 0 var(--color-red);clip:rect(44px,450px,56px,0);animation:5s linear infinite alternate-reverse glitch-anim}.glitch::after{left:-2px;text-shadow:-2px 0 var(--color-green),2px 2px var(--color-red);clip:rect(85px,450px,90px,0);animation:3s linear infinite alternate-reverse glitch-anim-2}@keyframes glitch-skew{0%,100%{transform:skew(0)}}@keyframes glitch-anim{0%{clip:rect(79px,9999px,3px,0)}100%{clip:rect(6px,9999px,83px,0)}}@keyframes glitch-anim-2{0%{clip:rect(5px,9999px,96px,0)}100%{clip:rect(90px,9999px,1px,0)}}.hero-subtitle{font-size:1.2rem;margin-bottom:40px}.typing-cursor{display:inline-block;width:10px;height:1.2rem;background-color:var(--color-green);animation:.7s infinite blink}@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}.hero-buttons{display:flex;justify-content:center;gap:20px}.shape{position:absolute;opacity:.1;z-index:0;filter:blur(4px);animation:10s ease-in-out infinite float}.shape1{width:150px;height:150px;background:var(--color-green);border-radius:50%;top:10%;left:5%;animation-delay:0s}.shape2{width:200px;height:200px;background:var(--color-red);top:20%;right:10%;clip-path:polygon(50% 0%,0% 100%,100% 100%);animation-delay:2s}.shape3{width:100px;height:100px;background:#5352ed;bottom:10%;left:20%;animation-delay:4s}.shape4{width:120px;height:120px;background:#f7b731;bottom:25%;right:15%;border-radius:10px;transform:rotate(45deg);animation-delay:6s}.modal-content{border:1px solid rgba(255,255,255,.1)}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px) rotate(10deg)}}.auth-tab{font-family:var(--font-secondary)}*{margin:0;padding:0;box-sizing:border-box}body::before{content:"";position:fixed;z-index:0;background:radial-gradient(circle at 20% 30%,rgba(0,255,65,.04) 0 150px,transparent 151px),radial-gradient(circle at 80% 70%,rgba(255,7,58,.04) 0 150px,transparent 151px);animation:25s ease-in-out infinite bgFloat}@keyframes bgFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-20px,-10px) scale(1.05)}}.modal,.modal-overlay{top:0;width:100%;height:100%}#authMessage,.auth-form h2,.divider{text-align:center}.contact-form input{width:100%;padding:12px;background-color:transparent;border:1px solid #333;border-radius:4px;color:var(--color-white);font-family:var(--font-secondary)}.auth-form h2{font-family:var(--font-primary)}#authMessage{margin-top:1rem}.auth-form h2,.auth-form input{color:var(--color-white)}.modal{position:fixed;left:0;z-index:10000;display:flex;align-items:center;justify-content:center}.modal-overlay{position:absolute;left:0;background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}.divider span,.modal-content{background:var(--color-dark-grey)}.modal-content{border-radius:15px;padding:3rem;max-width:400px;width:90%;position:relative;z-index:1}.close{position:absolute;top:1rem;right:1.5rem;color:#aaa;font-size:2rem}.auth-tabs{display:flex;margin-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.1)}.auth-tab,.btn-google{border:none}.auth-tab{flex:1;padding:1rem;background:0 0;color:#aaa}.auth-tab.active{color:var(--color-green);border-bottom:2px solid var(--color-green)}.auth-form h2{margin-bottom:2rem}.auth-form input,.btn-google{margin-bottom:1rem;width:100%}.btn-google{background:var(--color-white);color:var(--color-black)}.divider{margin:2rem 0;position:relative;color:#666}.divider::before{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(255,255,255,.1);z-index:1}.divider span{padding:0 1rem;position:relative;z-index:2}.auth-form input{padding:1rem;background:var(--color-black);border:1px solid rgba(255,255,255,.1);border-radius:8px;font-family:var(--font-secondary)}.auth-form button[type=submit]{width:100%;margin-top:1rem}#authMessage{padding:1rem;border-radius:8px;display:none}@media (max-width:768px){body{font-size:14px;line-height:1.5}#main-header{padding:15px 4%;flex-wrap:wrap;min-height:70px}#main-header .logo{font-size:1.4rem}#main-header nav{display:none;position:fixed;top:70px;left:0;width:100%;background:rgba(5,5,5,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,255,65,.2);padding:1rem 0;flex-direction:column;z-index:999}#main-header nav a{display:block;margin:0;padding:12px 5%;border-bottom:1px solid rgba(255,255,255,.1);text-align:center}.header-controls{gap:10px}.btn-nav{padding:.4rem 1rem;font-size:.85rem;min-width:auto}.music-dropdown-content{right:-20px;min-width:180px;max-height:250px;overflow-y:auto}.music-dropdown-content a{padding:10px 12px;font-size:.85rem}#hero{height:100vh;min-height:600px;padding:0 5%}.hero-content{max-width:100%;padding:0 1rem}.hero-title{font-size:2.5rem!important;line-height:1.2;margin-bottom:1rem;margin-top:3rem}.hero-subtitle{font-size:.9rem;margin-bottom:1rem;padding:0 1rem}.hero-buttons{flex-direction:column;gap:15px;align-items:center}.hero-buttons .btn{width:200px;text-align:center;padding:14px 20px}.shape{opacity:.05}.shape1{width:80px;height:80px}.shape2{width:100px;height:100px}.shape3{width:60px;height:60px}.shape4{width:70px;height:70px}.contact-form input{padding:10px;font-size:.9rem}.auth-form h2,.auth-tabs{margin-bottom:1.5rem}.modal-content{padding:2rem 1.5rem;max-width:350px;width:95%}.auth-form input,.auth-tab,.btn-google{padding:.8rem;font-size:.9rem}.auth-form h2{font-size:1.3rem}.btn{-webkit-touch-callout:none}html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}.btn{margin:5px 0;min-height:44px;display:inline-flex;align-items:center;justify-content:center}input{font-size:16px;min-height:44px}}@media (max-width:480px){.hero-title{font-size:2rem!important}#main-header{padding:12px 3%}#main-header .logo{font-size:1.2rem}.btn-nav{padding:.3rem .8rem;font-size:.8rem}.modal-content{padding:1.5rem 1rem}.modal-content{width:98%}}.dropdown-toggle{display:flex;align-items:center;gap:5px}.nav-dropdown,.nav-link{margin-left:20px}.dropdown-content{display:none;position:absolute;top:100%;right:0;background-color:var(--color-dark-grey);min-width:200px;box-shadow:0 8px 16px rgba(0,0,0,.3);z-index:1001;border-radius:8px;border:1px solid rgba(0,255,65,.2);padding:8px 0;margin-top:10px}.dropdown-content a{color:var(--color-white);padding:12px 20px;display:block}@media (min-width:769px){.mobile-only{display:none!important}}nav{gap:20px}@media (max-width:768px){.mobile-only{display:block}.desktop-only{display:none!important}#main-header nav{display:none;position:fixed;top:70px;left:0;width:100%;background:rgba(5,5,5,.95);flex-direction:column;padding:1rem 0}#main-header nav a{padding:12px 5%;border-bottom:1px solid rgba(255,255,255,.1)}}@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}@media screen and (max-width:1024px) and (min-width:769px){#main-header{padding:18px 3%}.hero-title{font-size:3.5rem}.hero-subtitle{font-size:1.1rem}}@media screen and (max-width:768px){#hero,#main-header{display:flex}#main-header .logo{font-size:1.3rem}*{box-sizing:border-box}body{font-size:14px;line-height:1.6;padding:0;margin:0}section{padding-left:15px;padding-right:15px}#main-header{padding:15px;min-height:65px;align-items:center;justify-content:space-between;flex-wrap:wrap;row-gap:10px;padding-top:max(12px,env(safe-area-inset-top));padding-left:max(15px,env(safe-area-inset-left));padding-right:max(15px,env(safe-area-inset-right))}#main-header nav{display:none;position:fixed;top:65px;left:0;width:100%;background:rgba(5,5,5,.98);backdrop-filter:blur(15px);border-bottom:1px solid rgba(0,255,65,.3);padding:0;flex-direction:column;z-index:999;max-height:calc(100vh - 65px);overflow-y:auto}#main-header nav a{display:block;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;font-size:1rem;margin:0}.header-controls{gap:8px;flex-shrink:0}.btn-nav{padding:8px 12px;font-size:.8rem;white-space:nowrap}.music-dropdown-content{left:2px;min-width:200px;max-height:250px;overflow-y:auto;-webkit-overflow-scrolling:touch}#hero{height:100vh;min-height:650px;padding:0 10px;align-items:center;justify-content:center}.hero-content{max-width:100%;padding:0;text-align:center;margin-top:65px}.hero-title{font-size:2.2rem!important;line-height:1.2;margin-bottom:1.5rem;padding:0 10px}.hero-subtitle{font-size:.95rem;margin-bottom:2rem;padding:0 15px;line-height:1.6}.hero-buttons{flex-direction:column;gap:12px;align-items:center;padding:0 20px}.hero-buttons .btn{width:100%;max-width:280px;text-align:center;padding:14px 20px;font-size:.9rem;min-height:50px;display:flex;align-items:center;justify-content:center}.shape{opacity:.03}.shape1,.shape4{width:60px;height:60px}.shape2{width:80px;height:80px}.shape3{width:50px;height:50px}.auth-tabs{margin-bottom:1.2rem}.contact-form input{padding:12px;font-size:16px;border-radius:6px;min-height:44px}.auth-tab,.btn-google{font-size:.9rem}.modal-content{padding:1.5rem;max-width:95%;width:95%;margin:20px;border-radius:12px}.close{top:.8rem;right:1rem;font-size:1.8rem}.auth-tab{padding:.8rem}.auth-form input,.btn-google{padding:12px;min-height:44px}.auth-form h2{font-size:1.2rem;margin-bottom:1.5rem}.auth-form input{font-size:16px;margin-bottom:1rem;border-radius:6px}.divider{margin:1.5rem 0}.btn{touch-action:manipulation}.btn{margin:8px 0;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation}.hero-shapes{display:none}@media (prefers-contrast:high){.btn{border-width:2px}}@media (prefers-reduced-motion:reduce){*,::after,::before{animation-duration:0s!important;animation-iteration-count:1!important}html{scroll-behavior:auto}}.btn,a[href],button,input{min-height:44px;min-width:44px}p{line-height:1.6;letter-spacing:.01em}.hero-subtitle{color:#e0e0e0}}@media screen and (max-width:480px){body{font-size:13px}section{padding-left:10px;padding-right:10px}#main-header{padding:10px 12px;min-height:60px}#main-header .logo{font-size:1.1rem}.btn-nav{padding:6px 10px;font-size:.75rem}.hero-content{margin-top:60px}.hero-title{font-size:1.8rem!important;padding:0 5px}.hero-subtitle{font-size:.85rem;padding:0 10px}.hero-buttons{padding:0 15px}.hero-buttons .btn{max-width:100%;padding:12px 16px;font-size:.85rem}.modal-content{padding:1.2rem;width:98%}}@supports (-webkit-touch-callout:none) and (max-width:768px){#hero{height:-webkit-fill-available}input[type=email],input[type=password],input[type=text]{font-size:16px!important}#main-header{-webkit-transform:translateZ(0);transform:translateZ(0)}.music-dropdown-content,body{-webkit-overflow-scrolling:touch}.btn,a,button{-webkit-touch-callout:none}}@-moz-document url-prefix(){@media screen and (max-width:768px){.hero-buttons{display:-moz-flex}.btn,input{border-radius:6px}}}@media screen and (max-width:768px){.hero-content{-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}.btn{will-change:transform}.btn:not(:hover):not(:focus){will-change:auto}.nav-link{position:relative;z-index:1}.modal-content,.music-dropdown-content,body{-webkit-overflow-scrolling:touch;scroll-behavior:smooth}}@media screen and (max-width:520px){.music-dropdown .btn span{display:none}.music-dropdown .btn i{margin-right:0}}@media (max-width:768px){.shape{display:none}}
+</style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Exo+2:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <meta property="og:type" content="website">
+<meta property="og:url" content="https://www.cipherhall.com/">
+<meta property="og:title" content="CipherHall | Learn Cybersecurity & Ethical Hacking Online">
+<meta property="og:description" content="Learn cybersecurity online with CipherHall. Hands-on ethical hacking, penetration testing, and cloud security courses for beginners and professionals.">
+<meta property="og:image" content="https://www.cipherhall.com/path/to/your/social-preview-image.png">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.cipherhall.com/">
+<meta property="twitter:title" content="CipherHall | Learn Cybersecurity & Ethical Hacking Online">
+<meta property="twitter:description" content="Learn cybersecurity online with CipherHall. Hands-on ethical hacking, penetration testing, and cloud security courses for beginners and professionals.">
+<meta property="twitter:image" content="https://www.cipherhall.com/path/to/your/social-preview-image.png">
+
+    <!-- FontAwesome -->
+ <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js" defer></script>
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CipherHall",
+  "url": "https://www.cipherhall.com",
+  "description": "Learn cybersecurity online with CipherHall. Hands-on ethical hacking, penetration testing, and cloud security courses for beginners and professionals.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.cipherhall.com/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "hasPart": [
+    {
+      "@type": "WebPage",
+      "name": "All Courses",
+      "url": "https://www.cipherhall.com/AllCourses",
+      "description": "Browse our complete catalog of free online cybersecurity courses, from beginner fundamentals to advanced expert topics."
+    },
+    {
+      "@type": "WebPage",
+      "name": "Student Dashboard",
+      "url": "https://www.cipherhall.com/dashboard",
+      "description": "Access your personal student dashboard to track course progress, view achievements, and continue your learning journey."
+    },
+    {
+      "@type": "WebPage",
+      "name": "Cybersecurity News",
+      "url": "https://www.cipherhall.com/news",
+      "description": "Stay updated with the latest news, articles, and insights from the world of cybersecurity."
+    },
+    {
+      "@type": "WebPage",
+      "name": "Interactive Labs",
+      "url": "https://www.cipherhall.com/lab",
+      "description": "Access hands-on, interactive cybersecurity labs to practice and hone your skills in a real-world environment."
+    },
+    {
+      "@type": "WebPage",
+      "name": "Privacy Policy",
+      "url": "https://www.cipherhall.com/privacy",
+      "description": "Read the CipherHall privacy policy to understand how we collect, use, and protect your data."
+    }
+  ]
+}
+</script>
+    <link rel="preload" href="assets/css/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="assets/css/main.min.css"></noscript>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3SB8N1P82M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3SB8N1P82M');
+</script>
+  </head>
+  <body>
+    <header id="main-header">
+      <a href="#" class="logo"
+        ><i class="fa-solid fa-shield-virus"></i> CipherHall</a
+      >
+      <nav>
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="/AllCourses" class="nav-link">Courses</a>
+        <a href="/dashboard" class="nav-link">Dashboard</a>
+        <a href="#blog-news" class="nav-link">News</a>
+
+        <!-- These links show ONLY on mobile -->
+        <a href="#about" class="nav-link mobile-only">About</a>
+        <a href="/labs" class="nav-link mobile-only">Labs</a>
+        <a href="#faq" class="nav-link mobile-only">FAQ</a>
+        <a href="#contact" class="nav-link mobile-only">Contact</a>
+
+        <!-- Desktop-only dropdown -->
+        <div class="nav-dropdown desktop-only">
+          <a href="#" class="dropdown-toggle">
+            More <i class="fas fa-chevron-down"></i>
+          </a>
+          <div class="dropdown-content">
+            <a href="#about">About</a>
+            <a href="/labs">Labs</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
+      <div class="header-controls">
+        <div class="music-dropdown" id="music-dropdown">
+          <button class="btn btn-secondary">
+            <span id="music-button-text">STUDY MUSIC</span>
+            <i id="music-icon" class="fa-solid fa-music"></i>
+          </button>
+          <div class="music-dropdown-content" id="music-dropdown-content">
+            <a
+              href="#"
+              data-src="https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3"
+              >1. Coffee Shop Vibes</a
+            >
+            <a
+              href="#"
+              data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+              >2. City Lights Lofi</a
+            >
+            <a
+              href="#"
+              data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"
+              >3. Mellow Thoughts</a
+            >
+            <a
+              href="#"
+              data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"
+              >4. Rainy Mood</a
+            >
+            <a
+              href="#"
+              data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
+              >5. Time Alone</a
+            >
+            <a href="#" id="stop-music-link"
+              ><i class="fa-solid fa-stop-circle"></i> Stop Music</a
+            >
+          </div>
+        </div>
+        <a href="#" id="loginNavBtn" class="btn-nav">Login / Signup</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero">
+        <div class="hero-content">
+          <h1 class="hero-title glitch" data-text="Learn Cybersecurity Online">
+            Learn Cybersecurity Online
+          </h1>
+
+          <p class="hero-subtitle">
+    Master ethical hacking, penetration testing, and network security with our industry-led online courses. 
+    <span id="typing-text"></span><span class="typing-cursor"></span>
+</p>
+          <div class="hero-buttons">
+            <a href="#courses" class="btn btn-primary"
+              >START LEARNING <i class="fa-solid fa-arrow-right"></i
+            ></a>
+            <a href="/labs" class="btn btn-secondary"
+              >TRY LABS <i class="fa-solid fa-terminal"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="hero-shapes">
+          <div class="shape shape1"></div>
+          <div class="shape shape2"></div>
+          <div class="shape shape3"></div>
+          <div class="shape shape4"></div>
+        </div>
+      </section>
+      <!-- ========== Start: New Introduction Section ========== -->
+<section id="introduction-hero">
+    <div class="intro-data-particle"></div>
+    <div class="intro-data-particle"></div>
+    <div class="intro-data-particle"></div>
+    <div class="intro-data-particle"></div>
+    
+    <div class="intro-container">
+        <div class="intro-content-grid">
+            <div class="intro-text-section">
+                <h2 class="intro-main-title">
+                    Your Gateway to a Career in <span class="intro-title-highlight">Cybersecurity</span>
+                </h2>
+                
+                <div class="intro-terminal-subtitle">
+                    &gt; Bridging theory with real-world application_
+                </div>
+                
+                <div class="intro-description-text">
+                    <p>
+                        Welcome to CipherHall, the premier online academy for aspiring cybersecurity professionals. We bridge the gap between theory and real-world application, offering a comprehensive curriculum designed by industry veterans. Whether you're starting from scratch or aiming to master advanced topics like <a href="/courses/malware-analysis-introduction-safe-expanded" class="intro-course-link">malware analysis</a> and <a href="/courses/complete-multi-cloud-security-course" class="intro-course-link">cloud security</a>, our platform provides the hands-on labs and expert instruction you need to succeed.
+                    </p>
+                </div>
+                
+                <div class="intro-mission-box">
+                    <i class="fas fa-shield-alt intro-mission-icon"></i>
+                    <strong>Our mission is to make high-quality cybersecurity education accessible.</strong> We focus on practical, job-ready skills in ethical hacking, digital forensics, and incident response, ensuring you're prepared for the challenges of the digital frontier.
+                </div>
+            </div>
+            
+            <div class="intro-visual-section">
+                <div class="intro-stats-container">
+                    <div class="intro-stat-card">
+                        <div class="intro-stat-number" data-target="10000">0</div>
+                        <div class="intro-stat-label">Students Trained</div>
+                    </div>
+                    <div class="intro-stat-card">
+                        <div class="intro-stat-number" data-target="95">0</div>
+                        <div class="intro-stat-label">Expert Courses</div>
+                    </div>
+                    <div class="intro-stat-card">
+                        <div class="intro-stat-number" data-target="95">0</div>
+                        <div class="intro-stat-label">Success Rate</div>
+                    </div>
+                    <div class="intro-stat-card">
+                        <div class="intro-stat-number" data-target="24">0</div>
+                        <div class="intro-stat-label">24/7 Support</div>
+                    </div>
+                </div>
+                
+                <div class="intro-security-badge">
+                    <i class="fas fa-lock intro-security-icon"></i>
+                    <div class="intro-badge-title">Industry Certified</div>
+                    <div class="intro-badge-subtitle">Real-world validated curriculum</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========== End: New Introduction Section ========== -->
+      <section id="courses">
+        <div class="container">
+          <h2 class="section-title">
+            Learn Cybersecurity with Our Featured <span>Courses</span>
+          </h2>
+
+          <div class="courses-grid">
+            <a href="courses/ethical-hacking-fundamentals" class="course-card">
+              <span class="difficulty beginner">Beginner</span>
+              <div class="icon"><i class="fa-solid fa-user-secret"></i></div>
+              <h3>Ethical Hacking Basics</h3>
+              <p>
+                Learn the core concepts of hacking, penetration testing, and
+                ethical security practices to build a strong foundation.
+              </p>
+              <div class="course-tags">
+                <span>Kali Linux</span>
+                <span>Nmap</span>
+                <span>Metasploit</span>
+              </div>
+            </a>
+
+            <a href="courses/network-penetration-testing" class="course-card">
+              <span class="difficulty advanced">Advanced</span>
+              <div class="icon">
+                <i class="fa-solid fa-skull-crossbones"></i>
+              </div>
+              <h3>Advanced Penetration Testing</h3>
+              <p>
+                Explore advanced exploitation, privilege escalation, and red
+                team tactics to perform professional-level security testing.
+              </p>
+              <div class="course-tags">
+                <span>Exploit Dev</span>
+                <span>OSCP Prep</span>
+                <span>Red Team</span>
+              </div>
+            </a>
+
+            <a href="courses/blockchain-security" class="course-card">
+              <span class="difficulty beginner">Beginner</span>
+              <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+              <h3>Blockchain Security Fundamentals</h3>
+              <p>
+                Understand the unique security challenges of blockchain
+                technology and learn how to protect decentralized applications.
+              </p>
+              <div class="course-tags">
+                <span>Blockchain</span>
+                <span>Smart Contracts</span>
+                <span>Cryptocurrency</span>
+              </div>
+            </a>
+
+            <a href="courses/malware-analysis-introduction-safe-expanded" class="course-card">
+              <span class="difficulty advanced">Advanced</span>
+              <div class="icon"><i class="fa-solid fa-user-lock"></i></div>
+              <h3>Malware Analysis & Reverse Eng.</h3>
+              <p>
+                Discover how malware works by reverse-engineering malicious
+                files and uncovering hidden threats used by attackers.
+              </p>
+              <div class="course-tags">
+                <span>Malware Analysis</span>
+                <span>Reverse Engineering</span>
+                <span>Threat Hunting</span>
+              </div>
+            </a>
+
+            <a href="courses/complete-multi-cloud-security-course" class="course-card">
+              <span class="difficulty advanced">Advanced</span>
+              <div class="icon"><i class="fa-solid fa-cloud"></i></div>
+              <h3>Cloud Security Professional</h3>
+              <p>
+                Gain hands-on skills in protecting AWS, Azure, and Google Cloud
+                environments with modern security techniques.
+              </p>
+              <div class="course-tags">
+                <span>AWS</span>
+                <span>Azure</span>
+                <span>GCP</span>
+              </div>
+            </a>
+
+            <a href="courses/advanced-threat-hunting-course" class="course-card">
+              <span class="difficulty beginner">Beginner</span>
+              <div class="icon"><i class="fa-solid fa-bug"></i></div>
+              <h3>Advanced Threat Hunting</h3>
+              <p>
+                Learn proactive threat hunting techniques to identify and
+                mitigate advanced persistent threats within enterprise networks.
+              </p>
+              <div class="course-tags">
+                <span>Threat Hunting</span>
+                <span>SIEM</span>
+                <span>Blue Team</span>
+              </div>
+            </a>
+          </div>
+          <div class="view-all-courses-wrapper">
+            <a href="/AllCourses" class="btn btn-primary view-all-courses-btn">
+              View All Courses <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+      
+
+      <section id="labs">
+        <div class="container">
+          <h2 class="section-title">
+            Hands-On Cybersecurity <span>Labs</span>
+          </h2>
+          <br />
+          <p
+            style="
+              text-align: center;
+              max-width: 600px;
+              margin: -2rem auto 0 auto;
+              color: #aaa;
+            "
+          >
+            No setup required. Launch a pre-configured environment in your
+            browser and start hacking in seconds.
+          </p>
+          <div class="terminal">
+            <div class="terminal-header">
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot green"></div>
+            </div>
+            <div class="terminal-body" id="terminal-body"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <h2 class="section-title">
+          About CipherHall Learn Cybersecurity from Experts
+        </h2>
+        <div class="ccontainer">
+          <!-- LEFT -->
+          <div class="left-column">
+            <!-- Creator 1 -->
+            <div class="creator-card">
+              <div class="creator-header">
+                <img
+  class="creator-avatar"
+  src="https://t4.ftcdn.net/jpg/16/09/59/37/240_F_1609593795_Ae1PPBgGSiy2tKw4GWXeXJtBTQn3dWpn.jpg" 
+  alt="Abdul Hannan, Co-Founder and Security Researcher at CipherHall"
+  loading="lazy"
+  width="60"
+  height="60"
+/>
+                <div class="creator-info">
+                  <h3>ABDUL HANNAN</h3>
+                  <div class="title">Co-Founder & Security Researcher</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PIN -->
+            <div class="pin-manager">
+              <div class="pin-header">
+                <div class="security-icon"></div>
+                <div class="pin-title">SECURE PIN MANAGER</div>
+              </div>
+              <div class="pin-blocks">
+                <div class="pin-block" id="pin1">0000</div>
+                <div class="pin-block" id="pin2">0000</div>
+                <div class="pin-block" id="pin3">0000</div>
+                <div class="pin-block" id="pin4">0000</div>
+                <div class="pin-block" id="pin5">0000</div>
+                <div class="pin-block" id="pin6">0000</div>
+              </div>
+              <div class="pin-label">DYNAMIC USER AUTHENTICATION CODES</div>
+            </div>
+
+            <!-- Creator 2 -->
+            <div class="creator-card">
+              <div class="creator-header">
+                                <img
+  class="creator-avatar"
+  src="https://t4.ftcdn.net/jpg/16/09/59/37/240_F_1609593795_Ae1PPBgGSiy2tKw4GWXeXJtBTQn3dWpn.jpg" 
+  alt="Abdul Hannan, Co-Founder and Lead Analyst"
+  loading="lazy"
+  width="60"
+  height="60"
+/>
+                <div class="creator-info">
+                  <h3>MUHAMMAD AHMAD</h3>
+                  <div class="title">Co-Founder & Lead Analyst</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CENTER -->
+          <div class="center-column">
+            <!-- Fingerprint -->
+            <div class="center-box fingerprint-container">
+              <svg class="fingerprint-svg" viewBox="0 0 100 100">
+                <path
+                  d="M50,15 Q70,15 80,25 Q90,35 90,50 Q90,70 80,80 Q70,90 50,90 Q30,90 20,80 Q10,70 10,50 Q10,35 20,25 Q30,15 50,15"
+                />
+                <path
+                  d="M50,25 Q65,25 72,32 Q80,40 80,50 Q80,65 72,72 Q65,80 50,80 Q35,80 28,72 Q20,65 20,50 Q20,40 28,32 Q35,25 50,25"
+                />
+                <path
+                  d="M50,35 Q60,35 65,40 Q70,45 70,50 Q70,60 65,65 Q60,70 50,70 Q40,70 35,65 Q30,60 30,50 Q30,45 35,40 Q40,35 50,35"
+                />
+                <path
+                  d="M50,45 Q55,45 57,47 Q60,50 60,50 Q60,55 57,57 Q55,60 50,60 Q45,60 43,57 Q40,55 40,50 Q40,50 43,47 Q45,45 50,45"
+                />
+              </svg>
+              <div class="fingerprint-label">BIOMETRIC AUTH</div>
+            </div>
+
+            <!-- Gear -->
+            <div class="center-box gear-container">
+              <div class="gear">
+                <div class="gear-tooth"></div>
+                <div class="gear-tooth"></div>
+                <div class="gear-tooth"></div>
+                <div class="gear-tooth"></div>
+                <div class="gear-tooth"></div>
+                <div class="gear-tooth"></div>
+                <div class="gear-tooth"></div>
+                <div class="gear-tooth"></div>
+              </div>
+              <div class="gear-label">SECURITY ENGINE</div>
+            </div>
+          </div>
+
+          <!-- RIGHT / ABOUT -->
+          <div class="about-section">
+            <div class="about-content">
+              <div class="about-text">
+                We are <span class="highlight">Abdul Hannan</span> and
+                <span class="highlight">Muhammad Ahmad</span>, founders of
+                <span class="highlight">CipherHall</span>. With
+                <span class="highlight">50+ delivered projects</span> spanning
+                red-team operations, secure authentication frameworks, and
+                enterprise-grade defense strategies, we live and breathe
+                cybersecurity.
+              </div>
+              <div class="about-text">
+                Our expertise covers
+                <span class="highlight">ethical hacking</span>,
+                <span class="highlight">penetration testing</span>, and
+                <span class="highlight"
+                  >zero-trust & biometric authentication</span
+                >. CipherHall channels this real-world experience into
+                practical, cutting-edge learning paths.
+              </div>
+              <div class="about-text">
+                Our mission is to equip the next generation of defenders with
+                the skills, tools, and mindset to outpace emerging threats.
+              </div>
+
+              <div class="stats-grid">
+                <div class="stat-item">
+                  <div class="stat-number">50+</div>
+                  <div class="stat-label">PROJECTS COMPLETED</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">24/7</div>
+                  <div class="stat-label">THREAT MONITORING</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">100%</div>
+                  <div class="stat-label">HANDS-ON TRAINING</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">∞</div>
+                  <div class="stat-label">COMMUNITY IMPACT</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="why-choose-us">
+        <div class="container">
+          <h2 class="section-title">Why Choose <span>CipherHall</span></h2>
+          <div class="features-grid">
+            <div class="feature-card">
+              <i class="feature-icon fas fa-graduation-cap"></i>
+              <h3>Industry-Certified Instructors</h3>
+              <p>
+                Learn from experts with active security clearances, CISSP, OSCP,
+                and real-world experience in Fortune 500 companies.
+              </p>
+            </div>
+            <div class="feature-card">
+              <i class="feature-icon fas fa-terminal"></i>
+              <h3>100% Hands-On Learning</h3>
+              <p>
+                No boring lectures. Every lesson includes practical labs with
+                real vulnerabilities and attack scenarios.
+              </p>
+            </div>
+            <div class="feature-card">
+              <i class="feature-icon fas fa-clock"></i>
+              <h3>Learn At Your Own Pace</h3>
+              <p>
+                24/7 access to labs and courses. Perfect for working
+                professionals and students with busy schedules.
+              </p>
+            </div>
+            <div class="feature-card">
+              <i class="feature-icon fas fa-certificate"></i>
+              <h3>Industry-Recognized Certificates</h3>
+              <p>
+                Earn certificates that employers trust. Our graduates work at
+                Google, Microsoft, and top cybersecurity firms.
+              </p>
+            </div>
+            <div class="feature-card">
+              <i class="feature-icon fas fa-users"></i>
+              <h3>Active Community Support</h3>
+              <p>
+                Join thousands of ethical hackers in our Discord community. Get
+                help, share knowledge, and network.
+              </p>
+            </div>
+            <div class="feature-card">
+              <i class="feature-icon fas fa-shield-alt"></i>
+              <h3>Latest Security Techniques</h3>
+              <p>
+                Stay ahead with cutting-edge content updated monthly to reflect
+                the latest threats and defense strategies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+      <div class="container">
+        <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Do I need prior experience in cybersecurity to start?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                No prior experience required! Our beginner courses start from
+                the fundamentals and gradually build your skills. We recommend
+                starting with "Ethical Hacking Fundamentals" if you're completely
+                new to cybersecurity.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>
+                What makes CipherHall different from other cybersecurity
+                training?
+              </h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                We focus on 100% hands-on learning with real-world scenarios.
+                Our instructors are active security professionals, and our
+                labs simulate actual enterprise environments you'll encounter
+                in the field.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Are the courses really free? What's the catch?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Yes, all of our courses are 100% free. There's no catch. Our mission is to make high-quality cybersecurity education accessible to everyone. We are supported by industry partners who share our vision.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>Will I get a certificate after completing a course?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Absolutely. Upon successful completion of any course, including passing all quizzes and labs, you will receive a verifiable Certificate of Completion that you can share on your professional profiles.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>How long does it take to complete a course?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Course duration varies: Beginner courses are typically 10-20 hours, while advanced courses can be over 100 hours. However, all our courses are self-paced, so you can learn at a speed that fits your schedule.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>What equipment do I need for the courses?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Just a computer with a modern web browser and a stable internet connection! All our labs and learning materials are accessed through your browser, so you don't need to install any special software or set up your own virtual machines.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <section id="blog-news">
+      <div class="container">
+        <h2 class="section-title">
+          Latest Cybersecurity <span>News & Insights</span>
+        </h2>
+        <div class="blog-grid">
+          <article class="blog-card">
+            <div class="blog-image">
+              <picture>
+                <source srcset="https://www.bleepstatic.com/content/hl-images/2021/12/14/CISA.jpg" type="image/jpeg">
+                <img src="https://www.bleepstatic.com/content/hl-images/2021/12/14/CISA.jpg" alt="CISA alert graphic with a warning symbol" loading="lazy" width="600" height="220">
+              </picture>
+              <span class="blog-category">Critical Vulnerability</span>
+            </div>
+            <div class="blog-content">
+              <h3>CISA Issues Emergency Sitecore Patch Directive</h3>
+              <p>
+                Federal agencies have until 25 Sep 2025 to patch a critical
+                Sitecore deserialization flaw (CVE-2025-53690, CVSS 9.0)
+                already under active exploitation by APT groups.
+              </p>
+              <div class="blog-meta">
+                <span class="blog-date">Sep 05, 2025</span>
+                <span class="read-time">4 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-image">
+              <picture>
+                <source srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDpIYz4ct9xh_zm2JdDLn1WN2AJo7oXVtbGw&s" type="image/gif">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDpIYz4ct9xh_zm2JdDLn1WN2AJo7oXVtbGw&s" alt="Stylized depiction of Russian hackers being targeted" loading="lazy" width="600" height="220">
+              </picture>
+              <span class="blog-category">Geopolitics</span>
+            </div>
+            <div class="blog-content">
+              <h3>U.S. Offers $10 M for Russian FSB Hackers</h3>
+              <p>
+                A decade-long campaign against U.S. critical infrastructure
+                and 500+ global energy companies prompts a new bounty on three
+                FSB officers from the notorious 'Dragonfly' group.
+              </p>
+              <div class="blog-meta">
+                <span class="blog-date">Sep 05, 2025</span>
+                <span class="read-time">5 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-image">
+              <picture>
+                <source srcset="https://pmnetworking.in/wp-content/uploads/2025/02/Cyber-Security.jpg" type="image/jpeg">
+                <img src="https://pmnetworking.in/wp-content/uploads/2025/02/Cyber-Security.jpg" alt="abstract digital graphic representing malware code" loading="lazy" width="600" height="220">
+              </picture>
+              <span class="blog-category">Malware</span>
+            </div>
+            <div class="blog-content">
+              <h3>CastleRAT Debuts in CastleLoader Ecosystem</h3>
+              <p>
+                Threat group TAG-150 is shipping a new remote-access trojan.
+                CastleRAT harvests system data, drops follow-on payloads,
+                and acts as an initial-access vector for info-stealers.
+              </p>
+              <div class="blog-meta">
+                <span class="blog-date">Sep 05, 2025</span>
+                <span class="read-time">6 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-image">
+              <picture>
+                <source srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0evAE_kFnv2HD1eBJT4_I1JneH1o2u-M0Wg&s" type="image/gif">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0evAE_kFnv2HD1eBJT4_I1JneH1o2u-M0Wg&s" alt="Digital lock overlaying an image of a school building" loading="lazy" width="600" height="220">
+              </picture>
+              <span class="blog-category">Data Breach</span>
+            </div>
+            <div class="blog-content">
+              <h3>South Carolina School District Breach Hits 31,000</h3>
+              <p>
+                Attackers accessed SSNs, driver-licence scans, and financial
+                data. The incident highlights the ongoing risk to education
+                trusts running legacy student-information systems.
+              </p>
+              <div class="blog-meta">
+                <span class="blog-date">Sep 06, 2025</span>
+                <span class="read-time">3 min read</span>
+              </div>
+            </div>
+          </article>
+          
+          <article class="blog-card">
+            <div class="blog-image">
+              <picture>
+                  <source srcset="https://images.wsj.net/im-896588?width=700&height=700" type="image/jpeg">
+                  <img src="https://images.wsj.net/im-896588?width=700&height=700" alt="Abstract image of a human brain made of circuits" loading="lazy" width="600" height="220">
+              </picture>
+              <span class="blog-category">AI Security</span>
+            </div>
+            <div class="blog-content">
+              <h3>Generative AI Used in Hyper-Realistic Phishing</h3>
+              <p>
+                Security researchers have uncovered a sophisticated phishing campaign that uses generative AI to create context-aware, personalized emails that bypass traditional spam filters.
+              </p>
+              <div class="blog-meta">
+                <span class="blog-date">Sep 08, 2025</span>
+                <span class="read-time">5 min read</span>
+              </div>
+            </div>
+          </article>
+
+      
+        </div>
+        <div class="blog-cta">
+          <a href="/news" class="btn btn-primary">Read More Articles</a>
+        </div>
+      </div>
+    </section>
+      <section id="contact">
+        <div class="container">
+          <h2 class="section-title">Contact <span>Us</span></h2>
+          <div class="contact-grid">
+            <div class="contact-form">
+              <form
+                action="https://formsubmit.co/cyberlearninghub2@gmail.com"
+                method="POST"
+              >
+                <!-- kill captcha & branded page -->
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+                <input
+                  type="hidden"
+                  name="_next"
+                  value="https://www.cipherhall.com/thanks"
+                />
+
+                <div class="form-group">
+                  <label for="name"
+                    ><i class="fa-solid fa-user"></i> Name</label
+                  >
+                  <input type="text" id="name" name="name" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="email"
+                    ><i class="fa-solid fa-envelope"></i> Email</label
+                  >
+                  <input type="email" id="email" name="email" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="subject"
+                    ><i class="fa-solid fa-tag"></i> Subject</label
+                  >
+                  <input type="text" id="subject" name="subject" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="message"
+                    ><i class="fa-solid fa-comment"></i> Message</label
+                  >
+                  <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  style="width: 100%"
+                >
+                  SEND MESSAGE
+                </button>
+              </form>
+            </div>
+
+            <div class="contact-info">
+              <h4>Contact Information</h4>
+              <p>
+                Have a question about our courses or labs? Get in touch with our
+                team of experts. We're here to help you on your cybersecurity
+                journey.
+              </p>
+
+              <div class="contact-info-item">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span>123 Cyber Street, Hacker City, CY 1337</span>
+              </div>
+
+              <div class="contact-info-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>+1 (555) 123-4567</span>
+              </div>
+
+              <div class="contact-info-item">
+                <i class="fa-solid fa-envelope"></i>
+                 <span>support@cipherhall.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="main-footer">
+      <div class="footer-content">
+        <div class="footer-column">
+          <a href="#" class="logo"
+            ><i class="fa-solid fa-shield-virus"></i> CipherHall</a
+          >
+          <p>
+            Empowering the next generation of cybersecurity professionals
+            through hands-on training and real-world labs.
+          </p>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="/AllCourses">Courses</a></li>
+            <li><a href="/labs">Labs</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Popular Courses</h4>
+
+          <ul>
+  <li>
+    <a href="courses/reverse-engineering-professional-expanded">Reverse Engineering</a>
+  </li>
+  <li>
+    <a href="courses/malware-analysis-introduction-safe-expanded">Malware Analysis</a>
+  </li>
+  <li>
+    <a href="courses/network-penetration-testing">Penetration Testing</a>
+  </li>
+  <li>
+    <a href="courses/incident-response-fundamentals">Incident Response</a>
+  </li>
+  <li>
+    <a href="courses/complete-multi-cloud-security-course">Cloud Security</a>
+  </li>
+</ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 CipherHall. All rights reserved.</p>
+      </div>
+    </footer>
+    <div id="authModal" class="modal" style="display: none">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <span class="close" id="closeAuthModal">&times;</span>
+        <div class="auth-tabs">
+          <button id="tabSignIn" class="auth-tab active">Sign In</button>
+          <button id="tabSignUp" class="auth-tab">Sign Up</button>
+        </div>
+        <div
+          id="authLoader"
+          style="display: none; text-align: center; padding: 2rem"
+        >
+          <i
+            class="fas fa-spinner fa-spin fa-2x"
+            style="color: var(--color-green)"
+          ></i>
+          <p style="margin-top: 0.5rem">Authenticating...</p>
+        </div>
+        <div id="signInForm" class="auth-form">
+          <h2>Sign In to CipherHall</h2>
+          <button id="googleSignIn" class="btn btn-google">
+            <i class="fab fa-google"></i> Continue with Google
+          </button>
+          <div class="divider"><span>or</span></div>
+          <form id="emailSignInForm">
+            <input
+              type="email"
+              id="signInEmail"
+              placeholder="Email Address"
+              required
+            />
+            <input
+              type="password"
+              id="signInPassword"
+              placeholder="Password"
+              required
+            />
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </form>
+        </div>
+        <div id="signUpForm" class="auth-form" style="display: none">
+          <h2>Join CipherHall</h2>
+          <button id="googleSignUp" class="btn btn-google">
+            <i class="fab fa-google"></i> Continue with Google
+          </button>
+          <div class="divider"><span>or</span></div>
+          <form id="emailSignUpForm">
+            <input
+              type="text"
+              id="signUpName"
+              placeholder="Full Name"
+              required
+            />
+            <input
+              type="email"
+              id="signUpEmail"
+              placeholder="Email Address"
+              required
+            />
+            <input
+              type="password"
+              id="signUpPassword"
+              placeholder="Password (min. 8 characters)"
+              required
+            />
+            <button type="submit" class="btn btn-secondary">
+              Create Account
+            </button>
+          </form>
+        </div>
+        <div id="authMessage"></div>
+      </div>
+    </div>
+
+    <script>
+  /* ========== 1. GLOBAL HELPERS & CONFIG ========== */
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => [...document.querySelectorAll(sel)];
+
+  const supabaseUrl = "https://lzcmzulemfubjaksoqor.supabase.co";
+  const supabaseKey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6Y216dWxlbWZ1Ympha3NvcW9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzMzM5MDgsImV4cCI6MjA3MDkwOTkwOH0.crhPH4YWtRsr1BJTpAQcmPbWSpwIWRbzoI4sRb2_fPI";
+
+  /* ========== 2. FUNCTION DEFINITIONS ========== */
+
+  // --- AUTH MODAL ---
+  function showAuthLoader(show = true) {
+    $("#authLoader") &&
+      ($("#authLoader").style.display = show ? "block" : "none");
+    $$(".modal-content > div:not(#authLoader):not(.close)").forEach(
+      (el) => (el.style.display = show ? "none" : "block")
+    );
+  }
+  function showAuthMessage(msg, isError = false) {
+    const box = $("#authMessage");
+    if (!box) return;
+    box.textContent = msg;
+    box.className = isError ? "error" : "success";
+    box.style.display = "block";
+    setTimeout(() => (box.style.display = "none"), 4000);
+  }
+  function openAuthModal() {
+    $("#authModal").style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+  function closeAuthModal() {
+    $("#authModal").style.display = "none";
+    document.body.style.overflow = "";
+    showAuthMessage("");
+  }
+  function setFinalMessage(msg, isError) {
+    $("#authModal .modal-content").innerHTML = `
+      <span class="close" id="closeFinalMessage">&times;</span>
+      <div style="text-align:center;padding:2rem;">
+        <i class="fas ${isError ? "fa-times-circle" : "fa-check-circle"} fa-2x"
+           style="color:${isError ? "var(--color-red)" : "var(--color-green)"}"></i>
+        <p style="margin-top:1rem;font-weight:600;">${msg}</p>
+      </div>`;
+    $("#closeFinalMessage").addEventListener("click", closeAuthModal);
+    setTimeout(closeAuthModal, 2000);
+  }
+
+  // --- AUTH HANDLERS ---
+  async function handleEmailSignIn(e, supabaseClient) {
+    e.preventDefault();
+    showAuthLoader(true);
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email: $("#signInEmail").value.trim(),
+      password: $("#signInPassword").value,
+    });
+    if (error) {
+      showAuthMessage(error.message, true);
+      showAuthLoader(false);
+      return;
+    }
+    localStorage.setItem("cybersec_user", JSON.stringify({
+        id: data.user.id,
+        email: data.user.email,
+        name: data.user.user_metadata?.full_name || data.user.email.split("@")[0],
+        loginTime: new Date().toISOString(),
+    }));
+    updateUIForLoggedInUser(data.user);
+    setFinalMessage("Signed in!", false);
+  }
+  async function handleEmailSignUp(e, supabaseClient) {
+    e.preventDefault();
+    showAuthLoader(true);
+    const name = $("#signUpName").value.trim();
+    const email = $("#signUpEmail").value.trim();
+    const password = $("#signUpPassword").value;
+    if (password.length < 6) {
+      showAuthMessage("Min 6 characters", true);
+      showAuthLoader(false);
+      return;
+    }
+    const { error: loginErr } = await supabaseClient.auth.signInWithPassword({ email, password });
+    if (!loginErr) {
+      showAuthLoader(false);
+      setFinalMessage("Account already exists. Please Sign In.", true);
+      return;
+    }
+    const { data, error } = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options: { data: { full_name: name }, emailRedirectTo: location.origin },
+    });
+    showAuthLoader(false);
+    if (error) {
+      showAuthMessage(error.message, true);
+    } else {
+      setFinalMessage("Check your inbox for confirmation!", false);
+    }
+  }
+  async function handleGoogleOAuth(supabaseClient) {
+    showAuthLoader(true);
+    await supabaseClient.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: location.origin, redirectMode: "same-tab" },
+    });
+  }
+  async function handleSignOut(supabaseClient) {
+    await supabaseClient.auth.signOut();
+    localStorage.removeItem("cybersec_user");
+    updateUIForLoggedOutUser();
+  }
+
+  // --- UI UPDATES ---
+  function updateUIForLoggedInUser(userData) {
+    const btn = $("#loginNavBtn");
+    if (!btn) return;
+    const name = userData.name || userData.user_metadata?.full_name || userData.email.split("@")[0];
+    btn.innerHTML = `
+      <div style="position:relative;display:inline-block;">
+        <button class="btn-nav" id="userMenuBtn">
+          <i class="fas fa-user-circle"></i> ${name}
+        </button>
+        <div id="userDropdown" style="display:none;position:absolute;right:0;top:100%;background:rgba(17,17,17,.95);border:1px solid rgba(0,255,65,.2);border-radius:8px;padding:.5rem 0;min-width:150px;z-index:1000;">
+          <a href="#" id="signOutBtn" style="display:block;padding:.5rem 1rem;color:var(--color-red);text-decoration:none;">Sign Out</a>
+        </div>
+      </div>`;
+    $("#userMenuBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      $("#userDropdown").style.display = $("#userDropdown").style.display === "block" ? "none" : "block";
+    });
+    $("#signOutBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey); // Re-create client instance for sign out
+      handleSignOut(supabaseClient);
+    });
+  }
+  function updateUIForLoggedOutUser() {
+    const btn = $("#loginNavBtn");
+    if (btn) {
+      btn.innerHTML = "Login / Signup";
+      btn.onclick = (e) => {
+        e.preventDefault();
+        openAuthModal();
+      };
+    }
+  }
+
+  // --- PAGE ANIMATIONS & INTERACTIONS ---
+  function initTyping() {
+      const el = $("#typing-text");
+      if (!el) return;
+      const phrases = ["Learn with hands-on labs.", "Taught by industry experts.", "Become a certified professional."];
+      let phraseIdx = 0, charIdx = 0, deleting = false;
+      function type() {
+          const current = phrases[phraseIdx];
+          if (deleting) el.textContent = current.substring(0, --charIdx);
+          else el.textContent = current.substring(0, ++charIdx);
+          let speed = deleting ? 75 : 150;
+          if (!deleting && charIdx === current.length) (speed = 2000), (deleting = true);
+          else if (deleting && charIdx === 0) (deleting = false), (phraseIdx = (phraseIdx + 1) % phrases.length);
+          setTimeout(type, speed);
+      }
+      type();
+  }
+  function initTerminal() {
+      const termBody = $("#terminal-body");
+      if (!termBody) return;
+      const cmds = [
+          { cmd: "nmap -sS -A 10.10.1.5", output: "Starting Nmap scan...\nHost is up (0.021s latency).\nPORT    STATE SERVICE\n22/tcp  open  ssh\n80/tcp  open  http\n443/tcp open  https", delay: 2000 },
+          { cmd: "hydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://10.10.1.5", output: '[ATTEMPT] - 1 password found: "password123"', delay: 3000 },
+          { cmd: "ssh admin@10.10.1.5", output: "Login successful. Welcome to the target machine.", delay: 1500 },
+          { cmd: "cat /root/flag.txt", output: "FLAG{CYB3R_AC4D3MY_R0CKS}", delay: 2500 },
+      ];
+      let cmdIdx = 0;
+      function run() {
+          if (cmdIdx >= cmds.length) {
+              cmdIdx = 0;
+              termBody.innerHTML = "";
+          }
+          const { cmd, output } = cmds[cmdIdx];
+          const line = document.createElement("p");
+          line.innerHTML = `<span class="prompt">root@lab:~# </span><span id="cmd-${cmdIdx}"></span><span class="command-cursor"></span>`;
+          termBody.appendChild(line);
+          let i = 0, t = setInterval(() => {
+              $(`#cmd-${cmdIdx}`).textContent += cmd[i++];
+              if (i === cmd.length) {
+                  clearInterval(t);
+                  line.querySelector(".command-cursor")?.remove();
+                  setTimeout(() => {
+                      const out = document.createElement("p");
+                      out.innerHTML = `<span class="output">${output}</span>`;
+                      termBody.appendChild(out);
+                      termBody.scrollTop = termBody.scrollHeight;
+                      cmdIdx++;
+                      setTimeout(run, cmds[cmdIdx - 1].delay);
+                  }, 500);
+              }
+          }, 50);
+      }
+      run();
+  }
+  function initScrollReveal() {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+        });
+    }, { threshold: 0.5 });
+    $$(".section-title").forEach((t) => obs.observe(t));
+  }
+  function initMusicPlayer(audioPlayer) {
+      const btnText = $("#music-button-text");
+      const icon = $("#music-icon");
+      const dd = $("#music-dropdown-content");
+      if (!btnText || !icon || !dd) return;
+      
+      function setUI(state) {
+          btnText.textContent = state === "Playing" ? "PAUSE MUSIC" : "STUDY MUSIC";
+          icon.className = state === "Playing" ? "fa-solid fa-circle-pause" : "fa-solid fa-music";
+      }
+      const savedSrc = localStorage.getItem("cybersec_music_src");
+      const savedTime = parseFloat(localStorage.getItem("cybersec_music_time") || 0);
+      if (savedSrc) {
+          audioPlayer.src = savedSrc;
+          audioPlayer.currentTime = savedTime;
+          audioPlayer.play().then(() => setUI("Playing")).catch(() => setUI("Stopped"));
+      }
+      $("#music-dropdown button").addEventListener("click", (e) => {
+          e.stopPropagation();
+          dd.style.display = dd.style.display === "block" ? "none" : "block";
+          if (audioPlayer.src && !audioPlayer.paused) {
+              audioPlayer.pause();
+              setUI("Stopped");
+          } else if (audioPlayer.src) {
+              audioPlayer.play().then(() => setUI("Playing"));
+          }
+      });
+      dd.querySelectorAll("a[data-src]").forEach((a) => {
+          a.addEventListener("click", (e) => {
+              e.preventDefault();
+              audioPlayer.src = a.dataset.src;
+              audioPlayer.play().then(() => setUI("Playing"));
+              localStorage.setItem("cybersec_music_src", a.dataset.src);
+              dd.style.display = "none";
+          });
+      });
+      $("#stop-music-link").addEventListener("click", (e) => {
+          e.preventDefault();
+          audioPlayer.pause();
+          audioPlayer.currentTime = 0;
+          audioPlayer.removeAttribute("src");
+          setUI("Stopped");
+          localStorage.removeItem("cybersec_music_src");
+          localStorage.removeItem("cybersec_music_time");
+          dd.style.display = "none";
+      });
+      window.addEventListener("beforeunload", () => {
+          if (!audioPlayer.paused && audioPlayer.src) {
+              localStorage.setItem("cybersec_music_src", audioPlayer.src);
+              localStorage.setItem("cybersec_music_time", audioPlayer.currentTime);
+          }
+      });
+      window.addEventListener("click", (e) => {
+          if (!e.target.closest("#music-dropdown")) dd.style.display = "none";
+      });
+  }
+  function initPinsAndParallax() {
+      function updatePINs() {
+          $$(".pin-block").forEach(b => (b.textContent = Math.floor(Math.random() * 10000).toString().padStart(4, "0")));
+      }
+      setInterval(updatePINs, 200);
+      updatePINs();
+  }
+  function initFaq() {
+      $$(".faq-item").forEach((item) => {
+          const question = item.querySelector(".faq-question");
+          question.addEventListener("click", () => {
+              const isActive = item.classList.contains("active");
+              $$(".faq-item").forEach(otherItem => otherItem.classList.remove("active"));
+              if (!isActive) item.classList.add("active");
+          });
+      });
+  }
+  function initDropdowns() {
+      $$(".dropdown-toggle").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              btn.closest(".nav-dropdown").classList.toggle("open-on-click");
+          });
+      });
+      document.addEventListener("click", () => $$(".nav-dropdown.open-on-click").forEach((d) => d.classList.remove("open-on-click")));
+  }
+  function initMobileMenu() {
+      const header = $("#main-header");
+      const nav = header?.querySelector("nav");
+      if (!header || !nav) return;
+
+      if (!$(".mobile-menu-toggle")) {
+          const mobileMenuBtn = document.createElement("button");
+          mobileMenuBtn.className = "mobile-menu-toggle";
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          mobileMenuBtn.setAttribute("aria-label", "Toggle mobile menu");
+          
+          const headerControls = $(".header-controls");
+          headerControls?.parentNode.insertBefore(mobileMenuBtn, headerControls);
+
+          mobileMenuBtn.addEventListener("click", function () {
+              nav.classList.toggle("active");
+              const icon = this.querySelector("i");
+              if (nav.classList.contains("active")) {
+                  icon.className = "fas fa-times";
+                  this.setAttribute("aria-expanded", "true");
+              } else {
+                  icon.className = "fas fa-bars";
+                  this.setAttribute("aria-expanded", "false");
+              }
+          });
+      }
+      nav.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+              nav.classList.remove("active");
+              const mobileBtn = $(".mobile-menu-toggle");
+              if (mobileBtn) {
+                  mobileBtn.querySelector("i").className = "fas fa-bars";
+                  mobileBtn.setAttribute("aria-expanded", "false");
+              }
+          });
+      });
+  }
+  function initializeIntroCounters() {
+      const counters = $$('.intro-stat-number');
+      const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  const counter = entry.target;
+                  const target = +counter.getAttribute('data-target');
+                  const duration = 2000;
+                  const stepTime = 20;
+                  const steps = duration / stepTime;
+                  const increment = target / steps;
+                  let current = 0;
+                  const updateCounter = () => {
+                      current += increment;
+                      if (current < target) {
+                          counter.textContent = Math.floor(current);
+                          setTimeout(updateCounter, stepTime);
+                      } else {
+                          counter.textContent = target;
+                      }
+                  };
+                  updateCounter();
+                  observer.unobserve(counter); // Animate only once
+              }
+          });
+      }, { threshold: 0.8 });
+
+      counters.forEach(counter => observer.observe(counter));
+  }
+
+
+  /* ========== 3. DOMContentLoaded INITIALIZER ========== */
+  document.addEventListener("DOMContentLoaded", () => {
+    // --- Initialize state variables ---
+    let currentUser = null;
+    const audioPlayer = new Audio();
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // --- Call initialization functions ---
+    initTyping();
+    initTerminal();
+    initScrollReveal();
+    initMusicPlayer(audioPlayer); // Pass the audio player instance
+    initPinsAndParallax();
+    initFaq();
+    initDropdowns();
+    initMobileMenu();
+    initializeIntroCounters();
+    
+    // --- Attach event listeners ---
+    $("#loginNavBtn")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      openAuthModal();
+    });
+    $("#closeAuthModal")?.addEventListener("click", closeAuthModal);
+    $("#authModal")?.addEventListener("click", (e) => {
+      if (e.target === $("#authModal")) closeAuthModal();
+    });
+
+    const tabIn = $("#tabSignIn"), tabUp = $("#tabSignUp");
+    const formIn = $("#signInForm"), formUp = $("#signUpForm");
+    [tabIn, tabUp].forEach(t => t?.addEventListener("click", () => {
+      tabIn.classList.toggle("active", t === tabIn);
+      tabUp.classList.toggle("active", t === tabUp);
+      formIn.style.display = t === tabIn ? "block" : "none";
+      formUp.style.display = t === tabUp ? "block" : "none";
+    }));
+
+    $("#emailSignInForm")?.addEventListener("submit", (e) => handleEmailSignIn(e, supabaseClient));
+    $("#emailSignUpForm")?.addEventListener("submit", (e) => handleEmailSignUp(e, supabaseClient));
+    $$("#googleSignIn, #googleSignUp").forEach(btn => btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleGoogleOAuth(supabaseClient);
+    }));
+
+    // --- Check for existing login or OAuth redirect ---
+    (async () => {
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error) {
+            console.error("Auth session error:", error.message);
+            updateUIForLoggedOutUser();
+        } else if (data.session) {
+            localStorage.setItem("cybersec_user", JSON.stringify({
+                id: data.session.user.id,
+                email: data.session.user.email,
+                name: data.session.user.user_metadata?.full_name || data.session.user.email.split("@")[0],
+                loginTime: new Date().toISOString(),
+            }));
+            updateUIForLoggedInUser(data.session.user);
+        } else {
+            // Check for older localStorage login if no session
+            try {
+                const stored = JSON.parse(localStorage.getItem("cybersec_user"));
+                if (stored && (Date.now() - new Date(stored.loginTime)) / 86400000 < 7) {
+                    updateUIForLoggedInUser(stored);
+                } else {
+                    updateUIForLoggedOutUser();
+                }
+            } catch {
+                updateUIForLoggedOutUser();
+            }
+        }
+    })();
+  });
+
+  /* ========== 4. WINDOW LOAD EVENTS (for non-critical UI) ========== */
+  window.addEventListener("load", () => {
+      const musicBtn = $("#music-dropdown");
+      if (musicBtn && !localStorage.getItem("music_indicator_shown")) {
+          const indicator = document.createElement("div");
+          indicator.className = "music-indicator";
+          indicator.innerHTML = `<i class="fa-solid fa-music"></i> Try Study Music!`;
+          musicBtn.style.position = "relative";
+          musicBtn.appendChild(indicator);
+          setTimeout(() => {
+              indicator.style.transition = "opacity 0.5s ease";
+              indicator.style.opacity = "0";
+              setTimeout(() => indicator.remove(), 500);
+          }, 5000);
+          localStorage.setItem("music_indicator_shown", "true");
+      }
+  });
+</script>
+    <div id="music-indicator" style="display: none">
+      🎵 Click here for Study Music!
+    </div>
+  </body>
+</html>
+
+
+
+

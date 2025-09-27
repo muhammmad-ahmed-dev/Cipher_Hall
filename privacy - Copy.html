@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Cipher Hall</title>
+  <meta name="description" content="Review the official CipherHall Privacy Policy. Learn how we are committed to protecting your data, handling personal information, and ensuring transparency and security for all our students.">
+  <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Privacy Policy",
+  "url": "https://www.cipherhall.com/privacy",
+  "description": "Our comprehensive privacy policy outlines how CipherHall collects, uses, and protects your personal information and data.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "CipherHall",
+    "url": "https://www.cipherhall.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.cipherhall.com/favicon.png"
+    }
+  }
+}
+</script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(0, 255, 65, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #00ff41 0%, #00d435 100%);
+            color: #000;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, transparent, rgba(0, 255, 65, 0.1), transparent);
+            animation: rotate 30s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #000, #333, #000);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .header p {
+            font-size: 1.3em;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        .breadcrumb {
+            background: linear-gradient(90deg, rgba(0, 255, 65, 0.1) 0%, rgba(0, 255, 65, 0.05) 100%);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .breadcrumb a {
+            color: #00ff41;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .breadcrumb a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .breadcrumb a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ff41;
+            transition: width 0.3s ease;
+        }
+
+        .breadcrumb a:hover::after {
+            width: 100%;
+        }
+
+        .content {
+            padding: 80px 0;
+        }
+
+        .policy-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .policy-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .policy-section:hover::before {
+            left: 100%;
+        }
+
+        .policy-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 255, 65, 0.2);
+            border-color: rgba(0, 255, 65, 0.4);
+        }
+
+        .policy-section h2 {
+            color: #00ff41;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(0, 255, 65, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .policy-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff41, #00d435);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .policy-section h3 {
+            color: #00d435;
+            font-size: 1.6em;
+            margin: 35px 0 20px 0;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .policy-section p {
+            margin-bottom: 20px;
+            color: #b0b0b0;
+            font-size: 1.1em;
+        }
+
+        .policy-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .policy-section li {
+            margin-bottom: 10px;
+            color: #b0b0b0;
+            font-size: 1.1em;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, rgba(0, 212, 53, 0.1) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #00ff41;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 49%, rgba(0, 255, 65, 0.05) 50%, transparent 51%);
+            background-size: 20px 20px;
+            animation: highlightMove 3s linear infinite;
+        }
+
+        @keyframes highlightMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 20px; }
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            color: #00ff41;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 50px;
+            text-align: center;
+            border: 2px solid #00ff41;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 65, 0.3),
+                inset 0 0 20px rgba(0, 255, 65, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 65, 0.05) 0%, transparent 70%);
+            animation: contactGlow 4s ease-in-out infinite;
+        }
+
+        .contact-info h3 {
+            color: #00ff41;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info p {
+            color: #e0e0e0;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 10px;
+        }
+
+        .contact-info strong {
+            color: #00ff41;
+        }
+
+        @keyframes contactGlow {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.6; }
+        }
+
+        .contact-info h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .last-updated {
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.08) 0%, rgba(0, 255, 65, 0.03) 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            backdrop-filter: blur(10px);
+            animation: lastUpdatedPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes lastUpdatedPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 65, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(0, 255, 65, 0.2); }
+        }
+
+        .toc {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .toc::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff41, #00d435, #00ff41);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .toc h3 {
+            color: #00ff41;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            margin-bottom: 10px;
+        }
+
+        .toc a {
+            color: #c0c0c0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            display: inline-block;
+            position: relative;
+            padding: 8px 0;
+            cursor: pointer;
+        }
+
+        .toc a:hover {
+            color: #00ff41;
+            transform: translateX(10px);
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .toc a::before {
+            content: '▶';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: #00ff41;
+            font-size: 0.8em;
+        }
+
+        .toc a:hover::before {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .toc a:active {
+            transform: translateX(5px);
+            color: #00d435;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.8em;
+            }
+            
+            .policy-section {
+                padding: 30px;
+            }
+            
+            .policy-section h2 {
+                font-size: 2em;
+            }
+
+            .toc a {
+                display: block;
+                margin: 8px 0;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #00ff41, #00d435);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #00d435, #00ff41);
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection styling */
+        ::selection {
+            background: rgba(0, 255, 65, 0.3);
+            color: #fff;
+        }
+    </style>
+    <script>
+        function scrollToSection(sectionId) {
+            event.preventDefault();
+            const element = document.getElementById(sectionId);
+            if (element) {
+                // Add offset for better positioning
+                const headerOffset = 100;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p>Your Privacy is Our Priority at CipherHall</p>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="/">Home</a> > Privacy Policy
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <div class="last-updated">
+                <strong>Last Updated:</strong> August 26, 2025 | <strong>Effective Date:</strong> August 26, 2025
+            </div>
+
+            <div class="toc">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('introduction')">1. Introduction</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('information-collection')">2. Information We Collect</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('information-use')">3. How We Use Your Information</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('information-sharing')">4. Information Sharing and Disclosure</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('data-security')">5. Data Security and Protection</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('cookies')">6. Cookies and Tracking Technologies</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('your-rights')">7. Your Privacy Rights</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('children-privacy')">8. Children's Privacy</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('international-users')">9. International Users</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('third-party-services')">10. Third-Party Services</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('policy-updates')">11. Policy Updates</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToSection('contact-us')">12. Contact Information</a></li>
+                </ul>
+            </div>
+
+            <div class="policy-section" id="introduction">
+                <h2>1. Introduction</h2>
+                <p>Welcome to CipherHall, where we're passionate about empowering individuals with cutting-edge cybersecurity knowledge and skills. At CipherHall, we understand that in today's digital landscape, privacy isn't just a preference—it's a fundamental right that deserves the highest level of protection.</p>
+
+                <p>This comprehensive Privacy Policy outlines our unwavering commitment to safeguarding your personal information while you explore our world-class cybersecurity courses, engage with our interactive labs, and become part of our thriving learning community. We believe in complete transparency about how we collect, use, protect, and share your information.</p>
+                
+                <div class="highlight">
+                    <p><strong>Our Privacy Promise:</strong> We are committed to protecting your privacy with the same level of security expertise we teach in our cybersecurity programs. Your trust is the foundation of our educational mission.</p>
+                </div>
+            </div>
+
+            <div class="policy-section" id="information-collection">
+                <h2>2. Information We Collect</h2>
+                <p>To provide you with the best possible learning experience, we collect various types of information through different channels. Here's a detailed breakdown of what we collect and why:</p>
+                
+                <h3>Personal Information You Provide</h3>
+                <ul>
+                    <li><strong>Account Registration:</strong> Name, email address, username, password, and profile information</li>
+                    <li><strong>Contact Information:</strong> Phone number, mailing address (when required for certifications)</li>
+                    <li><strong>Educational Background:</strong> Prior experience, certifications, career goals, and learning preferences</li>
+                    <li><strong>Payment Information:</strong> Billing details, payment method information (processed securely through third-party payment processors)</li>
+                    <li><strong>Communication Data:</strong> Messages, feedback, support requests, and course discussions</li>
+                </ul>
+
+                <h3>Automatically Collected Information</h3>
+                <ul>
+                    <li><strong>Usage Analytics:</strong> Course progress, time spent on lessons, quiz results, and learning patterns</li>
+                    <li><strong>Technical Data:</strong> IP address, browser type, device information, operating system, and access timestamps</li>
+                    <li><strong>Performance Metrics:</strong> Lab completion rates, skill assessments, and achievement data</li>
+                    <li><strong>Website Interactions:</strong> Pages visited, links clicked, and navigation patterns</li>
+                </ul>
+            </div>
+
+            <div class="policy-section" id="information-use">
+                <h2>3. How We Use Your Information</h2>
+                <p>Every piece of information we collect serves a specific purpose in enhancing your educational journey. Here's how we use your data to create value for you:</p>
+
+                <h3>Educational Enhancement</h3>
+                <ul>
+                    <li>Personalizing your learning experience based on your progress and preferences</li>
+                    <li>Providing customized course recommendations and career guidance</li>
+                    <li>Tracking your achievements and issuing certificates of completion</li>
+                    <li>Creating adaptive learning paths that match your skill level</li>
+                </ul>
+
+                <h3>Service Delivery</h3>
+                <ul>
+                    <li>Processing enrollments and managing your account access</li>
+                    <li>Delivering course content, assignments, and educational materials</li>
+                    <li>Facilitating peer-to-peer interactions and community discussions</li>
+                    <li>Providing technical support and troubleshooting assistance</li>
+                </ul>
+
+                <h3>Communication and Engagement</h3>
+                <ul>
+                    <li>Sending important course updates, announcements, and system notifications</li>
+                    <li>Sharing relevant industry news, cybersecurity trends, and career opportunities</li>
+                    <li>Responding to your inquiries, feedback, and support requests</li>
+                    <li>Inviting you to webinars, workshops, and special events (with your consent)</li>
+                </ul>
+            </div>
+
+            <div class="policy-section" id="information-sharing">
+                <h2>4. Information Sharing and Disclosure</h2>
+                <p>We respect your privacy and maintain strict controls over how your information is shared. We never sell your personal data to third parties. Here are the limited circumstances under which we may share your information:</p>
+
+                <h3>Service Providers and Partners</h3>
+                <p>We work with trusted third-party service providers who help us deliver our educational services:</p>
+                <ul>
+                    <li><strong>Payment Processors:</strong> For secure transaction processing</li>
+                    <li><strong>Cloud Infrastructure:</strong> For reliable content delivery and data storage</li>
+                    <li><strong>Analytics Providers:</strong> For improving user experience and course effectiveness</li>
+                    <li><strong>Communication Tools:</strong> For email delivery and customer support</li>
+                </ul>
+
+                <h3>Legal Requirements</h3>
+                <p>We may disclose information when required by law or to protect our rights and the safety of our users:</p>
+                <ul>
+                    <li>Compliance with legal obligations, court orders, or government requests</li>
+                    <li>Protection against fraud, security threats, or illegal activities</li>
+                    <li>Enforcement of our terms of service and user agreements</li>
+                </ul>
+            </div>
+
+            <div class="policy-section" id="data-security">
+                <h2>5. Data Security and Protection</h2>
+                <p>As a cybersecurity education platform, we implement industry-leading security measures to protect your personal information. Our security framework includes:</p>
+
+                <h3>Technical Safeguards</h3>
+                <ul>
+                    <li><strong>Encryption:</strong> All data transmissions use SSL/TLS encryption</li>
+                    <li><strong>Secure Storage:</strong> Personal data is stored using advanced encryption at rest</li>
+                    <li><strong>Access Controls:</strong> Strict role-based access limitations for our staff</li>
+                    <li><strong>Regular Audits:</strong> Continuous security assessments and penetration testing</li>
+                </ul>
+
+                <h3>Operational Security</h3>
+                <ul>
+                    <li>Employee background checks and security training programs</li>
+                    <li>Multi-factor authentication for all administrative accounts</li>
+                    <li>Regular security updates and patch management</li>
+                    <li>Incident response procedures and breach notification protocols</li>
+                </ul>
+
+                <div class="highlight">
+                    <p><strong>Security Commitment:</strong> We practice what we teach. Our security measures are continuously updated to reflect the latest cybersecurity best practices and industry standards.</p>
+                </div>
+            </div>
+
+            <div class="policy-section" id="cookies">
+                <h2>6. Cookies and Tracking Technologies</h2>
+                <p>We use cookies and similar technologies to enhance your browsing experience and improve our services. Here's what you need to know:</p>
+
+                <h3>Types of Cookies We Use</h3>
+                <ul>
+                    <li><strong>Essential Cookies:</strong> Required for basic website functionality and user authentication</li>
+                    <li><strong>Performance Cookies:</strong> Help us understand how you interact with our platform</li>
+                    <li><strong>Functional Cookies:</strong> Remember your preferences and personalize your experience</li>
+                    <li><strong>Analytics Cookies:</strong> Provide insights to improve our courses and services</li>
+                </ul>
+
+                <h3>Managing Your Cookie Preferences</h3>
+                <p>You have full control over your cookie preferences. You can modify your browser settings to refuse cookies, delete existing cookies, or receive notifications when cookies are being used. However, please note that disabling certain cookies may affect the functionality of our platform.</p>
+            </div>
+
+            <div class="policy-section" id="your-rights">
+                <h2>7. Your Privacy Rights</h2>
+                <p>We believe in empowering you with control over your personal information. Depending on your location, you may have the following rights:</p>
+
+                <h3>Universal Rights</h3>
+                <ul>
+                    <li><strong>Access Rights:</strong> Request a copy of the personal information we hold about you</li>
+                    <li><strong>Correction Rights:</strong> Update or correct inaccurate personal information</li>
+                    <li><strong>Deletion Rights:</strong> Request deletion of your personal information (subject to legal obligations)</li>
+                    <li><strong>Communication Preferences:</strong> Opt-out of marketing communications at any time</li>
+                </ul>
+
+                <h3>Enhanced Rights (GDPR/CCPA)</h3>
+                <ul>
+                    <li><strong>Data Portability:</strong> Receive your personal data in a structured, machine-readable format</li>
+                    <li><strong>Processing Objection:</strong> Object to certain types of data processing</li>
+                    <li><strong>Processing Restriction:</strong> Request limitation of data processing under specific circumstances</li>
+                    <li><strong>Automated Decision-Making:</strong> Opt-out of automated decision-making processes</li>
+                </ul>
+
+                <p><strong>Exercising Your Rights:</strong> To exercise any of these rights, please contact our Privacy Team using the information provided in the Contact section below. We will respond to your request within the legally required timeframe.</p>
+            </div>
+
+            <div class="policy-section" id="children-privacy">
+                <h2>8. Children's Privacy</h2>
+                <p>CipherHall is committed to protecting the privacy of children. Our services are designed for individuals aged 16 and above. We do not knowingly collect personal information from children under 16 years of age.</p>
+
+                <p>If we become aware that we have collected personal information from a child under 16, we will take immediate steps to delete such information. Parents or guardians who believe their child has provided personal information to us should contact us immediately.</p>
+
+                <h3>Teen Users (16-17 years old)</h3>
+                <p>For users between 16-17 years old, we encourage parental involvement in the educational journey. We may require parental consent for certain activities such as:</p>
+                <ul>
+                    <li>Participation in live webinars or community discussions</li>
+                    <li>Sharing achievements on social media platforms</li>
+                    <li>Receiving marketing communications about advanced courses</li>
+                </ul>
+            </div>
+
+            <div class="policy-section" id="international-users">
+                <h2>9. International Users</h2>
+                <p>CipherHall welcomes learners from around the globe. We are committed to complying with international privacy laws and regulations, including GDPR, CCPA, and other applicable data protection frameworks.</p>
+
+                <h3>Data Transfers</h3>
+                <p>Your personal information may be transferred to and processed in countries other than your own. When we transfer personal data internationally, we ensure appropriate safeguards are in place, including:</p>
+                <ul>
+                    <li>Standard Contractual Clauses approved by relevant authorities</li>
+                    <li>Adequacy decisions by competent data protection authorities</li>
+                    <li>Certification schemes and codes of conduct</li>
+                    <li>Binding corporate rules for intra-group transfers</li>
+                </ul>
+            </div>
+
+            <div class="policy-section" id="third-party-services">
+                <h2>10. Third-Party Services</h2>
+                <p>Our platform may integrate with various third-party services to enhance your learning experience. These integrations are carefully selected and monitored:</p>
+
+                <h3>Educational Integrations</h3>
+                <ul>
+                    <li><strong>Learning Management Systems:</strong> For advanced course delivery and progress tracking</li>
+                    <li><strong>Virtual Lab Environments:</strong> For hands-on cybersecurity practice</li>
+                    <li><strong>Certification Partners:</strong> For issuing industry-recognized credentials</li>
+                    <li><strong>Career Services:</strong> For job placement and networking opportunities</li>
+                </ul>
+
+                <h3>Third-Party Privacy</h3>
+                <p>Please note that third-party services have their own privacy policies and terms of service. We encourage you to review these policies when using integrated services. We are not responsible for the privacy practices of third-party services.</p>
+            </div>
+
+            <div class="policy-section" id="policy-updates">
+                <h2>11. Policy Updates</h2>
+                <p>We regularly review and update this Privacy Policy to ensure it remains current with our practices and legal requirements. When we make significant changes, we will:</p>
+
+                <ul>
+                    <li>Post the updated policy on our website with a new effective date</li>
+                    <li>Notify registered users via email about material changes</li>
+                    <li>Provide a summary of key changes on our platform</li>
+                    <li>Obtain your consent where required by applicable law</li>
+                </ul>
+
+                <p>We encourage you to periodically review this Privacy Policy to stay informed about how we protect your information. Your continued use of our services after policy updates indicates your acceptance of the revised terms.</p>
+            </div>
+
+            <div class="policy-section" id="contact-us">
+                <h2>12. Contact Information</h2>
+                <p>We value your feedback and are here to address any questions or concerns about your privacy. Our dedicated Privacy Team is committed to providing prompt and helpful responses.</p>
+
+                <div class="contact-info">
+                    <h3>Get in Touch with Our Privacy Team</h3>
+                    <p><strong>Email:</strong> privacy@cipherhall.com</p>
+                    <p><strong>Data Protection Officer:</strong> dpo@cybersecacademy.com</p>
+                    <p><strong>Support Portal:</strong> Submit privacy requests through our secure support system</p>
+                    <p><strong>Response Time:</strong> We aim to respond to all privacy inquiries within 72 hours</p>
+                </div>
+            </div>
+
+            <div class="highlight" style="margin-top: 40px;">
+                <p><strong>Thank You for Trusting CipherHall</strong></p>
+                <p>Your privacy is fundamental to our mission of creating a safe, secure, and empowering learning environment. As you advance in your cybersecurity journey with us, know that protecting your personal information is our ongoing commitment and responsibility.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

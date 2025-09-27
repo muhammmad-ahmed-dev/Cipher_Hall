@@ -1,0 +1,3554 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>OSINT Professional Course Curriculum | CipherHall</title>
+    <meta name="description" content="Begin your free OSINT Professional course. This curriculum covers advanced search, SOCMINT, GEOINT, OPSEC, and creating professional intelligence reports." />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="canonical" href="https://www.cipherhall.com/courses/osint-professional" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Open-Source Intelligence (OSINT) Professional",
+      "description": "A comprehensive course on the art and science of Open-Source Intelligence (OSINT), taking you from foundational principles to advanced, real-world investigative techniques.",
+      "provider": {
+        "@type": "Organization",
+        "name": "CipherHall",
+        "sameAs": "https://www.cipherhall.com"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "Online",
+        "instructor": {
+          "@type": "Person",
+          "name": "Isabella Rossi"
+        }
+      }
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Exo+2:wght@700;800;900&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" />
+    <link rel="stylesheet" href="assets/css/coursepages.css">
+</head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+      <div class="loader-icon">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+      <div class="loader-text">Loading Course Content...</div>
+    </div>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Music Player (fixed at top right) -->
+    <div class="header-controls">
+      <div class="music-dropdown" id="music-dropdown">
+        <button class="btn btn-secondary">
+          <span id="music-button-text">STUDY MUSIC</span>
+          <i id="music-icon" class="fa-solid fa-music"></i>
+        </button>
+        <div class="music-dropdown-content" id="music-dropdown-content">
+          <a
+            href="#"
+            data-src="https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3"
+            >1. Coffee Shop Vibes</a
+          >
+          <a
+            href="#"
+            data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+            >2. City Lights Lofi</a
+          >
+          <a
+            href="#"
+            data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"
+            >3. Mellow Thoughts</a
+          >
+          <a
+            href="#"
+            data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"
+            >4. Rainy Mood</a
+          >
+          <a
+            href="#"
+            data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
+            >5. Time Alone</a
+          >
+          <a href="#" id="stop-music-link"
+            ><i class="fa-solid fa-stop-circle"></i> Stop Music</a
+          >
+        </div>
+      </div>
+
+      <button class="btn btn-secondary" id="resetProgressBtn">
+        <i class="fas fa-redo"></i>
+        Reset Progress
+      </button>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal" style="display: none">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <span class="close" id="closeAuthModal">&times;</span>
+        <div class="auth-tabs">
+          <button id="tabSignIn" class="auth-tab active">Sign In</button>
+          <button id="tabSignUp" class="auth-tab">Sign Up</button>
+        </div>
+        <div
+          id="authLoader"
+          style="display: none; text-align: center; padding: 2rem"
+        >
+          <i
+            class="fas fa-spinner fa-spin fa-2x"
+            style="color: var(--color-green)"
+          ></i>
+          <p style="margin-top: 0.5rem">Authenticating...</p>
+        </div>
+        <div id="signInForm" class="auth-form">
+          <h2>Sign In to CipherHall</h2>
+          <button id="googleSignIn" class="btn btn-google">
+            <i class="fab fa-google"></i> Continue with Google
+          </button>
+          <div class="divider"><span>or</span></div>
+          <form id="emailSignInForm">
+            <input
+              type="email"
+              id="signInEmail"
+              placeholder="Email Address"
+              required
+            />
+            <input
+              type="password"
+              id="signInPassword"
+              placeholder="Password"
+              required
+            />
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </form>
+        </div>
+        <div id="signUpForm" class="auth-form" style="display: none">
+          <h2>Join CipherHall</h2>
+          <button id="googleSignUp" class="btn btn-google">
+            <i class="fab fa-google"></i> Continue with Google
+          </button>
+          <div class="divider"><span>or</span></div>
+          <form id="emailSignUpForm">
+            <input
+              type="text"
+              id="signUpName"
+              placeholder="Full Name"
+              required
+            />
+            <input
+              type="email"
+              id="signUpEmail"
+              placeholder="Email Address"
+              required
+            />
+            <input
+              type="password"
+              id="signUpPassword"
+              placeholder="Password (min. 8 characters)"
+              required
+            />
+            <button type="submit" class="btn btn-secondary">
+              Create Account
+            </button>
+          </form>
+        </div>
+        <div id="authMessage"></div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="course-info">
+          <h1 class="course-title" id="courseTitle">Loading...</h1>
+          <div class="course-progress">
+            <div class="progress-header">
+              <span class="progress-label">Course Progress</span>
+              <span class="progress-percentage" id="courseProgressPercent"
+                >0%</span
+              >
+            </div>
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                id="courseProgressFill"
+                style="width: 0%"
+              ></div>
+            </div>
+            <div class="progress-stats">
+              <span id="completedLessons">0</span>
+              <span id="totalLessons">0</span>
+            </div>
+          </div>
+          <a href="/dashboard" class="back-to-dashboard">
+            <i class="fas fa-arrow-left"></i>
+            Back to Dashboard
+          </a>
+        </div>
+      </div>
+
+      <nav class="lesson-nav" id="lessonNav">
+        <!-- Lessons will be loaded dynamically -->
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="content-header">
+        <div class="lesson-header">
+          <div class="lesson-header-left">
+            <span class="lesson-number" id="currentLessonNumber">1</span>
+            <h1 class="lesson-header-title" id="currentLessonTitle">
+              Loading...
+            </h1>
+          </div>
+          <div class="lesson-actions">
+            <button class="mbtn btn-primary" id="menuToggle">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body" id="contentBody">
+        <div class="lesson-content" id="lessonContent">
+          <!-- Lesson content will be loaded dynamically -->
+        </div>
+      </div>
+
+      <footer class="lesson-navigation">
+        <div class="nav-info" id="navInfo">Lesson 1 of 10</div>
+        <div class="nav-controls">
+          <button class="btn btn-secondary" id="prevLessonBtn" disabled>
+            <i class="fas fa-chevron-left"></i>
+            Previous
+          </button>
+          <button class="btn btn-primary" id="nextLessonBtn" disabled>
+            Next
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Achievement Notification -->
+    <div id="achievementNotification" class="achievement-notification">
+      <div class="notification-header">
+        <div class="notification-icon" id="notificationIcon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <div class="notification-content">
+          <h3 id="notificationTitle">Achievement Unlocked!</h3>
+          <p id="notificationDescription">Description here...</p>
+        </div>
+      </div>
+      <div class="notification-reward" id="notificationReward">
+        <i class="fas fa-coins"></i>
+        <span id="notificationPoints">+100 Points</span>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+      <span id="toastMessage"></span>
+    </div>
+
+    <script>
+      // =====================================================
+      // SYNCHRONIZED COURSE SYSTEM WITH DASHBOARD INTEGRATION
+      // =====================================================
+
+      // Supabase Configuration - Replace with your config
+      const supabaseUrl = "https://lzcmzulemfubjaksoqor.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6Y216dWxlbWZ1Ympha3NvcW9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzMzM5MDgsImV4cCI6MjA3MDkwOTkwOH0.crhPH4YWtRsr1BJTpAQcmPbWSpwIWRbzoI4sRb2_fPI";
+      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+      // =====================================================
+      // COURSE DATA STRUCTURE - REPLACE WITH YOUR COURSE JSON
+      // =====================================================
+      const COURSE_DATA = {
+    "id": "open-source-intelligence",
+    "title": "Open Source Intelligence: A Practical & Ethical Approach",
+    "description": "A comprehensive, 30-lesson course designed to build a professional-level skill set in Open Source Intelligence (OSINT) gathering and analysis. This syllabus covers the complete intelligence lifecycle, from establishing a secure and anonymous research environment to advanced search techniques, data correlation, automation, and professional reporting, all within a strict ethical and legal framework.",
+    "category": "threat_intelligence",
+    "difficulty": "Beginner to Advanced",
+    "duration": "60 hours",
+    "instructor": "Dr. Evelyn Reed",
+    "lessons": [
+        {
+            "id": "lesson-1",
+            "title": "Module 1: Foundations - Introduction to OSINT",
+            "duration": "90 min",
+            "objectives": [
+                "Define Open Source Intelligence (OSINT) and differentiate it from other intelligence disciplines.",
+                "Understand the critical ethical and legal boundaries that govern OSINT investigations.",
+                "Explore the phases of the intelligence lifecycle (Planning, Collection, Processing, Analysis, Dissemination).",
+                "Identify key use cases for OSINT in defensive cybersecurity, corporate security, and journalism."
+            ],
+            "content": {
+                "overview": "This foundational lesson introduces the discipline of Open Source Intelligence. We will define what constitutes 'open source' information, explore the structured process that turns raw data into actionable intelligence, and establish the strict ethical and legal guidelines that are non-negotiable for any professional investigator.",
+                "sections": [
+                    {
+                        "title": "What is OSINT?",
+                        "content": "<p>OSINT is the collection and analysis of information that is gathered from publicly and legally available sources. The key words are <strong>public</strong> and <strong>legal</strong>. This is not hacking or accessing private data. It is the art and science of finding, selecting, and acquiring information from public sources and analyzing it to produce actionable intelligence. The sources can range from the surface web (search engines, news articles) to the deep web (government records, academic papers) and even the dark web (public forums, markets).</p>",
+                        "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "The Intelligence Lifecycle",
+                        "content": "<p>Effective OSINT is not just random searching. It is a structured process:</p><ol><li><strong>Direction/Planning:</strong> Defining the intelligence requirements. What specific questions do we need to answer?</li><li><strong>Collection:</strong> Gathering the raw data from various public sources.</li><li><strong>Processing:</strong> Transforming the collected raw data into a usable format (e.g., translating languages, extracting text from images, structuring data).</li><li><strong>Analysis:</strong> Making sense of the processed data, correlating information, and forming conclusions.</li><li><strong>Dissemination:</strong> Delivering the finished intelligence product to the stakeholder in a clear, actionable report.</li></ol>",
+                        "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Identify Safe vs. Unsafe OSINT Practices",
+                        "description": "Create a table with two columns: 'Ethical/Legal OSINT' and 'Unethical/Illegal Activities'. Populate the table with at least five examples for each column. For example, 'Searching public court records' is legal, while 'Attempting to guess a user's password to access their private account' is illegal."
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 80,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "Which of the following best defines Open Source Intelligence (OSINT)?",
+                        "options": ["Hacking into private servers to find information.", "Collecting and analyzing information from publicly and legally available sources.", "Using a search engine.", "Reading a newspaper."],
+                        "correct": 1,
+                        "explanation": "The key to OSINT is the combination of collecting data from public/legal sources and then analyzing it to produce intelligence. Simple information gathering is not the same as intelligence."
+                    },
+                    {
+                        "id": 2,
+                        "question": "Which phase of the intelligence cycle involves transforming raw data into a usable format?",
+                        "options": ["Collection", "Analysis", "Dissemination", "Processing"],
+                        "correct": 3,
+                        "explanation": "Processing is the crucial intermediate step that cleans and structures raw data before it can be effectively analyzed."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-2",
+            "title": "Module 1: Foundations - The Investigator's Toolkit & Lab Setup",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the importance of operational security (OPSEC) for an OSINT investigator.",
+                "Configure a secure and anonymized research environment using virtual machines and VPNs.",
+                "Set up dedicated browser profiles with security-enhancing extensions.",
+                "Learn about OSINT frameworks as a tool for discovering resources."
+            ],
+            "content": {
+                "overview": "An OSINT investigator must protect themselves from being discovered by their target and from accidentally exposing their personal information. This lesson is a hands-on guide to setting up a secure and sterile investigation environment and introduces frameworks that help organize the vast landscape of OSINT tools.",
+                "sections": [
+                    {
+                        "title": "Operational Security (OPSEC)",
+                        "content": "<p>When you investigate a target, you are leaving a digital footprint (IP address, browser user-agent, etc.). Your target could potentially see that they are being investigated. Good OPSEC is about minimizing and sanitizing this footprint. Key principles include:</p><ul><li><strong>Anonymity:</strong> Using tools like VPNs and the Tor network to hide your true IP address.</li><li><strong>Sterile Accounts:</strong> Using dedicated, anonymous 'sock puppet' or 'burner' accounts for all research, with no link to your real identity.</li><li><strong>Isolation:</strong> Performing all investigation activities inside a dedicated, isolated virtual machine to prevent any accidental crossover with your personal data.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "The OSINT Framework",
+                        "content": "<p>The OSINT Framework is a web-based resource that maps out the vast landscape of OSINT tools and techniques. It's an interactive mind map that helps investigators discover new resources for specific tasks like username searches, domain analysis, or public records research. We will use this as our primary reference for discovering new tools throughout the course.</p>",
+                        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Set Up an OSINT Virtual Machine",
+                        "description": "Create a new VM (using VirtualBox or VMware). Inside the VM, install a browser of your choice. Configure a VPN. Create a new, dedicated browser profile for your investigations. Install several security and OSINT-focused browser extensions (e.g., a User-Agent switcher, an EXIF viewer). Take a clean snapshot."
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 80,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is the primary reason for using a VPN and an isolated VM for OSINT investigations?",
+                        "options": ["To make the internet connection faster.", "To maintain operational security (OPSEC) by hiding your true identity and isolating your research from your personal data.", "Because it is required by law.", "To access more websites."],
+                        "correct": 1,
+                        "explanation": "OPSEC is paramount for an investigator. Isolating your environment and anonymizing your traffic are the first and most important steps."
+                    },
+                    {
+                        "id": 2,
+                        "question": "A 'sock puppet' account in the context of OSINT is:",
+                        "options": ["Your real social media account.", "A fake, anonymous account used exclusively for research to avoid linking your investigation to your real identity.", "A type of software.", "An account that has been hacked."],
+                        "correct": 1,
+                        "explanation": "Using sterile, anonymous accounts is a core principle of OSINT OPSEC."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-3",
+            "title": "Module 1: Foundations - Search Engine Mastery",
+            "duration": "120 min",
+            "objectives": [
+                "Master advanced search operators (Google Dorking).",
+                "Learn how to effectively use alternative search engines (DuckDuckGo, Yandex, Bing).",
+                "Explore specialized search engines for public datasets, code, and academic papers.",
+                "Practice crafting complex queries to find specific information that is not easily discoverable."
+            ],
+            "content": {
+                "overview": "Search engines are the most powerful OSINT tool available, but most people only scratch the surface of their capabilities. This lesson is a deep dive into 'Google Dorking' and other advanced search techniques, teaching you how to craft queries that can uncover sensitive documents, hidden login pages, and other information that has been inadvertently exposed to the internet.",
+                "sections": [
+                    {
+                        "title": "Google Dorking (Advanced Operators)",
+                        "content": "<p>These special operators allow you to narrow down your search with extreme precision:</p><ul><li><strong>`site:`</strong> Restricts results to a specific website (e.g., `site:example.com`).</li><li><strong>`filetype:`</strong> Restricts results to a specific file type (e.g., `filetype:pdf`).</li><li><strong>`inurl:`</strong> Finds pages with a specific word in the URL.</li><li><strong>`intitle:`</strong> Finds pages with a specific word in the title.</li><li><strong>`\" \"` (Quotes):</strong> Searches for an exact phrase.</li><li><strong>`-` (Minus):</strong> Excludes a specific word.</li></ul><p>By combining these operators, you can create powerful queries, for example: `site:fbi.gov filetype:pdf \"for official use only\"` would search for PDF files on the fbi.gov domain that contain the exact phrase 'for official use only'.</p>",
+                        "image": "https://images.unsplash.com/photo-1599290078393-54b2d183f93f?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples": [
+                {
+                    "title": "Find Publicly Exposed Spreadsheets with Financial Info",
+                    "language": "text",
+                    "code": "# A corporate security investigator would use a dork like this to find sensitive financial documents\n# that may have been accidentally made public by their own company or a competitor.\n# Note: This is for educational demonstration of the query's power.\nfiletype:xls site:example.com \"budget\" OR \"forecast\" OR \"salary\""
+                },
+                {
+                    "title": "Discover Hidden Login Pages",
+                    "language": "text",
+                    "code": "# A penetration tester (with authorization) would use this type of query during reconnaissance\n# to find non-standard login portals that might be less secure than the main one.\nintitle:\"login\" inurl:\"/private/\" site:example.com"
+                },
+                {
+                    "title": "Search for Exposed Configuration Files",
+                    "language": "text",
+                    "code": "# A security researcher hunts for exposed configuration files which might contain passwords or API keys.\n# The `ext:` operator is an alternative to `filetype:`.\next:env \"DB_PASSWORD\" -github.com"
+                },
+                {
+                    "title": "Yandex Search for Image Geolocation",
+                    "language": "text",
+                    "code": "// Yandex is known for having a particularly powerful reverse image search.\n// A defender investigating a profile with a fake photo would use Yandex to find the photo's true origin.\n// This is a manual action:\n// 1. Go to yandex.com/images/\n// 2. Click the camera icon and upload an image.\n// 3. Analyze the results to find where else on the web that image appears."
+                }
+                ],
+                "activities": [
+                    {
+                        "title": "Find a Public PDF with Advanced Search",
+                        "description": "Using Google's advanced search operators, construct a query to find a publicly accessible PDF document from a US government or university website (`.gov` or `.edu`) that contains the phrase 'Threat Intelligence Report'. Document the exact 'dork' you used to find it."
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 80,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "The Google Dork `filetype:sql \"password\"` would be used to search for what?",
+                        "options": ["SQL tutorial videos.", "Files with the `.sql` extension (database dumps) that also contain the word 'password'.", "A person named SQL Password.", "The definition of SQL."],
+                        "correct": 1,
+                        "explanation": "This is a classic dork used by security researchers to find inadvertently exposed database backups, which are a major security risk."
+                    },
+                    {
+                        "id": 2,
+                        "question": "Which operator would you use to restrict your search results to only come from the website `example.com`?",
+                        "options": ["`url:example.com`", "`website:example.com`", "`site:example.com`", "`host:example.com`"],
+                        "correct": 2,
+                        "explanation": "The `site:` operator is the correct and most powerful way to limit a search to a specific domain and all its subdomains."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-4",
+            "title": "Module 2: Technical Footprinting - Domain, DNS & Website Analysis",
+            "duration": "120 min",
+            "objectives": [
+                "Perform WHOIS lookups to find domain registration information.",
+                "Query common DNS record types (A, MX, TXT) and understand their meaning.",
+                "Use automated tools and public sources to perform subdomain enumeration.",
+                "Analyze a website's `robots.txt` and use the Wayback Machine to find historical content."
+            ],
+            "content": {
+                "overview": "A target's online presence often starts with a domain name. This lesson covers the fundamental techniques for investigating a domain and its associated website, uncovering information about the organization that owns it, the servers that host it, and pages that may no longer be public.",
+                "sections": [
+                    {
+                        "title": "WHOIS and DNS Investigation",
+                        "content": "<p>Every domain registration contains public contact information in a <strong>WHOIS</strong> record. While often redacted for privacy, it can sometimes reveal the registrant's name, email, or organization. <strong>DNS (Domain Name System)</strong> records provide a map of the domain's infrastructure:</p><ul><li><strong>A Record:</strong> Points a domain name to an IP address.</li><li><strong>MX Record:</strong> Identifies the mail servers for the domain.</li><li><strong>TXT Record:</strong> Can contain arbitrary text, often used for security policies like SPF (Sender Policy Framework) or domain verification.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1554415707-6e8cf673a25d?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Subdomain Enumeration",
+                        "content": "<p>Organizations often have many subdomains that are not publicly linked (e.g., `dev.example.com`, `vpn.example.com`, `internal-portal.example.com`). Finding these can reveal new attack surfaces or hidden information. An investigator can find these by using search engine dorks (`site:*.example.com -www`), or by querying public datasets that collect historical DNS information and SSL certificate transparency logs.</p>",
+                        "image": "https://images.unsplash.com/photo-1544256718-3bcf237f3974?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Website Archaeology",
+                        "content": "<p>An investigator can often find interesting information by looking at a website's configuration files and history. The `robots.txt` file, while intended for search engines, often lists directories that the site owner doesn't want indexed, which can be a clue to interesting content. The <strong>Wayback Machine (Archive.org)</strong> is an invaluable tool that periodically archives websites, allowing you to see what a site looked like in the past and find pages or information that have since been deleted.</p>",
+                        "image": "https://images.unsplash.com/photo-1585079542156-2755d9c8a094?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples": [
+                {
+                    "title": "Perform a WHOIS Lookup with Python",
+                    "language": "python",
+                    "code": "# A defender or corporate investigator uses WHOIS to get registration details for a phishing domain.\n# This helps in identifying the hosting provider to send an abuse report.\nimport whois\n\ndef get_whois_info(domain):\n    try:\n        w = whois.whois(domain)\n        print(f'Registrar: {w.registrar}')\n        print(f'Creation Date: {w.creation_date}')\n        print(f'Emails: {w.emails}')\n    except Exception as e:\n        print(f'Could not get WHOIS info: {e}')\n\n# Usage:\nget_whois_info('google.com')"
+                },
+                {
+                    "title": "Query DNS Records with `dnspython`",
+                    "language": "python",
+                    "code": "# An investigator uses DNS records to map out a target's infrastructure.\n# For example, finding the MX records tells you what email service they use (e.g., Google Workspace, O365).\nimport dns.resolver\n\ndef query_dns_records(domain):\n    try:\n        for record_type in ['A', 'MX', 'TXT', 'NS']:\n            answers = dns.resolver.resolve(domain, record_type)\n            print(f'--- {record_type} Records ---')\n            for rdata in answers:\n                print(rdata.to_text())\n    except dns.resolver.NoAnswer:\n        print(f'No answer for {record_type}')\n    except Exception as e:\n        print(f'Error: {e}')\n\n# Usage:\nquery_dns_records('github.com')"
+                },
+                {
+                    "title": "Query Wayback Machine API with Python",
+                    "language": "python",
+                    "code": "# This script automates searching the Wayback Machine. An investigator could use this\n# to quickly find all archived URLs for a given website that contain a specific keyword.\nimport requests\n\ndef search_wayback(domain, keyword):\n    url = f\"http://web.archive.org/cdx/search/cdx?url={domain}/*&output=json&fl=original&filter=statuscode:200&filter=mimetype:text/html&filter=original:{keyword}\"\n    response = requests.get(url)\n    if response.status_code == 200:\n        # The first line is the header, so skip it.\n        return [url for [url] in response.json()[1:]]\n    return []\n\n# archived_logins = search_wayback('example.com', 'login')\n# print(archived_logins)"
+                },
+                {
+                    "title": "Check `robots.txt` with Python",
+                    "language": "python",
+                    "code": "# The robots.txt file often gives investigators clues about parts of a website the owner\n# wants to hide. This script programmatically fetches and parses this file.\nimport requests\n\ndef get_robots_txt(domain):\n    url = f\"https://{domain}/robots.txt\"\n    try:\n        response = requests.get(url, headers={'User-Agent': 'Ethical OSINT Bot'})\n        if response.status_code == 200:\n            print(f'--- robots.txt for {domain} ---')\n            # A hunter looks for 'Disallow' entries that point to interesting directories like /admin or /private\n            for line in response.text.split('\\n'):\n                if line.lower().startswith('disallow'):\n                    print(line)\n    except requests.exceptions.RequestException:\n        print('Could not fetch robots.txt')\n\n# Usage:\nget_robots_txt('google.com')"
+                }
+              ],
+                "activities": [
+                    {
+                        "title": "Investigate a Benign Domain History",
+                        "description": "Choose a well-known, public website (like your university's or a major open-source project). Use a WHOIS tool to find its creation date. Use `dig` or an online tool to find its A, MX, and TXT records. Use the Wayback Machine to view a snapshot of the website from at least five years ago. Document your findings."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "Which DNS record type is used to identify the mail servers for a domain?",
+                  "options": ["A Record", "TXT Record", "NS Record", "MX Record"],
+                  "correct": 3,
+                  "explanation": "MX (Mail eXchanger) records are specifically used to direct email for a domain."
+                },
+                {
+                  "id": 2,
+                  "question": "The Wayback Machine (Archive.org) is a valuable OSINT tool because it allows you to:",
+                  "options": ["Find the IP address of a website.", "View historical, archived versions of websites, including pages that have since been deleted.", "Register a new domain name.", "Send emails anonymously."],
+                  "correct": 1,
+                  "explanation": "Its historical snapshots are invaluable for finding information that is no longer on the live internet."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-5",
+            "title": "Module 2: Technical Footprinting - Infrastructure Analysis",
+            "duration": "120 min",
+            "objectives": [
+                "Understand how IP addresses can be linked to physical locations and service providers.",
+                "Use online tools and Shodan to discover open ports and running services on a server.",
+                "Analyze SSL/TLS certificates to find additional domains and company information.",
+                "Map out a target's infrastructure by correlating DNS and IP address data."
+            ],
+            "content": {
+                "overview": "Every internet-facing service runs on an IP address. Analyzing this infrastructure layer can reveal what technology a target is using, what services are exposed to the internet, and how their various web properties are interconnected. This lesson focuses on the tools and techniques used to footprint a target's technical infrastructure.",
+                "sections": [
+                    {
+                        "title": "IP Address Intelligence",
+                        "content": "<p>An IP address is more than just a number. It can provide several key pieces of information:</p><ul><li><strong>Geolocation:</strong> While not perfectly accurate, IP geolocation can often pinpoint the city and country where a server is located.</li><li><strong>ASN (Autonomous System Number):</strong> The ASN reveals the hosting provider or company that owns that block of IP addresses (e.g., Amazon AWS, Google Cloud).</li><li><strong>Reverse DNS:</strong> A PTR record can map an IP address back to a hostname, which can reveal a server's purpose.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1573495627361-d9b87960b12d?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Scanning with Shodan",
+                        "content": "<p>Shodan is a 'search engine for devices'. Unlike Google, it scans the entire internet for open ports and services, collecting the 'banner' (service identification string) for each one. An investigator can use Shodan to find all the exposed services for a company's IP range, discover vulnerable IoT devices, or find webcams, databases, and industrial control systems that have been inadvertently connected to the internet.</p>",
+                        "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples": [
+                    {
+                        "title": "Get IP Geolocation and ASN with Python",
+                        "language": "python",
+                        "code": "# A threat intelligence analyst would use a script like this to get quick context\n# on a suspicious IP address found in their logs.\nimport requests\n\ndef get_ip_info(ip_address):\n    try:\n        response = requests.get(f'https://ipinfo.io/{ip_address}/json')\n        if response.status_code == 200:\n            data = response.json()\n            print(f\"IP: {data.get('ip')}\")\n            print(f\"Location: {data.get('city')}, {data.get('region')}, {data.get('country')}\")\n            print(f\"Organization (ASN): {data.get('org')}\")\n    except requests.exceptions.RequestException as e:\n        print(f'Error fetching IP info: {e}')\n\n# Usage:\nget_ip_info('8.8.8.8')"
+                    },
+                    {
+                        "title": "Search Shodan with Python API",
+                        "language": "python",
+                        "code": "# Shodan's API allows for powerful, automated searching. A defender might use this\n# to monitor their own organization's IP ranges for newly exposed and unexpected services.\nimport shodan\n\nAPI_KEY = 'YOUR_SHODAN_API_KEY'\n\ndef search_shodan(api_key, query):\n    api = shodan.Shodan(api_key)\n    try:\n        results = api.search(query)\n        print(f\"Results found: {results['total']}\")\n        for result in results['matches']:\n            print(f\"IP: {result['ip_str']}, Port: {result['port']}, Banner: {result['data'].split('\\n')[0]}\")\n    except shodan.APIError as e:\n        print(f'Shodan API error: {e}')\n\n# Search for exposed webcams in a specific city (for demonstration)\n# search_shodan(API_KEY, 'webcam city:\"San Francisco\"')"
+                    },
+                    {
+                        "title": "Parse SSL Certificate Information",
+                        "language": "python",
+                        "code": "# SSL certificates contain valuable OSINT data. An investigator uses this to find more domains\n# belonging to a target. The 'Subject Alternative Name' (SAN) field often lists all the\n# hostnames covered by a single certificate.\nimport ssl\nimport socket\n\ndef get_cert_info(domain):\n    context = ssl.create_default_context()\n    with socket.create_connection((domain, 443)) as sock:\n        with context.wrap_socket(sock, server_hostname=domain) as ssock:\n            cert = ssock.getpeercert()\n            subject = dict(x[0] for x in cert['subject'])\n            print(f\"Common Name: {subject.get('commonName')}\")\n            for type, name in cert.get('subjectAltName', []):\n                print(f\"SAN: {name}\")\n\n# Usage:\nget_cert_info('google.com')"
+                    },
+                    {
+                        "title": "Shodan Dork for Vulnerable Webcams",
+                        "language": "text",
+                        "code": "# Shodan 'dorks' are similar to Google dorks. An ethical hacker or security researcher\n# would use a query like this to find a specific type of vulnerable device that has been\n# accidentally exposed to the internet. This helps vendors and users secure their systems.\n\nhttp.title:\"Live View / - AXIS\""
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Footprint a Public Company's Infrastructure",
+                        "description": "Choose a well-known public company. Find their primary domain name. Use DNS lookups to get their IP address. Use `ipinfo.io` to find the ASN and hosting provider. Use Shodan to search for open ports on that IP address. Finally, check the SSL certificate for the main website and list any Subject Alternative Names you find."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "The tool Shodan is best described as:",
+                  "options": ["A social media search engine.", "A search engine that scans the internet for open ports and services on devices.", "A tool for registering domain names.", "A search engine for the dark web."],
+                  "correct": 1,
+                  "explanation": "Shodan is specifically designed for infrastructure analysis, allowing researchers to find exposed devices, databases, and services across the entire internet."
+                },
+                {
+                  "id": 2,
+                  "question": "Analyzing the Subject Alternative Name (SAN) field of an SSL/TLS certificate is a useful OSINT technique because:",
+                  "options": ["It shows who paid for the certificate.", "It often reveals other domain and subdomains owned by the same entity, expanding your knowledge of the target's infrastructure.", "It contains the website's password.", "It is always encrypted."],
+                  "correct": 1,
+                  "explanation": "The SAN field is a list of all hostnames that the certificate is valid for, making it a fantastic source for discovering related web properties."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-6",
+            "title": "Module 3: Human & Social Intelligence - Social Media Intelligence (SOCMINT) Basics",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the ethical considerations of social media intelligence.",
+                "Practice basic searches on major platforms (Twitter, LinkedIn, Facebook).",
+                "Learn the concept of username expansion to find a user across multiple sites.",
+                "Extract meaningful information from public profiles and posts."
+            ],
+            "content": {
+                "overview": "Social media is one of the richest sources of open source information about individuals and organizations. This lesson covers the fundamental techniques for gathering intelligence from platforms like Twitter and LinkedIn, while constantly emphasizing the critical ethical need to only view public information and to respect privacy.",
+                "sections": [
+                    {
+                        "title": "Ethical Considerations",
+                        "content": "<p>SOCMINT has significant ethical implications. Our focus is on the responsible analysis of <strong>publicly available</strong> information for legitimate defensive or research purposes (e.g., threat intelligence, brand monitoring, investigative journalism). It is unethical and often illegal to attempt to access private profiles, send harassing messages, or use this information for doxxing or personal attacks. We operate as professionals with a strict code of conduct.</p>",
+                        "image": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Username Expansion",
+                        "content": "<p>People often reuse the same username across multiple services. If you find a target's username on one platform (e.g., Twitter), it's highly likely they use the same one on others (Instagram, Reddit, GitHub, etc.). This technique, known as username expansion, can be used to build a more complete picture of a public profile. Automated tools can quickly check for the existence of a username across hundreds of websites.</p>",
+                        "image": "https://images.unsplash.com/photo-1611605698335-8b1569810432?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples": [
+                {
+                    "title": "Search for Tweets with `snscrape` (Python)",
+                    "language": "python",
+                    "code": "# A journalist or researcher might use a tool like snscrape to gather public tweets related to an event.\n# This script shows how to scrape public tweets containing a specific hashtag without needing an API key.\n# Note: This is for analyzing public data trends, not targeting individuals.\nimport snscrape.modules.twitter as sntwitter\nimport pandas as pd\n\n# Query for a benign, high-traffic hashtag\nquery = \"#opensource until:2023-01-01 since:2022-01-01\"\ntweets = []\nlimit = 100\n\n# for tweet in sntwitter.TwitterSearchScraper(query).get_items():\n#     if len(tweets) == limit: break\n#     tweets.append([tweet.date, tweet.user.username, tweet.content])\n\n# df = pd.DataFrame(tweets, columns=['Date', 'User', 'Tweet'])\n# print(df)"
+                },
+                {
+                    "title": "Automate Username Checking with Python (`requests`)",
+                    "language": "python",
+                    "code": "# This script demonstrates the logic behind username expansion tools. A brand protection analyst might use this\n# to check for fraudulent accounts using their company's name. It checks if a username exists on a site\n# by seeing if the profile URL returns a '200 OK' status code.\nimport requests\n\ndef check_username(username):\n    sites = {\n        'GitHub': f'https://github.com/{username}',\n        'Twitter': f'https://twitter.com/{username}'\n    }\n    for site, url in sites.items():\n        response = requests.get(url, headers={'User-Agent': 'OSINT Checker'})\n        if response.status_code == 200:\n            print(f'[+] Found on {site}: {url}')\n        else:\n            print(f'[-] Not found on {site}')\n\n# Usage on a public, well-known username\ncheck_username('Google')"
+                },
+                {
+                    "title": "Twitter Search Operator Example",
+                    "language": "text",
+                    "code": "// Investigators use Twitter's own advanced search operators for powerful, targeted queries.\n// This query would be used by a threat intel analyst to find tweets from a specific, public\n// security researcher's account that mention a particular vulnerability (CVE).\n\nfrom:MalwareTechBook until:2022-01-01 \"CVE-2021-44228\""
+                },
+                {
+                    "title": "LinkedIn Google Dork",
+                    "language": "text",
+                    "code": "// A corporate investigator can use Google dorks to find public LinkedIn profiles\n// for people who work at a specific company.\n\nsite:linkedin.com/in \"Software Engineer\" \"Microsoft\""
+                }
+              ],
+                "activities": [
+                    {
+                        "title": "Research Your Own Public Footprint",
+                        "description": "Acting as an ethical investigator, perform an OSINT investigation on your *own* name and primary username(s). Use search engines, social media sites, and username expansion tools. The goal is to safely discover what a third party could learn about you from purely public sources. Document your findings in a private report. This is a critical exercise in understanding your own operational security."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is 'username expansion' in the context of OSINT?",
+                  "options": ["Making a username longer.", "The process of searching for the same username across multiple social media platforms and websites.", "Deleting a username.", "Finding the history of a username."],
+                  "correct": 1,
+                  "explanation": "This technique is based on the common user behavior of reusing the same username across different services."
+                },
+                {
+                  "id": 2,
+                  "question": "When conducting SOCMINT, what is the most important ethical rule to follow?",
+                  "options": ["Only access information that is publicly available.", "You must get permission from the person first.", "It is okay to try and guess passwords for private accounts.", "Create as many sock puppet accounts as possible."],
+                  "correct": 0,
+                  "explanation": "The line between ethical OSINT and illegal hacking/stalking is the line between public and private data. Ethical investigators never cross that line."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-7",
+            "title": "Module 3: Human & Social Intelligence - Advanced Social Media Analysis",
+            "duration": "90 min",
+            "objectives": [
+                "Analyze social networks to map relationships and influence.",
+                "Track the spread of information and hashtags across a platform.",
+                "Conduct basic sentiment analysis on a collection of public posts.",
+                "Ethically scrape and structure social media data for analysis."
+            ],
+            "content": {
+                "overview": "Beyond individual profiles, the true power of SOCMINT lies in analyzing the connections and conversations that make up a social network. This lesson introduces the concepts of social network analysis, sentiment analysis, and the tools for collecting data at a larger scale.",
+                "sections": [
+                    {
+                        "title": "Social Network Analysis (SNA)",
+                        "content": "<p>SNA is the process of mapping out the relationships between individuals or groups. In OSINT, this means looking at who follows whom, who replies to whom, and who is in the same groups. By visualizing this as a network graph, an investigator can quickly identify key influencers, distinct communities, and the central figures in a conversation.</p>",
+                        "image": "https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Sentiment Analysis",
+                        "content": "<p>Sentiment analysis is the use of natural language processing (NLP) to determine if a piece of text is positive, negative, or neutral. A brand reputation manager could use this to automatically gauge public opinion about a new product by analyzing thousands of tweets. While not always perfectly accurate, it's a powerful tool for analyzing data at scale.</p>",
+                        "image": "https://images.unsplash.com/photo-1557835252-6e21c8152e1f?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Track a Trending Hashtag",
+                        "description": "Choose a benign, popular hashtag that is currently trending on Twitter. Use Twitter's advanced search to gather a sample of recent tweets using this hashtag. Manually analyze the tweets to identify the key themes of the conversation, the most influential users discussing the topic, and the overall sentiment."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "A researcher creates a graph where each person in a Twitter conversation is a node, and a 'reply' is an edge connecting two nodes. What is this researcher doing?",
+                  "options": ["Username expansion", "Social Network Analysis (SNA)", "Reverse image search", "Geolocation"],
+                  "correct": 1,
+                  "explanation": "SNA is the practice of mapping and analyzing relationships and flows between people, groups, or other connected entities."
+                },
+                {
+                  "id": 2,
+                  "question": "A company wants to know if the public reaction to their new product is positive or negative. Which OSINT technique would be most appropriate?",
+                  "options": ["WHOIS lookups", "Sentiment analysis", "EXIF data extraction", "DNS analysis"],
+                  "correct": 1,
+                  "explanation": "Sentiment analysis is specifically designed to determine the emotional tone behind a body of text, making it ideal for gauging public opinion from social media data."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-8",
+            "title": "Module 3: Human & Social Intelligence - Email, Username & Breach Data",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the structure of an email address and its headers.",
+                "Use online tools for basic email address verification.",
+                "Leverage breach data repositories (like Have I Been Pwned) for threat intelligence.",
+                "Refine username expansion techniques and use tools like `sherlock`."
+            ],
+            "content": {
+                "overview": "Usernames and email addresses are often the primary identifiers for an individual online. This lesson focuses on the techniques used to verify this information, expand it across multiple platforms, and leverage data from public security breaches to understand a target's exposure.",
+                "sections": [
+                    {
+                        "title": "Email Address Analysis",
+                        "content": "<p>An email address (`user@domain.com`) provides two key pieces of information: the username and the domain. The domain can be investigated using the techniques from Lesson 4. The username can be used for username expansion. Tools can also perform a basic 'soft' verification by checking if the mail servers (from the MX record) will accept mail for that address, though this is not always reliable.</p>",
+                        "image": "https://images.unsplash.com/photo-1557853198-a020935548a3?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Leveraging Breach Data",
+                        "content": "<p>When a company is hacked, the stolen user data (emails, usernames, hashed passwords) is often dumped publicly. This is called 'breach data' or 'combolists'. A corporate security investigator can use a service like <strong>Have I Been Pwned (HIBP)</strong> to see if their company's email addresses have appeared in any public breaches. This is a critical defensive tool for identifying which users have had their credentials exposed and are at risk of password reuse or spear-phishing attacks.</p>",
+                        "image": "https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples": [
+                {
+                    "title": "Check an Email Address in HaveIBeenPwned API with Python",
+                    "language": "python",
+                    "code": "# A corporate security team would use the HIBP API to check their employees' emails for exposure\n# in public breaches. This helps them prioritize password resets and security awareness training.\nimport requests\n\nHIBP_API_KEY = 'YOUR_HIBP_API_KEY'\nEMAIL_TO_CHECK = 'example@example.com' # A valid email address\n\ndef check_hibp(api_key, email):\n    url = f'https://haveibeenpwned.com/api/v3/breachedaccount/{email}'\n    headers = {'hibp-api-key': api_key, 'User-Agent': 'OSINT-Course-Checker'}\n    response = requests.get(url, headers=headers)\n    if response.status_code == 200:\n        print(f'[ALERT] Email {email} found in the following breaches:')\n        for breach in response.json():\n            print(f'  - {breach[\"Name\"]}')\n    elif response.status_code == 404:\n        print(f'[INFO] Email {email} not found in any public breaches.')\n    else:\n        print(f'Error: {response.status_code}')\n\n# check_hibp(HIBP_API_KEY, EMAIL_TO_CHECK)"
+                },
+                {
+                    "title": "Run `sherlock` for Username Expansion",
+                    "language": "bash",
+                    "code": "# `sherlock` is a popular open-source tool that automates username expansion.\n# An investigator provides a single username, and Sherlock will check for its existence\n# across hundreds of social media and other websites.\ngit clone https://github.com/sherlock-project/sherlock.git\ncd sherlock\npython3 -m pip install -r requirements.txt\n\n# Run on a well-known public username\npython3 sherlock.py google"
+                },
+                {
+                    "title": "Analyze Email Headers for IP Address",
+                    "language": "text",
+                    "code": "// Email headers contain the path an email took across the internet. A defender analyzing\n// a phishing email can find the true originating IP address from the 'Received' headers.\n// They would read the headers from the BOTTOM UP.\n\nReceived: from mail-server.real.com (mail-server.real.com [203.0.113.10])\n    by mx.google.com with ESMTP id ...\n    for <victim@gmail.com>;\n    Tue, 28 Jan 2023 10:00:00 -0800 (PST)\nReceived: from [192.168.1.5] (attacker-machine.some-isp.com [198.51.100.50])\n    by mail-server.real.com with ESMTP id ...\n\n// In this case, `198.51.100.50` is the originating IP of the attacker."
+                },
+                {
+                    "title": "Verify Email Syntax with Regex (Python)",
+                    "language": "python",
+                    "code": "# As a simple processing step, an investigator might use regex to validate a list of potential\n# email addresses and filter out any that are not syntactically correct.\nimport re\n\ndef validate_email_syntax(email):\n    # This is a simple regex for demonstration.\n    pattern = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')\n    if pattern.match(email):\n        print(f'\"{email}\" has valid syntax.')\n    else:\n        print(f'\"{email}\" has invalid syntax.')\n\nvalidate_email_syntax('test@example.com')\nvalidate_email_syntax('invalid-email')"
+                }
+              ],
+                "activities": [
+                    {
+                        "title": "Search a Username Across Platforms",
+                        "description": "Choose a well-known, public brand name or a public figure's common username (e.g., 'nasa' or 'linus_torvalds'). Use the `sherlock` tool to perform a username expansion. Review the results and verify that the tool correctly identified the profiles on several major platforms (e.g., Twitter, GitHub, Instagram)."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "A corporate security investigator uses a service like 'Have I Been Pwned' to check their company's email addresses. What is the primary defensive purpose of this action?",
+                  "options": ["To find out which employees are on social media.", "To identify which employees have had their credentials exposed in public data breaches, indicating a high risk of password reuse and spear-phishing.", "To send a marketing email to all employees.", "To check if the email server is working."],
+                  "correct": 1,
+                  "explanation": "Checking against breach data is a critical, proactive security measure that allows organizations to identify and mitigate risks from credential exposure."
+                },
+                {
+                  "id": 2,
+                  "question": "When analyzing a phishing email, why would an investigator examine the email headers?",
+                  "options": ["To read the content of the email.", "To find the true originating IP address of the sender, which is often different from the 'From:' address.", "To see who else received the email.", "To find attachments."],
+                  "correct": 1,
+                  "explanation": "The 'Received' headers act like a series of postmarks, tracing the email's path from its source and allowing an investigator to bypass a spoofed 'From' address."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-9",
+            "title": "Module 4: Specialized Data - Visual & Geographic Intelligence",
+            "duration": "120 min",
+            "objectives": [
+                "Master reverse image search techniques using multiple platforms (Google, Yandex, TinEye).",
+                "Understand what EXIF metadata is and how to extract it from an image.",
+                "Learn the fundamentals of geolocation (GeoINT) from photos and videos.",
+                "Practice the technique of 'landmark triangulation' to pinpoint a location."
+            ],
+            "content": {
+                "overview": "A single image or video can contain a wealth of information. This lesson focuses on the tools and techniques for visual intelligence, teaching you how to find the original source of an image, extract hidden metadata, and analyze its contents to determine the real-world geographic location where it was taken.",
+                "sections": [
+                    {
+                        "title": "Reverse Image Search & Metadata",
+                        "content": "<p>A reverse image search lets you search with an image to find its original source or other instances of it online. This is invaluable for debunking fake news or verifying profiles. Additionally, the original image file may contain EXIF metadata, including the camera model, date/time, and sometimes even GPS coordinates.</p>",
+                        "image": "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Geolocation Intelligence (GeoINT)",
+                        "content": "<p>GeoINT is the process of identifying a location from visual clues. You start with an image and look for small details: landmarks, text/language on signs, infrastructure (e.g., what side of the road cars are on), and even natural clues like vegetation and the position of the sun. By combining these clues, you form a hypothesis and then use mapping tools like Google Maps and Street View to verify the exact spot.</p>",
+                        "image": "https://images.unsplash.com/photo-1594903335541-da634d8b9442?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples": [
+                    {
+                        "title": "Extract EXIF Data with Python (`Pillow`)",
+                        "language": "python",
+                        "code": "# A digital forensics investigator would use a script like this to programmatically\n# extract all available EXIF metadata from a batch of image files.\nfrom PIL import Image\nfrom PIL.ExifTags import TAGS\n\ndef get_exif_data(image_path):\n    try:\n        with Image.open(image_path) as img:\n            exif_data = img._getexif()\n            if exif_data:\n                for tag_id, value in exif_data.items():\n                    tag_name = TAGS.get(tag_id, tag_id)\n                    # GPSInfo has to be decoded further\n                    print(f'{tag_name}: {value}')\n    except Exception as e:\n        print(f'Could not read EXIF data: {e}')\n\n# Usage on a benign, personal photo (that has not had EXIF stripped)\n# get_exif_data('my_photo.jpg')"
+                    },
+                    {
+                        "title": "Use the `exiftool` Command-Line Utility",
+                        "language": "bash",
+                        "code": "# `exiftool` is the gold standard for metadata analysis. A defender would use it\n# to get a comprehensive view of all metadata in a file, not just EXIF.\n# It works on videos, PDFs, and many other file types as well.\nexiftool my_benign_photo.jpg"
+                    },
+                    {
+                        "title": "Analyze Shadow Direction with `suncalc` (Python)",
+                        "language": "python",
+                        "code": "# Geolocation experts use shadows to determine the time of day and orientation.\n# This script uses the `suncalc` library to show how an analyst could calculate the\n# sun's position for a given time and location, which can then be compared to a photo.\n# from suncalc import get_position\n# from datetime import datetime\n\n# # An investigator might know the date from a news report, and the location from a landmark.\n# date = datetime.now()\n# lat, lon = 40.7128, -74.0060 # New York City\n\n# pos = get_position(date, lon, lat)\n# azimuth_degrees = pos['azimuth'] * 180 / 3.14159\n# print(f'Sun Azimuth (from North): {azimuth_degrees:.2f} degrees')"
+                    },
+                    {
+                        "title": "Reverse Geocoding with `geopy` (Python)",
+                        "language": "python",
+                        "code": "# If an investigator has GPS coordinates (e.g., from EXIF data), they use reverse geocoding\n# to turn those coordinates into a human-readable address.\nfrom geopy.geocoders import Nominatim\n\ngeolocator = Nominatim(user_agent=\"my-osint-app\")\n\n# GPS coordinates for the Statue of Liberty\ncoordinates = \"40.6892, -74.0445\"\n\n# location = geolocator.reverse(coordinates)\n# print(location.address)"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Locate a Landmark from a Public Photo",
+                        "description": "Using an online GeoINT challenge website (like Geoguessr or a dedicated OSINT challenge site), choose a beginner-level challenge. You will be given a photo taken from Google Street View. Using only the visual clues in the image (road signs, language, landscape, etc.), your job is to find the location on a world map. Document the clues you used to make your determination."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is the primary goal of Geolocation Intelligence (GeoINT)?",
+                  "options": ["To find out a person's username.", "To determine the real-world geographic location where a photo or video was taken.", "To analyze a website's technology stack.", "To find historical versions of a website."],
+                  "correct": 1,
+                  "explanation": "GeoINT is the practice of pinpointing the 'where' from visual media."
+                },
+                {
+                  "id": 2,
+                  "question": "EXIF data in an image file can sometimes contain what highly sensitive piece of information?",
+                  "options": ["The name of the person in the photo.", "The password of the person who took the photo.", "The GPS coordinates of where the photo was taken.", "The photographer's opinions."],
+                  "correct": 2,
+                  "explanation": "While less common now due to privacy measures, the potential for GPS data in EXIF makes it a critical area of analysis for investigators."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-10",
+            "title": "Module 4: Specialized Data - Public Records & Business Intelligence",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the types of data available from public government and corporate records.",
+                "Learn how to search company registration databases.",
+                "Explore public financial records from agencies like the SEC.",
+                "Use open data portals to find and analyze government datasets."
+            ],
+            "content": {
+                "overview": "A vast amount of OSINT data comes not from social media or technical analysis, but from official public records. This lesson introduces the techniques for searching government and corporate databases to find information on businesses, assets, and financials.",
+                "sections": [
+                    {
+                        "title": "Corporate Registries",
+                        "content": "<p>Most countries and states require businesses to register with the government. These registration documents are often public records and can contain a wealth of information for a corporate investigator, including:</p><ul><li>The legal name and address of the business.</li><li>The names of the company directors and officers.</li><li>Other companies that those same individuals are associated with.</li></ul><p>Tools like OpenCorporates aggregate this data from many different registries around the world into a single, searchable database.</p>",
+                        "image": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Financial and Government Data",
+                        "content": "<p>For publicly traded companies, financial filings with regulatory bodies like the U.S. Securities and Exchange Commission (SEC) are public. These can reveal financial health, corporate structure, and key business risks. Additionally, governments around the world are increasingly making their data public through 'open data' portals. These datasets can cover everything from transportation statistics to property records and can be invaluable for researchers and journalists.</p>",
+                        "image": "https://images.unsplash.com/photo-1665686374246-010776b3a0c4?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples":[
+                {
+                    "title": "Search OpenCorporates API with Python",
+                    "language": "python",
+                    "code": "# A corporate investigator or due diligence analyst would use this API to get official\n# registration information for a company, including its directors and legal address.\nimport requests\n\n# Some APIs may require a token, passed in headers or as a URL parameter.\nCOMPANY_NAME = 'Tesla, Inc.'\n\ndef search_open_corporates(company):\n    url = f'https://api.opencorporates.com/v0.4/companies/search?q={company}'\n    response = requests.get(url)\n    if response.status_code == 200:\n        results = response.json().get('results', {}).get('companies', [])\n        if results:\n            first_result = results[0]['company']\n            print(f\"Company: {first_result['name']}\")\n            print(f\"Jurisdiction: {first_result['jurisdiction_code']}\")\n            print(f\"Registered Address: {first_result['registered_address_in_full']}\")\n\n# search_open_corporates(COMPANY_NAME)"
+                },
+                {
+                    "title": "Download an SEC Filing with Python",
+                    "language": "python",
+                    "code": "# A financial analyst or investigative journalist would automate the downloading of SEC filings\n# to analyze a public company's financial health and statements.\nimport requests\n\ndef download_sec_filing(accession_number):\n    # Accession numbers can be found via the SEC's EDGAR search.\n    # This is a reformatted accession number for the URL.\n    formatted_acc = accession_number.replace('-', '')\n    url = f\"https://www.sec.gov/Archives/edgar/data/.../{formatted_acc}/{accession_number}.txt\"\n    response = requests.get(url, headers={'User-Agent': 'Ethical OSINT Research'})\n    if response.status_code == 200:\n        print('Successfully downloaded filing.')\n        # with open('filing.txt', 'w') as f: f.write(response.text)\n\nprint('Conceptual code for SEC filing download.')"
+                },
+                {
+                    "title": "Access World Bank Open Data with `wbdata`",
+                    "language": "python",
+                    "code": "# A journalist or academic researcher would use a library like this to programmatically\n# access and analyze large-scale public datasets from organizations like the World Bank.\n# import wbdata\n# import pandas as pd\n# from datetime import datetime\n\n# # Get indicators for GDP per capita for several countries\n# indicators = {\"NY.GDP.PCAP.CD\": \"GDP per capita\"}\n# countries = [\"USA\", \"DEU\", \"CHN\"]\n# df = wbdata.get_dataframe(indicators, country=countries, convert_date=True)\n# print(df)"
+                },
+                {
+                    "title": "Look Up a Court Docket (Manual)",
+                    "language": "text",
+                    "code": "// A legal investigator would use public court record systems like PACER in the US.\n// The search for public records is typically a manual, website-driven process.\n\n// 1. Navigate to the relevant court's public access website.\n// 2. Use the case number or party name search.\n// 3. Review public docket entries for information on plaintiffs, defendants, and filings.\n// Note: Accessing documents may require a fee and registration."
+                }
+              ],
+                "activities": [
+                    {
+                        "title": "Look up a Public Business Registry",
+                        "description": "Choose a large, publicly traded company. Go to the OpenCorporates website and search for the company. Find its legal name, jurisdiction, and the names of some of its current or former officers. This simulates a basic corporate due diligence investigation."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "A tool like OpenCorporates is primarily used by OSINT investigators for what purpose?",
+                  "options": ["To find social media profiles.", "To find and analyze official company registration data from around the world.", "To perform reverse image searches.", "To find IP addresses."],
+                  "correct": 1,
+                  "explanation": "OpenCorporates aggregates official corporate registry data, making it an invaluable tool for due diligence and corporate investigations."
+                },
+                {
+                  "id": 2,
+                  "question": "In the United States, which government agency makes the financial filings of publicly traded companies available to the public?",
+                  "options": ["The Federal Bureau of Investigation (FBI)", "The Central Intelligence Agency (CIA)", "The National Security Agency (NSA)", "The Securities and Exchange Commission (SEC)"],
+                  "correct": 3,
+                  "explanation": "The SEC's EDGAR database is the primary source for public financial data on US companies."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-11",
+            "title": "Module 4: Specialized Data - Dark Web Intelligence (Safe & Legal)",
+            "duration": "90 min",
+            "objectives": [
+                "Understand what the Tor network is and how it provides anonymity.",
+                "Differentiate between the Deep Web and the Dark Web.",
+                "Learn how to safely and legally access the dark web for research purposes.",
+                "Explore legitimate dark web search engines and onion sites."
+            ],
+            "content": {
+                "overview": "The dark web is often sensationalized, but for an OSINT professional, it is another potential source of information. This lesson demystifies the dark web, explains the technology behind the Tor network, and covers how to safely and legally explore it for defensive threat intelligence, all within a strict ethical framework.",
+                "sections": [
+                    {
+                        "title": "Deep Web vs. Dark Web",
+                        "content": "<ul><li><strong>Deep Web:</strong> This is simply the part of the internet that is not indexed by search engines. This includes your online banking portal, your email inbox, and corporate intranets. The vast majority of the internet is the deep web.</li><li><strong>Dark Web:</strong> A small part of the deep web that has been intentionally hidden and requires special software—most commonly the Tor Browser—to access. Websites on the Tor dark web have addresses that end in `.onion`.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1593111933758-005b63013a52?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Safe and Legal Exploration",
+                        "content": "<p>Our interest in the dark web is purely for <strong>defensive intelligence</strong>. Threat intelligence analysts monitor public dark web forums and marketplaces to find out about new malware strains, data breaches, and emerging threats. This allows them to build defenses before these threats are seen on the regular internet. It is critical to follow OPSEC rules (use Tor inside your isolated VM) and to never engage in any illegal activity, such as attempting to buy illegal goods or access illicit material.</p>",
+                        "image": "https://images.unsplash.com/photo-1550751827-413977c7d686?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Explore Legal Onion Sites",
+                        "description": "Inside your secure OSINT VM, download and install the Tor Browser. Use a public list of legitimate and safe `.onion` sites (such as the landing pages for news organizations like the BBC or ProPublica) to practice navigating the network. Use a dark web search engine like Ahmia to search for benign terms like 'open source intelligence'."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is the primary technology used to access the dark web?",
+                  "options": ["Google Chrome", "A standard VPN", "The Tor network and Tor Browser", "A special password"],
+                  "correct": 2,
+                  "explanation": "Tor (The Onion Router) is specifically designed to anonymize traffic and to access the special `.onion` addresses that make up the dark web."
+                },
+                {
+                  "id": 2,
+                  "question": "For a threat intelligence analyst, what is a primary *legal* and *ethical* use of the dark web?",
+                  "options": ["To buy stolen data.", "To hire hackers.", "To passively monitor public forums and marketplaces for talk of new threats, malware, and data breaches to inform defensive strategies.", "To shut down illegal websites."],
+                  "correct": 2,
+                  "explanation": "The key is passive observation of public sources for threat intelligence. Any active participation in illicit activities is illegal and unethical."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-12",
+            "title": "Module 5: Automation, Analysis & Visualization - OSINT Automation & Scripting",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the benefits of automating OSINT collection.",
+                "Learn the basics of interacting with public APIs using Python.",
+                "Practice responsible web scraping to extract data from websites.",
+                "Build a simple, automated OSINT collection script."
+            ],
+            "content": {
+                "overview": "Manual OSINT gathering can be slow and repetitive. Automation is key to scaling your investigations and processing large amounts of data. This lesson is a hands-on introduction to OSINT scripting, covering the two primary methods of automated data collection: using official APIs and responsible web scraping.",
+                "sections": [
+                    {
+                        "title": "Interacting with APIs",
+                        "content": "<p>Many online services offer an Application Programming Interface (API), which is a structured way for programs to request data. Using an API is the preferred method of automation because it is sanctioned by the service provider. An analyst will often write Python scripts to query APIs from services like Twitter, GitHub, Shodan, or VirusTotal to automatically collect and enrich their data.</p>",
+                        "image": "https://images.unsplash.com/photo-1542621334-a254cf47733d?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Responsible Web Scraping",
+                        "content": "<p>When an API is not available, an investigator may need to resort to web scraping—the process of writing a script that downloads an HTML webpage and programmatically parses it to extract the desired information. This must be done responsibly:</p><ul><li><strong>Respect `robots.txt`:** This file states which parts of a site the owner does not want to be crawled by bots.</li><li><strong>Set a User-Agent:</strong> Identify your script with a custom User-Agent string so the site owner knows who you are.</li><li><strong>Don't Overwhelm the Server:</strong> Add delays (`time.sleep()`) between your requests to avoid being blocked or causing a denial of service.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples": [
+                {
+                    "title": "Get GitHub User Info via API with `requests`",
+                    "language": "python",
+                    "code": "# A threat intel analyst might use the GitHub API to get information on a user\n# who has posted suspicious code. This script fetches public information for a user.\nimport requests\n\ndef get_github_user_info(username):\n    url = f\"https://api.github.com/users/{username}\"\n    response = requests.get(url)\n    if response.status_code == 200:\n        user_data = response.json()\n        print(f\"Name: {user_data.get('name')}\")\n        print(f\"Public Repos: {user_data.get('public_repos')}\")\n        print(f\"Joined: {user_data.get('created_at')}\")\n    else:\n        print('User not found or API error.')\n\n# Usage:\nget_github_user_info('torvalds') # Linus Torvalds, the creator of Linux"
+                },
+                {
+                    "title": "Simple Web Scraper with `requests` and `BeautifulSoup`",
+                    "language": "python",
+                    "code": "# An investigator might use a scraper to extract all the links from a public blog post.\n# This script demonstrates responsible scraping by setting a custom User-Agent.\nimport requests\nfrom bs4 import BeautifulSoup\n\ndef get_links_from_url(url):\n    headers = {'User-Agent': 'Ethical OSINT Bot / Your-Contact-Info'}\n    try:\n        response = requests.get(url, headers=headers)\n        soup = BeautifulSoup(response.text, 'html.parser')\n        for link in soup.find_all('a'):\n            href = link.get('href')\n            if href and href.startswith('http'):\n                print(href)\n    except requests.exceptions.RequestException as e:\n        print(f'Could not fetch URL: {e}')\n\n# Usage on a benign, public site\nget_links_from_url('https://www.eff.org')"
+                },
+                {
+                    "title": "Twitter API v2 Search with `tweepy`",
+                    "language": "python",
+                    "code": "# Researchers and journalists use the official Twitter API for their investigations.\n# This script (using the tweepy library) would search for recent public tweets containing the hashtag #OSINT.\n# This requires authentication with a Twitter developer API key.\nimport tweepy\n\n# bearer_token = \"YOUR_BEARER_TOKEN\"\n# client = tweepy.Client(bearer_token)\n\n# response = client.search_recent_tweets(query=\"#OSINT -is:retweet\", max_results=10)\n# if response.data:\n#     for tweet in response.data:\n#         print(tweet.text)\n\nprint(\"Conceptual code for Twitter API search.\")"
+                },
+                {
+                    "title": "Parse an RSS Feed for Intelligence",
+                    "language": "python",
+                    "code": "# A threat intelligence analyst would use this script to monitor the RSS feeds of security blogs\n# for new posts about vulnerabilities or threat actors.\nimport feedparser\n\ndef check_security_blog_feed(feed_url):\n    feed = feedparser.parse(feed_url)\n    print(f'--- Latest posts from {feed.feed.title} ---')\n    for entry in feed.entries[:5]: # Get latest 5 entries\n        print(f'- {entry.title}')\n\n# Usage with a well-known public security blog RSS feed.\ncheck_security_blog_feed('https://krebsonsecurity.com/feed/')"
+                }
+              ],
+                "activities": [
+                    {
+                        "title": "Use an API to Pull Benign Twitter Data",
+                        "description": "Using a valid Twitter developer account and bearer token, write a simple Python script using the `tweepy` library to pull the 10 most recent, non-retweet, public tweets that mention the term '#infosec'. Print the text of each tweet to the console. This simulates the first step of an automated data collection workflow."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "When automating OSINT collection, why is using a service's official API preferred over web scraping?",
+                  "options": ["It is always faster.", "APIs provide structured, reliable data in a sanctioned way, whereas scraping can break if the website's layout changes and may violate a site's terms of service.", "Scraping is illegal.", "APIs do not require an internet connection."],
+                  "correct": 1,
+                  "explanation": "APIs are the contract for programmatic data access. They are more stable, efficient, and are the explicitly permitted method for getting data from a service."
+                },
+                {
+                  "id": 2,
+                  "question": "What is the purpose of setting a custom `User-Agent` and adding a delay between requests when web scraping?",
+                  "options": ["To hide your activity from the website owner.", "To act responsibly by identifying your bot and avoiding overwhelming the website's server with too many rapid requests.", "To make your script run faster.", "These steps are not necessary."],
+                  "correct": 1,
+                  "explanation": "This is the core of responsible scraping. It identifies you and ensures your script behaves like a good internet citizen."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-13",
+            "title": "Module 5: Automation, Analysis & Visualization - Link Analysis & Visualization",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the principles of link analysis for connecting disparate data points.",
+                "Introduce graph analysis tools like Maltego and Spiderfoot.",
+                "Learn the basics of creating and interpreting network graphs.",
+                "Use open-source libraries like `networkx` and `matplotlib` to visualize relationships."
+            ],
+            "content": {
+                "overview": "OSINT often produces a large volume of disconnected data points. The goal of analysis is to connect these dots to reveal hidden relationships and patterns. This lesson introduces link analysis and data visualization, the core techniques for transforming raw data into an understandable intelligence picture.",
+                "sections": [
+                    {
+                        "title": "Link Analysis",
+                        "content": "<p>Link analysis is the process of building a network graph of your findings. The 'nodes' of the graph are your data points (e.g., usernames, domains, IP addresses, companies), and the 'edges' are the relationships between them. For example, a person (`node`) might be the 'registrant' of a domain (`node`). That domain (`node`) might be 'hosted_on' an IP address (`node`). Visualizing these connections makes it easy to see how seemingly unrelated items are connected.</p>",
+                        "image": "https://images.unsplash.com/photo-1596522354185-3b5a7a81b2d7?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Visualization Tools",
+                        "content": "<ul><li><strong>Maltego:</strong> A powerful commercial (with a free community version) tool for link analysis. It automates the process of querying public sources and automatically builds the relationship graph for you.</li><li><strong>Spiderfoot:</strong> An open-source OSINT automation tool that can also produce visualizations of its findings.</li><li><strong>Gephi:</strong> An open-source tool for advanced graph visualization and analysis.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1579547945412-4d6d754218d7?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples": [
+                {
+                    "title": "Build a Simple Graph with `networkx` (Python)",
+                    "language": "python",
+                    "code": "# A defender can use a library like networkx to programmatically model and analyze relationships.\n# This script creates a simple graph connecting a person to a company and a domain.\nimport networkx as nx\nimport matplotlib.pyplot as plt\n\nG = nx.Graph()\n\n# Add nodes with types\nG.add_node('John Doe', type='Person')\nG.add_node('Example Corp', type='Company')\nG.add_node('example.com', type='Domain')\n\n# Add edges (relationships)\nG.add_edge('John Doe', 'Example Corp', label='Founder')\nG.add_edge('John Doe', 'example.com', label='Registrant')\n\n# Basic drawing of the graph\n# pos = nx.spring_layout(G)\n# nx.draw(G, with_labels=True)\n# plt.show()"
+                },
+                {
+                    "title": "Exporting Data for Maltego (CSV)",
+                    "language": "python",
+                    "code": "# A defender's automated tools can output data in a CSV format that Maltego can import.\n# This allows the investigator to visually analyze data collected by their custom scripts.\nimport csv\n\ndata = [\n    ['source', 'relationship', 'target'],\n    ['example.com', 'hosted_on_ip', '93.184.216.34'],\n    ['example.com', 'uses_mx', 'mail.example.com']\n]\n\n# with open('maltego_import.csv', 'w', newline='') as f:\n#     writer = csv.writer(f)\n#     writer.writerows(data)"
+                },
+                {
+                    "title": "Spiderfoot Command-Line Scan",
+                    "language": "bash",
+                    "code": "# Spiderfoot is an automation tool. A defender can launch a scan from the command line\n# against a target domain. It will automatically run dozens of OSINT modules (WHOIS, DNS, etc.)\n# and store the results in its database for viewing in the web UI.\nsf.py -s example.com"
+                },
+                {
+                    "title": "Gephi CSV Import Format",
+                    "language": "csv",
+                    "code": "# Gephi is a powerful visualization tool. Defenders import two CSV files to create a graph.\n# 1. A node list (e.g., nodes.csv)\n# Id,Label,Type\n# 1,John Doe,Person\n# 2,example.com,Domain\n\n# 2. An edge list (e.g., edges.csv)\n# Source,Target,Type\n# 1,2,Directed"
+                }
+              ],
+                "activities": [
+                    {
+                        "title": "Create a Relationship Graph",
+                        "description": "Based on the findings from your own public footprint research in Lesson 5, manually draw a relationship graph on paper or using diagramming software. Create a node for yourself, and then add nodes for any associated usernames, social media accounts, websites, or other public data points you found. Draw lines (edges) to connect these nodes, labeling the relationship."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is the primary purpose of 'link analysis' in an OSINT investigation?",
+                  "options": ["To find links on a webpage.", "To create a visual graph that connects disparate data points (people, places, domains) to reveal hidden relationships and patterns.", "To check if a website is online.", "To analyze social media trends."],
+                  "correct": 1,
+                  "explanation": "Link analysis is all about making connections between data points to build a more complete intelligence picture."
+                },
+                {
+                  "id": 2,
+                  "question": "A tool like Maltego is primarily used for:",
+                  "options": ["Writing reports", "Browsing the dark web", "Automating OSINT data collection and performing link analysis visualization.", "Editing images."],
+                  "correct": 2,
+                  "explanation": "Maltego is one of the industry-leading tools specifically designed for automating the OSINT gathering process and visualizing it as a graph."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-14",
+            "title": "Module 5: Automation, Analysis & Visualization - OSINT for Cyber Threat Intelligence",
+            "duration": "120 min",
+            "objectives": [
+                "Understand how OSINT is used to track threat actor infrastructure and TTPs.",
+                "Use public sources to collect and enrich Indicators of Compromise (IOCs).",
+                "Learn the challenges and limitations of attribution in threat intelligence.",
+                "Correlate OSINT findings with internal security logs."
+            ],
+            "content": {
+                "overview": "OSINT is a foundational component of modern Cyber Threat Intelligence (CTI). CTI analysts use public data to understand the threat landscape, enrich internal security alerts, and track adversary groups. This lesson bridges the gap between general OSINT and its specific application in a defensive cybersecurity context.",
+                "sections": [
+                    {
+                        "title": "Tracking Threat Actor Infrastructure",
+                        "content": "<p>When a security vendor or researcher discovers a new malware C2 server, they often publish the domain name or IP address. A CTI analyst uses OSINT techniques to pivot from this single indicator to map out the attacker's broader infrastructure. They might use reverse WHOIS lookups to find other domains registered by the same person, or passive DNS to find other domains that have pointed to the same IP address.",
+                        "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Enriching Internal Alerts",
+                        "content": "<p>Imagine an alert fires in your SIEM for a connection to a suspicious IP address. On its own, this is just an IP. A CTI analyst will enrich this IOC with OSINT. They will check the IP in threat feeds (like AbuseIPDB), Shodan, and VirusTotal. This OSINT context is what turns a simple alert into actionable intelligence, helping the analyst determine if the IP is a known C2 server, a scanner, or just a false positive.</p>",
+                        "image": "https://images.unsplash.com/photo-1593432336332-95ac70725a3d?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples":[
+                {
+                    "title": "Query AbuseIPDB for an IP Address",
+                    "language": "python",
+                    "code": "# A SOC analyst would automate this check for every suspicious IP seen in their logs.\n# AbuseIPDB is a crowd-sourced threat feed for malicious IP addresses.\nimport requests\n\nAPI_KEY = 'YOUR_ABUSEIPDB_KEY'\nIP_ADDRESS = '1.2.3.4' # An example IP\n\ndef check_abuseipdb(api_key, ip):\n    url = 'https://api.abuseipdb.com/api/v2/check'\n    headers = {'Key': api_key, 'Accept': 'application/json'}\n    params = {'ipAddress': ip, 'maxAgeInDays': '90'}\n    response = requests.get(url, headers=headers, params=params)\n    if response.status_code == 200:\n        data = response.json()['data']\n        print(f\"Abuse Confidence Score: {data['abuseConfidenceScore']}\")\n\n# check_abuseipdb(API_KEY, IP_ADDRESS)"
+                },
+                {
+                    "title": "Passive DNS Query with VirusTotal API",
+                    "language": "python",
+                    "code": "# A CTI analyst uses passive DNS to find historical relationships between IPs and domains.\n# This script queries the VirusTotal API to find what domains have historically resolved to a given IP.\nimport requests\n\nAPI_KEY = 'YOUR_VT_API_KEY'\nIP_ADDRESS = '8.8.8.8'\n\ndef get_vt_passive_dns(api_key, ip):\n    url = f'https://www.virustotal.com/api/v3/ip_addresses/{ip}/resolutions'\n    headers = {'x-apikey': api_key}\n    response = requests.get(url, headers=headers)\n    if response.status_code == 200:\n        for item in response.json()['data']:\n            print(f\"Domain: {item['attributes']['host_name']}\")\n\n# get_vt_passive_dns(API_KEY, IP_ADDRESS)"
+                },
+                {
+                    "title": "Query the HaveIBeenPwned API for Pastes",
+                    "language": "python",
+                    "code": "# An analyst investigating a data leak can use HIBP to search Pastebin and similar sites\n# for pastes that contain their company's domain name, which could indicate employee credential leaks.\nimport requests\n\ndef check_hibp_pastes(account):\n    url = f'https://haveibeenpwned.com/api/v3/pasteaccount/{account}'\n    # HIBP paste search doesn't require an API key but needs a custom User-Agent\n    headers = {'User-Agent': 'Ethical-OSINT-Checker'}\n    response = requests.get(url, headers=headers)\n    if response.status_code == 200:\n        print(f'[ALERT] Account or domain {account} found in pastes:')\n        for paste in response.json():\n            print(f'  - Title: {paste[\"Title\"]}, Source: {paste[\"Source\"]}')\n\n# check_hibp_pastes('example.com')"
+                },
+                {
+                    "title": "Use `Waybackurls` Tool",
+                    "language": "bash",
+                    "code": "# The `waybackurls` tool is a command-line utility that fetches all known URLs\n# for a domain from the Wayback Machine. A CTI analyst would use this to discover old\n# or deleted pages on an adversary's website that might contain clues.\n# (Requires Go and the tool to be installed)\ngo install github.com/tomnomnom/waybackurls@latest\nwaybackurls example.com"
+                }
+              ],
+                "activities": [
+                    {
+                        "title": "Collect Safe Threat Intel from Public Blogs",
+                        "description": "Go to a reputable public cybersecurity blog (like Krebs on Security, FireEye, or Cisco Talos). Find a recent blog post that analyzes a piece of malware or a threat campaign. Read the post and create a list of all the Indicators of Compromise (file hashes, domains, IPs) that they published. This simulates the process of gathering intelligence from the security community."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is the primary goal of OSINT for a Cyber Threat Intelligence (CTI) analyst?",
+                  "options": ["To find an attacker's home address.", "To enrich internal security data with external context, track adversary infrastructure, and understand the broader threat landscape.", "To perform penetration tests.", "To write news articles."],
+                  "correct": 1,
+                  "explanation": "CTI is all about providing context. OSINT is the primary way to gather that external context to make internal security alerts more meaningful."
+                },
+                {
+                  "id": 2,
+                  "question": "Passive DNS is a powerful OSINT data source because it allows an investigator to:",
+                  "options": ["See a website's current IP address.", "Find the historical relationships between domains and IP addresses, discovering infrastructure that may no longer be active.", "Block malicious domains.", "Register a new domain."],
+                  "correct": 1,
+                  "explanation": "Passive DNS provides a historical view, allowing an analyst to see, for example, what other malicious domains used the same IP address as their current target, thereby mapping out a larger campaign."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-15",
+            "title": "Module 5: Application & Reporting - Counter-OSINT & Privacy Protection",
+            "duration": "90 min",
+            "objectives": [
+                "Understand the concept of a 'digital footprint'.",
+                "Learn techniques for reducing one's personal and organizational digital footprint.",
+                "Apply Operational Security (OPSEC) strategies to OSINT investigations.",
+                "Conduct a privacy audit on your own public information."
+            ],
+            "content": {
+                "overview": "Just as we can use OSINT to investigate targets, others can use it to investigate us. This lesson turns the tables, focusing on the defensive discipline of Counter-OSINT. We will cover the strategies and techniques for reducing your own digital footprint to protect your personal privacy and the operational security of your investigations.",
+                "sections": [
+                    {
+                        "title": "Managing Your Digital Footprint",
+                        "content": "<p>Your digital footprint is the trail of data you leave behind online. It's composed of your active footprint (things you intentionally share, like social media posts) and your passive footprint (data collected about you without your knowledge, like your browsing history). A key counter-OSINT skill is to be consciously aware of this footprint and to minimize it where possible. This includes setting social media profiles to private, using strong and unique passwords for every service, and being careful about what information you share publicly.</p>",
+                        "image": "https://images.unsplash.com/photo-1550645068-fe1b0b5e5c77?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Operational Security (OPSEC) for the Hunter",
+                        "content": "<p>This goes beyond basic lab setup. Advanced OPSEC for an investigator involves creating a completely disassociated and consistent online persona (your 'sock puppet'). This includes not just a separate email and social media profile, but also using a dedicated machine or VM, a consistent browser fingerprint, and being careful never to mix your personal and investigative activities. The goal is to ensure your research cannot be traced back to you or your organization.</p>",
+                        "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Audit and Reduce Your Own Footprint",
+                        "description": "Repeat the OSINT investigation on yourself from Lesson 5. This time, create a report with an 'Action Plan'. For each piece of public information you find, identify a concrete step you could take to remove or privatize it (e.g., 'Change my Twitter profile to private,' 'Delete old, unused accounts,' 'Use a WHOIS privacy service for my personal domain')."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is the primary goal of Counter-OSINT?",
+                  "options": ["To conduct OSINT on others.", "To understand and reduce your own digital footprint to protect against being targeted by OSINT.", "To create fake information.", "To hack into social media accounts."],
+                  "correct": 1,
+                  "explanation": "Counter-OSINT is the defensive practice of managing your own information to prevent others from successfully collecting intelligence on you."
+                },
+                {
+                  "id": 2,
+                  "question": "A threat hunter using an isolated VM, a VPN, and a dedicated, anonymous Twitter account for research is practicing good:",
+                  "options": ["Data collection", "Reporting", "Operational Security (OPSEC)", "Social engineering"],
+                  "correct": 2,
+                  "explanation": "OPSEC is the process of protecting your own activities and identity from being discovered by adversaries, and these are all core OPSEC techniques."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-16",
+            "title": "Module 6: Operations & Reporting - Reporting & Documentation",
+            "duration": "90 min",
+            "objectives": [
+                "Understand the key components of a professional OSINT report.",
+                "Practice writing clear, concise, and objective intelligence summaries.",
+                "Learn the importance of source validation and confidence scoring.",
+                "Ensure that findings are actionable and reproducible."
+            ],
+            "content": {
+                "overview": "An OSINT investigation is only as valuable as its final report. The report is what transforms a collection of data points into actionable intelligence for a stakeholder. This lesson focuses on the critical skill of writing a high-quality OSINT report that is clear, objective, and provides the necessary context for decision-making.",
+                "sections": [
+                    {
+                        "title": "The OSINT Report Structure",
+                        "content": "<p>A good report is more than just a data dump. It should tell a story and answer the original intelligence questions. Key sections include:</p><ul><li><strong>Executive Summary:</strong> A one-paragraph, high-level summary of the most important findings. This is for the decision-maker who may not read the rest of the report.</li><li><strong>Intelligence Requirements:</strong> A restatement of the questions the investigation set out to answer.</li><li><strong>Key Findings:</strong> A detailed, point-by-point breakdown of the answers to those questions, supported by evidence.</li><li><strong>Source Reliability and Confidence Scoring:</strong> For each piece of information, the analyst must assess the reliability of the source. Information from an official government registry is much more reliable than an anonymous social media post.</li><li><strong>Appendices:</strong> Can include the full set of collected data, network graphs, or links to key sources.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Create a Mini OSINT Case Report",
+                        "description": "Choose a public event (e.g., a recent product launch by a major tech company). Conduct a small-scale OSINT investigation to answer a specific question (e.g., 'What was the public sentiment on Twitter about the launch on day one?'). Write a one-page report that includes an executive summary, a summary of your findings (with example tweets), and an assessment of your confidence in the conclusions."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is the most important section of an OSINT report for a non-technical manager or decision-maker?",
+                  "options": ["The appendix", "The list of tools used", "The Executive Summary", "The detailed data logs"],
+                  "correct": 2,
+                  "explanation": "The Executive Summary is designed to provide the key 'so what?' of the investigation in a brief, easily digestible format for stakeholders who may not need to know the technical details."
+                },
+                {
+                  "id": 2,
+                  "question": "Why is it important to include source reliability and confidence scores in an intelligence report?",
+                  "options": ["To make the report longer.", "To allow the reader to understand the analyst's assessment of the quality of the information, which helps them make better decisions.", "It is not important.", "To confuse the reader."],
+                  "correct": 1,
+                  "explanation": "Not all information is equal. An analyst has a responsibility to assess and communicate the credibility of their sources and the confidence they have in their conclusions, which is a fundamental part of the analytic process."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-17",
+            "title": "Module 6: Capstone Project & Course Review",
+            "duration": "180 min",
+            "objectives": [
+                "Apply the full OSINT lifecycle to a complex, multi-faceted investigation.",
+                "Start with a hypothesis and pivot based on evidence from multiple data sources.",
+                "Correlate data from technical, social, and public record sources.",
+                "Produce a comprehensive, professional OSINT report detailing your methodology, findings, and analysis."
+            ],
+            "content": {
+                "overview": "This final capstone project integrates all the skills from the course into a single, realistic scenario. You will be given a starting piece of information and a set of intelligence questions. Your job is to use the full range of OSINT techniques to answer these questions and produce a final, professional report.",
+                "sections": [
+                    {
+                        "title": "The Scenario",
+                        "content": "<p>The capstone will be based on a safe, public topic. For example, you might be asked to profile a public open-source project. Your intelligence requirements might be:</p><ul><li>Who are the primary developers?</li><li>What companies are the major contributors?</li><li>What is the project's development velocity (commits per month)?</li><li>Are there any public discussions of potential security concerns?</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1542649761-0bdd3753c5a7?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "The OSINT Workflow",
+                        "content": "<p>You must apply the full intelligence lifecycle:</p><ol><li><strong>Planning:</strong> Deconstruct the intelligence requirements into a list of specific indicators to look for.</li><li><strong>Collection:</strong> Use all the relevant techniques learned (GitHub analysis, social media, search engine dorks, etc.) to gather raw data.</li><li><strong>Processing & Analysis:</strong> Organize the collected data, create a link analysis graph, and draw conclusions that directly answer the intelligence requirements.</li><li><strong>Dissemination:</strong> Write up your full investigation in a professional report.</li></ol>",
+                        "image": "https://images.unsplash.com/photo-1586953208-14221d5a4988?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Perform a Full OSINT Investigation",
+                        "description": "Execute the full capstone workflow on the provided scenario. Your final deliverable is a multi-page PDF report that presents your findings in a professional format, answering all the initial intelligence requirements, and backed by evidence and sources."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What does it mean to 'pivot' during an OSINT investigation?",
+                  "options": ["To give up on the investigation.", "To take one piece of information you've found (like a username) and use it as a search key to find new information on other platforms.", "To change your hypothesis.", "To start writing the report."],
+                  "correct": 1,
+                  "explanation": "Pivoting is the core of investigation. Each new piece of data is not just an answer, but also a key to unlock new avenues of research."
+                },
+                {
+                  "id": 2,
+                  "question": "What is the most important final output of the capstone project?",
+                  "options": ["A list of all the websites you visited.", "The professional, well-structured report that presents the answers to the intelligence questions, backed by verifiable evidence.", "A Maltego graph.", "A collection of screenshots."],
+                  "correct": 1,
+                  "explanation": "The ultimate purpose of any intelligence work is to deliver a clear, actionable product to the stakeholder. The final report is that product."
+                }
+              ]
+            }
+        }
+    ]
+} // =====================================================
+      // GLOBAL VARIABLES
+      // =====================================================
+      let currentUser = null;
+      let currentLessonIndex = 0;
+      let courseProgress = {};
+      let userStats = {};
+      let quizState = {
+        currentQuestion: 0,
+        answers: [],
+        score: 0,
+        isComplete: false,
+      };
+
+      // Enhanced session tracking
+      let courseSession = {
+        startTime: null,
+        totalStudyTime: 0,
+        lessonsStarted: 0,
+        lessonsCompleted: 0,
+        pageLoadTime: new Date(),
+        interactionCount: 0,
+        lastActivityTime: new Date(),
+      };
+
+      // Music Player Variables
+      let audioPlayer = new Audio();
+
+      // Achievement notification system
+      let notificationQueue = [];
+      let isShowingNotification = false;
+
+      // =====================================================
+      // INITIALIZATION
+      // =====================================================
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          showLoadingScreen();
+          await checkAuth();
+
+          if (currentUser) {
+            // Initialize session tracking
+            startCourseSession();
+
+            // Load course data and progress
+            await loadCourseData();
+            await loadUserProfile();
+            await loadProgress();
+
+            // Initialize UI
+            initializeEventListeners();
+            renderSidebar();
+            loadLesson(currentLessonIndex);
+
+            // Initialize additional features
+            initMusicPlayer();
+            addMusicIndicator();
+            initializeActivityTracking();
+
+            hideLoadingScreen();
+          } else {
+            openAuthModal();
+          }
+        } catch (error) {
+          console.error("Error initializing course:", error);
+          hideLoadingScreen();
+          showToast("Failed to initialize course system", "error");
+        }
+      });
+
+      // =====================================================
+      // AUTHENTICATION SYSTEM
+      // =====================================================
+      async function checkAuth() {
+        try {
+          const {
+            data: { session },
+            error,
+          } = await supabase.auth.getSession();
+
+          if (error) {
+            console.error("Auth error:", error);
+            currentUser = null;
+            openAuthModal();
+            return;
+          }
+
+          if (!session) {
+            currentUser = null;
+            openAuthModal();
+            return;
+          }
+
+          currentUser = session.user;
+          updateUIWithUser();
+        } catch (error) {
+          console.error("Error checking auth:", error);
+          currentUser = null;
+          openAuthModal();
+        }
+      }
+
+      function updateUIWithUser() {
+        if (!currentUser) return;
+
+        const name =
+          currentUser.user_metadata?.full_name ||
+          currentUser.email.split("@")[0];
+        const userElements = document.querySelectorAll("[data-user-name]");
+        userElements.forEach((el) => (el.textContent = name));
+      }
+
+      // =====================================================
+      // USER PROFILE & STATS MANAGEMENT
+      // =====================================================
+      async function loadUserProfile() {
+        try {
+          // 🔍 Step 1: Try to fetch existing profile
+          const { data: profile, error } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", currentUser.id)
+            .single();
+
+          if (error && error.code !== "PGRST116") {
+            throw error;
+          }
+
+          if (!profile) {
+            // 🆕 Step 2: Create new profile if missing
+            await createUserProfile();
+          } else {
+            // ✅ Step 3: Use existing profile
+            userStats = profile;
+            await updateLastActivity();
+          }
+        } catch (error) {
+          console.error("❌ Error loading user profile:", error);
+          showToast("Failed to load user profile", "error");
+        }
+      }
+      async function createUserProfile() {
+        try {
+          const newProfile = {
+            id: currentUser.id,
+            full_name: currentUser.user_metadata?.full_name || "",
+            email: currentUser.email,
+            level: "Script Kiddie",
+            total_points: 0,
+            completed_courses: 0,
+            current_streak: 0,
+            total_certificates: 0,
+            total_achievements: 0,
+            sections_visited: 0,
+            bonus_points: 0,
+            in_progress_courses: 0,
+            settings_changed: 0,
+            midnight_sessions: 0,
+            early_sessions: 0,
+            weekend_sessions: 0,
+            last_activity: new Date().toISOString(),
+            created_at: new Date().toISOString(),
+          };
+
+          const { error } = await supabase
+            .from("profiles")
+            .insert([newProfile]);
+
+          if (!error) {
+            userStats = newProfile;
+            // Award first login achievement
+            setTimeout(() => checkAndUnlockAchievement("first_login"), 1000);
+          }
+        } catch (error) {
+          console.error("Error creating user profile:", error);
+        }
+      }
+
+      async function updateLastActivity() {
+        try {
+          const now = new Date();
+
+          // Update activity tracking
+          courseSession.lastActivityTime = now;
+
+          // Update database
+          await supabase
+            .from("profiles")
+            .update({
+              last_activity: now.toISOString(),
+            })
+            .eq("id", currentUser.id);
+
+          // Check time-based achievements
+          await checkTimeBasedAchievements(now);
+        } catch (error) {
+          console.error("Error updating last activity:", error);
+        }
+      }
+
+      // =====================================================
+      // COURSE SESSION MANAGEMENT
+      // =====================================================
+      function startCourseSession() {
+        courseSession.startTime = new Date();
+        courseSession.pageLoadTime = new Date();
+
+        logUserActivity("course_session_start", {
+          course_id: COURSE_DATA.id,
+          course_title: COURSE_DATA.title,
+          user_agent: navigator.userAgent,
+          screen_resolution: `${screen.width}x${screen.height}`,
+        });
+
+        // Check daily streak
+        checkDailyStreak();
+      }
+
+      function initializeActivityTracking() {
+        // Track page focus/blur for accurate study time
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+
+        // Track user interactions
+        ["click", "keydown", "scroll", "mousemove"].forEach((event) => {
+          document.addEventListener(event, trackUserInteraction, {
+            passive: true,
+          });
+        });
+
+        // Periodic activity updates
+        setInterval(updateStudyTime, 60000); // Every minute
+
+        // Save session data before page unload
+        window.addEventListener("beforeunload", saveSessionData);
+      }
+
+      function handleVisibilityChange() {
+        if (document.hidden) {
+          courseSession.lastActivityTime = new Date();
+        } else {
+          // Page became visible again - update activity
+          updateLastActivity();
+        }
+      }
+
+      function trackUserInteraction() {
+        courseSession.interactionCount++;
+        courseSession.lastActivityTime = new Date();
+
+        // Throttle activity updates
+        if (courseSession.interactionCount % 50 === 0) {
+          updateLastActivity();
+        }
+      }
+
+      function updateStudyTime() {
+        if (!courseSession.startTime || document.hidden) return;
+
+        const now = new Date();
+        const sessionDuration = now - courseSession.startTime;
+        courseSession.totalStudyTime = Math.floor(sessionDuration / 1000 / 60); // in minutes
+
+        // Update progress with study time
+        saveProgress();
+      }
+
+      function saveSessionData() {
+        if (!currentUser || !courseSession.startTime) return;
+
+        const sessionData = {
+          user_id: currentUser.id,
+          course_id: COURSE_DATA.id,
+          session_duration: courseSession.totalStudyTime,
+          lessons_viewed: courseSession.lessonsStarted,
+          lessons_completed: courseSession.lessonsCompleted,
+          interactions: courseSession.interactionCount,
+          session_date: courseSession.startTime.toISOString().split("T")[0],
+        };
+
+        // Store in localStorage as backup
+        localStorage.setItem(
+          "course_session_backup",
+          JSON.stringify(sessionData)
+        );
+
+        // Try to save to database
+        logUserActivity("course_session_end", sessionData);
+      }
+
+      // =====================================================
+      // COURSE DATA & PROGRESS MANAGEMENT
+      // =====================================================
+      async function loadCourseData() {
+        try {
+          // Update course info in UI
+          document.getElementById("courseTitle").textContent =
+            COURSE_DATA.title;
+          document.getElementById("totalLessons").textContent =
+            COURSE_DATA.lessons.length;
+
+          // Log course access
+          logUserActivity("course_access", {
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title,
+          });
+        } catch (error) {
+          console.error("Error loading course data:", error);
+        }
+      }
+
+      async function loadProgress() {
+        try {
+          // Get existing progress from database
+          const { data, error } = await supabase
+            .from("course_progress")
+            .select("*")
+            .eq("user_id", currentUser.id)
+            .eq("course_id", COURSE_DATA.id)
+            .single();
+
+          if (error && error.code !== "PGRST116") {
+            throw error;
+          }
+
+          if (data) {
+            courseProgress = JSON.parse(data.lesson_progress || "{}");
+            currentLessonIndex = data.current_lesson || 0;
+
+            // Update session tracking
+            courseSession.lessonsStarted = Object.keys(courseProgress).length;
+            courseSession.lessonsCompleted = Object.values(
+              courseProgress
+            ).filter((p) => p.completed).length;
+          } else {
+            // Initialize new progress
+            courseProgress = {};
+            currentLessonIndex = 0;
+            await saveProgress();
+
+            // Award first course start achievement
+            await checkAndUnlockAchievement("first_course_start");
+          }
+
+          updateProgressDisplay();
+        } catch (error) {
+          console.error("Error loading progress:", error);
+          showToast("Failed to load progress", "error");
+        }
+      }
+
+      async function saveProgress() {
+        try {
+          if (!currentUser) return;
+
+          const now = new Date();
+          const progressData = {
+            user_id: currentUser.id,
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title,
+            current_lesson: currentLessonIndex,
+            lesson_progress: JSON.stringify(courseProgress),
+            progress: calculateOverallProgress(),
+            lessons_completed: getCompletedLessonsCount(),
+            lessons_started: Object.keys(courseProgress).length,
+            study_time_minutes: courseSession.totalStudyTime,
+            last_accessed: now.toISOString(),
+            updated_at: now.toISOString(),
+          };
+
+          // Upsert progress
+          const { error } = await supabase
+            .from("course_progress")
+            .upsert([progressData]);
+
+          if (error) throw error;
+
+          // Update user stats
+          await updateUserStats();
+
+          updateProgressDisplay();
+        } catch (error) {
+          console.error("Error saving progress:", error);
+          showToast("Failed to save progress", "error");
+        }
+      }
+
+      async function updateUserStats() {
+        try {
+          // Get all course progress for this user
+          const { data: allProgress, error } = await supabase
+            .from("course_progress")
+            .select("progress, course_id, study_time_minutes")
+            .eq("user_id", currentUser.id);
+
+          if (error) throw error;
+
+          // Calculate stats
+          const completedCourses =
+            allProgress?.filter((p) => p.progress >= 100).length || 0;
+          const inProgressCourses =
+            allProgress?.filter((p) => p.progress > 0 && p.progress < 100)
+              .length || 0;
+          const totalStudyTime =
+            allProgress?.reduce(
+              (sum, p) => sum + (p.study_time_minutes || 0),
+              0
+            ) || 0;
+
+          // Calculate points (500 per completed course + achievement points)
+          const coursePoints = completedCourses * 500;
+          const bonusPoints = userStats.bonus_points || 0;
+          const totalPoints = coursePoints + bonusPoints;
+
+          // Update profile
+          const updateData = {
+            completed_courses: completedCourses,
+            in_progress_courses: inProgressCourses,
+            total_points: totalPoints,
+            total_study_time: totalStudyTime,
+            last_activity: new Date().toISOString(),
+          };
+
+          const { error: updateError } = await supabase
+            .from("profiles")
+            .update(updateData)
+            .eq("id", currentUser.id);
+
+          if (updateError) throw updateError;
+
+          // Update local stats
+          Object.assign(userStats, updateData);
+        } catch (error) {
+          console.error("Error updating user stats:", error);
+        }
+      }
+
+      function calculateOverallProgress() {
+        const completedLessons = getCompletedLessonsCount();
+        return Math.round(
+          (completedLessons / COURSE_DATA.lessons.length) * 100
+        );
+      }
+
+      function getCompletedLessonsCount() {
+        return Object.values(courseProgress).filter(
+          (lesson) => lesson.completed
+        ).length;
+      }
+
+      function updateProgressDisplay() {
+        const completedCount = getCompletedLessonsCount();
+        const progressPercent = calculateOverallProgress();
+
+        // Update UI elements
+        const elements = {
+          completedLessons: completedCount,
+          courseProgressPercent: `${progressPercent}%`,
+        };
+
+        Object.entries(elements).forEach(([id, value]) => {
+          const element = document.getElementById(id);
+          if (element) element.textContent = value;
+        });
+
+        // Update progress bar
+        const progressBar = document.getElementById("courseProgressFill");
+        if (progressBar) progressBar.style.width = `${progressPercent}%`;
+      }
+
+      // =====================================================
+      // LESSON MANAGEMENT
+      // =====================================================
+      function loadLesson(index) {
+        if (index < 0 || index >= COURSE_DATA.lessons.length) return;
+
+        const lesson = COURSE_DATA.lessons[index];
+        currentLessonIndex = index;
+
+        // Mark lesson as started and track activity
+        if (!courseProgress[lesson.id]) {
+          courseProgress[lesson.id] = {
+            started: true,
+            completed: false,
+            startedAt: new Date().toISOString(),
+            timeSpent: 0,
+          };
+
+          courseSession.lessonsStarted++;
+          saveProgress();
+
+          // Log lesson start
+          logUserActivity("lesson_start", {
+            lesson_id: lesson.id,
+            lesson_title: lesson.title,
+            lesson_index: index,
+          });
+        }
+
+        // Update lesson start time for time tracking
+        courseProgress[lesson.id].currentSessionStart = new Date();
+
+        // Update sidebar and navigation
+        renderSidebar();
+        updateNavigationButtons();
+
+        // Update header info
+        updateLessonHeader(lesson, index);
+
+        // Render lesson content
+        renderLessonContent(lesson);
+
+        // Smooth scroll and animations
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        document.getElementById("contentBody").scrollTop = 0;
+
+        const contentBody = document.getElementById("contentBody");
+        contentBody.classList.add("fade-in");
+        setTimeout(() => contentBody.classList.remove("fade-in"), 500);
+
+        // Check lesson-based achievements
+        checkLessonAchievements(index + 1);
+      }
+
+      function updateLessonHeader(lesson, index) {
+        const elements = {
+          currentLessonNumber: index + 1,
+          currentLessonTitle: lesson.title,
+          navInfo: `Lesson ${index + 1} of ${COURSE_DATA.lessons.length}`,
+        };
+
+        Object.entries(elements).forEach(([id, value]) => {
+          const element = document.getElementById(id);
+          if (element) element.textContent = value;
+        });
+      }
+
+      function renderSidebar() {
+        const lessonNav = document.getElementById("lessonNav");
+        if (!lessonNav) return;
+
+        lessonNav.innerHTML = "";
+
+        COURSE_DATA.lessons.forEach((lesson, index) => {
+          const lessonItem = document.createElement("div");
+          lessonItem.className = "lesson-item";
+
+          // Determine lesson status
+          const lessonProgress = courseProgress[lesson.id];
+          const isCompleted = lessonProgress?.completed || false;
+          const isInProgress = lessonProgress?.started || false;
+          const isLocked = !isCompleted && !canAccessLesson(index);
+          const isActive = index === currentLessonIndex;
+
+          // Apply status classes
+          if (isCompleted) lessonItem.classList.add("completed");
+          if (isLocked) lessonItem.classList.add("locked");
+          if (isActive) lessonItem.classList.add("active");
+
+          // Determine status display
+          let statusClass = "not-started";
+          let statusIcon = index + 1;
+
+          if (isCompleted) {
+            statusClass = "completed";
+            statusIcon = "✓";
+          } else if (isInProgress) {
+            statusClass = "in-progress";
+            statusIcon = "◐";
+          }
+
+          // Create lesson item HTML
+          lessonItem.innerHTML = `
+            <div class="lesson-status ${statusClass}">${statusIcon}</div>
+            <div class="lesson-info">
+                <div class="lesson-title">${lesson.title}</div>
+                <div class="lesson-meta">
+                    ${
+                      isCompleted
+                        ? "Completed"
+                        : isInProgress
+                        ? "In Progress"
+                        : isLocked
+                        ? "Locked"
+                        : "Not Started"
+                    }
+                </div>
+            </div>
+            <div class="lesson-duration">${lesson.duration}</div>
+        `;
+
+          // Add click handler if not locked
+          if (!isLocked) {
+            lessonItem.addEventListener("click", () => {
+              if (index !== currentLessonIndex) {
+                // Track lesson time before switching
+                trackLessonTime();
+
+                currentLessonIndex = index;
+                loadLesson(index);
+                closeSidebar();
+              }
+            });
+          }
+
+          lessonNav.appendChild(lessonItem);
+        });
+      }
+
+      function canAccessLesson(index) {
+        if (index === 0) return true; // First lesson always accessible
+
+        // Can access if previous lesson is completed
+        const previousLessonId = COURSE_DATA.lessons[index - 1].id;
+        return courseProgress[previousLessonId]?.completed || false;
+      }
+
+      function trackLessonTime() {
+        const currentLesson = COURSE_DATA.lessons[currentLessonIndex];
+        const lessonProgress = courseProgress[currentLesson.id];
+
+        if (lessonProgress?.currentSessionStart) {
+          const sessionTime = Math.floor(
+            (new Date() - new Date(lessonProgress.currentSessionStart)) /
+              1000 /
+              60
+          );
+          lessonProgress.timeSpent =
+            (lessonProgress.timeSpent || 0) + sessionTime;
+          delete lessonProgress.currentSessionStart;
+        }
+      }
+
+      // =====================================================
+      // LESSON CONTENT RENDERING
+      // =====================================================
+      function renderLessonContent(lesson) {
+        const contentContainer = document.getElementById("lessonContent");
+        if (!contentContainer) return;
+
+        let contentHTML = `
+        <div class="content-section">
+            <h2>Learning Objectives</h2>
+            <ul>
+                ${lesson.objectives.map((obj) => `<li>${obj}</li>`).join("")}
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Overview</h2>
+            <p>${lesson.content.overview}</p>
+        </div>
+    `;
+
+        // Render content sections
+        lesson.content.sections.forEach((section) => {
+          contentHTML += `
+            <div class="content-section">
+                <h2>${section.title}</h2>
+                ${section.content}
+                ${
+                  section.image
+                    ? `<img src="${section.image}" alt="${section.title}" class="content-image" loading="lazy">`
+                    : ""
+                }
+            </div>
+        `;
+        });
+
+        // Render code examples
+        if (
+          lesson.content.codeExamples &&
+          lesson.content.codeExamples.length > 0
+        ) {
+          contentHTML += `<div class="content-section"><h2>Code Examples</h2></div>`;
+
+          lesson.content.codeExamples.forEach((example, index) => {
+            const codeId = `code-${lesson.id}-${index}`;
+            contentHTML += `
+                <div class="code-section">
+                    <div class="code-header">
+                        <span class="code-title">${example.title}</span>
+                        <button class="copy-btn" onclick="copyCode('${codeId}')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <pre class="code-block"><code id="${codeId}" class="language-${
+              example.language
+            }">${escapeHtml(example.code)}</code></pre>
+                </div>
+            `;
+          });
+        }
+
+        // Render quiz
+        contentHTML += renderQuiz(lesson.quiz);
+
+        contentContainer.innerHTML = contentHTML;
+
+        // Highlight code syntax if Prism is available
+        setTimeout(() => {
+          if (window.Prism) {
+            Prism.highlightAll();
+          }
+        }, 100);
+      }
+
+      // =====================================================
+      // QUIZ SYSTEM
+      // =====================================================
+      function renderQuiz(quiz) {
+        const currentLessonProgress =
+          courseProgress[COURSE_DATA.lessons[currentLessonIndex].id];
+        const isCompleted = currentLessonProgress?.completed || false;
+
+        let quizHTML = `
+        <div class="quiz-section" id="quizSection">
+            <div class="quiz-header">
+                <h2 class="quiz-title">
+                    <i class="fas fa-clipboard-check"></i>
+                    Knowledge Check
+                </h2>
+                <p class="quiz-info">
+                    Complete this quiz with ${quiz.passingScore}% or higher to unlock the next lesson.
+                </p>
+            </div>
+    `;
+
+        if (isCompleted) {
+          const savedScore = currentLessonProgress.quizScore || 0;
+          quizHTML += `
+            <div class="quiz-results show">
+                <div class="quiz-score pass">${savedScore}%</div>
+                <div class="quiz-message">
+                    <strong>Lesson Completed!</strong><br>
+                    You've successfully passed this lesson's quiz.
+                </div>
+            </div>
+        `;
+        } else {
+          // Render quiz questions
+          quiz.questions.forEach((question, qIndex) => {
+            quizHTML += `
+                <div class="quiz-question ${
+                  qIndex === 0 ? "active" : ""
+                }" data-question="${qIndex}">
+                    <div class="question-header">
+                        <span class="question-number">Question ${
+                          qIndex + 1
+                        }</span>
+                        <span class="question-progress">${qIndex + 1}/${
+              quiz.questions.length
+            }</span>
+                    </div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="question-options">
+                        ${question.options
+                          .map(
+                            (option, oIndex) => `
+                            <div class="option" data-option="${oIndex}" onclick="selectOption(${qIndex}, ${oIndex})">
+                                <span class="option-letter">${String.fromCharCode(
+                                  65 + oIndex
+                                )}</span>
+                                <span class="option-text">${option}</span>
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                </div>
+            `;
+          });
+
+          quizHTML += `
+            <div class="quiz-controls">
+                <button class="btn btn-secondary" id="prevQuestionBtn" onclick="previousQuestion()" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <div>
+                    <button class="btn btn-secondary" id="nextQuestionBtn" onclick="nextQuestion()" disabled>
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="btn btn-primary" id="submitQuizBtn" onclick="submitQuiz()" style="display: none;">
+                        <i class="fas fa-check"></i>
+                        Submit Quiz
+                    </button>
+                </div>
+            </div>
+
+            <div class="quiz-results" id="quizResults">
+                <div class="quiz-score" id="quizScore">0%</div>
+                <div class="quiz-message" id="quizMessage"></div>
+                <div class="quiz-actions">
+                    <button class="btn btn-primary" id="continueBtn" onclick="completeLesson()" style="display: none;">
+                        <i class="fas fa-arrow-right"></i>
+                        Continue to Next Lesson
+                    </button>
+                    <button class="btn btn-secondary" onclick="retakeQuiz()">
+                        <i class="fas fa-redo"></i>
+                        Retake Quiz
+                    </button>
+                </div>
+            </div>
+        `;
+        }
+
+        quizHTML += "</div>";
+        return quizHTML;
+      }
+
+      // Quiz interaction functions
+      function selectOption(questionIndex, optionIndex) {
+        // Clear previous selections
+        document
+          .querySelectorAll(`[data-question="${questionIndex}"] .option`)
+          .forEach((opt) => {
+            opt.classList.remove("selected");
+          });
+
+        // Select current option
+        const selectedOption = document.querySelector(
+          `[data-question="${questionIndex}"] [data-option="${optionIndex}"]`
+        );
+        selectedOption.classList.add("selected");
+
+        // Store answer
+        quizState.answers[questionIndex] = optionIndex;
+
+        // Update navigation
+        const isLastQuestion =
+          questionIndex ===
+          COURSE_DATA.lessons[currentLessonIndex].quiz.questions.length - 1;
+        if (isLastQuestion) {
+          document.getElementById("submitQuizBtn").style.display =
+            "inline-flex";
+          document.getElementById("nextQuestionBtn").style.display = "none";
+        } else {
+          document.getElementById("nextQuestionBtn").disabled = false;
+        }
+      }
+
+      function nextQuestion() {
+        const currentQuestionEl = document.querySelector(
+          ".quiz-question.active"
+        );
+        const nextQuestionEl = currentQuestionEl.nextElementSibling;
+
+        if (
+          nextQuestionEl &&
+          nextQuestionEl.classList.contains("quiz-question")
+        ) {
+          currentQuestionEl.classList.remove("active");
+          nextQuestionEl.classList.add("active");
+          quizState.currentQuestion++;
+          updateQuizNavigation();
+        }
+      }
+
+      function previousQuestion() {
+        const currentQuestionEl = document.querySelector(
+          ".quiz-question.active"
+        );
+        const prevQuestionEl = currentQuestionEl.previousElementSibling;
+
+        if (
+          prevQuestionEl &&
+          prevQuestionEl.classList.contains("quiz-question")
+        ) {
+          currentQuestionEl.classList.remove("active");
+          prevQuestionEl.classList.add("active");
+          quizState.currentQuestion--;
+          updateQuizNavigation();
+        }
+      }
+
+      function updateQuizNavigation() {
+        const totalQuestions =
+          COURSE_DATA.lessons[currentLessonIndex].quiz.questions.length;
+        const prevBtn = document.getElementById("prevQuestionBtn");
+        const nextBtn = document.getElementById("nextQuestionBtn");
+        const submitBtn = document.getElementById("submitQuizBtn");
+
+        prevBtn.disabled = quizState.currentQuestion === 0;
+
+        const hasAnswer =
+          quizState.answers[quizState.currentQuestion] !== undefined;
+        const isLastQuestion = quizState.currentQuestion === totalQuestions - 1;
+
+        if (isLastQuestion) {
+          nextBtn.style.display = "none";
+          submitBtn.style.display = hasAnswer ? "inline-flex" : "none";
+        } else {
+          nextBtn.style.display = "inline-flex";
+          nextBtn.disabled = !hasAnswer;
+          submitBtn.style.display = "none";
+        }
+      }
+
+      async function submitQuiz() {
+        const lesson = COURSE_DATA.lessons[currentLessonIndex];
+        const quiz = lesson.quiz;
+        let correctAnswers = 0;
+
+        // Hide questions and controls
+        document
+          .querySelectorAll(".quiz-question")
+          .forEach((q) => (q.style.display = "none"));
+        document.querySelector(".quiz-controls").style.display = "none";
+
+        // Calculate score and highlight answers
+        quiz.questions.forEach((question, index) => {
+          const userAnswer = quizState.answers[index];
+          const correctAnswer = question.correct;
+          const isCorrect = userAnswer === correctAnswer;
+
+          if (isCorrect) correctAnswers++;
+
+          // Highlight answers
+          const questionEl = document.querySelector(
+            `[data-question="${index}"]`
+          );
+          const options = questionEl.querySelectorAll(".option");
+
+          options[correctAnswer].classList.add("correct");
+          if (userAnswer !== correctAnswer && userAnswer !== undefined) {
+            options[userAnswer].classList.add("incorrect");
+          }
+        });
+
+        const score = Math.round(
+          (correctAnswers / quiz.questions.length) * 100
+        );
+        const passed = score >= quiz.passingScore;
+
+        // Update quiz results UI
+        const quizScore = document.getElementById("quizScore");
+        const quizMessage = document.getElementById("quizMessage");
+        const quizActions = document.querySelector(".quiz-actions");
+
+        quizScore.textContent = `${score}%`;
+        quizScore.className = `quiz-score ${passed ? "pass" : "fail"}`;
+
+        if (passed) {
+          quizMessage.innerHTML = `
+            <strong>Congratulations!</strong><br>
+            You passed with ${score}%. You can now proceed to the next lesson.
+        `;
+
+          quizActions.innerHTML = `
+            <button class="btn btn-primary" onclick="completeLesson()">
+                <i class="fas fa-arrow-right"></i>
+                Continue to Next Lesson
+            </button>
+        `;
+
+          // Mark lesson as completed
+          await markLessonComplete(score);
+        } else {
+          quizMessage.innerHTML = `
+            <strong>Not quite there yet.</strong><br>
+            You scored ${score}%. You need ${quiz.passingScore}% to pass. Review the material and try again.
+        `;
+
+          quizActions.innerHTML = `
+            <button class="btn btn-secondary" onclick="retakeQuiz()">
+                <i class="fas fa-redo"></i>
+                Retake Quiz
+            </button>
+        `;
+        }
+
+        document.getElementById("quizResults").classList.add("show");
+
+        // Log quiz completion
+        logUserActivity("quiz_completed", {
+          lesson_id: lesson.id,
+          lesson_title: lesson.title,
+          score: score,
+          passed: passed,
+          attempts: (courseProgress[lesson.id]?.quizAttempts || 0) + 1,
+        });
+
+        // Scroll to results
+        document
+          .getElementById("quizResults")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function retakeQuiz() {
+        // Reset quiz state
+        quizState = {
+          currentQuestion: 0,
+          answers: [],
+          score: 0,
+          isComplete: false,
+        };
+
+        // Track quiz retry
+        const lessonId = COURSE_DATA.lessons[currentLessonIndex].id;
+        if (!courseProgress[lessonId]) courseProgress[lessonId] = {};
+        courseProgress[lessonId].quizAttempts =
+          (courseProgress[lessonId].quizAttempts || 0) + 1;
+
+        // Reload lesson content
+        loadLesson(currentLessonIndex);
+
+        // Scroll to quiz
+        setTimeout(() => {
+          document
+            .getElementById("quizSection")
+            .scrollIntoView({ behavior: "smooth" });
+        }, 500);
+      }
+
+      async function markLessonComplete(score) {
+        const lesson = COURSE_DATA.lessons[currentLessonIndex];
+        const lessonId = lesson.id;
+
+        // Track lesson completion time
+        trackLessonTime();
+
+        // Update lesson progress
+        courseProgress[lessonId] = {
+          ...courseProgress[lessonId],
+          completed: true,
+          quizScore: score,
+          completedAt: new Date().toISOString(),
+          finalScore: score,
+        };
+
+        // Update session tracking
+        courseSession.lessonsCompleted++;
+
+        // Save progress to database
+        await saveProgress();
+
+        // Update UI
+        renderSidebar();
+        updateNavigationButtons();
+
+        // Check various achievements
+        await checkLessonCompletionAchievements();
+        await checkPerfectScoreAchievements(score);
+        await checkStudyTimeAchievements();
+
+        // Log lesson completion
+        logUserActivity("lesson_completed", {
+          lesson_id: lessonId,
+          lesson_title: lesson.title,
+          final_score: score,
+          time_spent: courseProgress[lessonId].timeSpent || 0,
+          lesson_number: currentLessonIndex + 1,
+        });
+
+        showToast("Lesson completed successfully!", "success");
+      }
+
+      async function completeLesson() {
+        if (currentLessonIndex < COURSE_DATA.lessons.length - 1) {
+          // Move to next lesson
+          currentLessonIndex++;
+          loadLesson(currentLessonIndex);
+        } else {
+          // Course completion
+          await completeCourse();
+        }
+      }
+
+      async function completeCourse() {
+        try {
+          const completionTime = courseSession.totalStudyTime;
+
+          // Update course progress to 100% completed
+          await supabase
+            .from("course_progress")
+            .update({
+              progress: 100,
+              completed_at: new Date().toISOString(),
+              completion_time_minutes: completionTime,
+            })
+            .eq("user_id", currentUser.id)
+            .eq("course_id", COURSE_DATA.id);
+
+          // Award course completion achievements
+          await checkAndUnlockAchievement("course_completion_1");
+          await checkSpeedCompletionAchievements(completionTime);
+          await checkCourseStreakAchievements();
+
+          // Update user stats
+          await updateUserStats();
+
+          // Show completion message
+          showToast(
+            "Congratulations! Course completed successfully!",
+            "certificate"
+          );
+
+          // Log course completion
+          logUserActivity("course_completed", {
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title,
+            completion_time_minutes: completionTime,
+            total_lessons: COURSE_DATA.lessons.length,
+            average_quiz_score: calculateAverageQuizScore(),
+          });
+
+          // Redirect to dashboard after delay
+          setTimeout(() => {
+            window.location.href = "/dashboard";
+          }, 3000);
+        } catch (error) {
+          console.error("Error completing course:", error);
+          showToast("Error marking course as complete", "error");
+        }
+      }
+
+      // =====================================================
+      // ACHIEVEMENT INTEGRATION SYSTEM
+      // =====================================================
+      async function checkAndUnlockAchievement(
+        achievementId,
+        skipNotification = false
+      ) {
+        try {
+          // Prevent duplicate checks
+          const cacheKey = `achievement_${achievementId}_${currentUser.id}`;
+          if (sessionStorage.getItem(cacheKey)) return false;
+
+          // Check if already unlocked
+          const { data: existing, error } = await supabase
+            .from("user_achievements")
+            .select("id")
+            .eq("user_id", currentUser.id)
+            .eq("achievement_id", achievementId)
+            .single();
+
+          if (existing) {
+            sessionStorage.setItem(cacheKey, "true");
+            return false;
+          }
+
+          // Award achievement
+          const achievementData = {
+            user_id: currentUser.id,
+            achievement_id: achievementId,
+            unlocked_at: new Date().toISOString(),
+            points_awarded: getAchievementPoints(achievementId),
+            context: "course_system",
+          };
+
+          const { data, error: insertError } = await supabase
+            .from("user_achievements")
+            .insert([achievementData])
+            .select()
+            .single();
+
+          if (insertError) {
+            if (insertError.code === "23505") return false; // Already exists
+            throw insertError;
+          }
+
+          // Update user points
+          await supabase.rpc('increment_user_stats', {
+  user_id_param: currentUser.id,
+  points_to_add: achievementData.points_awarded,
+  achievements_to_add: 1
+});
+
+          // Cache and queue notification
+          sessionStorage.setItem(cacheKey, "true");
+
+          if (!skipNotification) {
+            queueAchievementNotification({
+              id: achievementId,
+              name: getAchievementName(achievementId),
+              description: getAchievementDescription(achievementId),
+              points: achievementData.points_awarded,
+              rarity: getAchievementRarity(achievementId),
+              icon: getAchievementIcon(achievementId),
+            });
+          }
+
+          return true;
+        } catch (error) {
+          console.error("Error unlocking achievement:", error);
+          return false;
+        }
+      }
+
+      // Helper functions for achievement data (replace with your actual achievement definitions)
+      function getAchievementPoints(id) {
+        const pointsMap = {
+          first_course_start: 75,
+          first_lesson: 100,
+          course_completion_1: 500,
+          perfect_score: 250,
+          speed_demon: 750,
+          marathon_learner: 500,
+          night_owl: 200,
+          early_bird: 200,
+          weekend_warrior: 150,
+          // Add more as needed
+        };
+        return pointsMap[id] || 100;
+      }
+
+      function getAchievementName(id) {
+        const nameMap = {
+          first_course_start: "Learning Initiated",
+          first_lesson: "First Steps",
+          course_completion_1: "Course Conqueror",
+          perfect_score: "Perfectionist",
+          speed_demon: "Speed Demon",
+          // Add more as needed
+        };
+        return nameMap[id] || "Achievement Unlocked";
+      }
+
+      function getAchievementDescription(id) {
+        const descMap = {
+          first_course_start: "Start your first cybersecurity course",
+          first_lesson: "Complete your first lesson",
+          course_completion_1: "Complete your first course",
+          perfect_score: "Score 100% on any quiz",
+          speed_demon: "Complete a course in under 2 hours",
+          // Add more as needed
+        };
+        return descMap[id] || "Achievement description";
+      }
+
+      function getAchievementRarity(id) {
+        const rarityMap = {
+          first_course_start: "common",
+          first_lesson: "bronze",
+          course_completion_1: "silver",
+          perfect_score: "gold",
+          speed_demon: "legendary",
+          // Add more as needed
+        };
+        return rarityMap[id] || "common";
+      }
+
+      function getAchievementIcon(id) {
+        const iconMap = {
+          first_course_start: "fas fa-play",
+          first_lesson: "fas fa-baby",
+          course_completion_1: "fas fa-trophy",
+          perfect_score: "fas fa-star",
+          speed_demon: "fas fa-rocket",
+          // Add more as needed
+        };
+        return iconMap[id] || "fas fa-award";
+      }
+
+      async function checkLessonAchievements(lessonNumber) {
+        if (lessonNumber === 1) {
+          await checkAndUnlockAchievement("first_lesson");
+        }
+
+        // Check if user has completed multiple lessons in one day
+        const today = new Date().toISOString().split("T")[0];
+        const todayCompletions = Object.values(courseProgress).filter(
+          (p) => p.completed && p.completedAt?.startsWith(today)
+        ).length;
+
+        if (todayCompletions >= 3) {
+          await checkAndUnlockAchievement("lesson_marathon");
+        }
+      }
+
+      async function checkLessonCompletionAchievements() {
+        const completedCount = getCompletedLessonsCount();
+
+        // Lesson-based achievements
+        const lessonMilestones = [1, 5, 10, 25, 50, 100];
+        for (const milestone of lessonMilestones) {
+          if (completedCount >= milestone) {
+            await checkAndUnlockAchievement(`lessons_${milestone}`);
+          }
+        }
+
+        // Course completion achievements
+        if (completedCount === COURSE_DATA.lessons.length) {
+          await checkAndUnlockAchievement("course_completion_1");
+
+          // Check for additional course completion achievements
+          const { data: allCourses } = await supabase
+            .from("course_progress")
+            .select("course_id")
+            .eq("user_id", currentUser.id)
+            .eq("progress", 100);
+
+          const totalCompleted = allCourses?.length || 0;
+
+          const courseMilestones = [1, 5, 10, 25];
+          for (const milestone of courseMilestones) {
+            if (totalCompleted >= milestone) {
+              await checkAndUnlockAchievement(`course_completion_${milestone}`);
+            }
+          }
+        }
+      }
+
+      async function checkPerfectScoreAchievements(score) {
+        if (score === 100) {
+          await checkAndUnlockAchievement("perfect_score");
+
+          // Check for consecutive perfect scores
+          const recentScores = Object.values(courseProgress)
+            .filter((p) => p.completed && p.quizScore)
+            .slice(-5) // Last 5 completed
+            .map((p) => p.quizScore);
+
+          if (
+            recentScores.length >= 3 &&
+            recentScores.every((s) => s === 100)
+          ) {
+            await checkAndUnlockAchievement("perfectionist_streak");
+          }
+        }
+      }
+
+      async function checkSpeedCompletionAchievements(completionTime) {
+        // Speed demon: Complete course in under 2 hours (120 minutes)
+        if (completionTime <= 120) {
+          await checkAndUnlockAchievement("speed_demon");
+        }
+
+        // Quick learner: Complete course in under 4 hours (240 minutes)
+        if (completionTime <= 240) {
+          await checkAndUnlockAchievement("quick_learner");
+        }
+      }
+
+      async function checkStudyTimeAchievements() {
+        const totalTime = courseSession.totalStudyTime;
+
+        // Marathon learner: Study for 8+ hours in a course session
+        if (totalTime >= 480) {
+          // 8 hours
+          await checkAndUnlockAchievement("marathon_learner");
+        }
+
+        // Dedicated learner: Study for 4+ hours
+        if (totalTime >= 240) {
+          // 4 hours
+          await checkAndUnlockAchievement("dedicated_learner");
+        }
+      }
+
+      async function checkCourseStreakAchievements() {
+        try {
+          // Check for consecutive course completions
+          const { data: recentCourses, error } = await supabase
+            .from("course_progress")
+            .select("completed_at, course_id")
+            .eq("user_id", currentUser.id)
+            .eq("progress", 100)
+            .order("completed_at", { ascending: false })
+            .limit(10);
+
+          if (error || !recentCourses) return;
+
+          // Check for courses completed on consecutive days
+          let consecutiveDays = 1;
+          for (let i = 1; i < recentCourses.length; i++) {
+            const prevDate = new Date(
+              recentCourses[i - 1].completed_at
+            ).toDateString();
+            const currentDate = new Date(
+              recentCourses[i].completed_at
+            ).toDateString();
+            const dayDiff =
+              Math.abs(new Date(prevDate) - new Date(currentDate)) /
+              (1000 * 60 * 60 * 24);
+
+            if (dayDiff <= 1) {
+              consecutiveDays++;
+            } else {
+              break;
+            }
+          }
+
+          if (consecutiveDays >= 3) {
+            await checkAndUnlockAchievement("learning_streak");
+          }
+        } catch (error) {
+          console.error("Error checking course streak achievements:", error);
+        }
+      }
+
+      // =====================================================
+      // TIME-BASED ACHIEVEMENTS
+      // =====================================================
+      async function checkTimeBasedAchievements(timestamp) {
+        const hour = timestamp.getHours();
+        const dayOfWeek = timestamp.getDay();
+
+        // Night owl (after midnight, before 6 AM)
+        if (hour >= 0 && hour < 6) {
+          await incrementTimeBasedCounter("midnight_sessions", "night_owl");
+        }
+
+        // Early bird (4 AM to 6 AM)
+        if (hour >= 4 && hour < 6) {
+          await incrementTimeBasedCounter("early_sessions", "early_bird");
+        }
+
+        // Weekend warrior (Saturday = 6, Sunday = 0)
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+          await incrementTimeBasedCounter(
+            "weekend_sessions",
+            "weekend_warrior"
+          );
+        }
+      }
+
+      async function incrementTimeBasedCounter(counterType, achievementId) {
+        try {
+          const dateStr = new Date().toISOString().split("T")[0];
+          const cacheKey = `${counterType}_${currentUser.id}_${dateStr}`;
+
+          // Prevent multiple increments per day
+          if (sessionStorage.getItem(cacheKey)) return;
+
+          // Update counter
+      await supabase.rpc('increment_profile_counter', {
+  user_id_param: currentUser.id,
+  counter_field: counterType,
+  increment_value: 1
+});
+
+          // Cache to prevent double counting
+          sessionStorage.setItem(cacheKey, "true");
+
+          // Check related achievement
+          if (achievementId) {
+            await checkAndUnlockAchievement(achievementId, true);
+          }
+        } catch (error) {
+          console.error(`Error incrementing ${counterType}:`, error);
+        }
+      }
+
+      async function checkDailyStreak() {
+        try {
+          const { data: profile, error } = await supabase
+            .from("profiles")
+            .select("last_activity, current_streak, last_streak_date")
+            .eq("id", currentUser.id)
+            .single();
+
+          if (error) throw error;
+
+          const now = new Date();
+          const today = now.toDateString();
+          const lastActivity = profile.last_activity
+            ? new Date(profile.last_activity)
+            : null;
+          const lastStreakDate = profile.last_streak_date
+            ? new Date(profile.last_streak_date).toDateString()
+            : null;
+
+          let newStreak = profile.current_streak || 0;
+          let shouldUpdateStreak = false;
+
+          if (!lastActivity) {
+            // First time user
+            newStreak = 1;
+            shouldUpdateStreak = true;
+          } else {
+            const daysSinceLastActivity = Math.floor(
+              (now - lastActivity) / (1000 * 60 * 60 * 24)
+            );
+
+            if (lastStreakDate === today) {
+              // Already counted today's streak
+              return newStreak;
+            } else if (
+              daysSinceLastActivity === 1 ||
+              (daysSinceLastActivity === 0 && lastStreakDate !== today)
+            ) {
+              // Consecutive day or same day but not counted yet
+              newStreak += 1;
+              shouldUpdateStreak = true;
+            } else if (daysSinceLastActivity > 1) {
+              // Streak broken
+              newStreak = 1;
+              shouldUpdateStreak = true;
+            }
+          }
+
+          if (shouldUpdateStreak) {
+            await supabase
+              .from("profiles")
+              .update({
+                current_streak: newStreak,
+                last_activity: now.toISOString(),
+                last_streak_date: now.toISOString(),
+              })
+              .eq("id", currentUser.id);
+
+            userStats.current_streak = newStreak;
+
+            showToast(`Daily streak: ${newStreak} days!`, "success");
+            await checkStreakAchievements(newStreak);
+          }
+
+          return newStreak;
+        } catch (error) {
+          console.error("Error checking daily streak:", error);
+          return 0;
+        }
+      }
+
+      async function checkStreakAchievements(currentStreak) {
+        const streakMilestones = [3, 7, 14, 30, 100, 365];
+
+        for (const milestone of streakMilestones) {
+          if (currentStreak >= milestone) {
+            await checkAndUnlockAchievement(`streak_${milestone}`);
+          }
+        }
+      }
+
+      // =====================================================
+      // USER ACTIVITY LOGGING
+      // =====================================================
+      async function logUserActivity(activityType, metadata = {}) {
+        try {
+          const now = new Date();
+
+          const activityData = {
+            user_id: currentUser.id,
+            activity_type: activityType,
+            timestamp: now.toISOString(),
+            course_id: COURSE_DATA.id,
+            lesson_index: currentLessonIndex,
+            session_duration: courseSession.totalStudyTime,
+            metadata: JSON.stringify(metadata),
+            created_at: now.toISOString(),
+          };
+
+          // Try to log to activities table
+          const { error } = await supabase
+            .from("user_activities")
+            .insert([activityData]);
+
+          if (error && error.code !== "42P01") {
+            console.warn("Activity logging failed:", error.message);
+          }
+
+          // Always update last activity in profile
+          await supabase
+            .from("profiles")
+            .update({ last_activity: now.toISOString() })
+            .eq("id", currentUser.id);
+        } catch (error) {
+          console.error("Error logging user activity:", error);
+        }
+      }
+
+      // =====================================================
+      // NAVIGATION SYSTEM
+      // =====================================================
+      function updateNavigationButtons() {
+        const prevBtn = document.getElementById("prevLessonBtn");
+        const nextBtn = document.getElementById("nextLessonBtn");
+
+        if (!prevBtn || !nextBtn) return;
+
+        // Previous button
+        prevBtn.disabled = currentLessonIndex === 0;
+
+        // Next button logic
+        const isLastLesson =
+          currentLessonIndex === COURSE_DATA.lessons.length - 1;
+        const canGoNext =
+          currentLessonIndex < COURSE_DATA.lessons.length - 1 &&
+          canAccessLesson(currentLessonIndex + 1);
+
+        if (isLastLesson) {
+          const isCurrentCompleted =
+            courseProgress[COURSE_DATA.lessons[currentLessonIndex].id]
+              ?.completed;
+          nextBtn.disabled = !isCurrentCompleted;
+          nextBtn.innerHTML = '<i class="fas fa-trophy"></i> Complete Course';
+        } else {
+          nextBtn.disabled = !canGoNext;
+          nextBtn.innerHTML = 'Next <i class="fas fa-chevron-right"></i>';
+        }
+      }
+
+      // Navigation button event handlers
+      function goToPreviousLesson() {
+        if (currentLessonIndex > 0) {
+          trackLessonTime(); // Track time spent on current lesson
+          currentLessonIndex--;
+          loadLesson(currentLessonIndex);
+        }
+      }
+
+      function goToNextLesson() {
+        if (currentLessonIndex < COURSE_DATA.lessons.length - 1) {
+          const canGoNext = canAccessLesson(currentLessonIndex + 1);
+          if (canGoNext) {
+            trackLessonTime();
+            currentLessonIndex++;
+            loadLesson(currentLessonIndex);
+          } else {
+            showToast("Complete the current lesson quiz to proceed", "warning");
+          }
+        } else {
+          // Complete course
+          completeCourse();
+        }
+      }
+
+      // =====================================================
+      // SIDEBAR FUNCTIONS
+      // =====================================================
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebarOverlay");
+
+        if (sidebar) sidebar.classList.toggle("open");
+        if (overlay) overlay.classList.toggle("active");
+      }
+
+      function closeSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebarOverlay");
+
+        if (sidebar) sidebar.classList.remove("open");
+        if (overlay) overlay.classList.remove("active");
+      }
+
+      // =====================================================
+      // ACHIEVEMENT NOTIFICATION SYSTEM
+      // =====================================================
+      function queueAchievementNotification(achievement) {
+        notificationQueue.push(achievement);
+        processNotificationQueue();
+      }
+
+      function processNotificationQueue() {
+        if (isShowingNotification || notificationQueue.length === 0) return;
+
+        isShowingNotification = true;
+        const achievement = notificationQueue.shift();
+        showAchievementNotification(achievement);
+
+        const duration =
+          achievement.rarity === "mythic"
+            ? 8000
+            : achievement.rarity === "legendary"
+            ? 7000
+            : 6000;
+
+        setTimeout(() => {
+          isShowingNotification = false;
+          processNotificationQueue();
+        }, duration + 500);
+      }
+
+      function showAchievementNotification(achievement) {
+        const notification = document.getElementById("achievementNotification");
+        if (!notification) return;
+
+        const icon = document.getElementById("notificationIcon");
+        const title = document.getElementById("notificationTitle");
+        const description = document.getElementById("notificationDescription");
+        const points = document.getElementById("notificationPoints");
+
+        if (icon) {
+          icon.innerHTML = `<i class="${achievement.icon}"></i>`;
+          icon.className = `notification-icon ${achievement.rarity}`;
+        }
+        if (title) title.textContent = achievement.name;
+        if (description) description.textContent = achievement.description;
+        if (points) points.textContent = `+${achievement.points} Points`;
+
+        notification.className = `achievement-notification ${achievement.rarity}`;
+        notification.classList.add("show");
+
+        const duration =
+          achievement.rarity === "mythic"
+            ? 8000
+            : achievement.rarity === "legendary"
+            ? 7000
+            : 6000;
+
+        setTimeout(() => {
+          notification.classList.remove("show");
+        }, duration);
+      }
+
+      // =====================================================
+      // UTILITY FUNCTIONS
+      // =====================================================
+      function calculateAverageQuizScore() {
+        const scores = Object.values(courseProgress)
+          .filter((p) => p.completed && p.quizScore)
+          .map((p) => p.quizScore);
+
+        if (scores.length === 0) return 0;
+        return Math.round(
+          scores.reduce((sum, score) => sum + score, 0) / scores.length
+        );
+      }
+
+      async function resetProgress() {
+        if (
+          !confirm(
+            "Are you sure you want to reset your progress? This action cannot be undone."
+          )
+        ) {
+          return;
+        }
+
+        try {
+          // Track lesson time before reset
+          trackLessonTime();
+
+          // Reset local state
+          courseProgress = {};
+          currentLessonIndex = 0;
+          courseSession = {
+            startTime: new Date(),
+            totalStudyTime: 0,
+            lessonsStarted: 0,
+            lessonsCompleted: 0,
+            pageLoadTime: new Date(),
+            interactionCount: 0,
+            lastActivityTime: new Date(),
+          };
+
+          // Delete from database
+          await supabase
+            .from("course_progress")
+            .delete()
+            .eq("user_id", currentUser.id)
+            .eq("course_id", COURSE_DATA.id);
+
+          // Log reset activity
+          logUserActivity("progress_reset", {
+            course_id: COURSE_DATA.id,
+            reset_reason: "manual",
+          });
+
+          // Reinitialize
+          await saveProgress();
+          renderSidebar();
+          loadLesson(0);
+
+          showToast("Progress reset successfully", "success");
+        } catch (error) {
+          console.error("Error resetting progress:", error);
+          showToast("Failed to reset progress", "error");
+        }
+      }
+
+      function copyCode(codeId) {
+        const codeElement = document.getElementById(codeId);
+        if (!codeElement) return;
+
+        const text = codeElement.textContent;
+
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            showToast("Code copied to clipboard!", "success");
+
+            // Track code copy for achievements
+            logUserActivity("code_copied", {
+              code_section: codeId,
+              lesson_id: COURSE_DATA.lessons[currentLessonIndex].id,
+            });
+          })
+          .catch((err) => {
+            console.error("Failed to copy code:", err);
+            showToast("Failed to copy code", "error");
+
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+              document.execCommand("copy");
+              showToast("Code copied to clipboard!", "success");
+            } catch (fallbackError) {
+              showToast(
+                "Copy failed - please select and copy manually",
+                "error"
+              );
+            }
+            document.body.removeChild(textArea);
+          });
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // =====================================================
+      // UI FEEDBACK SYSTEMS
+      // =====================================================
+      function showToast(message, type = "success") {
+        const toast = document.getElementById("toast");
+        const messageEl = document.getElementById("toastMessage");
+
+        if (!toast || !messageEl) {
+          console.log(`Toast: ${message} (${type})`);
+          return;
+        }
+
+        messageEl.textContent = message;
+        toast.className = `toast ${type} show`;
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 4000);
+      }
+
+      function showLoadingScreen() {
+        const loadingScreen = document.getElementById("loadingScreen");
+        if (loadingScreen) loadingScreen.classList.remove("hidden");
+      }
+
+      function hideLoadingScreen() {
+        const loadingScreen = document.getElementById("loadingScreen");
+        if (loadingScreen) {
+          setTimeout(() => {
+            loadingScreen.classList.add("hidden");
+          }, 1000);
+        }
+      }
+
+      // =====================================================
+      // MUSIC PLAYER INTEGRATION
+      // =====================================================
+      function initMusicPlayer() {
+        const btnText = document.getElementById("music-button-text");
+        const icon = document.getElementById("music-icon");
+        const dropdown = document.getElementById("music-dropdown-content");
+
+        if (!btnText || !icon || !dropdown) return;
+
+        function setUI(state) {
+          btnText.textContent =
+            state === "Playing" ? "PAUSE MUSIC" : "STUDY MUSIC";
+          icon.className =
+            state === "Playing"
+              ? "fa-solid fa-circle-pause"
+              : "fa-solid fa-music";
+        }
+
+        // Load saved music state
+        const savedSrc = localStorage.getItem("cybersec_music_src");
+        const savedTime = parseFloat(
+          localStorage.getItem("cybersec_music_time") || 0
+        );
+
+        if (savedSrc) {
+          audioPlayer.src = savedSrc;
+          audioPlayer.currentTime = savedTime;
+          audioPlayer
+            .play()
+            .then(() => setUI("Playing"))
+            .catch(() => setUI("Stopped"));
+        }
+
+        // Music button click handler
+        document
+          .getElementById("music-dropdown")
+          .querySelector("button")
+          .addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdown.style.display =
+              dropdown.style.display === "block" ? "none" : "block";
+
+            if (audioPlayer.src && !audioPlayer.paused) {
+              audioPlayer.pause();
+              setUI("Stopped");
+            } else if (audioPlayer.src) {
+              audioPlayer.play().then(() => setUI("Playing"));
+            }
+          });
+
+        // Music selection handlers
+        dropdown.querySelectorAll("a[data-src]").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            audioPlayer.src = link.dataset.src;
+            audioPlayer.play().then(() => setUI("Playing"));
+            localStorage.setItem("cybersec_music_src", link.dataset.src);
+            dropdown.style.display = "none";
+          });
+        });
+
+        // Stop music handler
+        const stopLink = document.getElementById("stop-music-link");
+        if (stopLink) {
+          stopLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+            audioPlayer.removeAttribute("src");
+            setUI("Stopped");
+            localStorage.removeItem("cybersec_music_src");
+            localStorage.removeItem("cybersec_music_time");
+            dropdown.style.display = "none";
+          });
+        }
+
+        // Save music state before page unload
+        window.addEventListener("beforeunload", () => {
+          if (!audioPlayer.paused && audioPlayer.src) {
+            localStorage.setItem("cybersec_music_src", audioPlayer.src);
+            localStorage.setItem(
+              "cybersec_music_time",
+              audioPlayer.currentTime
+            );
+          }
+        });
+
+        // Close dropdown when clicking outside
+        window.addEventListener("click", (e) => {
+          if (!e.target.closest("#music-dropdown")) {
+            dropdown.style.display = "none";
+          }
+        });
+      }
+
+      // Show initial music indicator
+      function addMusicIndicator() {
+        const musicBtn = document.querySelector("#music-dropdown");
+        if (musicBtn) {
+          const indicator = document.createElement("div");
+          indicator.className = "music-indicator";
+          indicator.innerHTML = `<i class="fa-solid fa-music"></i> Try Study Music!`;
+
+          musicBtn.style.position = "relative";
+          musicBtn.appendChild(indicator);
+
+          setTimeout(() => indicator.remove(), 3000);
+        }
+      }
+
+      // Initialize Event Listeners
+      function initializeEventListeners() {
+        // Navigation buttons
+        document
+          .getElementById("prevLessonBtn")
+          ?.addEventListener("click", goToPreviousLesson);
+        document
+          .getElementById("nextLessonBtn")
+          ?.addEventListener("click", goToNextLesson);
+
+        // Reset progress button
+        document
+          .getElementById("resetProgressBtn")
+          ?.addEventListener("click", resetProgress);
+
+        // Mobile menu toggle
+        document
+          .getElementById("menuToggle")
+          ?.addEventListener("click", toggleSidebar);
+        document
+          .getElementById("sidebarOverlay")
+          ?.addEventListener("click", closeSidebar);
+
+        // Keyboard shortcuts
+        document.addEventListener("keydown", handleKeyboardShortcuts);
+
+        // Window resize handler
+        window.addEventListener("resize", handleWindowResize);
+
+        // Content interaction tracking
+        document.getElementById("contentBody")?.addEventListener(
+          "scroll",
+          debounce(() => {
+            trackUserInteraction();
+          }, 1000)
+        );
+      }
+
+      // Keyboard Shortcuts
+      function handleKeyboardShortcuts(e) {
+        if (document.querySelector(".quiz-question.active")) return;
+
+        if (e.key === "ArrowLeft" && e.ctrlKey) {
+          e.preventDefault();
+          goToPreviousLesson();
+        } else if (e.key === "ArrowRight" && e.ctrlKey) {
+          e.preventDefault();
+          goToNextLesson();
+        }
+      }
+
+      // Window Resize Handler
+      function handleWindowResize() {
+        if (window.innerWidth > 768) {
+          closeSidebar();
+        }
+      }
+
+      // Debounce Helper
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+
+      // Initialize responsive behavior
+      if (window.innerWidth <= 768) {
+        document.getElementById("menuToggle").style.display = "inline-flex";
+      }
+
+      // Auto-save progress periodically
+      setInterval(async () => {
+        if (currentUser && Object.keys(courseProgress).length > 0) {
+          await saveProgress();
+        }
+      }, 60000); // Save every minute
+
+      // System initialization logging
+      console.log("CyberSec Academy Course System Initialized");
+      console.log("Current Course:", COURSE_DATA.title);
+      console.log("Total Lessons:", COURSE_DATA.lessons.length);
+
+      // Google OAuth Integration
+      const googleBtn = document.querySelector(".btn-google");
+      if (googleBtn) {
+        googleBtn.addEventListener("click", async () => {
+          const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+              redirectTo:
+                window.location.origin +
+                "/courses/osint-professional",
+            },
+          });
+
+          if (error) {
+            console.error("Google login error:", error.message);
+            showToast("Google login failed: " + error.message, "error");
+          }
+        });
+      }
+
+      // Check for existing session
+      supabase.auth.getSession().then(({ data }) => {
+        if (data.session) {
+          console.log("User already logged in:", data.session.user);
+          currentUser = data.session.user;
+          startCourseSession();
+        }
+      });
+
+      // Add missing auth modal functions
+      function openAuthModal() {
+        const modal = document.getElementById("authModal");
+        if (modal) {
+          modal.style.display = "flex";
+        }
+      }
+
+      function closeAuthModal() {
+        const modal = document.getElementById("authModal");
+        if (modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      // Add auth tab switching functionality
+      document.getElementById("tabSignIn")?.addEventListener("click", () => {
+        document.getElementById("tabSignIn").classList.add("active");
+        document.getElementById("tabSignUp").classList.remove("active");
+        document.getElementById("signInForm").style.display = "block";
+        document.getElementById("signUpForm").style.display = "none";
+      });
+
+      document.getElementById("tabSignUp")?.addEventListener("click", () => {
+        document.getElementById("tabSignUp").classList.add("active");
+        document.getElementById("tabSignIn").classList.remove("active");
+        document.getElementById("signUpForm").style.display = "block";
+        document.getElementById("signInForm").style.display = "none";
+      });
+
+      document
+        .getElementById("closeAuthModal")
+        ?.addEventListener("click", closeAuthModal);
+
+      // Improved error handling for auth session
+      supabase.auth.onAuthStateChange((event, session) => {
+        if (event === "SIGNED_IN") {
+          currentUser = session.user;
+          closeAuthModal();
+          startCourseSession();
+        } else if (event === "SIGNED_OUT") {
+          currentUser = null;
+          openAuthModal();
+        }
+      });
+
+      // Add form submission handlers
+      document
+        .getElementById("emailSignInForm")
+        ?.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("signInEmail").value;
+          const password = document.getElementById("signInPassword").value;
+
+          try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email,
+              password,
+            });
+
+            if (error) throw error;
+
+            closeAuthModal();
+          } catch (error) {
+            showToast(error.message, "error");
+          }
+        });
+
+      document
+        .getElementById("emailSignUpForm")
+        ?.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("signUpEmail").value;
+          const password = document.getElementById("signUpPassword").value;
+          const name = document.getElementById("signUpName").value;
+
+          try {
+            const { data, error } = await supabase.auth.signUp({
+              email,
+              password,
+              options: {
+                data: {
+                  full_name: name,
+                },
+              },
+            });
+
+            if (error) throw error;
+
+            showToast(
+              "Account created successfully! Please check your email.",
+              "success"
+            );
+          } catch (error) {
+            showToast(error.message, "error");
+          }
+        });
+    </script>
+  </body>
+</html>
+

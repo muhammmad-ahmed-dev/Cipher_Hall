@@ -1,0 +1,3048 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- ========== Start: SEO & Schema Enhancement ========== -->
+    <title>Attack Simulation & Adversary Emulation Course | CipherHall</title>
+    <meta name="description" content="A hands-on course in adversary emulation using MITRE ATT&CK. Learn to test your defenses by simulating real-world attacker TTPs in a safe lab environment.">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="canonical" href="https://www.cipherhall.com/courses/attack-simulation" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Attack Simulation with Real-World Case Studies",
+      "description": "A comprehensive course on adversary emulation for defensive purposes, mapping the MITRE ATT&CK framework to real-world threat actor campaigns to build and test robust security controls.",
+      "provider": {
+        "@type": "Organization",
+        "name": "CipherHall",
+        "sameAs": "https://www.cipherhall.com"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "Online",
+        "instructor": {
+          "@type": "Person",
+          "name": "Dr. Chen Wei"
+        }
+      }
+    }
+    </script>
+    <!-- ========== End: SEO & Schema Enhancement ========== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Exo+2:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/coursepages.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader-icon">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="loader-text">Loading Course Content...</div>
+    </div>
+    
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Music Player (fixed at top right) -->
+    <div class="header-controls">
+        <div class="music-dropdown" id="music-dropdown">
+            <button class="btn btn-secondary">
+                <span id="music-button-text">STUDY MUSIC</span>
+                <i id="music-icon" class="fa-solid fa-music"></i>
+            </button>
+            <div class="music-dropdown-content" id="music-dropdown-content">
+                <a href="#" data-src="https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3">1. Coffee Shop Vibes</a>
+                <a href="#" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3">2. City Lights Lofi</a>
+                <a href="#" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3">3. Mellow Thoughts</a>
+                <a href="#" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3">4. Rainy Mood</a>
+                <a href="#" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3">5. Time Alone</a>
+                <a href="#" id="stop-music-link"><i class="fa-solid fa-stop-circle"></i> Stop Music</a>
+            </div>
+        </div>
+        
+        <button class="btn btn-secondary" id="resetProgressBtn">
+            <i class="fas fa-redo"></i>
+            Reset Progress
+        </button>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal" style="display: none">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <span class="close" id="closeAuthModal">&times;</span>
+            <div class="auth-tabs">
+                <button id="tabSignIn" class="auth-tab active">Sign In</button>
+                <button id="tabSignUp" class="auth-tab">Sign Up</button>
+            </div>
+            <div id="authLoader" style="display: none; text-align: center; padding: 2rem">
+                <i class="fas fa-spinner fa-spin fa-2x" style="color: var(--color-green)"></i>
+                <p style="margin-top: 0.5rem">Authenticating...</p>
+            </div>
+            <div id="signInForm" class="auth-form">
+                <h2>Sign In to CipherHall</h2>
+                <button id="googleSignIn" class="btn btn-google">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+                <div class="divider"><span>or</span></div>
+                <form id="emailSignInForm">
+                    <input type="email" id="signInEmail" placeholder="Email Address" required>
+                    <input type="password" id="signInPassword" placeholder="Password" required>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+            </div>
+            <div id="signUpForm" class="auth-form" style="display: none">
+                <h2>Join CipherHall</h2>
+                <button id="googleSignUp" class="btn btn-google">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+                <div class="divider"><span>or</span></div>
+                <form id="emailSignUpForm">
+                    <input type="text" id="signUpName" placeholder="Full Name" required>
+                    <input type="email" id="signUpEmail" placeholder="Email Address" required>
+                    <input type="password" id="signUpPassword" placeholder="Password (min. 8 characters)" required>
+                    <button type="submit" class="btn btn-secondary">Create Account</button>
+                </form>
+            </div>
+            <div id="authMessage"></div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="course-info">
+                <h1 class="course-title" id="courseTitle">Loading...</h1>
+                <div class="course-progress">
+                    <div class="progress-header">
+                        <span class="progress-label">Course Progress</span>
+                        <span class="progress-percentage" id="courseProgressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="courseProgressFill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span id="completedLessons">0</span>
+                        <span id="totalLessons">0</span>
+                    </div>
+                </div>
+                <a href="/dashboard" class="back-to-dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+            </div>
+        </div>
+
+        <nav class="lesson-nav" id="lessonNav">
+            <!-- Lessons will be loaded dynamically -->
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="content-header">
+            <div class="lesson-header">
+                <div class="lesson-header-left">
+                    <span class="lesson-number" id="currentLessonNumber">1</span>
+                    <h1 class="lesson-header-title" id="currentLessonTitle">Loading...</h1>
+                </div>
+                <div class="lesson-actions">
+                    <button class="mbtn btn-primary" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                       
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-body" id="contentBody">
+            <div class="lesson-content" id="lessonContent">
+                <!-- Lesson content will be loaded dynamically -->
+            </div>
+        </div>
+
+        <footer class="lesson-navigation">
+            <div class="nav-info" id="navInfo">
+                Lesson 1 of 10
+            </div>
+            <div class="nav-controls">
+                <button class="btn btn-secondary" id="prevLessonBtn" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <button class="btn btn-primary" id="nextLessonBtn" disabled>
+                    Next
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Achievement Notification -->
+    <div id="achievementNotification" class="achievement-notification">
+        <div class="notification-header">
+            <div class="notification-icon" id="notificationIcon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="notification-content">
+                <h3 id="notificationTitle">Achievement Unlocked!</h3>
+                <p id="notificationDescription">Description here...</p>
+            </div>
+        </div>
+        <div class="notification-reward" id="notificationReward">
+            <i class="fas fa-coins"></i>
+            <span id="notificationPoints">+100 Points</span>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+       // =====================================================
+// SYNCHRONIZED COURSE SYSTEM WITH DASHBOARD INTEGRATION
+// =====================================================
+
+// Supabase Configuration - Replace with your config
+const supabaseUrl = 'https://lzcmzulemfubjaksoqor.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6Y216dWxlbWZ1Ympha3NvcW9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzMzM5MDgsImV4cCI6MjA3MDkwOTkwOH0.crhPH4YWtRsr1BJTpAQcmPbWSpwIWRbzoI4sRb2_fPI';
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// =====================================================
+// COURSE DATA STRUCTURE - REPLACE WITH YOUR COURSE JSON
+// =====================================================
+  const COURSE_DATA =
+   {
+    "id": "attack-simulation",
+    "title": "Attack Simulation with Real-World Case Studies",
+    "description": "A comprehensive, 30-lesson course on adversary emulation and attack simulation for defensive purposes. This syllabus maps the MITRE ATT&CK framework to real-world threat actor campaigns, teaching students how to safely simulate attacker techniques in an isolated lab environment. The goal is to understand adversary tradecraft in order to build, test, and validate robust security controls.",
+    "category": "cybersecurity_operations",
+    "difficulty": "Intermediate to Advanced",
+    "duration": "60 hours",
+    "instructor": "Dr. Chen Wei",
+    "lessons": [
+        {
+            "id": "lesson-1",
+            "title": "Module 1: Foundations - Introduction to Attack Simulation",
+            "duration": "90 min",
+            "objectives": [
+                "Define adversary emulation and its role in a modern security program.",
+                "Differentiate between Red, Blue, and Purple Teaming.",
+                "Understand the structure and purpose of the MITRE ATT&CK Framework.",
+                "Discuss the ethical and safety requirements for conducting attack simulations."
+            ],
+            "content": {
+                "overview": "This foundational lesson introduces the discipline of adversary emulation. We will explore why safely simulating attacker techniques is a critical component of a proactive, threat-informed defense. We will define the different 'teams' involved in security testing and establish the ethical framework and lab safety requirements that will govern the entire course.",
+                "sections": [
+                    {
+                        "title": "Red vs. Blue vs. Purple Teaming",
+                        "content": "<ul><li><strong>Red Team:</strong> An authorized team of security professionals that mimics the tactics, techniques, and procedures (TTPs) of real-world adversaries to test an organization's defenses.</li><li><strong>Blue Team:</strong> The defensive team, typically the Security Operations Center (SOC), responsible for detecting and responding to attacks.</li><li><strong>Purple Teaming:</strong> A collaborative approach where the Red and Blue teams work together. The Red Team executes a technique, and both teams immediately work together to see if the Blue Team's tools and processes detected it. This creates a rapid feedback loop for improving security controls. This course focuses on the Purple Team mindset.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "MITRE ATT&CK & Adversary Emulation",
+                        "content": "<p>Adversary emulation is not about 'hacking'; it's a scientific process of replicating the known behaviors of specific threat actors. The MITRE ATT&CK framework is our 'encyclopedia' of these behaviors. An emulation plan will specify a series of ATT&CK techniques (e.g., T1053.005, T1003.001) that represent a specific adversary's known playbook.</p>",
+                        "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Case Study: APT29 (Cozy Bear)",
+                        "description": "Read a public threat intelligence report on the group known as APT29. Identify at least three distinct ATT&CK techniques mentioned in the report that this group is known to use."
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 80,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is the primary goal of a Purple Team exercise?",
+                        "options": ["To break into the network without being detected.", "For the Red and Blue teams to work collaboratively to test and improve defensive controls in real-time.", "For the Blue Team to try and find the Red Team's physical location.", "To generate a report for management."],
+                        "correct": 1,
+                        "explanation": "Purple teaming emphasizes collaboration and rapid improvement, breaking down the traditional adversarial relationship between Red and Blue teams."
+                    },
+                    {
+                        "id": 2,
+                        "question": "In the context of this course, what does 'adversary emulation' mean?",
+                        "options": ["Creating new malware.", "Replicating the known TTPs of real-world threat actors in a safe lab environment to test defenses.", "Contacting threat actors online.", "Exploiting zero-day vulnerabilities."],
+                        "correct": 1,
+                        "explanation": "Emulation is about mimicking known behaviors for defensive purposes, not about discovering or using novel attack methods."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-2",
+            "title": "Module 1: Foundations - Lab Setup for Simulation",
+            "duration": "120 min",
+            "objectives": [
+                "Design an isolated lab network with a 'victim' workstation, a domain controller, and an analysis/SIEM server.",
+                "Install and configure Sysmon and other logging agents on the victim host.",
+                "Set up an open-source SIEM like the ELK stack or a Splunk trial.",
+                "Install and configure the Atomic Red Team framework for executing emulated tests."
+            ],
+            "content": {
+                "overview": "Safe and effective attack simulation requires a dedicated, isolated lab. This lesson is a hands-on guide to building a minimal but functional lab environment. We will set up multiple virtual machines to simulate a small corporate network, deploy the necessary logging and monitoring tools, and install our first adversary emulation framework.",
+                "sections": [
+                    {
+                        "title": "Lab Architecture",
+                        "content": "<p>Our lab will consist of three core components running as virtual machines on an internal-only network:</p><ul><li><strong>Windows Workstation:</strong> This will be our primary 'victim' machine. It will have tools like Sysmon and a log forwarder installed.</li><li><strong>Windows Server:</strong> This will act as a simple Active Directory Domain Controller to allow for more realistic lateral movement and credential access simulations.</li><li><strong>Linux Server:</strong> This will run our SIEM (e.g., ELK stack) for collecting and analyzing logs, and will also be the 'attacker' machine where we launch our simulations from.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1517694712202-14261e80e439?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Atomic Red Team Framework",
+                        "content": "<p>Atomic Red Team is a PowerShell-based framework for executing small, targeted tests that map directly to MITRE ATT&CK techniques. Each 'atomic test' is a simple, standalone script that emulates a specific technique. This is an excellent tool for learning and for testing individual detection rules in a very controlled way.</p>",
+                        "image": "https://images.unsplash.com/photo-1504639725590-77a8b6f3b79f?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Build the Lab Environment",
+                        "description": "Following a step-by-step guide, install and configure the three VMs (Windows Client, Windows Server, Linux Analyst). Set up a simple Active Directory domain. Install Sysmon on the Windows machines and configure them to forward logs to your ELK/Splunk instance. On the Linux machine, install Atomic Red Team. Finally, take a clean snapshot of all three VMs."
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 80,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "Why is an isolated virtual lab environment critical for attack simulation?",
+                        "options": ["It is cheaper than physical hardware.", "To ensure that the simulated attacks are contained and do not accidentally impact your real host machine or network.", "It allows for faster internet access.", "It is the only way to install the necessary tools."],
+                        "correct": 1,
+                        "explanation": "Containment is the most important safety principle. Attack simulation scripts, even benign ones, should never be run on a production system or a machine connected to an untrusted network."
+                    },
+                    {
+                        "id": 2,
+                        "question": "The Atomic Red Team framework is designed to:",
+                        "options": ["Automatically hack any computer.", "Provide a library of simple, MITRE ATT&CK-aligned scripts for executing single, targeted adversary techniques.", "Act as a full-featured SIEM.", "Replace the need for a Blue Team."],
+                        "correct": 1,
+                        "explanation": "Atomic Red Team is focused on executing individual, 'atomic' tests, making it an excellent tool for focused purple team exercises and detection validation."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-3",
+            "title": "Module 1: Foundations - Reconnaissance & Initial Access Simulation",
+            "duration": "90 min",
+            "objectives": [
+                "Differentiate between passive and active reconnaissance techniques.",
+                "Understand common initial access vectors like phishing and drive-by compromise.",
+                "Simulate a benign phishing attack using an open-source tool.",
+                "Analyze the logs generated by an initial access attempt."
+            ],
+            "content": {
+                "overview": "An attack begins with reconnaissance to gather information and initial access to get a foothold in the environment. This lesson covers the TTPs in these first two phases of the ATT&CK lifecycle and demonstrates how to safely simulate a benign phishing attack to test user awareness and email security controls.",
+                "sections": [
+                    {
+                        "title": "Reconnaissance (T1589-T1600)",
+                        "content": "<p>This is the information-gathering phase. <strong>Passive Reconnaissance</strong> involves using public sources (OSINT) to learn about a target without directly touching their infrastructure. <strong>Active Reconnaissance</strong> involves directly probing the target, for example, by port scanning their IP addresses or trying to enumerate subdomains. We will focus on simulating the *results* of recon, not performing it on live targets.</p>",
+                        "image": "https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Initial Access (T1078, T1189, T1566)",
+                        "content": "<p>This is how attackers get in. The most common vector by far is <strong>Phishing (T1566)</strong>, which involves sending a deceptive email with a malicious link or attachment. In our lab, we can simulate this by sending an email with a link to a benign payload that, when 'executed', will simply create a file or beacon out to our attacker machine. This allows us to test the entire chain from email delivery to endpoint execution.</p>",
+                        "image": "https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Case Study: Emotet",
+                        "description": "Read a threat intelligence report on the Emotet trojan. Document the primary initial access vector it uses and the type of lure documents it employs to trick users."
+                    },
+                    {
+                        "title": "Simulate a Benign Phishing Email",
+                        "description": "Using a framework like Gophish (or by manually crafting an email in the lab), send an email to a test account on your Windows VM. The email should contain a link to a benign executable hosted on your Linux attacker machine. On the Windows VM, click the link, download, and run the file. Then, check your SIEM to see the log trail (email logs, browser logs, process creation logs)."
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 80,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "Using Google to find information about a company is an example of what?",
+                        "options": ["Active Reconnaissance", "Passive Reconnaissance", "Lateral Movement", "Impact"],
+                        "correct": 1,
+                        "explanation": "Passive reconnaissance uses publicly available information and does not involve direct interaction with the target's systems."
+                    },
+                    {
+                        "id": 2,
+                        "question": "According to threat intelligence, what is the most common initial access vector for malware and ransomware?",
+                        "options": ["Exploiting unpatched servers", "Stolen remote access credentials", "Phishing emails", "Insider threats"],
+                        "correct": 2,
+                        "explanation": "Phishing remains the dominant method for initial access because it exploits the human element, which is often the weakest link in the security chain."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-4",
+            "title": "Module 2: Execution & Persistence - Execution Simulation",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the Execution tactic in MITRE ATT&CK.",
+                "Simulate command and scripting interpreter execution (PowerShell, CMD).",
+                "Emulate user execution via malicious attachments.",
+                "Use Atomic Red Team to execute benign tests and analyze the resulting Sysmon logs."
+            ],
+            "content": {
+                "overview": "Once an attacker has initial access, they need to execute their code. The Execution tactic covers the techniques adversaries use to run malicious code on a local or remote system. This lesson focuses on the most common execution method in Windows environments: abusing built-in scripting interpreters.",
+                "sections": [
+                    {
+                        "title": "Command and Scripting Interpreters (T1059)",
+                        "content": "<p>Attackers love to use what's already on the system, a technique known as 'Living off the Land'. Instead of dropping a custom binary, they will often use built-in Windows tools to execute their commands. <strong>PowerShell (T1059.001)</strong> and the <strong>Command Shell (T1059.003)</strong> are the two most frequently abused interpreters. An attacker can use them to download further payloads, modify the system, or run reconnaissance commands.</p>",
+                        "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples": [
+                {
+                    "title": "Invoke an Atomic Red Team Test (PowerShell)",
+                    "language": "powershell",
+                    "code": "# A defender uses Atomic Red Team's PowerShell module to execute a benign test.\n# This command invokes the test for ATT&CK Technique T1059.001 (PowerShell).\n# It will run a simple, non-malicious PowerShell command that is designed to be detected.\nImport-Module \"/path/to/AtomicRedTeam/invoke-atomicredteam.psd1\"\nInvoke-AtomicTest T1059.001"
+                },
+                {
+                    "title": "Benign PowerShell Download Cradle",
+                    "language": "powershell",
+                    "code": "# This is a safe, benign version of a common malware download cradle.\n# A defender would execute this in the lab to test their detections for this specific TTP.\n# It downloads a benign text file and prints it to the console.\n$webClient = New-Object System.Net.WebClient\n$payload = $webClient.DownloadString(\"http://<attacker-ip>/benign.txt\")\nWrite-Host $payload"
+                },
+                {
+                    "title": "Splunk Query to Detect PowerShell Downloads",
+                    "language": "spl",
+                    "code": "(* This Splunk query is a high-fidelity hunt for PowerShell execution.\n   A defender looks for the process creation event for powershell.exe where the command line\n   contains keywords that indicate downloading content from the internet. *)\n\nindex=sysmon EventCode=1 Image=\"*\\\\powershell.exe\" (CommandLine=\"*DownloadString*\" OR CommandLine=\"*Invoke-WebRequest*\")\n| table _time, User, ParentImage, CommandLine"
+                },
+                {
+                    "title": "KQL Query to Detect Encoded PowerShell Commands",
+                    "language": "kql",
+                    "code": "// Attackers often base64-encode their PowerShell commands to hide them.\n// This KQL query for Microsoft Sentinel hunts for the use of the '-e' or '-enc' flags,\n// which are used to execute encoded commands. This is highly suspicious.\nDeviceProcessEvents\n| where FileName =~ \"powershell.exe\"\n| where ProcessCommandLine has \"-e\" or ProcessCommandLine has \"-enc\""
+                }
+              ],
+                "activities": [
+                    {
+                        "title": "Case Study: TrickBot",
+                        "description": "Read a public report on the TrickBot banking trojan. Document how it uses PowerShell as part of its initial execution and persistence stages."
+                    },
+                    {
+                        "title": "Execute a Benign PowerShell Atomic Test",
+                        "description": "In your lab, use the `Invoke-AtomicTest` command to execute the test for T1059.001. After running the test, go to your SIEM and find the corresponding Sysmon Event ID 1. Analyze the command line, parent process, and user associated with the emulated attack. This validates your entire logging pipeline."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is meant by 'Living off the Land'?",
+                  "options": ["An attacker who works from a remote location.", "An attacker using pre-existing, legitimate tools (like PowerShell, WMI, etc.) on the victim system to perform their actions.", "An attacker who only steals agricultural data.", "An attacker who uses no tools at all."],
+                  "correct": 1,
+                  "explanation": "This technique helps attackers blend in with normal administrative activity, making them much harder to detect than if they used custom malware."
+                },
+                {
+                  "id": 2,
+                  "question": "A defender sees a process creation event for `powershell.exe -enc aA...==` (a long base64 string), what is this a strong indicator of?",
+                  "options": ["A normal system script.", "A user checking their PowerShell version.", "An attacker attempting to execute an obfuscated PowerShell command.", "A software installation."],
+                  "correct": 2,
+                  "explanation": "The `-enc` or `-e` flags are specifically for running encoded commands. While some legitimate scripts use this, it is overwhelmingly used by adversaries for defense evasion."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-5",
+            "title": "Module 2: Execution & Persistence - Persistence Simulation",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the Persistence tactic in MITRE ATT&CK.",
+                "Simulate persistence via Registry Run Keys.",
+                "Emulate persistence via the Startup Folder.",
+                "Execute benign tests for Scheduled Tasks and Service Creation."
+            ],
+            "content": {
+                "overview": "Once an attacker has executed code, they want to ensure they maintain their access even if the machine is rebooted. The Persistence tactic covers the many ways adversaries achieve this. This lesson focuses on safely simulating the most common Windows persistence techniques and detecting them in the logs.",
+                "sections": [
+                    {
+                        "title": "Common Persistence Techniques",
+                        "content": "<ul><li><strong>Registry Run Keys (T1547.001):</strong> This is the most classic Windows persistence method. An attacker adds a value to a `Run` key in the registry that points to their malware, causing it to execute at startup.</li><li><strong>Startup Folder (T1547.001):</strong> An attacker can place a malicious executable or LNK file in the user's Startup folder, which will cause it to be run upon logon.</li><li><strong>Scheduled Tasks (T1053.005):</strong> Attackers can create a new scheduled task that runs their malware on a schedule or on a specific trigger (like a user logon).</li><li><strong>Service Creation (T1543.003):</strong> For higher privileges, an attacker can create a new Windows service that is configured to launch their malware automatically on system boot.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1510511233900-1982d92bd835?w=800&h=400&fit=crop"
+                    }
+                ],
+                "codeExamples":[
+                {
+                    "title": "Atomic Test for Scheduled Task",
+                    "language": "powershell",
+                    "code": "# A defender runs this benign test to validate their detections for T1053.005.\n# This command uses the built-in `schtasks.exe` utility to create a harmless task\n# that launches the calculator. The real value is in capturing the logs this action generates.\nInvoke-AtomicTest T1053.005 -TestNumbers 1"
+                },
+                {
+                    "title": "Simulate Registry Run Key Persistence (Benign)",
+                    "language": "powershell",
+                    "code": "# A defender uses this script to simulate the creation of a registry run key.\n# This will generate a Sysmon Event ID 13 (RegistryValue Set) which the SIEM should alert on.\n$runKey = \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\"\n$appName = \"BenignStartupApp\"\n$appPath = \"C:\\Windows\\System32\\notepad.exe\"\n\nSet-ItemProperty -Path $runKey -Name $appName -Value $appPath"
+                },
+                {
+                    "title": "Simulate Startup Folder Persistence (Benign)",
+                    "language": "powershell",
+                    "code": "# This script demonstrates the startup folder persistence technique.\n# A defender would expect to see a Sysmon Event ID 11 (FileCreate) for this event.\n$startupPath = [Environment]::GetFolderPath('Startup')\n$filePath = Join-Path $startupPath \"benign.bat\"\n\nSet-Content -Path $filePath -Value \"echo Harmless startup script\""
+                },
+                {
+                    "title": "KQL Query for New Service Creation",
+                    "language": "kql",
+                    "code": "// A defender uses this KQL query to hunt for new services being created.\n// A key indicator is the service being created by a non-standard tool or a process running from\n// an unusual location.\nSecurityEvent \n| where EventID == 4697 // A new service was installed\n| parse EventData with * '<Data Name=\"ServiceName\">' ServiceName '</Data>' * '<Data Name=\"ServiceFileName\">' ServiceFileName '</Data>' *\n| project TimeGenerated, ServiceName, ServiceFileName, Account"
+                }
+              ],
+                "activities": [
+                    {
+                        "title": "Case Study: FIN7",
+                        "description": "Read a public threat intelligence report about the FIN7 cybercrime group. Document the specific persistence techniques that they are known to use to maintain access to victim networks."
+                    },
+                    {
+                        "title": "Create and Remove a Benign Scheduled Task",
+                        "description": "In your lab's Windows VM, use the `schtasks.exe` command to create a new task that runs `notepad.exe` every day at a specific time. Go to your SIEM and find the process creation event for `schtasks.exe` and the Windows Event Log entry for the task creation. Afterwards, use `schtasks.exe /delete` to clean up the task."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "If an attacker places an LNK file in the folder at `C:\\Users\\<user>\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup`, what are they trying to achieve?",
+                  "options": ["Persistence", "Lateral Movement", "Defense Evasion", "Exfiltration"],
+                  "correct": 0,
+                  "explanation": "This is the user's Startup folder. Any program or shortcut placed here will be automatically executed every time that user logs into the machine (ATT&CK T1547.001)."
+                },
+                {
+                  "id": 2,
+                  "question": "A defender is writing a detection rule for a new service being created. What would be the most suspicious characteristic of that service?",
+                  "options": ["The service executable points to a file in `C:\\Windows\\System32`.", "The service is signed by Microsoft.", "The service executable points to a file in `C:\\Users\\Public\\`.", "The service is set to start manually."],
+                  "correct": 2,
+                  "explanation": "Legitimate Windows services almost always live in protected system directories like System32. A service pointing to an executable in a user-writable directory like `C:\\Users\\Public` is a massive red flag."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-6",
+            "title": "Module 3: In-Depth Attack Tactics - Privilege Escalation & Defense Evasion",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the Privilege Escalation tactic in MITRE ATT&CK.",
+                "Simulate a simple UAC bypass using a known technique.",
+                "Understand the Defense Evasion tactic.",
+                "Simulate log deletion and basic script obfuscation."
+            ],
+            "content": {
+                "overview": "Once on a system, attackers often have low privileges. Their next goal is to escalate to a higher privilege level (like SYSTEM) to gain full control. At the same time, they must evade defenses by disabling security tools or hiding their actions. This lesson covers these two critical, often intertwined, tactics.",
+                "sections": [
+                    {
+                        "title": "Privilege Escalation",
+                        "content": "<p>This tactic involves exploiting a vulnerability or misconfiguration to gain higher permissions. Common techniques include:</p><ul><li><strong>UAC Bypass (T1548.002):</strong> User Account Control (UAC) is the Windows feature that prompts for permission when a program tries to perform an administrative action. Attackers have found numerous ways to trigger elevated actions from a lower-privileged context without causing a UAC prompt to appear.</li><li><strong>Token Manipulation (T1134):</strong> Abusing access tokens to impersonate other users or escalate to higher privileges.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1542778433-229273c4b691?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Defense Evasion",
+                        "content": "<p>This is a broad tactic covering all the ways an attacker avoids being caught.</p><ul><li><strong>Obfuscation (T1027):</strong> Hiding files or information, for example by Base64-encoding PowerShell scripts.</li><li><strong>Disabling Security Tools (T1562.001):</strong> Using commands to disable antivirus or logging services.</li><li><strong>Indicator Removal on Host (T1070):</strong> Deleting log files or using tools to modify file timestamps ('timestomping').</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1593642702821-c8da6758f0c6?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Case Study: Ryuk Ransomware",
+                        "description": "Read a public report on the Ryuk ransomware. Document the specific techniques it uses to escalate privileges and to disable security tools before it begins encrypting files."
+                    },
+                    {
+                        "title": "Simulate Defense Evasion with CALDERA",
+                        "description": "Use the CALDERA adversary emulation platform to run a pre-built plan that includes several defense evasion techniques. For example, run the 'Log Deletion' ability and then check the Windows Event Log on the victim VM to see that the logs have been cleared. Review the logs on your SIEM to see if the log-clearing event itself was detected."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is the goal of a UAC Bypass technique?",
+                  "options": ["To get a user's password.", "To gain elevated (administrator) privileges from a medium-integrity process without triggering a UAC prompt.", "To disable the firewall.", "To move to another machine."],
+                  "correct": 1,
+                  "explanation": "UAC is a barrier between standard user privileges and administrator privileges. A bypass allows an attacker to cross that barrier silently."
+                },
+                {
+                  "id": 2,
+                  "question": "A defender sees a Sysmon event for a process running `wevtutil.exe cl Security`. What is this a sign of?",
+                  "options": ["The user is checking the time.", "A normal system update.", "A defense evasion technique to clear the Windows Security Event Log.", "The system is shutting down."],
+                  "correct": 2,
+                  "explanation": "This is the standard command-line method for clearing an event log, a common technique (T1070.001) used by attackers to cover their tracks."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-7",
+            "title": "Module 3: In-Depth Attack Tactics - Credential Access & Discovery",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the Credential Access tactic in MITRE ATT&CK.",
+                "Safely simulate the behavior of a credential dumping tool like Mimikatz.",
+                "Understand the Discovery tactic.",
+                "Simulate system and network reconnaissance using benign 'Living off the Land' commands."
+            ],
+            "content": {
+                "overview": "After gaining a foothold and escalating privileges, attackers need two things: credentials to access more systems, and knowledge of the environment they are in. This lesson covers the Credential Access and Discovery tactics, showing how attackers steal passwords and perform internal reconnaissance.",
+                "sections": [
+                    {
+                        "title": "Credential Access",
+                        "content": "<p>This tactic involves stealing account names and passwords. The most famous technique is <strong>OS Credential Dumping: LSASS Memory (T1003.001)</strong>. The LSASS (Local Security Authority Subsystem Service) process in Windows stores user credentials in memory. A tool like <strong>Mimikatz</strong> can dump the memory of this process and extract plaintext passwords and hashes for all logged-on users. This is why gaining administrator privileges is so critical for an attacker.</p>",
+                        "image": "https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Discovery",
+                        "content": "<p>Once an attacker has credentials, they perform discovery to learn about the network and decide where to move next. They use built-in Windows commands ('Living off the Land') to do this:</p><ul><li><strong>`net user`</strong> and <strong>`net group`</strong> to find other users and groups.</li><li><strong>`ipconfig /all`</strong> to get network information.</li><li><strong>`arp -a`</strong> to find other hosts on the same local network.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Case Study: Mimikatz",
+                        "description": "Read a report about how threat actors use the Mimikatz tool in post-exploitation. Explain why gaining administrative privileges is a prerequisite for running it successfully and what kind of credentials it can dump from memory."
+                    },
+                    {
+                        "title": "CALDERA Mimikatz Simulation",
+                        "description": "Use the CALDERA platform to run its built-in LSASS credential dumping ability. **Note:** This is a safe simulation. CALDERA does not run the real Mimikatz but emulates its behavior by creating a process that requests access to LSASS with the specific access rights that the real tool would use. Go to your SIEM or EDR and find the Sysmon Event ID 10 (ProcessAccess) event where a process opened a handle to `lsass.exe`. This is the primary detection for this technique."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "A tool like Mimikatz is primarily used to:",
+                  "options": ["Encrypt files.", "Dump credentials like plaintext passwords and hashes from memory, particularly the LSASS process.", "Spread across the network.", "Create persistence."],
+                  "correct": 1,
+                  "explanation": "Mimikatz is the gold standard for credential dumping on Windows and is one of the most popular post-exploitation tools for attackers."
+                },
+                {
+                  "id": 2,
+                  "question": "A defender sees a process creation event for `powershell.exe -c \"arp -a\"`. This is a strong indicator of which ATT&CK tactic?",
+                  "options": ["Credential Access", "Discovery", "Exfiltration", "Initial Access"],
+                  "correct": 1,
+                  "explanation": "`arp -a` is a built-in command to view the local network's ARP cache, which shows the IP and MAC addresses of other hosts on the same subnet. This is a classic Discovery technique (T1018)."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-8",
+            "title": "Module 4: The Kill Chain Finale - Lateral Movement & Collection",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the Lateral Movement tactic in MITRE ATT&CK.",
+                "Simulate lateral movement using benign remote service execution.",
+                "Understand the Collection tactic.",
+                "Simulate data staging by archiving benign files."
+            ],
+            "content": {
+                "overview": "Armed with credentials and knowledge of the network, the attacker moves to other systems (Lateral Movement) and begins gathering sensitive data (Collection). This lesson simulates these crucial middle phases of an intrusion.",
+                "sections": [
+                    {
+                        "title": "Lateral Movement",
+                        "content": "<p>This tactic involves moving from one computer to another within the network. After dumping credentials on the first machine, an attacker will use those credentials to access another, more valuable machine, like a file server or domain controller. Common techniques include:</p><ul><li><strong>Remote Services (T1021):</strong> Using legitimate tools like PsExec or WMI to execute commands on a remote machine.</li><li><strong>Pass-the-Hash (T1550.002):</strong> An attacker uses a user's NTLM hash (dumped from LSASS) to authenticate to a remote service *without* needing the plaintext password.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Collection",
+                        "content": "<p>Once on a system with valuable data, the attacker needs to collect it. This often involves:</p><ul><li><strong>Data Staging (T1074):</strong> Copying data from multiple locations into a single folder.</li><li><strong>Archive Collected Data (T1560):</strong> Compressing the staged data (e.g., into a password-protected ZIP file) to make it smaller and easier to exfiltrate.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1504639725590-77a8b6f3b79f?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Case Study: WannaCry",
+                        "description": "Read a technical analysis of the WannaCry worm. Explain how it used the EternalBlue exploit to achieve lateral movement and spread so rapidly across networks."
+                    },
+                    {
+                        "title": "Atomic Test of Lateral Movement",
+                        "description": "In your lab environment (with a workstation and a domain controller), use the Atomic Red Team framework to execute a benign test for lateral movement via Scheduled Task (T1053.005). From the workstation, this test will use `schtasks.exe` to create a harmless task on the remote domain controller. In your SIEM, find the network authentication event (Logon Type 3) on the DC and the corresponding process creation events."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is 'Pass-the-Hash'?",
+                  "options": ["A way to crack a password.", "A lateral movement technique where an attacker uses a stolen NTLM hash to authenticate to a remote system without knowing the corresponding plaintext password.", "A method of encrypting data.", "A type of firewall."],
+                  "correct": 1,
+                  "explanation": "This is a classic Windows attack that bypasses the need for password cracking by abusing the way the NTLM authentication protocol works."
+                },
+                {
+                  "id": 2,
+                  "question": "A defender observes a process creation event for `7z.exe` on a sensitive file server that is creating a large, password-protected archive in the `C:\\Windows\\Temp\\` directory. This is a strong indicator of which ATT&CK tactic?",
+                  "options": ["Initial Access", "Persistence", "Collection", "Privilege Escalation"],
+                  "correct": 2,
+                  "explanation": "This is a classic sign of Data Staging (T1074) and Archiving (T1560), where an attacker is packaging up stolen data before exfiltrating it."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-9",
+            "title": "Module 4: The Kill Chain Finale - Command & Control & Exfiltration",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the Command & Control (C2) tactic in MITRE ATT&CK.",
+                "Simulate a benign C2 beacon over HTTP/S.",
+                "Understand the Exfiltration tactic.",
+                "Simulate a benign data exfiltration over a common protocol."
+            ],
+            "content": {
+                "overview": "The final stages of an attack involve the malware communicating with its operator for instructions (Command & Control) and sending the stolen data out of the network (Exfiltration). This lesson covers the TTPs for these final phases and how to simulate their network signatures.",
+                "sections": [
+                    {
+                        "title": "Command & Control (C2)",
+                        "content": "<p>C2 is the communication channel between the malware and the attacker. Attackers often use common protocols to blend in:</p><ul><li><strong>HTTP/HTTPS (T1071.001):</strong> The most common C2 protocol. Malware will send periodic 'beacons' (GET requests) and receive tasks in the response, or exfiltrate data via POST requests.</li><li><strong>DNS Tunneling (T1071.004):</strong> As discussed previously, attackers can hide C2 communication in DNS queries.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Exfiltration",
+                        "content": "<p>This is the act of getting the stolen data out. Common methods include:</p><ul><li><strong>Exfiltration Over C2 Channel (T1041):</strong> The stolen data is simply sent out over the existing HTTP or DNS C2 channel.</li><li><strong>Transfer to Cloud Storage (T1567):</strong> The attacker uses stolen credentials to upload the data to a public cloud storage service like Dropbox or MEGA, which might be allowed by the firewall.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1510511233900-1982d92bd835?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Case Study: Cobalt Strike",
+                        "description": "Read a report on the use of the Cobalt Strike framework by ransomware groups. Document how its 'Beacon' component communicates over HTTP/S and DNS to evade detection."
+                    },
+                    {
+                        "title": "Simulate C2 with a Benign Beacon",
+                        "description": "On your Linux attacker VM, run a simple Python web server. On your Windows victim VM, run a provided PowerShell or Python script that makes a web request to the attacker VM every 10 seconds (a beacon). On the Linux machine, observe the incoming requests in the web server's log. In your SIEM, observe the Sysmon network connection events and Zeek http.log events. This entire benign workflow perfectly simulates the network signature of an HTTP C2 beacon."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "The term 'beaconing' in the context of C2 refers to:",
+                  "options": ["A file being encrypted.", "A periodic, heartbeat-like connection from malware to its C2 server to check for new commands.", "A user logging on.", "A password being stolen."],
+                  "correct": 1,
+                  "explanation": "Beaconing is the fundamental mechanism that allows an attacker to maintain remote control over a compromised host."
+                },
+                {
+                  "id": 2,
+                  "question": "Why do attackers often use common protocols like HTTPS or DNS for their C2 communication?",
+                  "options": ["They are faster.", "They are the only protocols that work.", "To blend in with normal network traffic and bypass firewalls that are configured to allow standard web and DNS traffic.", "They are easier to program."],
+                  "correct": 2,
+                  "explanation": "This is a defense evasion technique. By wrapping their C2 traffic in a protocol that is ubiquitous in any corporate network, they make it much harder for defenders to spot."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-10",
+            "title": "Module 4: The Kill Chain Finale - Impact Simulation & Red Team Tooling",
+            "duration": "90 min",
+            "objectives": [
+                "Understand the Impact tactic in MITRE ATT&CK.",
+                "Safely simulate the behavior of ransomware by encrypting benign files.",
+                "Discuss the conceptual workings of common Red Team C2 frameworks (Cobalt Strike, Sliver).",
+                "Differentiate between a simple script and a full C2 framework."
+            ],
+            "content": {
+                "overview": "The final stage of many attacks is Impact—the adversary's ultimate goal. This could be data destruction, service disruption, or financial extortion via ransomware. This lesson covers how to safely simulate the impact phase and provides a conceptual overview of the advanced tooling that real-world attackers use.",
+                "sections": [
+                    {
+                        "title": "Impact",
+                        "content": "<p>The Impact tactic covers techniques that disrupt the availability or integrity of systems. The most prominent example is <strong>Data Encrypted for Impact (T1486)</strong>, also known as ransomware. In our lab, we can safely simulate this by writing a benign script that encrypts a folder of dummy text files using a known good encryption library, and then writes a 'ransom note' to the desktop. This allows us to test our detections for this high-impact behavior without using real malware.</p>",
+                        "image": "https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Red Team Tooling (Conceptual)",
+                        "content": "<p>While our simulations have used simple, single-purpose scripts, real attackers and professional red teams use sophisticated Command and Control (C2) frameworks. Tools like <strong>Cobalt Strike</strong> (commercial) or <strong>Sliver</strong> (open-source) bundle all of the ATT&CK tactics into a single, integrated platform. They provide a 'Beacon' or 'Implant' that is deployed on the victim, and an attacker console that allows the operator to easily execute tasks for reconnaissance, lateral movement, and exfiltration. Understanding the capabilities of these tools is crucial for defenders.",
+                        "image": "https://images.unsplash.com/photo-1504639725590-77a8b6f3b79f?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Case Study: The SolarWinds Attack",
+                        "description": "Read a public report on the SolarWinds supply chain attack. Document how the attackers used a customized version of the Cobalt Strike C2 framework in their post-exploitation activities."
+                    },
+                    {
+                        "title": "Simulated Ransomware with Benign Files",
+                        "description": "On your Windows VM, create a folder with several benign text files. Run a provided benign Python script that uses the Fernet cryptography library to encrypt each of these text files (changing their extension to `.locked`) and then creates a `RANSOM_NOTE.txt` file on the desktop. In your SIEM, analyze the logs to see if you can build a detection for this chain of events (high volume of file read/write/delete/rename operations)."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "Data Encrypted for Impact (T1486) is the ATT&CK technique that describes what type of activity?",
+                  "options": ["Credential Dumping", "Ransomware", "Persistence", "Lateral Movement"],
+                  "correct": 1,
+                  "explanation": "This is the official MITRE ATT&CK mapping for ransomware behavior, where the adversary encrypts data to disrupt the victim's operations and/or extort them for payment."
+                },
+                {
+                  "id": 2,
+                  "question": "What is the primary function of a C2 framework like Cobalt Strike or Sliver?",
+                  "options": ["To scan for vulnerabilities.", "To provide an integrated platform for post-exploitation, allowing an operator to manage implants, move laterally, and exfiltrate data from compromised hosts.", "To write phishing emails.", "To defend a network."],
+                  "correct": 1,
+                  "explanation": "C2 frameworks are the attacker's 'operating system' for managing and conducting an intrusion after they have gained initial access."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-11",
+            "title": "Module 5: The Purple Team Cycle - Building Adversary Emulation Plans",
+            "duration": "90 min",
+            "objectives": [
+                "Understand the concept of an adversary emulation plan.",
+                "Learn how to translate CTI reports into a step-by-step emulation plan.",
+                "Use the ATT&CK Navigator to visualize and plan campaigns.",
+                "Create a custom emulation plan based on a real-world threat actor."
+            ],
+            "content": {
+                "overview": "A mature security organization doesn't just run random tests; they emulate the specific TTPs of the adversaries most likely to target them. This lesson covers how to take raw threat intelligence and structure it into a formal adversary emulation plan, which serves as the playbook for a Red or Purple Team exercise.",
+                "sections": [
+                    {
+                        "title": "From CTI to Playbook",
+                        "content": "<p>The process starts with Cyber Threat Intelligence (CTI). A CTI analyst will research a specific threat group (e.g., FIN7) and produce a report on their known TTPs. The emulation engineer takes this report and translates it into a concrete, step-by-step plan. Each step in the plan maps to a specific ATT&CK technique and includes the specific commands or tools that will be used to simulate it.</p>",
+                        "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "ATT&CK Navigator",
+                        "content": "<p>The ATT&CK Navigator is a free web tool from MITRE that allows you to visualize the ATT&CK matrices. An emulation engineer uses it to select and color-code all the techniques used by a specific threat actor. This provides a high-level visual 'heatmap' of the actor's playbook and is an excellent tool for planning and briefing on an emulation exercise.</p>",
+                        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Case Study: MITRE ATT&CK APT Playbooks",
+                        "description": "Explore the official MITRE adversary emulation plan library. Choose a well-documented group like APT29. Review the step-by-step emulation plan and see how the high-level TTPs are translated into specific, executable commands."
+                    },
+                    {
+                        "title": "Create a Custom Emulation Plan for Emotet",
+                        "description": "Based on a public threat intelligence report on Emotet, create a simple, step-by-step emulation plan in a markdown document. The plan should have at least four steps, covering Initial Access, Execution, and Persistence. For each step, include the relevant ATT&CK Technique ID and a one-line pseudo-code description of the action to be simulated (e.g., 'Step 1: T1566.001 - Spearphishing Attachment - User opens a Word document with a malicious macro.')."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is the primary input for creating an adversary emulation plan?",
+                  "options": ["The Red Team's imagination.", "A list of all available tools.", "Cyber Threat Intelligence (CTI) reports describing the TTPs of a specific threat actor.", "The organization's security budget."],
+                  "correct": 2,
+                  "explanation": "Emulation is intelligence-driven. The goal is to mimic real-world threats, and CTI provides the necessary data on what those threats look like."
+                },
+                {
+                  "id": 2,
+                  "question": "The MITRE ATT&CK Navigator is primarily used to:",
+                  "options": ["Launch attacks.", "Visually map and compare the TTPs of different threat actors on the ATT&CK matrix.", "Analyze logs.", "Write reports."],
+                  "correct": 1,
+                  "explanation": "It is a visualization and planning tool that helps defenders and emulation engineers understand the scope of an adversary's known capabilities."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-12",
+            "title": "Module 5: The Purple Team Cycle - Purple Teaming",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the purple team methodology and its benefits.",
+                "Learn how to conduct a collaborative test of a single ATT&CK technique.",
+                "Practice the 'Red Team execute, Blue Team analyze' workflow.",
+                "Document the results of a purple team test, including detection gaps and recommendations."
+            ],
+            "content": {
+                "overview": "Purple Teaming is a collaborative approach that breaks down the silos between offense and defense to achieve rapid security improvement. This lesson covers the methodology of a purple team exercise, where the focus is on a transparent, iterative process of testing and improving specific security controls.",
+                "sections": [
+                    {
+                        "title": "The Purple Team Workflow",
+                        "content": "<p>A typical purple team exercise focuses on one ATT&CK technique at a time and follows an iterative loop:</p><ol><li><strong>Plan:</strong> The Red and Blue teams agree on the technique to test and the specific command that will be used (e.g., `schtasks.exe /create...`).</li><li><strong>Execute:</strong> The Red Team executes the agreed-upon test in the lab environment.</li><li><strong>Analyze:</strong> The Blue Team immediately checks their SIEM and EDR tools. Did an alert fire? Are there visible logs of the activity?</li><li><strong>Improve:</strong> If there was no detection, the teams work together *right then* to write and tune a new detection rule.</li><li><strong>Repeat:</strong> The Red Team executes the test again, and the teams verify that the new rule now works as expected.</li></ol><p>This tight feedback loop is what makes purple teaming so effective for improving detection coverage.</p>",
+                        "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Case Study: Purple Teaming in the Financial Sector",
+                        "description": "Read a blog post or whitepaper from a financial services company about their experience implementing a purple team program. Document the key benefits they identified and the challenges they faced."
+                    },
+                    {
+                        "title": "Run a Red/Blue Simulation",
+                        "description": "In your lab, perform a simple purple team exercise. The 'Red Team' action will be to execute the benign Atomic Red Team test for creating a scheduled task (T1053.005). The 'Blue Team' action will be to watch the SIEM in real-time. Document if you saw the event. If so, copy the raw log. If not, brainstorm why not (e.g., logging misconfiguration). This simulates a single iteration of the purple team cycle."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is the primary benefit of the purple teaming methodology?",
+                  "options": ["It is more secretive than a red team engagement.", "It creates a tight, collaborative feedback loop between the offensive (Red) and defensive (Blue) teams to rapidly test and improve security controls.", "It focuses only on attacking.", "It is only for the Blue Team."],
+                  "correct": 1,
+                  "explanation": "The core of purple teaming is collaboration. It's about working together to achieve a common goal: better security."
+                },
+                {
+                  "id": 2,
+                  "question": "In a purple team exercise, after the Red Team executes a technique and the Blue Team finds no existing detection, what is the immediate next step?",
+                  "options": ["The exercise ends.", "The Red Team tries a different technique.", "The teams work together to create and validate a new detection rule for that specific technique.", "A report is sent to management."],
+                  "correct": 2,
+                  "explanation": "The immediate feedback and improvement cycle is what makes purple teaming so powerful. The goal is to fix the detection gap on the spot."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-13",
+            "title": "Module 6: Operations & Reporting - Reporting and Documentation",
+            "duration": "90 min",
+            "objectives": [
+                "Understand the key components of an effective attack simulation report.",
+                "Practice mapping findings to the ATT&CK framework for context.",
+                "Learn to write clear, actionable recommendations for the Blue Team.",
+                "Review public threat intelligence reports as examples of high-quality documentation."
+            ],
+            "content": {
+                "overview": "The final deliverable of any professional security test is the report. The report is what communicates the findings to the defensive team and management, providing a clear roadmap for remediation. This lesson covers the art of writing a high-quality, actionable report based on the results of an attack simulation.",
+                "sections": [
+                    {
+                        "title": "The Simulation Report Structure",
+                        "content": "<p>A good report should include:</p><ul><li><strong>Executive Summary:</strong> A high-level overview of the exercise's goals, scope, and key findings for a management audience.</li><li><strong>Methodology:</strong> A description of the adversary that was emulated and the ATT&CK techniques that were tested.</li><li><strong>Findings:</strong> A detailed breakdown of each technique that was tested. For each one, the report should state whether it was blocked, detected, or missed entirely by the defenses.</li><li><strong>Evidence:</strong> Screenshots, log excerpts, and timestamps to support each finding.</li><li><strong>Actionable Recommendations:</strong> For each missed detection, the report should provide a concrete, actionable recommendation for the Blue Team (e.g., 'Create a new SIEM rule to detect the execution of `schtasks.exe /create`').</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop"
+                    }
+                ],
+                "activities": [
+                    {
+                        "title": "Review Public APT Reports",
+                        "description": "Read a public threat actor profile report from a major threat intelligence vendor like Mandiant or CrowdStrike. Analyze how the report is structured. Pay attention to how they use the ATT&CK framework to describe adversary TTPs and how they present their findings."
+                    },
+                    {
+                        "title": "Document Lab Simulation Findings",
+                        "description": "Based on a previous Atomic Red Team lab (e.g., the Scheduled Task test), write a mini-report. The report should have three sections: the Technique Tested (with the ATT&CK ID), the Outcome (Detected/Missed), and the Evidence (a copy of the relevant log entry from your SIEM)."
+                    }
+                ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "In an attack simulation report, what is the most important part of a 'finding'?",
+                  "options": ["The name of the Red Teamer who executed the test.", "The exact time the test was run.", "A clear, actionable recommendation for the Blue Team on how to improve their defenses.", "A guess at who the real-world attacker might be."],
+                  "correct": 2,
+                  "explanation": "The report's primary purpose is to drive improvement. Actionable recommendations are what turn the findings into concrete security enhancements."
+                },
+                {
+                  "id": 2,
+                  "question": "Mapping a finding to a MITRE ATT&CK technique in a report is useful because:",
+                  "options": ["It makes the report look more professional.", "It provides a standardized, industry-wide context for the behavior, allowing the Blue Team to understand the TTP and research other ways to detect it.", "It is required by MITRE.", "It hides the technical details."],
+                  "correct": 1,
+                  "explanation": "Using ATT&CK as a common language bridges the gap between the test results and the broader landscape of threat intelligence, making the findings more valuable."
+                }
+              ]
+            }
+        },
+        {
+            "id": "lesson-14",
+            "title": "Module 6: Capstone Project",
+            "duration": "180 min",
+            "objectives": [
+              "Apply the full adversary emulation lifecycle to a complex scenario.",
+              "Create and execute a multi-stage emulation plan based on CTI.",
+              "Act as both the Red Team (executing the plan) and the Blue Team (analyzing the logs).",
+              "Produce a comprehensive final report detailing the attack path and the detection opportunities at each stage."
+            ],
+            "content": {
+              "overview": "This final capstone project integrates all the skills from the course. You will be tasked with emulating a simplified version of a real-world intrusion kill chain. You will execute the techniques, analyze the logs, and produce a final report that documents the entire simulated attack from a Purple Team perspective.",
+              "sections": [
+                {
+                  "title": "The Scenario: Emotet → TrickBot → Ryuk Kill Chain (Simulated)",
+                  "content": "<p>This is a classic cybercrime kill chain. Your mission is to simulate it using benign tools:</p><ol><li><strong>Initial Access (Emotet):</strong> You will craft a benign macro-enabled document that, when opened, runs a PowerShell script.</li><li><strong>Execution & Persistence (TrickBot):</strong> The PowerShell script will download a second benign script and set up a scheduled task to 'persist' it.</li><li><strong>Credential Access & Impact (Ryuk):</strong> The second script will simulate LSASS access (generating a Sysmon Event ID 10) and then encrypt a folder of harmless text files.</li></ol>",
+                  "image": "https://images.unsplash.com/photo-1542649761-0bdd3753c5a7?w=800&h=400&fit=crop"
+                },
+                {
+                  "title": "The Workflow",
+                  "content": "<p>You will wear two hats. First, as the Red Teamer, you will execute each step of the plan in your lab. Second, as the Blue Teamer, you will go into your SIEM after each step and find the corresponding logs. Your final report will document the full attack path, including the specific logs that could have been used to detect the activity at each stage, and will include a new high-fidelity detection rule for the overall chain.</p>",
+                  "image": "https://images.unsplash.com/photo-1586953208-14221d5a4988?w=800&h=400&fit=crop"
+                }
+              ],
+              "activities": [
+                {
+                  "title": "Perform the Full Kill Chain Emulation",
+                  "description": "Execute the full capstone workflow. Create the benign documents and scripts, execute the multi-stage attack in your lab, and analyze the resulting logs in your SIEM. Your final deliverable is a multi-page PDF report that tells the complete story of the simulated attack from a defensive perspective."
+                }
+              ]
+            },
+            "quiz": {
+              "passingScore": 80,
+              "questions": [
+                {
+                  "id": 1,
+                  "question": "What is the primary skill being tested in this multi-stage capstone project?",
+                  "options": ["The ability to write PowerShell.", "The ability to correlate events from different stages of an attack into a single, coherent narrative.", "The ability to install a SIEM.", "The ability to write a ransom note."],
+                  "correct": 1,
+                  "explanation": "The capstone's main challenge is to move beyond single technique analysis and see the 'big picture' of an intrusion by linking disparate events together to tell the full story of the attack."
+                },
+                {
+                  "id": 2,
+                  "question": "The final report for the capstone should be written from what perspective?",
+                  "options": ["A manager who wants to know the cost.", "The attacker, explaining how they got in.", "A Purple Team, detailing the simulated TTPs, the observable evidence for each, and the recommended detection improvements.", "The end user who was phished."],
+                  "correct": 2,
+                  "explanation": "The report should embody the purple team philosophy: it should clearly and collaboratively document both the offensive actions and the defensive observations to drive improvement."
+                }
+              ]
+            }
+        }
+    ]
+}
+
+// =====================================================
+// GLOBAL VARIABLES
+// =====================================================
+let currentUser = null;
+let currentLessonIndex = 0;
+let courseProgress = {};
+let userStats = {};
+let quizState = {
+    currentQuestion: 0,
+    answers: [],
+    score: 0,
+    isComplete: false
+};
+
+// Enhanced session tracking
+let courseSession = {
+    startTime: null,
+    totalStudyTime: 0,
+    lessonsStarted: 0,
+    lessonsCompleted: 0,
+    pageLoadTime: new Date(),
+    interactionCount: 0,
+    lastActivityTime: new Date()
+};
+
+// Music Player Variables
+let audioPlayer = new Audio();
+
+// Achievement notification system
+let notificationQueue = [];
+let isShowingNotification = false;
+
+// =====================================================
+// INITIALIZATION
+// =====================================================
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        showLoadingScreen();
+        await checkAuth();
+        
+        if (currentUser) {
+            // Initialize session tracking
+            startCourseSession();
+            
+            // Load course data and progress
+            await loadCourseData();
+            await loadUserProfile();
+            await loadProgress();
+            
+            // Initialize UI
+            initializeEventListeners();
+            renderSidebar();
+            loadLesson(currentLessonIndex);
+            
+            // Initialize additional features
+            initMusicPlayer();
+            addMusicIndicator();
+            initializeActivityTracking();
+            
+            hideLoadingScreen();
+        } else {
+            openAuthModal();
+        }
+    } catch (error) {
+        console.error('Error initializing course:', error);
+        hideLoadingScreen();
+        showToast('Failed to initialize course system', 'error');
+    }
+});
+
+// =====================================================
+// AUTHENTICATION SYSTEM
+// =====================================================
+async function checkAuth() {
+    try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+            console.error('Auth error:', error);
+            currentUser = null;
+            openAuthModal();
+            return;
+        }
+
+        if (!session) {
+            currentUser = null;
+            openAuthModal();
+            return;
+        }
+
+        currentUser = session.user;
+        updateUIWithUser();
+    } catch (error) {
+        console.error('Error checking auth:', error);
+        currentUser = null;
+        openAuthModal();
+    }
+}
+
+function updateUIWithUser() {
+    if (!currentUser) return;
+    
+    const name = currentUser.user_metadata?.full_name || currentUser.email.split('@')[0];
+    const userElements = document.querySelectorAll('[data-user-name]');
+    userElements.forEach(el => el.textContent = name);
+}
+
+// =====================================================
+// USER PROFILE & STATS MANAGEMENT
+// =====================================================
+async function loadUserProfile() {
+  try {
+    // 🔍 Step 1: Try to fetch existing profile
+    const { data: profile, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', currentUser.id)
+      .single();
+
+    if (error && error.code !== 'PGRST116') {
+      throw error;
+    }
+
+    if (!profile) {
+      // 🆕 Step 2: Create new profile if missing
+      await createUserProfile();
+    } else {
+      // ✅ Step 3: Use existing profile
+      userStats = profile;
+      await updateLastActivity();
+    }
+
+  } catch (error) {
+    console.error('❌ Error loading user profile:', error);
+    showToast('Failed to load user profile', 'error');
+  }
+}
+async function createUserProfile() {
+    try {
+        const newProfile = {
+            id: currentUser.id,
+            full_name: currentUser.user_metadata?.full_name || '',
+            email: currentUser.email,
+            level: 'Script Kiddie',
+            total_points: 0,
+            completed_courses: 0,
+            current_streak: 0,
+            total_certificates: 0,
+            total_achievements: 0,
+            sections_visited: 0,
+            bonus_points: 0,
+            in_progress_courses: 0,
+            settings_changed: 0,
+            midnight_sessions: 0,
+            early_sessions: 0,
+            weekend_sessions: 0,
+            last_activity: new Date().toISOString(),
+            created_at: new Date().toISOString()
+        };
+
+        const { error } = await supabase
+            .from('profiles')
+            .insert([newProfile]);
+
+        if (!error) {
+            userStats = newProfile;
+            // Award first login achievement
+            setTimeout(() => checkAndUnlockAchievement('first_login'), 1000);
+        }
+    } catch (error) {
+        console.error('Error creating user profile:', error);
+    }
+}
+
+async function updateLastActivity() {
+    try {
+        const now = new Date();
+        
+        // Update activity tracking
+        courseSession.lastActivityTime = now;
+        
+        // Update database
+        await supabase
+            .from('profiles')
+            .update({ 
+                last_activity: now.toISOString()
+            })
+            .eq('id', currentUser.id);
+
+        // Check time-based achievements
+        await checkTimeBasedAchievements(now);
+        
+    } catch (error) {
+        console.error('Error updating last activity:', error);
+    }
+}
+
+// =====================================================
+// COURSE SESSION MANAGEMENT
+// =====================================================
+function startCourseSession() {
+    courseSession.startTime = new Date();
+    courseSession.pageLoadTime = new Date();
+    
+    logUserActivity('course_session_start', {
+        course_id: COURSE_DATA.id,
+        course_title: COURSE_DATA.title,
+        user_agent: navigator.userAgent,
+        screen_resolution: `${screen.width}x${screen.height}`
+    });
+    
+    // Check daily streak
+    checkDailyStreak();
+}
+
+function initializeActivityTracking() {
+    // Track page focus/blur for accurate study time
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Track user interactions
+    ['click', 'keydown', 'scroll', 'mousemove'].forEach(event => {
+        document.addEventListener(event, trackUserInteraction, { passive: true });
+    });
+    
+    // Periodic activity updates
+    setInterval(updateStudyTime, 60000); // Every minute
+    
+    // Save session data before page unload
+    window.addEventListener('beforeunload', saveSessionData);
+}
+
+function handleVisibilityChange() {
+    if (document.hidden) {
+        courseSession.lastActivityTime = new Date();
+    } else {
+        // Page became visible again - update activity
+        updateLastActivity();
+    }
+}
+
+function trackUserInteraction() {
+    courseSession.interactionCount++;
+    courseSession.lastActivityTime = new Date();
+    
+    // Throttle activity updates
+    if (courseSession.interactionCount % 50 === 0) {
+        updateLastActivity();
+    }
+}
+
+function updateStudyTime() {
+    if (!courseSession.startTime || document.hidden) return;
+    
+    const now = new Date();
+    const sessionDuration = now - courseSession.startTime;
+    courseSession.totalStudyTime = Math.floor(sessionDuration / 1000 / 60); // in minutes
+    
+    // Update progress with study time
+    saveProgress();
+}
+
+function saveSessionData() {
+    if (!currentUser || !courseSession.startTime) return;
+    
+    const sessionData = {
+        user_id: currentUser.id,
+        course_id: COURSE_DATA.id,
+        session_duration: courseSession.totalStudyTime,
+        lessons_viewed: courseSession.lessonsStarted,
+        lessons_completed: courseSession.lessonsCompleted,
+        interactions: courseSession.interactionCount,
+        session_date: courseSession.startTime.toISOString().split('T')[0]
+    };
+    
+    // Store in localStorage as backup
+    localStorage.setItem('course_session_backup', JSON.stringify(sessionData));
+    
+    // Try to save to database
+    logUserActivity('course_session_end', sessionData);
+}
+
+// =====================================================
+// COURSE DATA & PROGRESS MANAGEMENT
+// =====================================================
+async function loadCourseData() {
+    try {
+        // Update course info in UI
+        document.getElementById('courseTitle').textContent = COURSE_DATA.title;
+        document.getElementById('totalLessons').textContent = COURSE_DATA.lessons.length;
+        
+        // Log course access
+        logUserActivity('course_access', {
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title
+        });
+        
+    } catch (error) {
+        console.error('Error loading course data:', error);
+    }
+}
+
+async function loadProgress() {
+    try {
+        // Get existing progress from database
+        const { data, error } = await supabase
+            .from('course_progress')
+            .select('*')
+            .eq('user_id', currentUser.id)
+            .eq('course_id', COURSE_DATA.id)
+            .single();
+
+        if (error && error.code !== 'PGRST116') {
+            throw error;
+        }
+
+        if (data) {
+            courseProgress = JSON.parse(data.lesson_progress || '{}');
+            currentLessonIndex = data.current_lesson || 0;
+            
+            // Update session tracking
+            courseSession.lessonsStarted = Object.keys(courseProgress).length;
+            courseSession.lessonsCompleted = Object.values(courseProgress).filter(p => p.completed).length;
+        } else {
+            // Initialize new progress
+            courseProgress = {};
+            currentLessonIndex = 0;
+            await saveProgress();
+            
+            // Award first course start achievement
+            await checkAndUnlockAchievement('first_course_start');
+        }
+
+        updateProgressDisplay();
+        
+    } catch (error) {
+        console.error('Error loading progress:', error);
+        showToast('Failed to load progress', 'error');
+    }
+}
+
+async function saveProgress() {
+    try {
+        if (!currentUser) return;
+
+        const now = new Date();
+        const progressData = {
+            user_id: currentUser.id,
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title,
+            current_lesson: currentLessonIndex,
+            lesson_progress: JSON.stringify(courseProgress),
+            progress: calculateOverallProgress(),
+            lessons_completed: getCompletedLessonsCount(),
+            lessons_started: Object.keys(courseProgress).length,
+            study_time_minutes: courseSession.totalStudyTime,
+            last_accessed: now.toISOString(),
+            updated_at: now.toISOString()
+        };
+
+        // Upsert progress
+        const { error } = await supabase
+            .from('course_progress')
+            .upsert([progressData]);
+
+        if (error) throw error;
+
+        // Update user stats
+        await updateUserStats();
+        
+        updateProgressDisplay();
+
+    } catch (error) {
+        console.error('Error saving progress:', error);
+        showToast('Failed to save progress', 'error');
+    }
+}
+
+async function updateUserStats() {
+    try {
+        // Get all course progress for this user
+        const { data: allProgress, error } = await supabase
+            .from('course_progress')
+            .select('progress, course_id, study_time_minutes')
+            .eq('user_id', currentUser.id);
+
+        if (error) throw error;
+
+        // Calculate stats
+        const completedCourses = allProgress?.filter(p => p.progress >= 100).length || 0;
+        const inProgressCourses = allProgress?.filter(p => p.progress > 0 && p.progress < 100).length || 0;
+        const totalStudyTime = allProgress?.reduce((sum, p) => sum + (p.study_time_minutes || 0), 0) || 0;
+
+        // Calculate points (500 per completed course + achievement points)
+        const coursePoints = completedCourses * 500;
+        const bonusPoints = userStats.bonus_points || 0;
+        const totalPoints = coursePoints + bonusPoints;
+
+        // Update profile
+        const updateData = {
+            completed_courses: completedCourses,
+            in_progress_courses: inProgressCourses,
+            total_points: totalPoints,
+            total_study_time: totalStudyTime,
+            last_activity: new Date().toISOString()
+        };
+
+        const { error: updateError } = await supabase
+            .from('profiles')
+            .update(updateData)
+            .eq('id', currentUser.id);
+
+        if (updateError) throw updateError;
+
+        // Update local stats
+        Object.assign(userStats, updateData);
+
+    } catch (error) {
+        console.error('Error updating user stats:', error);
+    }
+}
+
+function calculateOverallProgress() {
+    const completedLessons = getCompletedLessonsCount();
+    return Math.round((completedLessons / COURSE_DATA.lessons.length) * 100);
+}
+
+function getCompletedLessonsCount() {
+    return Object.values(courseProgress).filter(lesson => lesson.completed).length;
+}
+
+function updateProgressDisplay() {
+    const completedCount = getCompletedLessonsCount();
+    const progressPercent = calculateOverallProgress();
+    
+    // Update UI elements
+    const elements = {
+        'completedLessons': completedCount,
+        'courseProgressPercent': `${progressPercent}%`
+    };
+    
+    Object.entries(elements).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) element.textContent = value;
+    });
+    
+    // Update progress bar
+    const progressBar = document.getElementById('courseProgressFill');
+    if (progressBar) progressBar.style.width = `${progressPercent}%`;
+}
+
+// =====================================================
+// LESSON MANAGEMENT
+// =====================================================
+function loadLesson(index) {
+    if (index < 0 || index >= COURSE_DATA.lessons.length) return;
+
+    const lesson = COURSE_DATA.lessons[index];
+    currentLessonIndex = index;
+
+    // Mark lesson as started and track activity
+    if (!courseProgress[lesson.id]) {
+        courseProgress[lesson.id] = { 
+            started: true, 
+            completed: false,
+            startedAt: new Date().toISOString(),
+            timeSpent: 0
+        };
+        
+        courseSession.lessonsStarted++;
+        saveProgress();
+        
+        // Log lesson start
+        logUserActivity('lesson_start', {
+            lesson_id: lesson.id,
+            lesson_title: lesson.title,
+            lesson_index: index
+        });
+    }
+
+    // Update lesson start time for time tracking
+    courseProgress[lesson.id].currentSessionStart = new Date();
+
+    // Update sidebar and navigation
+    renderSidebar();
+    updateNavigationButtons();
+
+    // Update header info
+    updateLessonHeader(lesson, index);
+
+    // Render lesson content
+    renderLessonContent(lesson);
+
+    // Smooth scroll and animations
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('contentBody').scrollTop = 0;
+
+    const contentBody = document.getElementById('contentBody');
+    contentBody.classList.add('fade-in');
+    setTimeout(() => contentBody.classList.remove('fade-in'), 500);
+    
+    // Check lesson-based achievements
+    checkLessonAchievements(index + 1);
+}
+
+function updateLessonHeader(lesson, index) {
+    const elements = {
+        'currentLessonNumber': index + 1,
+        'currentLessonTitle': lesson.title,
+        'navInfo': `Lesson ${index + 1} of ${COURSE_DATA.lessons.length}`
+    };
+    
+    Object.entries(elements).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) element.textContent = value;
+    });
+}
+
+function renderSidebar() {
+    const lessonNav = document.getElementById('lessonNav');
+    if (!lessonNav) return;
+    
+    lessonNav.innerHTML = '';
+
+    COURSE_DATA.lessons.forEach((lesson, index) => {
+        const lessonItem = document.createElement('div');
+        lessonItem.className = 'lesson-item';
+        
+        // Determine lesson status
+        const lessonProgress = courseProgress[lesson.id];
+        const isCompleted = lessonProgress?.completed || false;
+        const isInProgress = lessonProgress?.started || false;
+        const isLocked = !isCompleted && !canAccessLesson(index);
+        const isActive = index === currentLessonIndex;
+
+        // Apply status classes
+        if (isCompleted) lessonItem.classList.add('completed');
+        if (isLocked) lessonItem.classList.add('locked');
+        if (isActive) lessonItem.classList.add('active');
+
+        // Determine status display
+        let statusClass = 'not-started';
+        let statusIcon = index + 1;
+        
+        if (isCompleted) {
+            statusClass = 'completed';
+            statusIcon = '✓';
+        } else if (isInProgress) {
+            statusClass = 'in-progress';
+            statusIcon = '◐';
+        }
+
+        // Create lesson item HTML
+        lessonItem.innerHTML = `
+            <div class="lesson-status ${statusClass}">${statusIcon}</div>
+            <div class="lesson-info">
+                <div class="lesson-title">${lesson.title}</div>
+                <div class="lesson-meta">
+                    ${isCompleted ? 'Completed' : 
+                      isInProgress ? 'In Progress' : 
+                      isLocked ? 'Locked' : 'Not Started'}
+                </div>
+            </div>
+            <div class="lesson-duration">${lesson.duration}</div>
+        `;
+
+        // Add click handler if not locked
+        if (!isLocked) {
+            lessonItem.addEventListener('click', () => {
+                if (index !== currentLessonIndex) {
+                    // Track lesson time before switching
+                    trackLessonTime();
+                    
+                    currentLessonIndex = index;
+                    loadLesson(index);
+                    closeSidebar();
+                }
+            });
+        }
+
+        lessonNav.appendChild(lessonItem);
+    });
+}
+
+function canAccessLesson(index) {
+    if (index === 0) return true; // First lesson always accessible
+    
+    // Can access if previous lesson is completed
+    const previousLessonId = COURSE_DATA.lessons[index - 1].id;
+    return courseProgress[previousLessonId]?.completed || false;
+}
+
+function trackLessonTime() {
+    const currentLesson = COURSE_DATA.lessons[currentLessonIndex];
+    const lessonProgress = courseProgress[currentLesson.id];
+    
+    if (lessonProgress?.currentSessionStart) {
+        const sessionTime = Math.floor((new Date() - new Date(lessonProgress.currentSessionStart)) / 1000 / 60);
+        lessonProgress.timeSpent = (lessonProgress.timeSpent || 0) + sessionTime;
+        delete lessonProgress.currentSessionStart;
+    }
+}
+
+// =====================================================
+// LESSON CONTENT RENDERING
+// =====================================================
+function renderLessonContent(lesson) {
+    const contentContainer = document.getElementById('lessonContent');
+    if (!contentContainer) return;
+    
+    let contentHTML = `
+        <div class="content-section">
+            <h2>Learning Objectives</h2>
+            <ul>
+                ${lesson.objectives.map(obj => `<li>${obj}</li>`).join('')}
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Overview</h2>
+            <p>${lesson.content.overview}</p>
+        </div>
+    `;
+
+    // Render content sections
+    lesson.content.sections.forEach(section => {
+        contentHTML += `
+            <div class="content-section">
+                <h2>${section.title}</h2>
+                ${section.content}
+                ${section.image ? `<img src="${section.image}" alt="${section.title}" class="content-image" loading="lazy">` : ''}
+            </div>
+        `;
+    });
+
+    // Render code examples
+    if (lesson.content.codeExamples && lesson.content.codeExamples.length > 0) {
+        contentHTML += `<div class="content-section"><h2>Code Examples</h2></div>`;
+        
+        lesson.content.codeExamples.forEach((example, index) => {
+            const codeId = `code-${lesson.id}-${index}`;
+            contentHTML += `
+                <div class="code-section">
+                    <div class="code-header">
+                        <span class="code-title">${example.title}</span>
+                        <button class="copy-btn" onclick="copyCode('${codeId}')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <pre class="code-block"><code id="${codeId}" class="language-${example.language}">${escapeHtml(example.code)}</code></pre>
+                </div>
+            `;
+        });
+    }
+
+    // Render quiz
+    contentHTML += renderQuiz(lesson.quiz);
+
+    contentContainer.innerHTML = contentHTML;
+
+    // Highlight code syntax if Prism is available
+    setTimeout(() => {
+        if (window.Prism) {
+            Prism.highlightAll();
+        }
+    }, 100);
+}
+
+// =====================================================
+// QUIZ SYSTEM
+// =====================================================
+function renderQuiz(quiz) {
+    const currentLessonProgress = courseProgress[COURSE_DATA.lessons[currentLessonIndex].id];
+    const isCompleted = currentLessonProgress?.completed || false;
+    
+    let quizHTML = `
+        <div class="quiz-section" id="quizSection">
+            <div class="quiz-header">
+                <h2 class="quiz-title">
+                    <i class="fas fa-clipboard-check"></i>
+                    Knowledge Check
+                </h2>
+                <p class="quiz-info">
+                    Complete this quiz with ${quiz.passingScore}% or higher to unlock the next lesson.
+                </p>
+            </div>
+    `;
+
+    if (isCompleted) {
+        const savedScore = currentLessonProgress.quizScore || 0;
+        quizHTML += `
+            <div class="quiz-results show">
+                <div class="quiz-score pass">${savedScore}%</div>
+                <div class="quiz-message">
+                    <strong>Lesson Completed!</strong><br>
+                    You've successfully passed this lesson's quiz.
+                </div>
+            </div>
+        `;
+    } else {
+        // Render quiz questions
+        quiz.questions.forEach((question, qIndex) => {
+            quizHTML += `
+                <div class="quiz-question ${qIndex === 0 ? 'active' : ''}" data-question="${qIndex}">
+                    <div class="question-header">
+                        <span class="question-number">Question ${qIndex + 1}</span>
+                        <span class="question-progress">${qIndex + 1}/${quiz.questions.length}</span>
+                    </div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="question-options">
+                        ${question.options.map((option, oIndex) => `
+                            <div class="option" data-option="${oIndex}" onclick="selectOption(${qIndex}, ${oIndex})">
+                                <span class="option-letter">${String.fromCharCode(65 + oIndex)}</span>
+                                <span class="option-text">${option}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        });
+
+        quizHTML += `
+            <div class="quiz-controls">
+                <button class="btn btn-secondary" id="prevQuestionBtn" onclick="previousQuestion()" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <div>
+                    <button class="btn btn-secondary" id="nextQuestionBtn" onclick="nextQuestion()" disabled>
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="btn btn-primary" id="submitQuizBtn" onclick="submitQuiz()" style="display: none;">
+                        <i class="fas fa-check"></i>
+                        Submit Quiz
+                    </button>
+                </div>
+            </div>
+
+            <div class="quiz-results" id="quizResults">
+                <div class="quiz-score" id="quizScore">0%</div>
+                <div class="quiz-message" id="quizMessage"></div>
+                <div class="quiz-actions">
+                    <button class="btn btn-primary" id="continueBtn" onclick="completeLesson()" style="display: none;">
+                        <i class="fas fa-arrow-right"></i>
+                        Continue to Next Lesson
+                    </button>
+                    <button class="btn btn-secondary" onclick="retakeQuiz()">
+                        <i class="fas fa-redo"></i>
+                        Retake Quiz
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    quizHTML += '</div>';
+    return quizHTML;
+}
+
+// Quiz interaction functions
+function selectOption(questionIndex, optionIndex) {
+    // Clear previous selections
+    document.querySelectorAll(`[data-question="${questionIndex}"] .option`).forEach(opt => {
+        opt.classList.remove('selected');
+    });
+
+    // Select current option
+    const selectedOption = document.querySelector(`[data-question="${questionIndex}"] [data-option="${optionIndex}"]`);
+    selectedOption.classList.add('selected');
+
+    // Store answer
+    quizState.answers[questionIndex] = optionIndex;
+
+    // Update navigation
+    const isLastQuestion = questionIndex === COURSE_DATA.lessons[currentLessonIndex].quiz.questions.length - 1;
+    if (isLastQuestion) {
+        document.getElementById('submitQuizBtn').style.display = 'inline-flex';
+        document.getElementById('nextQuestionBtn').style.display = 'none';
+    } else {
+        document.getElementById('nextQuestionBtn').disabled = false;
+    }
+}
+
+function nextQuestion() {
+    const currentQuestionEl = document.querySelector('.quiz-question.active');
+    const nextQuestionEl = currentQuestionEl.nextElementSibling;
+    
+    if (nextQuestionEl && nextQuestionEl.classList.contains('quiz-question')) {
+        currentQuestionEl.classList.remove('active');
+        nextQuestionEl.classList.add('active');
+        quizState.currentQuestion++;
+        updateQuizNavigation();
+    }
+}
+
+function previousQuestion() {
+    const currentQuestionEl = document.querySelector('.quiz-question.active');
+    const prevQuestionEl = currentQuestionEl.previousElementSibling;
+    
+    if (prevQuestionEl && prevQuestionEl.classList.contains('quiz-question')) {
+        currentQuestionEl.classList.remove('active');
+        prevQuestionEl.classList.add('active');
+        quizState.currentQuestion--;
+        updateQuizNavigation();
+    }
+}
+
+function updateQuizNavigation() {
+    const totalQuestions = COURSE_DATA.lessons[currentLessonIndex].quiz.questions.length;
+    const prevBtn = document.getElementById('prevQuestionBtn');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const submitBtn = document.getElementById('submitQuizBtn');
+
+    prevBtn.disabled = quizState.currentQuestion === 0;
+    
+    const hasAnswer = quizState.answers[quizState.currentQuestion] !== undefined;
+    const isLastQuestion = quizState.currentQuestion === totalQuestions - 1;
+    
+    if (isLastQuestion) {
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = hasAnswer ? 'inline-flex' : 'none';
+    } else {
+        nextBtn.style.display = 'inline-flex';
+        nextBtn.disabled = !hasAnswer;
+        submitBtn.style.display = 'none';
+    }
+}
+
+async function submitQuiz() {
+    const lesson = COURSE_DATA.lessons[currentLessonIndex];
+    const quiz = lesson.quiz;
+    let correctAnswers = 0;
+
+    // Hide questions and controls
+    document.querySelectorAll('.quiz-question').forEach(q => q.style.display = 'none');
+    document.querySelector('.quiz-controls').style.display = 'none';
+
+    // Calculate score and highlight answers
+    quiz.questions.forEach((question, index) => {
+        const userAnswer = quizState.answers[index];
+        const correctAnswer = question.correct;
+        const isCorrect = userAnswer === correctAnswer;
+        
+        if (isCorrect) correctAnswers++;
+
+        // Highlight answers
+        const questionEl = document.querySelector(`[data-question="${index}"]`);
+        const options = questionEl.querySelectorAll('.option');
+        
+        options[correctAnswer].classList.add('correct');
+        if (userAnswer !== correctAnswer && userAnswer !== undefined) {
+            options[userAnswer].classList.add('incorrect');
+        }
+    });
+
+    const score = Math.round((correctAnswers / quiz.questions.length) * 100);
+    const passed = score >= quiz.passingScore;
+
+    // Update quiz results UI
+    const quizScore = document.getElementById('quizScore');
+    const quizMessage = document.getElementById('quizMessage');
+    const quizActions = document.querySelector('.quiz-actions');
+
+    quizScore.textContent = `${score}%`;
+    quizScore.className = `quiz-score ${passed ? 'pass' : 'fail'}`;
+
+    if (passed) {
+        quizMessage.innerHTML = `
+            <strong>Congratulations!</strong><br>
+            You passed with ${score}%. You can now proceed to the next lesson.
+        `;
+        
+        quizActions.innerHTML = `
+            <button class="btn btn-primary" onclick="completeLesson()">
+                <i class="fas fa-arrow-right"></i>
+                Continue to Next Lesson
+            </button>
+        `;
+        
+        // Mark lesson as completed
+        await markLessonComplete(score);
+        
+    } else {
+        quizMessage.innerHTML = `
+            <strong>Not quite there yet.</strong><br>
+            You scored ${score}%. You need ${quiz.passingScore}% to pass. Review the material and try again.
+        `;
+        
+        quizActions.innerHTML = `
+            <button class="btn btn-secondary" onclick="retakeQuiz()">
+                <i class="fas fa-redo"></i>
+                Retake Quiz
+            </button>
+        `;
+    }
+
+    document.getElementById('quizResults').classList.add('show');
+    
+    // Log quiz completion
+    logUserActivity('quiz_completed', {
+        lesson_id: lesson.id,
+        lesson_title: lesson.title,
+        score: score,
+        passed: passed,
+        attempts: (courseProgress[lesson.id]?.quizAttempts || 0) + 1
+    });
+
+    // Scroll to results
+    document.getElementById('quizResults').scrollIntoView({ behavior: 'smooth' });
+}
+
+function retakeQuiz() {
+    // Reset quiz state
+    quizState = {
+        currentQuestion: 0,
+        answers: [],
+        score: 0,
+        isComplete: false
+    };
+
+    // Track quiz retry
+    const lessonId = COURSE_DATA.lessons[currentLessonIndex].id;
+    if (!courseProgress[lessonId]) courseProgress[lessonId] = {};
+    courseProgress[lessonId].quizAttempts = (courseProgress[lessonId].quizAttempts || 0) + 1;
+
+    // Reload lesson content
+    loadLesson(currentLessonIndex);
+    
+    // Scroll to quiz
+    setTimeout(() => {
+        document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth' });
+    }, 500);
+}
+
+async function markLessonComplete(score) {
+    const lesson = COURSE_DATA.lessons[currentLessonIndex];
+    const lessonId = lesson.id;
+    
+    // Track lesson completion time
+    trackLessonTime();
+    
+    // Update lesson progress
+    courseProgress[lessonId] = {
+        ...courseProgress[lessonId],
+        completed: true,
+        quizScore: score,
+        completedAt: new Date().toISOString(),
+        finalScore: score
+    };
+
+    // Update session tracking
+    courseSession.lessonsCompleted++;
+
+    // Save progress to database
+    await saveProgress();
+    
+    // Update UI
+    renderSidebar();
+    updateNavigationButtons();
+
+    // Check various achievements
+    await checkLessonCompletionAchievements();
+    await checkPerfectScoreAchievements(score);
+    await checkStudyTimeAchievements();
+    
+    // Log lesson completion
+    logUserActivity('lesson_completed', {
+        lesson_id: lessonId,
+        lesson_title: lesson.title,
+        final_score: score,
+        time_spent: courseProgress[lessonId].timeSpent || 0,
+        lesson_number: currentLessonIndex + 1
+    });
+    
+    showToast('Lesson completed successfully!', 'success');
+}
+
+async function completeLesson() {
+    if (currentLessonIndex < COURSE_DATA.lessons.length - 1) {
+        // Move to next lesson
+        currentLessonIndex++;
+        loadLesson(currentLessonIndex);
+        
+    } else {
+        // Course completion
+        await completeCourse();
+    }
+}
+
+async function completeCourse() {
+    try {
+        const completionTime = courseSession.totalStudyTime;
+        
+        // Update course progress to 100% completed
+        await supabase
+            .from('course_progress')
+            .update({
+                progress: 100,
+                completed_at: new Date().toISOString(),
+                completion_time_minutes: completionTime
+            })
+            .eq('user_id', currentUser.id)
+            .eq('course_id', COURSE_DATA.id);
+
+        // Award course completion achievements
+        await checkAndUnlockAchievement('course_completion_1');
+        await checkSpeedCompletionAchievements(completionTime);
+        await checkCourseStreakAchievements();
+        
+        // Update user stats
+        await updateUserStats();
+        
+        // Show completion message
+        showToast('Congratulations! Course completed successfully!', 'certificate');
+        
+        // Log course completion
+        logUserActivity('course_completed', {
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title,
+            completion_time_minutes: completionTime,
+            total_lessons: COURSE_DATA.lessons.length,
+            average_quiz_score: calculateAverageQuizScore()
+        });
+        
+        // Redirect to dashboard after delay
+        setTimeout(() => {
+            window.location.href = '/dashboard.html';
+        }, 3000);
+        
+    } catch (error) {
+        console.error('Error completing course:', error);
+        showToast('Error marking course as complete', 'error');
+    }
+}
+
+// =====================================================
+// ACHIEVEMENT INTEGRATION SYSTEM
+// =====================================================
+async function checkAndUnlockAchievement(achievementId, skipNotification = false) {
+    try {
+        // Prevent duplicate checks
+        const cacheKey = `achievement_${achievementId}_${currentUser.id}`;
+        if (sessionStorage.getItem(cacheKey)) return false;
+
+        // Check if already unlocked
+        const { data: existing, error } = await supabase
+            .from('user_achievements')
+            .select('id')
+            .eq('user_id', currentUser.id)
+            .eq('achievement_id', achievementId)
+            .single();
+
+        if (existing) {
+            sessionStorage.setItem(cacheKey, 'true');
+            return false;
+        }
+
+        // Award achievement
+        const achievementData = {
+            user_id: currentUser.id,
+            achievement_id: achievementId,
+            unlocked_at: new Date().toISOString(),
+            points_awarded: getAchievementPoints(achievementId),
+            context: 'course_system'
+        };
+
+        const { data, error: insertError } = await supabase
+            .from('user_achievements')
+            .insert([achievementData])
+            .select()
+            .single();
+
+        if (insertError) {
+            if (insertError.code === '23505') return false; // Already exists
+            throw insertError;
+        }
+
+        // Update user points
+await supabase.rpc('increment_user_stats', {
+  user_id_param: currentUser.id,
+  points_to_add: achievementData.points_awarded,
+  achievements_to_add: 1
+});
+
+        // Cache and queue notification
+        sessionStorage.setItem(cacheKey, 'true');
+        
+        if (!skipNotification) {
+            queueAchievementNotification({
+                id: achievementId,
+                name: getAchievementName(achievementId),
+                description: getAchievementDescription(achievementId),
+                points: achievementData.points_awarded,
+                rarity: getAchievementRarity(achievementId),
+                icon: getAchievementIcon(achievementId)
+            });
+        }
+
+        return true;
+
+    } catch (error) {
+        console.error('Error unlocking achievement:', error);
+        return false;
+    }
+}
+
+// Helper functions for achievement data (replace with your actual achievement definitions)
+function getAchievementPoints(id) {
+    const pointsMap = {
+        'first_course_start': 75,
+        'first_lesson': 100,
+        'course_completion_1': 500,
+        'perfect_score': 250,
+        'speed_demon': 750,
+        'marathon_learner': 500,
+        'night_owl': 200,
+        'early_bird': 200,
+        'weekend_warrior': 150,
+        // Add more as needed
+    };
+    return pointsMap[id] || 100;
+}
+
+function getAchievementName(id) {
+    const nameMap = {
+        'first_course_start': 'Learning Initiated',
+        'first_lesson': 'First Steps',
+        'course_completion_1': 'Course Conqueror',
+        'perfect_score': 'Perfectionist',
+        'speed_demon': 'Speed Demon',
+        // Add more as needed
+    };
+    return nameMap[id] || 'Achievement Unlocked';
+}
+
+function getAchievementDescription(id) {
+    const descMap = {
+        'first_course_start': 'Start your first cybersecurity course',
+        'first_lesson': 'Complete your first lesson',
+        'course_completion_1': 'Complete your first course',
+        'perfect_score': 'Score 100% on any quiz',
+        'speed_demon': 'Complete a course in under 2 hours',
+        // Add more as needed
+    };
+    return descMap[id] || 'Achievement description';
+}
+
+function getAchievementRarity(id) {
+    const rarityMap = {
+        'first_course_start': 'common',
+        'first_lesson': 'bronze',
+        'course_completion_1': 'silver',
+        'perfect_score': 'gold',
+        'speed_demon': 'legendary',
+        // Add more as needed
+    };
+    return rarityMap[id] || 'common';
+}
+
+function getAchievementIcon(id) {
+    const iconMap = {
+        'first_course_start': 'fas fa-play',
+        'first_lesson': 'fas fa-baby',
+        'course_completion_1': 'fas fa-trophy',
+        'perfect_score': 'fas fa-star',
+        'speed_demon': 'fas fa-rocket',
+        // Add more as needed
+    };
+    return iconMap[id] || 'fas fa-award';
+}
+
+async function checkLessonAchievements(lessonNumber) {
+    if (lessonNumber === 1) {
+        await checkAndUnlockAchievement('first_lesson');
+    }
+    
+    // Check if user has completed multiple lessons in one day
+    const today = new Date().toISOString().split('T')[0];
+    const todayCompletions = Object.values(courseProgress).filter(p => 
+        p.completed && p.completedAt?.startsWith(today)
+    ).length;
+    
+    if (todayCompletions >= 3) {
+        await checkAndUnlockAchievement('lesson_marathon');
+    }
+}
+
+async function checkLessonCompletionAchievements() {
+    const completedCount = getCompletedLessonsCount();
+    
+    // Lesson-based achievements
+    const lessonMilestones = [1, 5, 10, 25, 50, 100];
+    for (const milestone of lessonMilestones) {
+        if (completedCount >= milestone) {
+            await checkAndUnlockAchievement(`lessons_${milestone}`);
+        }
+    }
+    
+    // Course completion achievements
+    if (completedCount === COURSE_DATA.lessons.length) {
+        await checkAndUnlockAchievement('course_completion_1');
+        
+        // Check for additional course completion achievements
+        const { data: allCourses } = await supabase
+            .from('course_progress')
+            .select('course_id')
+            .eq('user_id', currentUser.id)
+            .eq('progress', 100);
+        
+        const totalCompleted = allCourses?.length || 0;
+        
+        const courseMilestones = [1, 5, 10, 25];
+        for (const milestone of courseMilestones) {
+            if (totalCompleted >= milestone) {
+                await checkAndUnlockAchievement(`course_completion_${milestone}`);
+            }
+        }
+    }
+}
+
+async function checkPerfectScoreAchievements(score) {
+    if (score === 100) {
+        await checkAndUnlockAchievement('perfect_score');
+        
+        // Check for consecutive perfect scores
+        const recentScores = Object.values(courseProgress)
+            .filter(p => p.completed && p.quizScore)
+            .slice(-5) // Last 5 completed
+            .map(p => p.quizScore);
+        
+        if (recentScores.length >= 3 && recentScores.every(s => s === 100)) {
+            await checkAndUnlockAchievement('perfectionist_streak');
+        }
+    }
+}
+
+async function checkSpeedCompletionAchievements(completionTime) {
+    // Speed demon: Complete course in under 2 hours (120 minutes)
+    if (completionTime <= 120) {
+        await checkAndUnlockAchievement('speed_demon');
+    }
+    
+    // Quick learner: Complete course in under 4 hours (240 minutes)
+    if (completionTime <= 240) {
+        await checkAndUnlockAchievement('quick_learner');
+    }
+}
+
+async function checkStudyTimeAchievements() {
+    const totalTime = courseSession.totalStudyTime;
+    
+    // Marathon learner: Study for 8+ hours in a course session
+    if (totalTime >= 480) { // 8 hours
+        await checkAndUnlockAchievement('marathon_learner');
+    }
+    
+    // Dedicated learner: Study for 4+ hours
+    if (totalTime >= 240) { // 4 hours
+        await checkAndUnlockAchievement('dedicated_learner');
+    }
+}
+
+async function checkCourseStreakAchievements() {
+    try {
+        // Check for consecutive course completions
+        const { data: recentCourses, error } = await supabase
+            .from('course_progress')
+            .select('completed_at, course_id')
+            .eq('user_id', currentUser.id)
+            .eq('progress', 100)
+            .order('completed_at', { ascending: false })
+            .limit(10);
+
+        if (error || !recentCourses) return;
+
+        // Check for courses completed on consecutive days
+        let consecutiveDays = 1;
+        for (let i = 1; i < recentCourses.length; i++) {
+            const prevDate = new Date(recentCourses[i-1].completed_at).toDateString();
+            const currentDate = new Date(recentCourses[i].completed_at).toDateString();
+            const dayDiff = Math.abs(new Date(prevDate) - new Date(currentDate)) / (1000 * 60 * 60 * 24);
+            
+            if (dayDiff <= 1) {
+                consecutiveDays++;
+            } else {
+                break;
+            }
+        }
+
+        if (consecutiveDays >= 3) {
+            await checkAndUnlockAchievement('learning_streak');
+        }
+
+    } catch (error) {
+        console.error('Error checking course streak achievements:', error);
+    }
+}
+
+// =====================================================
+// TIME-BASED ACHIEVEMENTS
+// =====================================================
+async function checkTimeBasedAchievements(timestamp) {
+    const hour = timestamp.getHours();
+    const dayOfWeek = timestamp.getDay();
+
+    // Night owl (after midnight, before 6 AM)
+    if (hour >= 0 && hour < 6) {
+        await incrementTimeBasedCounter('midnight_sessions', 'night_owl');
+    }
+
+    // Early bird (4 AM to 6 AM)
+    if (hour >= 4 && hour < 6) {
+        await incrementTimeBasedCounter('early_sessions', 'early_bird');
+    }
+
+    // Weekend warrior (Saturday = 6, Sunday = 0)
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+        await incrementTimeBasedCounter('weekend_sessions', 'weekend_warrior');
+    }
+}
+
+async function incrementTimeBasedCounter(counterType, achievementId) {
+    try {
+        const dateStr = new Date().toISOString().split('T')[0];
+        const cacheKey = `${counterType}_${currentUser.id}_${dateStr}`;
+
+        // Prevent multiple increments per day
+        if (sessionStorage.getItem(cacheKey)) return;
+
+        // Update counter
+        await supabase.rpc('increment_profile_counter', {
+  user_id_param: currentUser.id,
+  counter_field: counterType,
+  increment_value: 1
+});
+
+        // Cache to prevent double counting
+        sessionStorage.setItem(cacheKey, 'true');
+
+        // Check related achievement
+        if (achievementId) {
+            await checkAndUnlockAchievement(achievementId, true);
+        }
+
+    } catch (error) {
+        console.error(`Error incrementing ${counterType}:`, error);
+    }
+}
+
+async function checkDailyStreak() {
+    try {
+        const { data: profile, error } = await supabase
+            .from('profiles')
+            .select('last_activity, current_streak, last_streak_date')
+            .eq('id', currentUser.id)
+            .single();
+
+        if (error) throw error;
+
+        const now = new Date();
+        const today = now.toDateString();
+        const lastActivity = profile.last_activity ? new Date(profile.last_activity) : null;
+        const lastStreakDate = profile.last_streak_date ? new Date(profile.last_streak_date).toDateString() : null;
+
+        let newStreak = profile.current_streak || 0;
+        let shouldUpdateStreak = false;
+
+        if (!lastActivity) {
+            // First time user
+            newStreak = 1;
+            shouldUpdateStreak = true;
+        } else {
+            const daysSinceLastActivity = Math.floor((now - lastActivity) / (1000 * 60 * 60 * 24));
+            
+            if (lastStreakDate === today) {
+                // Already counted today's streak
+                return newStreak;
+            } else if (daysSinceLastActivity === 1 || (daysSinceLastActivity === 0 && lastStreakDate !== today)) {
+                // Consecutive day or same day but not counted yet
+                newStreak += 1;
+                shouldUpdateStreak = true;
+            } else if (daysSinceLastActivity > 1) {
+                // Streak broken
+                newStreak = 1;
+                shouldUpdateStreak = true;
+            }
+        }
+
+        if (shouldUpdateStreak) {
+            await supabase
+                .from('profiles')
+                .update({
+                    current_streak: newStreak,
+                    last_activity: now.toISOString(),
+                    last_streak_date: now.toISOString()
+                })
+                .eq('id', currentUser.id);
+
+            userStats.current_streak = newStreak;
+            
+            showToast(`Daily streak: ${newStreak} days!`, 'success');
+            await checkStreakAchievements(newStreak);
+        }
+
+        return newStreak;
+        
+    } catch (error) {
+        console.error('Error checking daily streak:', error);
+        return 0;
+    }
+}
+
+async function checkStreakAchievements(currentStreak) {
+    const streakMilestones = [3, 7, 14, 30, 100, 365];
+    
+    for (const milestone of streakMilestones) {
+        if (currentStreak >= milestone) {
+            await checkAndUnlockAchievement(`streak_${milestone}`);
+        }
+    }
+}
+
+// =====================================================
+// USER ACTIVITY LOGGING
+// =====================================================
+async function logUserActivity(activityType, metadata = {}) {
+    try {
+        const now = new Date();
+        
+        const activityData = {
+            user_id: currentUser.id,
+            activity_type: activityType,
+            timestamp: now.toISOString(),
+            course_id: COURSE_DATA.id,
+            lesson_index: currentLessonIndex,
+            session_duration: courseSession.totalStudyTime,
+            metadata: JSON.stringify(metadata),
+            created_at: now.toISOString()
+        };
+
+        // Try to log to activities table
+        const { error } = await supabase
+            .from('user_activities')
+            .insert([activityData]);
+
+        if (error && error.code !== '42P01') {
+            console.warn('Activity logging failed:', error.message);
+        }
+
+        // Always update last activity in profile
+        await supabase
+            .from('profiles')
+            .update({ last_activity: now.toISOString() })
+            .eq('id', currentUser.id);
+
+    } catch (error) {
+        console.error('Error logging user activity:', error);
+    }
+}
+
+// =====================================================
+// NAVIGATION SYSTEM
+// =====================================================
+function updateNavigationButtons() {
+    const prevBtn = document.getElementById('prevLessonBtn');
+    const nextBtn = document.getElementById('nextLessonBtn');
+    
+    if (!prevBtn || !nextBtn) return;
+
+    // Previous button
+    prevBtn.disabled = currentLessonIndex === 0;
+    
+    // Next button logic
+    const isLastLesson = currentLessonIndex === COURSE_DATA.lessons.length - 1;
+    const canGoNext = currentLessonIndex < COURSE_DATA.lessons.length - 1 && 
+                     canAccessLesson(currentLessonIndex + 1);
+    
+    if (isLastLesson) {
+        const isCurrentCompleted = courseProgress[COURSE_DATA.lessons[currentLessonIndex].id]?.completed;
+        nextBtn.disabled = !isCurrentCompleted;
+        nextBtn.innerHTML = '<i class="fas fa-trophy"></i> Complete Course';
+    } else {
+        nextBtn.disabled = !canGoNext;
+        nextBtn.innerHTML = 'Next <i class="fas fa-chevron-right"></i>';
+    }
+}
+
+// Navigation button event handlers
+function goToPreviousLesson() {
+    if (currentLessonIndex > 0) {
+        trackLessonTime(); // Track time spent on current lesson
+        currentLessonIndex--;
+        loadLesson(currentLessonIndex);
+    }
+}
+
+function goToNextLesson() {
+    if (currentLessonIndex < COURSE_DATA.lessons.length - 1) {
+        const canGoNext = canAccessLesson(currentLessonIndex + 1);
+        if (canGoNext) {
+            trackLessonTime();
+            currentLessonIndex++;
+            loadLesson(currentLessonIndex);
+        } else {
+            showToast('Complete the current lesson quiz to proceed', 'warning');
+        }
+    } else {
+        // Complete course
+        completeCourse();
+    }
+}
+
+// =====================================================
+// SIDEBAR FUNCTIONS
+// =====================================================
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    
+    if (sidebar) sidebar.classList.toggle('open');
+    if (overlay) overlay.classList.toggle('active');
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    
+    if (sidebar) sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('active');
+}
+
+// =====================================================
+// ACHIEVEMENT NOTIFICATION SYSTEM
+// =====================================================
+function queueAchievementNotification(achievement) {
+    notificationQueue.push(achievement);
+    processNotificationQueue();
+}
+
+function processNotificationQueue() {
+    if (isShowingNotification || notificationQueue.length === 0) return;
+
+    isShowingNotification = true;
+    const achievement = notificationQueue.shift();
+    showAchievementNotification(achievement);
+
+    const duration = achievement.rarity === 'mythic' ? 8000 :
+                     achievement.rarity === 'legendary' ? 7000 : 6000;
+
+    setTimeout(() => {
+        isShowingNotification = false;
+        processNotificationQueue();
+    }, duration + 500);
+}
+
+function showAchievementNotification(achievement) {
+    const notification = document.getElementById('achievementNotification');
+    if (!notification) return;
+
+    const icon = document.getElementById('notificationIcon');
+    const title = document.getElementById('notificationTitle');
+    const description = document.getElementById('notificationDescription');
+    const points = document.getElementById('notificationPoints');
+
+    if (icon) {
+        icon.innerHTML = `<i class="${achievement.icon}"></i>`;
+        icon.className = `notification-icon ${achievement.rarity}`;
+    }
+    if (title) title.textContent = achievement.name;
+    if (description) description.textContent = achievement.description;
+    if (points) points.textContent = `+${achievement.points} Points`;
+
+    notification.className = `achievement-notification ${achievement.rarity}`;
+    notification.classList.add('show');
+
+    const duration = achievement.rarity === 'mythic' ? 8000 :
+                     achievement.rarity === 'legendary' ? 7000 : 6000;
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, duration);
+}
+
+// =====================================================
+// UTILITY FUNCTIONS
+// =====================================================
+function calculateAverageQuizScore() {
+    const scores = Object.values(courseProgress)
+        .filter(p => p.completed && p.quizScore)
+        .map(p => p.quizScore);
+    
+    if (scores.length === 0) return 0;
+    return Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length);
+}
+
+async function resetProgress() {
+    if (!confirm('Are you sure you want to reset your progress? This action cannot be undone.')) {
+        return;
+    }
+
+    try {
+        // Track lesson time before reset
+        trackLessonTime();
+        
+        // Reset local state
+        courseProgress = {};
+        currentLessonIndex = 0;
+        courseSession = {
+            startTime: new Date(),
+            totalStudyTime: 0,
+            lessonsStarted: 0,
+            lessonsCompleted: 0,
+            pageLoadTime: new Date(),
+            interactionCount: 0,
+            lastActivityTime: new Date()
+        };
+        
+        // Delete from database
+        await supabase
+            .from('course_progress')
+            .delete()
+            .eq('user_id', currentUser.id)
+            .eq('course_id', COURSE_DATA.id);
+
+        // Log reset activity
+        logUserActivity('progress_reset', {
+            course_id: COURSE_DATA.id,
+            reset_reason: 'manual'
+        });
+
+        // Reinitialize
+        await saveProgress();
+        renderSidebar();
+        loadLesson(0);
+        
+        showToast('Progress reset successfully', 'success');
+        
+    } catch (error) {
+        console.error('Error resetting progress:', error);
+        showToast('Failed to reset progress', 'error');
+    }
+}
+
+function copyCode(codeId) {
+    const codeElement = document.getElementById(codeId);
+    if (!codeElement) return;
+    
+    const text = codeElement.textContent;
+    
+    navigator.clipboard.writeText(text).then(() => {
+        showToast('Code copied to clipboard!', 'success');
+        
+        // Track code copy for achievements
+        logUserActivity('code_copied', {
+            code_section: codeId,
+            lesson_id: COURSE_DATA.lessons[currentLessonIndex].id
+        });
+        
+    }).catch(err => {
+        console.error('Failed to copy code:', err);
+        showToast('Failed to copy code', 'error');
+        
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast('Code copied to clipboard!', 'success');
+        } catch (fallbackError) {
+            showToast('Copy failed - please select and copy manually', 'error');
+        }
+        document.body.removeChild(textArea);
+    });
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// =====================================================
+// UI FEEDBACK SYSTEMS
+// =====================================================
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    const messageEl = document.getElementById('toastMessage');
+    
+    if (!toast || !messageEl) {
+        console.log(`Toast: ${message} (${type})`);
+        return;
+    }
+    
+    messageEl.textContent = message;
+    toast.className = `toast ${type} show`;
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 4000);
+}
+
+function showLoadingScreen() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) loadingScreen.classList.remove('hidden');
+}
+
+function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 1000);
+    }
+}
+
+// =====================================================
+// MUSIC PLAYER INTEGRATION
+// =====================================================
+function initMusicPlayer() {
+    const btnText = document.getElementById('music-button-text');
+    const icon = document.getElementById('music-icon');
+    const dropdown = document.getElementById('music-dropdown-content');
+    
+    if (!btnText || !icon || !dropdown) return;
+    
+    function setUI(state) {
+        btnText.textContent = state === "Playing" ? "PAUSE MUSIC" : "STUDY MUSIC";
+        icon.className = state === "Playing" ? "fa-solid fa-circle-pause" : "fa-solid fa-music";
+    }
+
+    // Load saved music state
+    const savedSrc = localStorage.getItem("cybersec_music_src");
+    const savedTime = parseFloat(localStorage.getItem("cybersec_music_time") || 0);
+    
+    if (savedSrc) {
+        audioPlayer.src = savedSrc;
+        audioPlayer.currentTime = savedTime;
+        audioPlayer.play()
+            .then(() => setUI("Playing"))
+            .catch(() => setUI("Stopped"));
+    }
+
+    // Music button click handler
+    document.getElementById('music-dropdown').querySelector('button').addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        
+        if (audioPlayer.src && !audioPlayer.paused) {
+            audioPlayer.pause();
+            setUI("Stopped");
+        } else if (audioPlayer.src) {
+            audioPlayer.play().then(() => setUI("Playing"));
+        }
+    });
+
+    // Music selection handlers
+    dropdown.querySelectorAll("a[data-src]").forEach((link) => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            audioPlayer.src = link.dataset.src;
+            audioPlayer.play().then(() => setUI("Playing"));
+            localStorage.setItem("cybersec_music_src", link.dataset.src);
+            dropdown.style.display = "none";
+        });
+    });
+
+    // Stop music handler
+    const stopLink = document.getElementById("stop-music-link");
+    if (stopLink) {
+        stopLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+            audioPlayer.removeAttribute("src");
+            setUI("Stopped");
+            localStorage.removeItem("cybersec_music_src");
+            localStorage.removeItem("cybersec_music_time");
+            dropdown.style.display = "none";
+        });
+    }
+
+    // Save music state before page unload
+    window.addEventListener("beforeunload", () => {
+        if (!audioPlayer.paused && audioPlayer.src) {
+            localStorage.setItem("cybersec_music_src", audioPlayer.src);
+            localStorage.setItem(
+                "cybersec_music_time",
+                audioPlayer.currentTime
+            );
+        }
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener("click", (e) => {
+        if (!e.target.closest("#music-dropdown")) {
+            dropdown.style.display = "none";
+        }
+    });
+}
+
+// Show initial music indicator
+function addMusicIndicator() {
+    const musicBtn = document.querySelector("#music-dropdown");
+    if (musicBtn) {
+        const indicator = document.createElement("div");
+        indicator.className = "music-indicator";
+        indicator.innerHTML = `<i class="fa-solid fa-music"></i> Try Study Music!`;
+
+        musicBtn.style.position = "relative";
+        musicBtn.appendChild(indicator);
+
+        setTimeout(() => indicator.remove(), 3000);
+    }
+}
+
+// Initialize Event Listeners
+function initializeEventListeners() {
+    // Navigation buttons
+    document.getElementById('prevLessonBtn')?.addEventListener('click', goToPreviousLesson);
+    document.getElementById('nextLessonBtn')?.addEventListener('click', goToNextLesson);
+
+    // Reset progress button
+    document.getElementById('resetProgressBtn')?.addEventListener('click', resetProgress);
+
+    // Mobile menu toggle
+    document.getElementById('menuToggle')?.addEventListener('click', toggleSidebar);
+    document.getElementById('sidebarOverlay')?.addEventListener('click', closeSidebar);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', handleKeyboardShortcuts);
+
+    // Window resize handler
+    window.addEventListener('resize', handleWindowResize);
+
+    // Content interaction tracking
+    document.getElementById('contentBody')?.addEventListener('scroll', debounce(() => {
+        trackUserInteraction();
+    }, 1000));
+}
+
+// Keyboard Shortcuts
+function handleKeyboardShortcuts(e) {
+    if (document.querySelector('.quiz-question.active')) return;
+
+    if (e.key === 'ArrowLeft' && e.ctrlKey) {
+        e.preventDefault();
+        goToPreviousLesson();
+    } else if (e.key === 'ArrowRight' && e.ctrlKey) {
+        e.preventDefault();
+        goToNextLesson();
+    }
+}
+
+// Window Resize Handler
+function handleWindowResize() {
+    if (window.innerWidth > 768) {
+        closeSidebar();
+    }
+}
+
+// Debounce Helper
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Initialize responsive behavior
+if (window.innerWidth <= 768) {
+    document.getElementById('menuToggle').style.display = 'inline-flex';
+}
+
+// Auto-save progress periodically
+setInterval(async () => {
+    if (currentUser && Object.keys(courseProgress).length > 0) {
+        await saveProgress();
+    }
+}, 60000); // Save every minute
+
+// System initialization logging
+console.log('CyberSec Academy Course System Initialized');
+console.log('Current Course:', COURSE_DATA.title);
+console.log('Total Lessons:', COURSE_DATA.lessons.length);
+
+// Google OAuth Integration
+const googleBtn = document.querySelector(".btn-google");
+if (googleBtn) {
+    googleBtn.addEventListener("click", async () => {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: window.location.origin + "/courses/attack-simulation",
+            },
+        });
+
+        if (error) {
+            console.error("Google login error:", error.message);
+            showToast("Google login failed: " + error.message, "error");
+        }
+    });
+}
+
+// Check for existing session
+supabase.auth.getSession().then(({ data }) => {
+    if (data.session) {
+        console.log("User already logged in:", data.session.user);
+        currentUser = data.session.user;
+        startCourseSession();
+    }
+});
+
+
+// Add missing auth modal functions
+function openAuthModal() {
+    const modal = document.getElementById('authModal');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function closeAuthModal() {
+    const modal = document.getElementById('authModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Add auth tab switching functionality
+document.getElementById('tabSignIn')?.addEventListener('click', () => {
+    document.getElementById('tabSignIn').classList.add('active');
+    document.getElementById('tabSignUp').classList.remove('active');
+    document.getElementById('signInForm').style.display = 'block';
+    document.getElementById('signUpForm').style.display = 'none';
+});
+
+document.getElementById('tabSignUp')?.addEventListener('click', () => {
+    document.getElementById('tabSignUp').classList.add('active');
+    document.getElementById('tabSignIn').classList.remove('active');
+    document.getElementById('signUpForm').style.display = 'block';
+    document.getElementById('signInForm').style.display = 'none';
+});
+
+document.getElementById('closeAuthModal')?.addEventListener('click', closeAuthModal);
+
+// Improved error handling for auth session
+supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN') {
+        currentUser = session.user;
+        closeAuthModal();
+        startCourseSession();
+    } else if (event === 'SIGNED_OUT') {
+        currentUser = null;
+        openAuthModal();
+    }
+});
+
+// Add form submission handlers
+document.getElementById('emailSignInForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('signInEmail').value;
+    const password = document.getElementById('signInPassword').value;
+    
+    try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password
+        });
+        
+        if (error) throw error;
+        
+        closeAuthModal();
+    } catch (error) {
+        showToast(error.message, 'error');
+    }
+});
+
+document.getElementById('emailSignUpForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('signUpEmail').value;
+    const password = document.getElementById('signUpPassword').value;
+    const name = document.getElementById('signUpName').value;
+    
+    try {
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    full_name: name
+                }
+            }
+        });
+        
+        if (error) throw error;
+        
+        showToast('Account created successfully! Please check your email.', 'success');
+    } catch (error) {
+        showToast(error.message, 'error');
+    }
+});
+    </script>
+</body>
+
+</html>

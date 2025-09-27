@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Enhanced SEO Meta Tags -->
+    <title>Cybersecurity News & Threat Intelligence | CipherHall</title>
+    <meta name="description" content="Stay updated with the latest cybersecurity news, data breaches, threat intelligence, and hacking incidents. Get expert insights on emerging cyber threats and security trends.">
+    <meta name="keywords" content="cybersecurity news, data breach news, hacking news, threat intelligence, cyber attacks, security vulnerabilities, malware news, ransomware attacks, cyber threat reports">
+    <meta name="author" content="CipherHall">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://www.cipherhall.com/news">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Latest Cybersecurity News & Threat Intelligence - CipherHall">
+    <meta property="og:description" content="Stay ahead of cyber threats with our curated cybersecurity news, breach reports, and threat intelligence updates from industry experts.">
+    <meta property="og:image" content="https://www.cipherhall.com/assets/images/og-news.jpg">
+    <meta property="og:url" content="https://www.cipherhall.com/news">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cybersecurity News & Threat Intelligence - CipherHall">
+    <meta name="twitter:description" content="Latest cybersecurity news, data breaches, and threat intelligence updates">
+    <meta name="twitter:image" content="https://www.cipherhall.com/assets/images/twitter-news.jpg">
+
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "CipherHall Cybersecurity Intelligence Hub",
+      "url": "https://www.cipherhall.com/news",
+      "description": "The latest cybersecurity news, threat intelligence reports, and vulnerability analysis from the experts at CipherHall.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "CipherHall",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.cipherhall.com/favicon.png"
+        }
+      }
+    }
+    </script>
+    <style>
+        :root {
+            --color-black: #0a0a0a;
+            --color-dark-grey: #1a1a1a;
+            --color-darker-grey: #141414;
+            --color-green: #00ff41;
+            --color-green-dark: #00d435;
+            --color-red: #ff073a;
+            --color-red-dark: #e6062f;
+            --color-white: #f8f9fa;
+            --color-grey: #9ca3af;
+            --color-orange: #ff8c00;
+            --color-blue: #0099ff;
+            --color-yellow: #fbbf24;
+            --color-purple: #8b5cf6;
+            --color-cyan: #06d6a0;
+            --font-primary: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --shadow-glow: 0 0 20px rgba(0, 255, 65, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 16px;
+            --border-radius-sm: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { 
+            background: linear-gradient(135deg, var(--color-black) 0%, var(--color-darker-grey) 100%); 
+            color: var(--color-white); 
+            font-family: var(--font-primary); 
+            overflow-x: hidden; 
+            line-height: 1.6; 
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-darker-grey); }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(45deg, var(--color-green), var(--color-green-dark)); 
+            border-radius: 8px; 
+        }
+        /* Add these styles inside your existing <style> tag */
+
+        .nav-links.mobile-nav-open {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 70px; /* Height of the navbar */
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.98); /* Slightly more solid background */
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+            animation: slideDown 0.3s ease-in-out;
+        }
+
+        .nav-links.mobile-nav-open a {
+            padding: 1rem;
+            text-align: center;
+            width: 100%;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Particles Background */
+        .particles { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            z-index: -1; 
+            opacity: 0.3; 
+        }
+        .particle { 
+            position: absolute; 
+            width: 3px; 
+            height: 3px; 
+            background: var(--color-green); 
+            border-radius: 50%; 
+            opacity: 0.7; 
+            animation: float 12s infinite linear; 
+        }
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; } 
+            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; } 
+        }
+
+        /* Navigation */
+        .navbar { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 1000; 
+            background: rgba(10, 10, 10, 0.95); 
+            backdrop-filter: blur(20px); 
+            border-bottom: 1px solid rgba(0, 255, 65, 0.1); 
+            transition: var(--transition); 
+        }
+        .navbar.scrolled { 
+            background: rgba(10, 10, 10, 0.98); 
+            box-shadow: var(--shadow-glow); 
+        }
+        .nav-container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 0 1rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            height: 70px; 
+        }
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.75rem; 
+            text-decoration: none; 
+            color: var(--color-white); 
+            font-weight: 800; 
+            font-size: 1.4rem; 
+        }
+        .logo i { font-size: 2rem; color: var(--color-green); }
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 0.5rem; 
+            align-items: center; 
+        }
+        .nav-links a { 
+            color: var(--color-grey); 
+            text-decoration: none; 
+            font-weight: 500; 
+            padding: 0.75rem 1rem; 
+            border-radius: var(--border-radius-sm); 
+            font-size: 0.95rem; 
+            transition: var(--transition); 
+        }
+        .nav-links a:hover, .nav-links a.active { 
+            color: var(--color-white); 
+            background: rgba(0, 255, 65, 0.1); 
+        }
+        .mobile-menu-btn { 
+            display: none; 
+            background: none; 
+            border: none; 
+            color: var(--color-white); 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+        }
+
+        /* Hero Section */
+        .hero { padding: 8rem 0 4rem 0; text-align: center; }
+        .hero-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .hero h1 { 
+            font-size: clamp(2.5rem, 5vw, 4.5rem); 
+            font-weight: 800; 
+            margin-bottom: 1.5rem; 
+            color: var(--color-white); 
+            background: linear-gradient(45deg, var(--color-white), var(--color-green)); 
+            background-clip: text; 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        .hero p { 
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem); 
+            color: var(--color-grey); 
+            max-width: 700px; 
+            margin: 0 auto 2rem auto; 
+        }
+
+        /* Breaking News Ticker */
+        .breaking-news { 
+            background: linear-gradient(90deg, var(--color-red), var(--color-red-dark)); 
+            padding: 12px 0; 
+            overflow: hidden; 
+        }
+        .breaking-news-content { 
+            display: flex; 
+            align-items: center; 
+            white-space: nowrap; 
+            animation: scroll-news 40s linear infinite; 
+            font-size: 0.95rem; 
+        }
+        .breaking-label { 
+            background: var(--color-white); 
+            color: var(--color-red); 
+            padding: 6px 16px; 
+            font-weight: 700; 
+            margin-right: 20px; 
+            text-transform: uppercase; 
+            font-size: 0.85rem; 
+            border-radius: 20px; 
+        }
+        @keyframes scroll-news { 
+            0% { transform: translateX(100%); } 
+            100% { transform: translateX(-100%); } 
+        }
+
+        /* Search and Controls */
+        .search-controls { 
+            background: var(--color-dark-grey); 
+            padding: 2rem 0; 
+            border-bottom: 1px solid rgba(0, 255, 65, 0.1); 
+            position: sticky; 
+            top: 70px; 
+            z-index: 100; 
+        }
+        .controls-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 1rem; 
+            display: flex; 
+            gap: 1rem; 
+            align-items: center; 
+            flex-wrap: wrap; 
+        }
+        .search-box { 
+            flex: 1; 
+            min-width: 300px; 
+            position: relative; 
+        }
+        .search-input { 
+            width: 100%; 
+            padding: 0.8rem 1rem 0.8rem 3rem; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 25px; 
+            color: var(--color-white); 
+            font-size: 0.95rem; 
+            transition: var(--transition); 
+        }
+        .search-input:focus { 
+            outline: none; 
+            border-color: var(--color-green); 
+            box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.2); 
+        }
+        .search-icon { 
+            position: absolute; 
+            left: 1rem; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            color: var(--color-grey); 
+        }
+        .view-toggle { 
+            display: flex; 
+            background: rgba(255, 255, 255, 0.05); 
+            border-radius: 25px; 
+            overflow: hidden; 
+        }
+        .view-btn { 
+            padding: 0.6rem 1rem; 
+            background: transparent; 
+            border: none; 
+            color: var(--color-grey); 
+            cursor: pointer; 
+            transition: var(--transition); 
+        }
+        .view-btn.active { 
+            background: var(--color-green); 
+            color: var(--color-black); 
+        }
+        .sort-dropdown { 
+            padding: 0.6rem 1rem; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 25px; 
+            color: var(--color-white); 
+            cursor: pointer; 
+        }
+        .dropdown{
+            background: var(--color-dark-grey);
+            color: var(--color-white);
+        }
+
+        /* News Filters */
+        .news-filters { 
+            background: var(--color-darker-grey); 
+            padding: 1rem 0; 
+        }
+        .filters-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 1rem; 
+            display: flex; 
+            gap: 0.5rem; 
+            flex-wrap: wrap; 
+        }
+        .filter-btn { 
+            padding: 0.6rem 1.2rem; 
+            background: transparent; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            color: var(--color-white); 
+            border-radius: 25px; 
+            cursor: pointer; 
+            transition: var(--transition); 
+            font-size: 0.85rem; 
+        }
+        .filter-btn.active, .filter-btn:hover { 
+            background: var(--color-green); 
+            color: var(--color-black); 
+            border-color: var(--color-green); 
+        }
+
+        /* Main Content */
+        .news-section { padding: 2rem 0 4rem 0; }
+        .news-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .news-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 350px; 
+            gap: 3rem; 
+            align-items: start; 
+        }
+        .news-cards { 
+            display: grid; 
+            gap: 2rem; 
+            margin-bottom: 3rem; 
+        }
+        .news-cards.grid-view { 
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); 
+        }
+        .news-cards.list-view { 
+            grid-template-columns: 1fr; 
+        }
+
+        /* Enhanced News Cards */
+        .news-card { 
+            background: var(--color-dark-grey); 
+            border-radius: var(--border-radius); 
+            overflow: hidden; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: var(--transition); 
+            position: relative; 
+        }
+        .news-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.15); 
+            border-color: rgba(0, 255, 65, 0.3); 
+        }
+        .card-image { 
+            position: relative; 
+            height: 220px; 
+            overflow: hidden; 
+        }
+        .card-image img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.3s ease; 
+        }
+        .news-card:hover .card-image img { transform: scale(1.05); }
+        .severity-badge { 
+            position: absolute; 
+            top: 1rem; 
+            right: 1rem; 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 20px; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+        }
+        .severity-critical { background: var(--color-red); color: white; }
+        .severity-high { background: var(--color-orange); color: white; }
+        .severity-medium { background: var(--color-yellow); color: black; }
+        .severity-low { background: var(--color-blue); color: white; }
+        .severity-info { background: var(--color-cyan); color: black; }
+
+        .news-card-content { padding: 1.5rem; }
+        .news-category { 
+            display: inline-block; 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 20px; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            margin-bottom: 1rem; 
+            color: var(--color-white); 
+        }
+        .news-category.data-breach { background: var(--color-red); }
+        .news-category.vulnerability { background: var(--color-blue); }
+        .news-category.threat-intel { background: var(--color-green); color: var(--color-black); }
+        .news-category.ransomware { background: var(--color-purple); }
+        .news-category.malware { background: var(--color-orange); }
+        .news-category.phishing { background: var(--color-yellow); color: var(--color-black); }
+
+        .news-title { 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            color: var(--color-white); 
+            margin-bottom: 1rem; 
+            line-height: 1.3; 
+        }
+        .news-card:hover .news-title { color: var(--color-green); }
+        .news-excerpt { 
+            color: var(--color-grey); 
+            margin-bottom: 1rem; 
+            line-height: 1.6; 
+        }
+        
+        /* Enhanced Description Section */
+        .news-description { 
+            background: rgba(0, 0, 0, 0.3); 
+            padding: 1.5rem; 
+            margin: 1rem -1.5rem 1rem -1.5rem; 
+            border-top: 1px solid rgba(0, 255, 65, 0.1); 
+            display: none; 
+        }
+        .news-description.expanded { display: block; }
+        .description-content { 
+            color: var(--color-white); 
+            line-height: 1.7; 
+            margin-bottom: 1rem; 
+        }
+        .technical-details { 
+            background: var(--color-darker-grey); 
+            padding: 1rem; 
+            border-radius: var(--border-radius-sm); 
+            margin-top: 1rem; 
+        }
+        .technical-details h4 { 
+            color: var(--color-green); 
+            margin-bottom: 0.5rem; 
+            font-size: 0.9rem; 
+        }
+        .tech-detail-item { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0.25rem 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+            font-size: 0.85rem; 
+        }
+        .tech-detail-item:last-child { border-bottom: none; }
+
+        .news-tags { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 0.5rem; 
+            margin-top: 1rem; 
+        }
+        .news-tag { 
+            padding: 0.2rem 0.6rem; 
+            background: rgba(255, 255, 255, 0.1); 
+            border-radius: 12px; 
+            font-size: 0.75rem; 
+            color: var(--color-grey); 
+        }
+
+        .news-meta { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            font-size: 0.85rem; 
+            margin-top: 1.5rem; 
+            padding-top: 1rem; 
+            border-top: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        .meta-left { display: flex; align-items: center; gap: 1rem; }
+        .meta-right { display: flex; align-items: center; gap: 1rem; }
+
+        .expand-btn { 
+            background: none; 
+            border: none; 
+            color: var(--color-green); 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: var(--transition); 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+        }
+        .expand-btn:hover { color: var(--color-green-dark); }
+        .expand-icon { transition: transform 0.3s ease; }
+        .expand-btn.expanded .expand-icon { transform: rotate(180deg); }
+
+        .action-buttons { 
+            display: flex; 
+            gap: 0.5rem; 
+        }
+        .action-btn { 
+            padding: 0.4rem 0.8rem; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 20px; 
+            color: var(--color-grey); 
+            text-decoration: none; 
+            font-size: 0.8rem; 
+            transition: var(--transition); 
+            display: flex; 
+            align-items: center; 
+            gap: 0.3rem; 
+        }
+        .action-btn:hover { 
+            background: rgba(0, 255, 65, 0.1); 
+            color: var(--color-green); 
+            border-color: rgba(0, 255, 65, 0.3); 
+        }
+
+        /* Sidebar */
+        .sidebar { 
+            position: sticky; 
+            top: 160px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 2rem; 
+        }
+        .sidebar-section { 
+            background: var(--color-dark-grey); 
+            border-radius: var(--border-radius); 
+            padding: 1.5rem; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        .sidebar-section h3 { 
+            color: var(--color-green); 
+            margin-bottom: 1.5rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+        }
+
+        .trending-item { 
+            display: flex; 
+            gap: 1rem; 
+            padding: 1rem 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        .trending-item:last-child { border-bottom: none; }
+        .trending-link { 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 1rem; 
+        }
+        .trending-link:hover h4 { color: var(--color-green); }
+        .trending-number { 
+            color: var(--color-green); 
+            font-weight: 700; 
+            font-size: 1.3rem; 
+            min-width: 30px; 
+        }
+        .trending-content h4 { 
+            font-size: 0.9rem; 
+            color: var(--color-white); 
+            margin-bottom: 0.5rem; 
+            transition: color 0.2s ease; 
+        }
+        .trending-content span { 
+            color: var(--color-grey); 
+            font-size: 0.8rem; 
+        }
+
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 1rem; 
+            margin-top: 1rem; 
+        }
+        .stat-item { 
+            text-align: center; 
+            padding: 1rem; 
+            background: rgba(0, 0, 0, 0.3); 
+            border-radius: var(--border-radius-sm); 
+        }
+        .stat-number { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            color: var(--color-green); 
+        }
+        .stat-label { 
+            font-size: 0.8rem; 
+            color: var(--color-grey); 
+        }
+
+        /* Empty State */
+        .empty-state { 
+            display: none; 
+            text-align: center; 
+            padding: 4rem 2rem; 
+            color: var(--color-grey); 
+        }
+        .empty-state.show { display: block; }
+        .empty-icon { 
+            font-size: 4rem; 
+            margin-bottom: 1rem; 
+            opacity: 0.5; 
+        }
+
+        /* Footer */
+        .footer { 
+            background: var(--color-dark-grey); 
+            border-top: 1px solid rgba(0, 255, 65, 0.1); 
+            padding: 3rem 1rem 1rem 1rem; 
+            margin-top: 4rem; 
+            text-align: center; 
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .news-grid { grid-template-columns: 1fr; }
+            .sidebar { 
+                position: static; 
+                display: grid; 
+                grid-template-columns: 1fr 1fr; 
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .search-controls { position: static; }
+            .controls-container { flex-direction: column; align-items: stretch; }
+            .search-box { min-width: auto; }
+            .sidebar { grid-template-columns: 1fr; }
+            .news-cards.grid-view { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/index" class="logo">
+                <i class="fas fa-shield-virus"></i>
+                <span>CipherHall</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/index"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/AllCourses"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+                <li><a href="/labs"><i class="fas fa-flask"></i> Labs</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile menu"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Cybersecurity <span class="highlight">Intelligence</span> Hub</h1>
+            <p>Stay ahead of emerging threats with real-time cybersecurity news, data breach reports, vulnerability alerts, and expert threat intelligence analysis from around the globe.</p>
+        </div>
+    </section>
+
+    <!-- Breaking News Ticker -->
+    <div class="breaking-news">
+        <div class="breaking-news-content">
+            <span class="breaking-label">🚨 Breaking</span>
+            <span id="tickerText">Loading latest threat intelligence...</span>
+        </div>
+    </div>
+
+    <!-- Search and Controls -->
+    <section class="search-controls">
+        <div class="controls-container">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search cybersecurity news, CVEs, threats...">
+            </div>
+          
+            <select class="sort-dropdown" id="sortDropdown">
+                <option value="newest" class="dropdown">Newest First</option>
+                <option value="oldest" class="dropdown">Oldest First</option>
+                <option value="severity" class="dropdown">By Severity</option>
+                <option value="alphabetical" class="dropdown">Alphabetical</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- News Filters -->
+    <section class="news-filters">
+        <div class="filters-container">
+            <button class="filter-btn active" data-category="all">All News</button>
+            <button class="filter-btn" data-category="data-breach">Data Breaches</button>
+            <button class="filter-btn" data-category="vulnerability">Vulnerabilities</button>
+            <button class="filter-btn" data-category="threat-intel">Threat Intel</button>
+            <button class="filter-btn" data-category="ransomware">Ransomware</button>
+            <button class="filter-btn" data-category="malware">Malware</button>
+            <button class="filter-btn" data-category="phishing">Phishing</button>
+        </div>
+    </section>
+
+    <!-- Main News Section -->
+    <section class="news-section">
+        <div class="news-container">
+            <div class="news-grid">
+                <main class="main-content">
+                    <div class="news-cards grid-view" id="newsCards">
+                        <!-- News cards populated by JS -->
+                    </div>
+                    <div class="empty-state" id="emptyState">
+                        <i class="fas fa-search empty-icon"></i>
+                        <h3>No articles found</h3>
+                        <p>Try adjusting your search terms or filters to find relevant cybersecurity news.</p>
+                    </div>
+                </main>
+
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3><i class="fas fa-fire"></i> Trending Now</h3>
+                        <div id="trendingList"></div>
+                    </div>
+                    
+                    <div class="sidebar-section">
+                        <h3><i class="fas fa-chart-bar"></i> Threat Statistics</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">24</div>
+                                <div class="stat-label">Critical CVEs</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">156</div>
+                                <div class="stat-label">Active Threats</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">89</div>
+                                <div class="stat-label">Breach Reports</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">312</div>
+                                <div class="stat-label">IOCs Updated</div>
+                            </div>
+                        </div>
+                    </div>
+
+                                       <div class="sidebar-section">
+                        <h3><i class="fas fa-tags"></i> Categories</h3>
+                        <div class="category-list">
+                            <a href="#" onclick="filterByCategory('data-breach'); return false;">
+                                <i class="fas fa-exclamation-triangle"></i> Data Breaches
+                            </a>
+                            <a href="#" onclick="filterByCategory('vulnerability'); return false;">
+                                <i class="fas fa-bug"></i> Vulnerabilities
+                            </a>
+                            <a href="#" onclick="filterByCategory('threat-intel'); return false;">
+                                <i class="fas fa-eye"></i> Threat Intel
+                            </a>
+                            <a href="#" onclick="filterByCategory('ransomware'); return false;">
+                                <i class="fas fa-lock"></i> Ransomware
+                            </a>
+                             <a href="#" onclick="filterByCategory('phishing'); return false;">
+                                <i class="fas fa-fish"></i> Phishing
+                            </a>
+                            <a href="#" onclick="filterByCategory('malware'); return false;">
+                                <i class="fas fa-virus"></i> Malware
+                            </a>
+                            <a href="#" onclick="filterByCategory('cloud-security'); return false;">
+                                <i class="fas fa-cloud"></i> Cloud Security
+                            </a>
+                            <a href="#" onclick="filterByCategory('mobile-security'); return false;">
+                                <i class="fas fa-mobile-alt"></i> Mobile Security
+                            </a>
+                             <a href="#" onclick="filterByCategory('ai-security'); return false;">
+                                <i class="fas fa-robot"></i> AI Security
+                            </a>
+                             <a href="#" onclick="filterByCategory('supply-chain'); return false;">
+                                <i class="fas fa-link"></i> Supply Chain
+                            </a>
+                            <a href="#" onclick="filterByCategory('policy-regulation'); return false;">
+                                <i class="fas fa-gavel"></i> Policy & Regulation
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 CipherHall. All rights reserved. | Stay secure, stay informed.</p>
+    </footer>
+
+    <script>
+        // Enhanced News Data with Detailed Descriptions
+        const newsData = [
+            {
+                id: 1,
+                title: "Critical SAP S/4HANA Command Injection Vulnerability Under Active Exploitation",
+                excerpt: "A critical command injection flaw (CVE-2025-42957) in SAP S/4HANA is being actively exploited, allowing attackers with basic user privileges to achieve full system compromise.",
+                fullDescription: `
+                    <p>Security researchers have discovered and disclosed a critical command injection vulnerability in SAP's flagship enterprise resource planning (ERP) suite, S/4HANA. The vulnerability, designated as CVE-2025-42957, has been assigned a CVSS score of 9.8, indicating its critical severity level.</p>
+                    <p><strong>Attack Vector:</strong> The vulnerability exists in the Web Dynpro framework component of SAP S/4HANA, specifically in how the system processes user-supplied input in certain administrative functions. Attackers can exploit this flaw by injecting malicious commands through specially crafted HTTP requests to vulnerable endpoints.</p>
+                    <p><strong>Impact Assessment:</strong> Successful exploitation allows attackers to execute arbitrary operating system commands with the privileges of the SAP system user, potentially leading to complete system compromise. This includes unauthorized data access, system manipulation, and the ability to pivot to other connected systems within the enterprise network.</p>
+                    <p><strong>Affected Systems:</strong> All SAP S/4HANA systems running versions 2020, 2021, 2022, and 2023 are vulnerable. The issue affects both on-premise and cloud deployments, with over 440,000 SAP customers worldwide potentially at risk.</p>
+                `,
+                category: "vulnerability",
+                severity: "critical",
+                image: "https://pathlock.com/wp-content/uploads/2025/09/Critical-SAP-2025-31324-3.webp",
+                author: "Deeba Ahmed",
+                date: "2025-09-08",
+                readTime: "7 min read",
+                tags: ["SAP", "Command Injection", "ERP", "Enterprise Security", "CVE-2025-42957"],
+                technicalDetails: { "CVE ID": "CVE-2025-42957", "CVSS Score": "9.8 (Critical)", "Attack Vector": "Network", "Privileges Required": "Low" },
+                views: 52400,
+                shares: 1250
+            },
+            {
+                id: 2,
+                title: "CISA Orders Federal Agencies to Patch Actively Exploited Sitecore Zero-Day",
+                excerpt: "Following reports of active attacks, CISA has added a critical Sitecore vulnerability (CVE-2025-53690) to its Known Exploited Vulnerabilities catalog, mandating immediate patching.",
+                fullDescription: `
+                    <p>The Cybersecurity and Infrastructure Security Agency (CISA) has issued an emergency directive requiring all federal agencies to immediately patch a critical zero-day vulnerability in Sitecore Experience Platform (XP) and Sitecore Experience Manager (XM).</p>
+                    <p><strong>Vulnerability Details:</strong> CVE-2025-53690 is an authentication bypass vulnerability that allows remote attackers to gain administrative access to Sitecore-based websites without any user credentials. The flaw exists in the Sitecore.Security.Authentication module and affects how the platform validates user sessions.</p>
+                    <p><strong>Active Exploitation:</strong> Multiple cybersecurity firms have reported detecting active exploitation attempts across various sectors, including government, healthcare, and financial services. The attacks appear to be coordinated, suggesting involvement of well-resourced threat actors.</p>
+                `,
+                category: "vulnerability",
+                severity: "critical",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz4WQDgqGrmv2FNNrNZ2KYXKyspPc72JhI6g&s",
+                author: "Jonathan Greig",
+                date: "2025-09-07",
+                readTime: "5 min read",
+                tags: ["CISA", "Sitecore", "Zero-day", "Authentication Bypass", "Federal Agencies"],
+                technicalDetails: { "CVE ID": "CVE-2025-53690", "CVSS Score": "9.1 (Critical)", "Attack Vector": "Network", "Patch Status": "Available" },
+                views: 48200,
+                shares: 980
+            },
+            {
+                id: 3,
+                title: "Maersk Discloses Data Breach Through Third-Party Logistics Vendor",
+                excerpt: "Global shipping leader Maersk has notified customers of a data breach originating from a compromised third-party service provider, exposing customer shipping data and personal information.",
+                fullDescription: `
+                    <p>A.P. Moller-Maersk, the world's largest container shipping company, has disclosed a significant data breach affecting customer information through a compromise of one of its third-party logistics service providers.</p>
+                    <p><strong>Compromised Data:</strong> The breach exposed a wide range of customer information including full names, email addresses, phone numbers, shipping addresses, cargo descriptions, shipment tracking numbers, and in some cases, commercial invoicing details. While no payment card information was directly exposed, some commercial contract terms may have been accessed.</p>
+                    <p><strong>Third-Party Risk:</strong> This incident highlights the growing challenge of third-party risk management in global supply chains. The compromised vendor, identified as a logistics software provider, had extensive integration with Maersk's customer data systems to facilitate shipment tracking and management services.</p>
+                `,
+                category: "data-breach",
+                severity: "high",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ03H-i9a56tQBVILLliRgST2eOSOZpFa3cJw&s",
+                author: "DataBreachToday",
+                date: "2025-09-06",
+                readTime: "6 min read",
+                tags: ["Maersk", "Third-party Breach", "Supply Chain", "Customer Data", "Logistics"],
+                technicalDetails: { "Incident Type": "Third-party Data Breach", "Discovery Date": "August 28, 2025", "Affected Records": "247,000 customers" },
+                views: 35600,
+                shares: 720
+            },
+            {
+                id: 4,
+                title: "REvil Ransomware Group Resurfaces with Financial Sector Targeting Campaign",
+                excerpt: "The notorious REvil ransomware group has resumed operations with a sophisticated campaign targeting mid-tier financial institutions using a new strain called 'REvil 3.0'.",
+                fullDescription: `
+                    <p>Cybersecurity researchers have confirmed the return of the REvil (Sodinokibi) ransomware group with a highly targeted campaign against financial institutions across North America and Europe. The group, which was previously disrupted by international law enforcement operations in 2021, has emerged with enhanced tactics and a new ransomware strain dubbed "REvil 3.0."</p>
+                    <p><strong>Technical Analysis:</strong> REvil 3.0 incorporates advanced evasion techniques including living-off-the-land binaries (LOLBins), memory-only execution, and AI-powered target reconnaissance. The malware now includes built-in data exfiltration capabilities and can automatically identify and prioritize high-value financial data for theft before encryption.</p>
+                    <p><strong>Ransom Demands:</strong> The group's ransom demands have significantly increased, with recent victims reportedly being asked for payments ranging from $5 million to $25 million. The attackers threaten to auction stolen financial data on dark web marketplaces if ransoms are not paid within 72 hours.</p>
+                `,
+                category: "ransomware",
+                severity: "critical",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO23TqASFlD0StJO-zTOzyOXKy4rC8vNWUAw&s",
+                author: "CrowdStrike Intelligence",
+                date: "2025-09-05",
+                readTime: "8 min read",
+                tags: ["REvil", "Ransomware", "Financial Sector", "Banking Security", "Threat Intelligence"],
+                technicalDetails: { "Threat Group": "REvil (Sodinokibi)", "Campaign Name": "Operation FinLock", "Target Sector": "Financial Services", "Ransom Range": "$5M - $25M" },
+                views: 41200,
+                shares: 890
+            },
+            {
+                id: 5,
+                title: "New 'Wi-Fi Flicker' Attack Manipulates Smart Home Devices Remotely",
+                excerpt: "Security researchers demonstrate a novel attack technique that uses precisely timed Wi-Fi signal fluctuations to reset and compromise IoT devices without network access.",
+                fullDescription: `
+                    <p>Cybersecurity researchers from the University of Colorado Boulder have unveiled a groundbreaking attack methodology called "Wi-Fi Flicker" that exploits the power management features of smart home devices to gain unauthorized control without ever connecting to the target network.</p>
+                    <p><strong>Attack Mechanism:</strong> The Wi-Fi Flicker attack works by rapidly switching a Wi-Fi access point on and off at specific frequencies that match the power-saving intervals of target IoT devices. This causes vulnerable devices to enter an unstable state where they may reset to factory defaults, disconnect from their secure networks, or enter pairing mode.</p>
+                    <p><strong>Real-World Implications:</strong> In practical attack scenarios, malicious actors could drive through residential neighborhoods with a modified Wi-Fi router and reset multiple smart home devices simultaneously. Once reset, many devices default to open configuration modes, allowing attackers to establish malicious connections and gain persistent access to home networks.</p>
+                `,
+                category: "vulnerability",
+                severity: "medium",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIjdCvQFFLPiUIHoiYkrCJguWuwbx12uoag&s",
+                author: "Dr. Sarah Chen, University of Colorado",
+                date: "2025-09-04",
+                readTime: "6 min read",
+                tags: ["IoT Security", "Wi-Fi Attacks", "Smart Home", "Device Manipulation", "Research"],
+                technicalDetails: { "Attack Type": "RF Signal Manipulation", "Affected Protocols": "IEEE 802.11 (Wi-Fi)", "Success Rate": "87% of tested devices" },
+                views: 28900,
+                shares: 650
+            },
+            {
+                id: 6,
+                title: "Sophisticated Phishing Campaign Targets Cryptocurrency Executives with AI-Generated Deepfakes",
+                excerpt: "A new phishing campaign uses AI-generated video deepfakes of known cryptocurrency leaders to trick executives into revealing wallet credentials and private keys.",
+                fullDescription: `
+                    <p>Cybersecurity firm Chainalysis has uncovered a sophisticated phishing operation that leverages artificial intelligence to create convincing deepfake videos of prominent cryptocurrency figures, targeting C-level executives at digital asset companies worldwide.</p>
+                    <p><strong>Attack Methodology:</strong> Victims receive personalized LinkedIn messages or emails containing links to supposedly exclusive video conferences or interviews. When clicked, these links lead to realistic video calls featuring AI-generated deepfakes of cryptocurrency celebrities discussing "urgent security matters" or "exclusive investment opportunities" that require immediate wallet verification.</p>
+                    <p><strong>Financial Impact:</strong> At least 12 executives have fallen victim to these attacks, resulting in the theft of cryptocurrency assets worth an estimated $47 million. The stolen funds have been traced through multiple blockchain mixing services, making recovery extremely difficult.</p>
+                `,
+                category: "phishing",
+                severity: "high",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY6UBf2mK6tx7qdEpsp8tJx60BYWpVZk1iYg&s",
+                author: "Chainalysis Threat Intelligence",
+                date: "2025-09-03",
+                readTime: "7 min read",
+                tags: ["Deepfakes", "Cryptocurrency", "AI Phishing", "Executive Targeting", "Social Engineering"],
+                technicalDetails: { "Campaign Name": "CryptoFake", "Active Since": "July 2025", "Financial Losses": "$47 million" },
+                views: 33800,
+                shares: 775
+            },
+            {
+                id: 7,
+                title: "Critical Infrastructure Alert: Russian APT Group Targets US Power Grid with New 'GridLock' Malware",
+                excerpt: "US-CERT warns of active targeting of electrical power generation facilities by Russian state-sponsored actors using previously unknown malware designed for operational disruption.",
+                fullDescription: `
+                    <p>The United States Computer Emergency Readiness Team (US-CERT) has issued a high-priority alert regarding ongoing cyberattacks against American electrical power infrastructure by a Russian Advanced Persistent Threat (APT) group designated as "Volt Typhoon 2.0."</p>
+                    <p><strong>GridLock Malware Analysis:</strong> The newly discovered malware, designated "GridLock," is specifically engineered to interact with Industrial Control Systems (ICS) and Supervisory Control and Data Acquisition (SCADA) systems commonly used in power plants. The malware can modify operational parameters, disable safety systems, and create cascading failures across interconnected power grids.</p>
+                `,
+                category: "threat-intel",
+                severity: "critical",
+                image: "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iaONT9B3xi1I/v0/-1x-1.webp",
+                author: "US-CERT Threat Intelligence",
+                date: "2025-09-02",
+                readTime: "9 min read",
+                tags: ["Critical Infrastructure", "Russian APT", "Power Grid", "GridLock Malware", "National Security"],
+                technicalDetails: { "Threat Group": "Volt Typhoon 2.0 (Russian GRU)", "Malware Family": "GridLock", "Target Systems": "ICS/SCADA" },
+                views: 67200,
+                shares: 1450
+            },
+            {
+                id: 8,
+                title: "Healthcare Data Breach: Anthem Health Plans Exposes 2.1 Million Patient Records",
+                excerpt: "Major health insurer Anthem has disclosed a cybersecurity incident affecting 2.1 million members' personal health information due to a misconfigured cloud storage system.",
+                fullDescription: `
+                    <p>Anthem Inc., one of the largest health insurance companies in the United States, has reported a significant data breach affecting approximately 2.1 million members' protected health information (PHI) and personally identifiable information (PII).</p>
+                    <p><strong>Incident Details:</strong> The breach was discovered during a routine security audit on August 20, 2025, when Anthem's cybersecurity team identified a misconfigured Amazon S3 storage bucket containing sensitive member data. The bucket had been inadvertently set to public access permissions during a cloud migration project completed in June 2025.</p>
+                `,
+                category: "data-breach",
+                severity: "high",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8aEV-mBIZxlipH7vJW1_BAwjFiO8tPaj6Ow&s",
+                author: "Healthcare IT Security",
+                date: "2025-09-01",
+                readTime: "6 min read",
+                tags: ["Healthcare", "HIPAA Violation", "Cloud Security", "PHI Breach", "Insurance"],
+                technicalDetails: { "Affected Records": "2.1 million members", "Discovery Method": "Security audit", "Exposure Duration": "8 weeks" },
+                views: 45600,
+                shares: 920
+            },
+            {
+                id: 9,
+                title: "VMware vCenter Flaw (CVE-2025-62841) Allows for Complete Datacenter Takeover",
+                excerpt: "A critical remote code execution vulnerability in VMware vCenter Server could allow unauthenticated attackers to gain full control over entire virtualized datacenters.",
+                fullDescription: `
+                    <p>VMware has released an emergency patch for a critical vulnerability, CVE-2025-62841, affecting its vCenter Server product. The flaw, with a CVSS score of 10.0, allows for unauthenticated remote code execution, posing a severe risk to thousands of organizations that rely on VMware for their virtual infrastructure.</p>
+                    <p><strong>Technical Breakdown:</strong> The vulnerability lies within the vCenter Server's plugin architecture, where improper handling of uploaded plugin packages can lead to arbitrary file writes. An attacker can exploit this by uploading a malicious package, leading to code execution with the highest system privileges on the vCenter appliance.</p>
+                `,
+                category: "vulnerability",
+                severity: "critical",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPhgsyx4SWCcqwuSXZjSmLh1_9IdVauGVu-w&s",
+                author: "The Hacker News",
+                date: "2025-08-31",
+                readTime: "7 min read",
+                tags: ["VMware", "vCenter", "RCE", "Datacenter", "Virtualization"],
+                technicalDetails: { "CVE ID": "CVE-2025-62841", "CVSS Score": "10.0 (Critical)", "Vector": "Remote", "Authentication": "None" },
+                views: 59100,
+                shares: 1100
+            },
+            {
+                id: 10,
+                title: "LockBit 4.0 Ransomware Adds 'Data Destruction' Feature in Double Extortion Tactic",
+                excerpt: "The latest version of the prolific LockBit ransomware, dubbed 'LockBit 4.0', now includes a feature to permanently destroy victim data if ransom negotiations fail, escalating pressure on victims.",
+                fullDescription: `
+                    <p>The LockBit ransomware gang has once again evolved its tactics with the introduction of LockBit 4.0. Beyond the standard data encryption and exfiltration, the new variant includes a 'data wiper' component. This module is designed to be remotely triggered by the attackers, permanently deleting all encrypted data and system backups if a victim refuses to pay or if law enforcement is involved.</p>
+                    <p><strong>Psychological Pressure:</strong> Security analysts believe this new feature is a purely psychological tactic designed to increase the pressure on organizations to pay the ransom quickly. The threat of complete and irreversible data loss adds a new layer to the double extortion model.</p>
+                `,
+                category: "ransomware",
+                severity: "critical",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOJm8_vdv3kGubeCngy7BKAcWTjO2ZkQ5nJA&s",
+                author: "BleepingComputer",
+                date: "2025-08-30",
+                readTime: "5 min read",
+                tags: ["LockBit", "Ransomware", "Data Wiper", "Extortion", "Cybercrime"],
+                technicalDetails: { "Threat Group": "LockBit", "Variant": "4.0", "New Tactic": "Data Destruction", "Targeting": "Opportunistic" },
+                views: 42300,
+                shares: 950
+            },
+            {
+                id: 11,
+                title: "Major US School District Paralyzed by Ransomware, Student and Staff Data Leaked",
+                excerpt: "A large metropolitan school district has shut down all its IT systems following a severe ransomware attack. The attackers have already leaked sensitive data of over 50,000 students and staff.",
+                fullDescription: `
+                    <p>The Springfield Unified School District, serving over 100,000 students, has confirmed it is the victim of a crippling ransomware attack. The attack, which began over the weekend, has forced the closure of all schools in the district as IT systems, including communication, grading, and student information systems, are offline.</p>
+                    <p><strong>Leaked Data:</strong> The hacking group responsible has already published a 50GB data sample on their leak site, containing student names, addresses, grades, disciplinary records, and staff payroll information, including Social Security numbers.</p>
+                `,
+                category: "data-breach",
+                severity: "high",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv6yLIqHEYD9SuPJBui1iRDv9jq24CWCA4HQ&s",
+                author: "Krebs on Security",
+                date: "2025-08-29",
+                readTime: "6 min read",
+                tags: ["Education", "Ransomware", "Data Breach", "Student Data", "PII"],
+                technicalDetails: { "Victim": "School District", "Attack Type": "Ransomware + Data Leak", "Leaked Data": "50GB", "Impact": "System-wide shutdown" },
+                views: 31500,
+                shares: 680
+            },
+            {
+                id: 12,
+                title: "Surge in 'Quishing' Attacks: QR Code Phishing Bypasses Traditional Email Security",
+                excerpt: "Threat actors are increasingly using QR codes in emails to bypass security scanners and direct users to malicious websites, a technique known as 'Quishing'.",
+                fullDescription: `
+                    <p>A new wave of phishing campaigns is successfully bypassing corporate email security filters by embedding malicious links within QR codes. Since most email scanners are designed to analyze text and URLs, they often fail to inspect the content of images like QR codes.</p>
+                    <p><strong>Attack Flow:</strong> Employees receive emails that appear to be from IT support, requesting them to re-authenticate their multi-factor authentication (MFA) by scanning a QR code with their phone. The code directs them to a credential harvesting page that perfectly mimics their organization's login portal.</p>
+                `,
+                category: "phishing",
+                severity: "medium",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStmi3ydZinYwKHdc10ySosPhAbe5Xbn1Peew&s",
+                author: "Proofpoint Research",
+                date: "2025-08-28",
+                readTime: "4 min read",
+                tags: ["Phishing", "QR Code", "Quishing", "Email Security", "MFA"],
+                technicalDetails: { "Technique": "Quishing", "Vector": "Email", "Payload": "Credential Harvester", "Evasion": "Bypasses URL scanners" },
+                views: 29800,
+                shares: 810
+            },
+            {
+                id: 13,
+                title: "Lazarus Group Targets DeFi Platforms with Sophisticated Social Engineering",
+                excerpt: "The North Korean-linked Lazarus APT group is using fake job offers and social media personas to compromise developers at decentralized finance (DeFi) platforms.",
+                fullDescription: `
+                    <p>Mandiant threat intelligence has identified a new campaign by the Lazarus Group targeting developers and engineers in the DeFi space. The attackers create convincing fake profiles on LinkedIn, posing as recruiters from major crypto firms. After establishing trust, they send a "coding challenge" or "job description" document embedded with custom malware.</p>
+                    <p><strong>Malware Deployed:</strong> The malware, a new variant of the 'AppleJeus' family, acts as a backdoor, giving Lazarus full access to the developer's machine. The ultimate goal is to steal private keys from company wallets and drain funds from the DeFi protocols.</p>
+                `,
+                category: "threat-intel",
+                severity: "high",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx5PtkVqZzPzXwbKxEvcR43eXuqYy4ii1AzQ&s",
+                author: "Mandiant",
+                date: "2025-08-27",
+                readTime: "8 min read",
+                tags: ["Lazarus Group", "North Korea", "DeFi", "Cryptocurrency", "APT"],
+                technicalDetails: { "Threat Group": "Lazarus (APT38)", "Target": "DeFi Developers", "Malware": "AppleJeus", "Goal": "Financial Theft" },
+                views: 38900,
+                shares: 900
+            },
+            {
+                id: 14,
+                title: "New Android Malware 'GoldDigger' Steals Facial Recognition Data to Bypass Biometrics",
+                excerpt: "A new Android trojan named 'GoldDigger' is capable of capturing high-resolution facial scans and voice data to create deepfakes that can bypass biometric security checks in banking apps.",
+                fullDescription: `
+                    <p>Security researchers at Zimperium have discovered a highly sophisticated Android banking malware. Distributed through third-party app stores, 'GoldDigger' uses deceptive accessibility service permissions to record the screen and capture facial data when a user logs into a legitimate banking app. It then exfiltrates this data to an attacker's server, where it can be used to generate deepfakes to authorize fraudulent transactions.</p>
+                `,
+                category: "malware",
+                severity: "high",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScec71gZdjuytvLcFw17mxq_VHnl01WMqnpw&s",
+                author: "Zimperium zLabs",
+                date: "2025-08-26",
+                readTime: "6 min read",
+                tags: ["Android", "Malware", "Biometrics", "Deepfake", "Mobile Security"],
+                technicalDetails: { "Malware": "GoldDigger", "Platform": "Android", "Capability": "Facial Data Theft", "Target": "Banking Apps" },
+                views: 34500,
+                shares: 780
+            },
+            {
+                id: 15,
+                title: "SEC Fines Major Corporation $35M for Delayed Cyberattack Disclosure",
+                excerpt: "The U.S. Securities and Exchange Commission (SEC) has imposed a $35 million penalty on a publicly traded company for failing to disclose a material cybersecurity incident within the newly mandated four-day reporting window.",
+                fullDescription: `
+                    <p>In the first major enforcement action under its new cybersecurity disclosure rules, the SEC has fined SolarWinds Corporation $35 million. The agency found that the company intentionally delayed reporting a known, material data breach for over six weeks, violating rules that require disclosure within four business days of determining an incident's materiality.</p>
+                    <p>This landmark case sets a strong precedent for all publicly traded companies, emphasizing the SEC's commitment to enforcing timely and transparent communication about cybersecurity risks to investors.</p>
+                `,
+                category: "policy-regulation",
+                severity: "medium",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrEdDKT_W3RXT1vuOpMqG9jcqfnGvGza6vnQ&s",
+                author: "Wall Street Journal",
+                date: "2025-08-25",
+                readTime: "5 min read",
+                tags: ["SEC", "Regulation", "Disclosure", "Compliance", "Cybersecurity Law"],
+                technicalDetails: { "Agency": "SEC", "Action": "Fine", "Amount": "$35 Million", "Reason": "Delayed Breach Disclosure" },
+                views: 29000,
+                shares: 550
+            },
+            {
+                id: 16,
+                title: "Attackers Poison AI Models with 'Nightshade' Data Contamination Tool",
+                excerpt: "A new tool called Nightshade allows artists to subtly alter the pixels in their online images, causing catastrophic failures in AI models that attempt to train on them.",
+                fullDescription: `
+                    <p>Researchers at the University of Chicago have released a tool that represents a new form of protest against generative AI models. Nightshade allows creators to 'poison' their own artwork before uploading it. To the human eye, the images look normal, but to an AI model, the poisoned data manipulates the training process, causing the model to learn incorrect associations. For example, a poisoned image of a 'dog' might teach the model that dogs have ten legs.</p>
+                    <p>This raises significant security concerns for companies developing large language and image models, as widespread use of such tools could corrupt expensive training datasets.</p>
+                `,
+                category: "ai-security",
+                severity: "medium",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOvb2AY7iUMFf6619n_xhV_mX-CLEk0gUcRA&s",
+                author: "MIT Technology Review",
+                date: "2025-08-24",
+                readTime: "6 min read",
+                tags: ["AI", "Machine Learning", "Data Poisoning", "Generative AI", "Cyber Attack"],
+                technicalDetails: { "Tool": "Nightshade", "Attack": "Data Poisoning", "Target": "AI Training Models", "Impact": "Model Corruption" },
+                views: 36700,
+                shares: 880
+            },
+            {
+                id: 17,
+                title: "Popular NPM Package 'color-echo' Compromised in Supply Chain Attack",
+                excerpt: "The widely-used 'color-echo' NPM package, with over 5 million weekly downloads, was hijacked to include malicious code that steals developer credentials and environment variables.",
+                fullDescription: `
+                    <p>In a classic supply chain attack, the developer account for the popular 'color-echo' JavaScript library was compromised. The attacker then published a new version containing a malicious post-install script. This script would scan the developer's machine for AWS keys, SSH keys, and other sensitive credentials stored in environment variables, then exfiltrate them to a remote server.</p>
+                    <p>The malicious versions were available on the NPM registry for over 12 hours before being detected and removed, potentially compromising thousands of development environments.</p>
+                `,
+                category: "supply-chain",
+                severity: "critical",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvicPHObWsJVxwiwh6jq24W1JK3rZyiWVLPA&sps://images.unsplash.com/photo-1618422168128-83149c48373b?auto=format&fit=crop&w=1000&q=80",
+                author: "The Register",
+                date: "2025-08-23",
+                readTime: "5 min read",
+                tags: ["NPM", "JavaScript", "Supply Chain", "Credential Theft", "Open Source"],
+                technicalDetails: { "Package": "color-echo", "Vector": "Account Takeover", "Payload": "Credential Stealer", "Impact": "Developer Compromise" },
+                views: 44000,
+                shares: 1020
+            },
+            {
+                id: 18,
+                title: "Massive Cloud Misconfiguration Exposes 38 Million Records at Travel Conglomerate",
+                excerpt: "A major travel booking conglomerate left a series of Elasticsearch databases exposed without a password, leaking over 38 million customer and flight records.",
+                fullDescription: `
+                    <p>Cybersecurity researchers discovered several publicly accessible Elasticsearch clusters belonging to a global travel company. The databases contained sensitive records including passenger names, passport numbers, flight itineraries, and the last four digits of credit cards. The exposure was due to a lack of authentication controls on the cloud-hosted databases.</p>
+                    <p>The data was accessible for an indeterminate period, highlighting ongoing risks associated with rapid cloud adoption without proper security oversight.</p>
+                `,
+                category: "cloud-security",
+                severity: "high",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ12IjHYauV6dfrrnLdg1QPGJV6KjhJ7uMhBg&s",
+                author: "Wired",
+                date: "2025-08-22",
+                readTime: "4 min read",
+                tags: ["Cloud Security", "Misconfiguration", "Data Leak", "Elasticsearch", "Travel Industry"],
+                technicalDetails: { "Technology": "Elasticsearch", "Cause": "No Authentication", "Records Exposed": "38 Million", "Industry": "Travel" },
+                views: 31200,
+                shares: 610
+            },
+            {
+                id: 19,
+                title: "iOS Zero-Click Exploit 'PhantomTap' Bypasses Lockdown Mode",
+                excerpt: "Researchers at Google's Project Zero have detailed a new zero-click exploit for iOS that can compromise a device through a malicious iMessage, even when Apple's Lockdown Mode is enabled.",
+                fullDescription: `
+                    <p>'PhantomTap' is a sophisticated exploit chain that leverages a previously unknown vulnerability in the way iOS processes rich content in iMessage. The exploit requires no user interaction and can install spyware on a fully patched iPhone. Notably, the researchers found a way to bypass Apple's high-security Lockdown Mode, which is designed to protect high-risk individuals from such attacks.</p>
+                `,
+                category: "mobile-security",
+                severity: "critical",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEaji5gnTG1EsxzWcJqAHF7HZRTYJHXFXOvA&s",
+                author: "Google Project Zero",
+                date: "2025-08-21",
+                readTime: "9 min read",
+                tags: ["iOS", "Zero-click", "Exploit", "Spyware", "Mobile Security"],
+                technicalDetails: { "Exploit": "PhantomTap", "Platform": "iOS", "Vector": "iMessage (Zero-Click)", "Bypass": "Lockdown Mode" },
+                views: 55900,
+                shares: 1300
+            },
+            {
+                id: 20,
+                title: "Europol Dismantles 'LabHost,' a Major Phishing-as-a-Service Platform",
+                excerpt: "An international law enforcement operation led by Europol has resulted in the takedown of LabHost, a service that provided phishing kits to thousands of cybercriminals.",
+                fullDescription: `
+                    <p>LabHost was a one-stop-shop for cybercriminals, offering high-quality phishing kits targeting banks, social media, and government services. The platform operated on a subscription model, allowing even low-skilled actors to launch sophisticated phishing campaigns. The operation involved police forces from 19 countries and resulted in 37 arrests and the seizure of over 100 servers.</p>
+                `,
+                category: "threat-intel",
+                severity: "low",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_RO1-L7b51DI6mQDyGNPC8i79nPy5ZhmYvg&s",
+                author: "Europol",
+                date: "2025-08-20",
+                readTime: "5 min read",
+                tags: ["Europol", "Takedown", "Phishing-as-a-Service", "Law Enforcement", "Cybercrime"],
+                technicalDetails: { "Platform": "LabHost", "Operation": "International Takedown", "Arrests": "37", "Impact": "Disruption of Phishing Operations" },
+                views: 25400,
+                shares: 500
+            },
+            {
+                id: 21,
+                title: "BlackCat Ransomware Cripples Hospital Network, Demands $10 Million",
+                excerpt: "The BlackCat/ALPHV ransomware group has claimed responsibility for an attack on a major hospital network, forcing the cancellation of surgeries and diverting emergency patients.",
+                fullDescription: `
+                    <p>A multi-state hospital network has been forced to revert to paper-based systems after a ransomware attack encrypted their electronic health record (EHR) systems. The BlackCat group has threatened to leak over 1TB of sensitive patient data unless a $10 million ransom is paid. The FBI and CISA are assisting with the investigation.</p>
+                `,
+                category: "ransomware",
+                severity: "critical",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfevrx5AGKwZEkNS7Xuv2ai0mVakJHhH8p44xDmsaaI1xgODhdbsP7cndYkyXPHhitRNo&usqp=CAU",
+                author: "Dark Reading",
+                date: "2025-08-19",
+                readTime: "6 min read",
+                tags: ["BlackCat", "Ransomware", "Healthcare", "EHR", "Patient Data"],
+                technicalDetails: { "Threat Group": "BlackCat/ALPHV", "Victim": "Hospital Network", "Ransom": "$10 Million", "Impact": "Operational Disruption" },
+                views: 40100,
+                shares: 910
+            },
+            {
+                id: 22,
+                title: "Microsoft Exchange On-Prem Servers Targeted by New Zero-Day Exploit Chain",
+                excerpt: "Microsoft has issued an out-of-band patch for two new zero-day vulnerabilities in on-premise Exchange Servers that are being actively exploited in the wild.",
+                fullDescription: `
+                    <p>Designated CVE-2025-71138 and CVE-2025-71139, the two vulnerabilities can be chained together to achieve unauthenticated remote code execution on vulnerable servers. Microsoft's Threat Intelligence Center has observed a state-sponsored actor using the exploit chain to deploy web shells for long-term persistence and data theft. All organizations running on-premise Exchange are urged to patch immediately.</p>
+                `,
+                category: "vulnerability",
+                severity: "critical",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH6YXRF-mB7R3gPbRbZjUb_yCdG_bCEudb4g&s",
+                author: "Microsoft Security Response Center",
+                date: "2025-08-18",
+                readTime: "5 min read",
+                tags: ["Microsoft Exchange", "Zero-day", "RCE", "Web Shell", "Patch"],
+                technicalDetails: { "CVEs": "CVE-2025-71138, CVE-2025-71139", "Product": "MS Exchange Server", "Impact": "Remote Code Execution", "Status": "Actively Exploited" },
+                views: 47600,
+                shares: 1150
+            },
+            {
+                id: 23,
+                title: "Deepfake Audio Used to Authorize $15 Million Fraudulent Wire Transfer",
+                excerpt: "In a sophisticated social engineering attack, criminals used AI-generated audio to impersonate a company's CEO and convince a finance manager to authorize a fraudulent $15 million wire transfer.",
+                fullDescription: `
+                    <p>A UK-based energy firm has reported a major financial loss after one of its senior finance managers was duped by an AI-powered voice deepfake. The manager received a call from what they believed was the company's CEO, who urgently requested a wire transfer to a new international supplier. The voice, tone, and accent were a perfect match. The fraud was only discovered hours later when the manager spoke with the real CEO.</p>
+                `,
+                category: "ai-security",
+                severity: "high",
+                image: "https://media.kasperskydaily.com/wp-content/uploads/sites/92/2023/07/10095211/audio-deepfake-technology-featured.jpg",
+                author: "Forbes",
+                date: "2025-08-15",
+                readTime: "4 min read",
+                tags: ["AI", "Deepfake", "Voice Phishing", "Vishing", "Wire Fraud"],
+                technicalDetails: { "Attack": "Voice Deepfake", "Method": "Vishing", "Loss": "$15 Million", "Impersonation": "CEO" },
+                views: 32400,
+                shares: 750
+            },
+            {
+                id: 24,
+                title: "Attack on Managed Service Provider (MSP) Hits 200+ Downstream Clients",
+                excerpt: "A ransomware attack on a prominent Managed Service Provider (MSP) has had a cascading effect, leading to service disruptions and data encryption for over 200 of its small business clients.",
+                fullDescription: `
+                    <p>Cybercriminals breached the network of 'SecureIT Solutions,' a mid-sized MSP, and used its remote management tools to deploy ransomware across the networks of its clients. This supply chain attack has effectively crippled hundreds of small businesses, including dental offices, law firms, and accounting agencies, who relied on the MSP for their IT infrastructure.</p>
+                `,
+                category: "supply-chain",
+                severity: "high",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIVJGHS8mXKj14ioIwv-GG70O4E2SbqjhfTA&s",
+                author: "CRN",
+                date: "2025-08-14",
+                readTime: "6 min read",
+                tags: ["MSP", "Supply Chain", "Ransomware", "Small Business", "Third-party Risk"],
+                technicalDetails: { "Attack Type": "Supply Chain", "Vector": "Compromised MSP", "Downstream Victims": "200+", "Payload": "Ransomware" },
+                views: 38800,
+                shares: 820
+            },
+            {
+                id: 25,
+                title: "New macOS Info-stealer 'ShadowApple' Spreads via Pirated Software",
+                excerpt: "A new information-stealing malware targeting macOS is being distributed through trojanized versions of popular software on torrent sites. 'ShadowApple' aims to steal browser cookies, passwords, and cryptocurrency wallet files.",
+                fullDescription: `
+                    <p>Security researchers at SentinelOne have identified a new strain of macOS malware named 'ShadowApple.' It is bundled with pirated versions of high-demand software like Final Cut Pro and Adobe Photoshop. Once executed, it quietly installs itself and begins exfiltrating sensitive data from the user's keychain, browser profiles, and crypto wallet applications.</p>
+                `,
+                category: "malware",
+                severity: "medium",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUQYfnvTdfHvCBVCvEGaERDdG0eNFpWn3TLw&s",
+                author: "SentinelOne",
+                date: "2025-08-12",
+                readTime: "5 min read",
+                tags: ["macOS", "Malware", "InfoStealer", "Pirated Software", "Apple Security"],
+                technicalDetails: { "Malware": "ShadowApple", "Platform": "macOS", "Type": "Information Stealer", "Distribution": "Torrents" },
+                views: 26100,
+                shares: 510
+            }
+        ];
+
+        const trendingTopics = [
+            { title: "SAP S/4HANA Critical Vulnerability", views: "67k", time: "2h ago" },
+            { title: "Russian APT Targets US Power Grid", views: "52k", time: "4h ago" },
+            { title: "CISA Emergency Sitecore Patch", views: "48k", time: "6h ago" },
+            { title: "REvil Ransomware Returns", views: "41k", time: "8h ago" },
+            { title: "Anthem Health Data Breach", views: "35k", time: "1d ago" }
+        ];
+
+        const tickerMessages = [
+            "🔥 CRITICAL: SAP S/4HANA command injection (CVE-2025-42957) under active exploitation - Patch immediately!",
+            "⚡ BREAKING: Russian APT group deploys 'GridLock' malware targeting US power infrastructure",
+            "🚨 URGENT: CISA orders federal agencies to patch Sitecore zero-day within 48 hours",
+            "💀 ALERT: REvil ransomware resurfaces with $25M ransom demands targeting financial sector",
+            "🔓 UPDATE: Anthem health breach exposes 2.1M patient records via misconfigured cloud storage"
+        ];
+
+        let currentFilter = 'all';
+        let currentView = 'grid';
+        let currentSort = 'newest';
+        let searchTerm = '';
+
+        // Utility Functions
+        const formatNumber = (num) => {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'k';
+            return num.toString();
+        };
+
+        const formatDate = (dateString) => {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays <= 7) return `${diffDays} days ago`;
+            return date.toLocaleDateString();
+        };
+
+        // Enhanced News Card Creation
+        const createNewsCard = (article) => {
+            const card = document.createElement('article');
+            card.className = 'news-card';
+            card.setAttribute('data-category', article.category);
+            card.setAttribute('data-id', article.id);
+            
+            card.innerHTML = `
+                <div class="card-image">
+                    <img src="${article.image}" alt="${article.title}" loading="lazy">
+                    <span class="severity-badge severity-${article.severity}">${article.severity}</span>
+                </div>
+                <div class="news-card-content">
+                    <span class="news-category ${article.category}">${article.category.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+                    <h3 class="news-title">${article.title}</h3>
+                    <p class="news-excerpt">${article.excerpt}</p>
+                    
+                    <div class="news-description" id="desc-${article.id}">
+                        <div class="description-content">
+                            ${article.fullDescription}
+                        </div>
+                        ${article.technicalDetails ? `
+                            <div class="technical-details">
+                                <h4><i class="fas fa-cogs"></i> Technical Details</h4>
+                                ${Object.entries(article.technicalDetails).map(([key, value]) => 
+                                    `<div class="tech-detail-item">
+                                        <span class="tech-key">${key}:</span>
+                                        <span class="tech-value">${value}</span>
+                                    </div>`
+                                ).join('')}
+                            </div>
+                        ` : ''}
+                        <div class="news-tags">
+                            ${article.tags.map(tag => `<span class="news-tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="news-meta">
+                        <div class="meta-left">
+                            <span><i class="fas fa-user"></i> ${article.author}</span>
+                            <span><i class="fas fa-calendar"></i> ${formatDate(article.date)}</span>
+                            <span><i class="fas fa-clock"></i> ${article.readTime}</span>
+                        </div>
+                        <div class="meta-right">
+                            <span><i class="fas fa-eye"></i> ${formatNumber(article.views)}</span>
+                            <button class="expand-btn" onclick="toggleDescription(${article.id})">
+                                <span class="expand-text">Read More</span>
+                                <i class="fas fa-chevron-down expand-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons" style="margin-top: 1rem; display: none;">
+                        <a href="#" class="action-btn" onclick="shareArticle(${article.id}); return false;">
+                            <i class="fas fa-share"></i> Share
+                        </a>
+                        <a href="#" class="action-btn" onclick="bookmarkArticle(${article.id}); return false;">
+                            <i class="fas fa-bookmark"></i> Save
+                        </a>
+                        <a href="#" class="action-btn" onclick="reportArticle(${article.id}); return false;">
+                            <i class="fas fa-flag"></i> Report
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        };
+
+        // Toggle Description Function
+        const toggleDescription = (articleId) => {
+            const description = document.getElementById(`desc-${articleId}`);
+            const button = document.querySelector(`[data-id="${articleId}"] .expand-btn`);
+            const expandText = button.querySelector('.expand-text');
+            const expandIcon = button.querySelector('.expand-icon');
+            const actionButtons = button.closest('.news-card').querySelector('.action-buttons');
+            
+            if (description.classList.contains('expanded')) {
+                description.classList.remove('expanded');
+                button.classList.remove('expanded');
+                expandText.textContent = 'Read More';
+                actionButtons.style.display = 'none';
+            } else {
+                description.classList.add('expanded');
+                button.classList.add('expanded');
+                expandText.textContent = 'Read Less';
+                actionButtons.style.display = 'flex';
+            }
+        };
+
+        // Search and Filter Functions
+        const filterNews = () => {
+            let filteredNews = newsData.filter(article => {
+                const matchesCategory = currentFilter === 'all' || article.category === currentFilter;
+                const matchesSearch = searchTerm === '' || 
+                    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+                
+                return matchesCategory && matchesSearch;
+            });
+
+            // Sort articles
+            switch (currentSort) {
+                case 'oldest':
+                    filteredNews.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    break;
+                case 'severity':
+                    const severityOrder = { 'critical': 4, 'high': 3, 'medium': 2, 'low': 1, 'info': 0 };
+                    filteredNews.sort((a, b) => severityOrder[b.severity] - severityOrder[a.severity]);
+                    break;
+                case 'alphabetical':
+                    filteredNews.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                default: // newest
+                    filteredNews.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+
+            return filteredNews;
+        };
+
+        const renderNews = () => {
+            const newsContainer = document.getElementById('newsCards');
+            const emptyState = document.getElementById('emptyState');
+            const filteredNews = filterNews();
+            
+            newsContainer.innerHTML = '';
+            
+            if (filteredNews.length === 0) {
+                emptyState.classList.add('show');
+            } else {
+                emptyState.classList.remove('show');
+                filteredNews.forEach(article => {
+                    newsContainer.appendChild(createNewsCard(article));
+                });
+            }
+        };
+
+        // Trending Topics Rendering
+        const renderTrendingTopics = () => {
+            const trendingList = document.getElementById('trendingList');
+            trendingList.innerHTML = '';
+            
+            trendingTopics.forEach((topic, index) => {
+                const item = document.createElement('div');
+                item.className = 'trending-item';
+                item.innerHTML = `
+                    <a href="#" onclick="performSearch('${topic.title}'); return false;" class="trending-link">
+                        <div class="trending-number">${index + 1}</div>
+                        <div class="trending-content">
+                            <h4>${topic.title}</h4>
+                            <span>${topic.views} views • ${topic.time}</span>
+                        </div>
+                    </a>
+                `;
+                trendingList.appendChild(item);
+            });
+        };
+
+        // Action Functions
+        const shareArticle = (articleId) => {
+            const article = newsData.find(a => a.id === articleId);
+            if (navigator.share) {
+                navigator.share({
+                    title: article.title,
+                    text: article.excerpt,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(`${article.title}\n${window.location.href}#article-${articleId}`);
+                showNotification('Article link copied to clipboard!');
+            }
+        };
+
+        const bookmarkArticle = (articleId) => {
+            const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+            if (!bookmarks.includes(articleId)) {
+                bookmarks.push(articleId);
+                localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+                showNotification('Article bookmarked!');
+            } else {
+                showNotification('Article already bookmarked!');
+            }
+        };
+
+        const reportArticle = (articleId) => {
+            showNotification('Thank you for your feedback. This article has been flagged for review.');
+        };
+
+        const showNotification = (message) => {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--color-green);
+                color: var(--color-black);
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                z-index: 10000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        };
+
+        // Category Filter Function
+        const filterByCategory = (category) => {
+            const filterButton = document.querySelector(`.filter-btn[data-category='${category}']`);
+            if (filterButton) {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                filterButton.classList.add('active');
+                currentFilter = category;
+                renderNews();
+            }
+        };
+
+        // Search Function
+        const performSearch = (query) => {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = query;
+            searchTerm = query;
+            renderNews();
+        };
+
+        // Particle Animation
+        const createParticles = () => {
+            const particlesContainer = document.getElementById('particles');
+            
+            setInterval(() => {
+                if (document.querySelectorAll('.particle').length < 50) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    particlesContainer.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 15000);
+                }
+            }, 800);
+        };
+
+        // Initialize Application
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial render
+            renderNews();
+            renderTrendingTopics();
+            createParticles();
+
+            // Breaking news ticker
+            const tickerText = document.getElementById('tickerText');
+            let tickerIndex = 0;
+            
+            const updateTicker = () => {
+                tickerIndex = (tickerIndex + 1) % tickerMessages.length;
+                tickerText.textContent = tickerMessages[tickerIndex];
+            };
+            
+            tickerText.textContent = tickerMessages[0];
+            setInterval(updateTicker, 8000);
+
+                    // Add this code inside the 'DOMContentLoaded' event listener block
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-nav-open');
+        });
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                searchTerm = e.target.value;
+                renderNews();
+            });
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelector('.filter-btn.active').classList.remove('active');
+                    button.classList.add('active');
+                    currentFilter = button.dataset.category;
+                    renderNews();
+                });
+            });
+
+            // View toggle
+            document.querySelectorAll('.view-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelector('.view-btn.active').classList.remove('active');
+                    button.classList.add('active');
+                    currentView = button.dataset.view;
+                    
+                    const newsCards = document.getElementById('newsCards');
+                    newsCards.className = `news-cards ${currentView}-view`;
+                });
+            });
+
+            // Sort dropdown
+            document.getElementById('sortDropdown').addEventListener('change', (e) => {
+                currentSort = e.target.value;
+                renderNews();
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+                .category-list a {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--color-grey);
+                    text-decoration: none;
+                    padding: 8px 0;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    transition: color 0.3s ease;
+                }
+                .category-list a:hover {
+                    color: var(--color-green);
+                }
+                .category-list a:last-child {
+                    border-bottom: none;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Additional utility functions for enhanced functionality
+        const exportArticles = () => {
+            const filteredNews = filterNews();
+            const dataStr = JSON.stringify(filteredNews, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'cybersecurity_news.json';
+            link.click();
+        };
+
+        const printArticle = (articleId) => {
+            const article = newsData.find(a => a.id === articleId);
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                    <head><title>${article.title}</title></head>
+                    <body style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
+                        <h1>${article.title}</h1>
+                        <p><strong>Author:</strong> ${article.author} | <strong>Date:</strong> ${article.date}</p>
+                        <p><strong>Category:</strong> ${article.category} | <strong>Severity:</strong> ${article.severity}</p>
+                        <div>${article.fullDescription}</div>
+                        <p><strong>Tags:</strong> ${article.tags.join(', ')}</p>
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        };
+
+        // Global functions for onclick handlers
+        window.toggleDescription = toggleDescription;
+        window.filterByCategory = filterByCategory;
+        window.performSearch = performSearch;
+        window.shareArticle = shareArticle;
+        window.bookmarkArticle = bookmarkArticle;
+        window.reportArticle = reportArticle;
+    </script>
+</body>
+</html>

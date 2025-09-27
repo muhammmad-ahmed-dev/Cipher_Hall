@@ -1,0 +1,3190 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ========== Start: SEO & Schema Enhancement ========== -->
+    <title>Computer Networking Basics Course | CipherHall</title>
+    <meta name="description" content="Enroll in our free beginner's course on computer networking. Learn protocols, devices, the OSI model, IP addressing, and troubleshooting." />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="canonical" href="https://www.cipherhall.com/courses/computer-networking-basics" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Computer Networking Basics",
+      "description": "Understand how computer networks work, protocols, devices, and practical troubleshooting.",
+      "provider": {
+        "@type": "Organization",
+        "name": "CipherHall",
+        "sameAs": "https://www.cipherhall.com"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "Online",
+        "instructor": {
+          "@type": "Person",
+          "name": "Prof. Michael Rodriguez"
+        }
+      }
+    }
+    </script>
+    <!-- ========== End: SEO & Schema Enhancement ========== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Exo+2:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css"
+    />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+    <link rel="stylesheet" href="assets/css/coursepages.css" />
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader-icon">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="loader-text">Loading Course Content...</div>
+    </div>
+    
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Music Player (fixed at top right) -->
+    <div class="header-controls">
+        <div class="music-dropdown" id="music-dropdown">
+            <button class="btn btn-secondary">
+                <span id="music-button-text">STUDY MUSIC</span>
+                <i id="music-icon" class="fa-solid fa-music"></i>
+            </button>
+            <div class="music-dropdown-content" id="music-dropdown-content">
+                <a href="#" data-src="https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3">1. Coffee Shop Vibes</a>
+                <a href="#" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3">2. City Lights Lofi</a>
+                <a href="#" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3">3. Mellow Thoughts</a>
+                <a href="#" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3">4. Rainy Mood</a>
+                <a href="#" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3">5. Time Alone</a>
+                <a href="#" id="stop-music-link"><i class="fa-solid fa-stop-circle"></i> Stop Music</a>
+            </div>
+        </div>
+        
+        <button class="btn btn-secondary" id="resetProgressBtn">
+            <i class="fas fa-redo"></i>
+            Reset Progress
+        </button>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal" style="display: none">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <span class="close" id="closeAuthModal">&times;</span>
+            <div class="auth-tabs">
+                <button id="tabSignIn" class="auth-tab active">Sign In</button>
+                <button id="tabSignUp" class="auth-tab">Sign Up</button>
+            </div>
+            <div id="authLoader" style="display: none; text-align: center; padding: 2rem">
+                <i class="fas fa-spinner fa-spin fa-2x" style="color: var(--color-green)"></i>
+                <p style="margin-top: 0.5rem">Authenticating...</p>
+            </div>
+            <div id="signInForm" class="auth-form">
+                <h2>Sign In to CipherHall</h2>
+                <button id="googleSignIn" class="btn btn-google">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+                <div class="divider"><span>or</span></div>
+                <form id="emailSignInForm">
+                    <input type="email" id="signInEmail" placeholder="Email Address" required>
+                    <input type="password" id="signInPassword" placeholder="Password" required>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+            </div>
+            <div id="signUpForm" class="auth-form" style="display: none">
+                <h2>Join CipherHall</h2>
+                <button id="googleSignUp" class="btn btn-google">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+                <div class="divider"><span>or</span></div>
+                <form id="emailSignUpForm">
+                    <input type="text" id="signUpName" placeholder="Full Name" required>
+                    <input type="email" id="signUpEmail" placeholder="Email Address" required>
+                    <input type="password" id="signUpPassword" placeholder="Password (min. 8 characters)" required>
+                    <button type="submit" class="btn btn-secondary">Create Account</button>
+                </form>
+            </div>
+            <div id="authMessage"></div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="course-info">
+                <h1 class="course-title" id="courseTitle">Loading...</h1>
+                <div class="course-progress">
+                    <div class="progress-header">
+                        <span class="progress-label">Course Progress</span>
+                        <span class="progress-percentage" id="courseProgressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="courseProgressFill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span id="completedLessons">0</span>
+                        <span id="totalLessons">0</span>
+                    </div>
+                </div>
+                <a href="/dashboard" class="back-to-dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+            </div>
+        </div>
+
+        <nav class="lesson-nav" id="lessonNav">
+            <!-- Lessons will be loaded dynamically -->
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="content-header">
+            <div class="lesson-header">
+                <div class="lesson-header-left">
+                    <span class="lesson-number" id="currentLessonNumber">1</span>
+                    <h1 class="lesson-header-title" id="currentLessonTitle">Loading...</h1>
+                </div>
+                <div class="lesson-actions">
+                    <button class="mbtn btn-primary" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                       
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-body" id="contentBody">
+            <div class="lesson-content" id="lessonContent">
+                <!-- Lesson content will be loaded dynamically -->
+            </div>
+        </div>
+
+        <footer class="lesson-navigation">
+            <div class="nav-info" id="navInfo">
+                Lesson 1 of 10
+            </div>
+            <div class="nav-controls">
+                <button class="btn btn-secondary" id="prevLessonBtn" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <button class="btn btn-primary" id="nextLessonBtn" disabled>
+                    Next
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Achievement Notification -->
+    <div id="achievementNotification" class="achievement-notification">
+        <div class="notification-header">
+            <div class="notification-icon" id="notificationIcon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="notification-content">
+                <h3 id="notificationTitle">Achievement Unlocked!</h3>
+                <p id="notificationDescription">Description here...</p>
+            </div>
+        </div>
+        <div class="notification-reward" id="notificationReward">
+            <i class="fas fa-coins"></i>
+            <span id="notificationPoints">+100 Points</span>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+       // =====================================================
+// SYNCHRONIZED COURSE SYSTEM WITH DASHBOARD INTEGRATION
+// =====================================================
+
+// Supabase Configuration - Replace with your config
+const supabaseUrl = 'https://lzcmzulemfubjaksoqor.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6Y216dWxlbWZ1Ympha3NvcW9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzMzM5MDgsImV4cCI6MjA3MDkwOTkwOH0.crhPH4YWtRsr1BJTpAQcmPbWSpwIWRbzoI4sRb2_fPI';
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// =====================================================
+// COURSE DATA STRUCTURE - REPLACE WITH YOUR COURSE JSON
+// =====================================================
+  const COURSE_DATA = {
+    "id": "computer-networking-basics",
+    "title": "Computer Networking Basics",
+    "description": "Understand how computer networks work, protocols, devices, and practical troubleshooting",
+    "category": "networking",
+    "difficulty": "Beginner",
+    "duration": "12 hours",
+    "instructor": "Prof. Michael Rodriguez",
+    "lessons": [
+        {
+            "id": "lesson-1",
+            "title": "Introduction to Networking",
+            "duration": "60 min",
+            "objectives": [
+                "Understand what computer networking is and why it matters",
+                "Learn about different types of networks (LAN, WAN, MAN, PAN)",
+                "Explore the evolution and benefits of networking"
+            ],
+            "content": {
+                "overview": "Welcome to Computer Networking! This lesson introduces you to the fundamental concepts of computer networks and their importance in modern computing.",
+                "sections": [
+                    {
+                        "title": "What is Computer Networking?",
+                        "content": "<p>Computer networking is the practice of connecting multiple computing devices together to share resources, communicate, and collaborate. Networks enable data exchange, resource sharing, and distributed computing across different locations.</p><div class=\"info-box tip\"><div class=\"info-box-header\"><i class=\"fas fa-lightbulb\"></i><strong>Key Concept</strong></div><p>A network is simply two or more devices connected together to share information and resources. The internet is the world's largest network!</p></div><h3>Benefits of Networking:</h3><ul><li><strong>Resource Sharing:</strong> Share printers, storage, and applications</li><li><strong>Communication:</strong> Email, messaging, video conferencing</li><li><strong>Data Sharing:</strong> Access files from anywhere</li><li><strong>Cost Reduction:</strong> Share expensive resources</li><li><strong>Centralized Management:</strong> Easier administration and security</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Types of Networks",
+                        "content": "<p>Networks are classified based on their geographical coverage and purpose:</p><h3>Personal Area Network (PAN):</h3><ul><li>Covers a very small area (within 10 meters)</li><li>Examples: Bluetooth, USB connections</li><li>Typically connects personal devices</li></ul><h3>Local Area Network (LAN):</h3><ul><li>Covers a building or campus (up to a few kilometers)</li><li>High data rates and low latency</li><li>Examples: Office networks, home networks</li></ul><h3>Metropolitan Area Network (MAN):</h3><ul><li>Covers a city or metropolitan area</li><li>Larger than LAN but smaller than WAN</li><li>Examples: City-wide Wi-Fi, cable TV networks</li></ul><h3>Wide Area Network (WAN):</h3><ul><li>Covers large geographical areas (countries, continents)</li><li>Lower data rates and higher latency than LANs</li><li>Examples: The Internet, corporate networks across cities</li></ul><div class=\"info-box note\"><div class=\"info-box-header\"><i class=\"fas fa-info-circle\"></i><strong>Remember</strong></div><p>The classification is mainly about coverage area and typical use cases. Modern technologies can blur these boundaries.</p></div>"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is the primary purpose of computer networking?",
+                        "options": [
+                            "To make computers run faster",
+                            "To connect devices for sharing resources and communication",
+                            "To increase computer memory",
+                            "To protect against viruses"
+                        ],
+                        "correct": 1,
+                        "explanation": "Computer networking's main purpose is to connect multiple devices together to enable resource sharing, communication, and collaboration."
+                    },
+                    {
+                        "id": 2,
+                        "question": "Which network type covers the largest geographical area?",
+                        "options": [
+                            "LAN",
+                            "PAN",
+                            "MAN",
+                            "WAN"
+                        ],
+                        "correct": 3,
+                        "explanation": "A Wide Area Network (WAN) covers large geographical areas, such as countries and continents, with the internet being the largest example."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-2",
+            "title": "Network Models – OSI & TCP/IP",
+            "duration": "90 min",
+            "objectives": [
+                "Understand the purpose of network models",
+                "Learn the 7 layers of the OSI model",
+                "Learn the 4 layers of the TCP/IP model",
+                "Compare and contrast the OSI and TCP/IP models"
+            ],
+            "content": {
+                "overview": "Network models provide a framework for understanding how different networking protocols and devices interact. This lesson covers the two most important models: OSI and TCP/IP.",
+                "sections": [
+                    {
+                        "title": "The OSI Model",
+                        "content": "<p>The Open Systems Interconnection (OSI) model is a conceptual framework that standardizes the functions of a telecommunication or computing system into seven abstraction layers.</p><ol><li><strong>Physical Layer:</strong> Transmits raw bits over a physical medium.</li><li><strong>Data Link Layer:</strong> Manages node-to-node data transfer and error correction.</li><li><strong>Network Layer:</strong> Handles routing and logical addressing (IP addresses).</li><li><strong>Transport Layer:</strong> Provides reliable or unreliable delivery and error recovery (TCP/UDP).</li><li><strong>Session Layer:</strong> Manages sessions between applications.</li><li><strong>Presentation Layer:</strong> Translates, encrypts, and compresses data.</li><li><strong>Application Layer:</strong> Provides network services to end-user applications.</li></ol><div class=\"info-box tip\"><div class=\"info-box-header\"><i class=\"fas fa-lightbulb\"></i><strong>Mnemonic</strong></div><p>A popular mnemonic to remember the OSI layers from 7 to 1 is: \"All People Seem To Need Data Processing\".</p></div>",
+                        "image": "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "The TCP/IP Model",
+                        "content": "<p>The TCP/IP model is a more practical model that is used for the internet. It consists of four layers.</p><ol><li><strong>Network Interface Layer:</strong> Combines the OSI Physical and Data Link layers.</li><li><strong>Internet Layer:</strong> Maps to the OSI Network Layer, responsible for IP addressing and routing.</li><li><strong>Transport Layer:</strong> Maps to the OSI Transport Layer, responsible for TCP and UDP.</li><li><strong>Application Layer:</strong> Combines the OSI Session, Presentation, and Application layers.</li></ol>"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "Which layer of the OSI model is responsible for routing and logical addressing?",
+                        "options": [
+                            "Data Link Layer",
+                            "Network Layer",
+                            "Transport Layer",
+                            "Physical Layer"
+                        ],
+                        "correct": 1,
+                        "explanation": "The Network Layer (Layer 3) is responsible for logical addressing (IP addresses) and determining the best path for data to travel across the network."
+                    },
+                    {
+                        "id": 2,
+                        "question": "In the TCP/IP model, which layer is responsible for the TCP and UDP protocols?",
+                        "options": [
+                            "Internet Layer",
+                            "Application Layer",
+                            "Transport Layer",
+                            "Network Interface Layer"
+                        ],
+                        "correct": 2,
+                        "explanation": "The Transport Layer in the TCP/IP model is responsible for end-to-end communication and manages the TCP and UDP protocols."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-3",
+            "title": "Data Transmission Basics",
+            "duration": "75 min",
+            "objectives": [
+                "Differentiate between analog and digital signals",
+                "Understand the concepts of bandwidth and latency",
+                "Learn about different transmission media"
+            ],
+            "content": {
+                "overview": "This lesson covers the fundamental concepts of how data is transmitted over a network, including the types of signals used and key performance metrics.",
+                "sections": [
+                    {
+                        "title": "Analog vs. Digital Signals",
+                        "content": "<p><strong>Analog signals</strong> are continuous waves that can represent any value within a range. <strong>Digital signals</strong> are discrete and can only represent a finite number of values (typically 0s and 1s).</p><div class=\"info-box note\"><div class=\"info-box-header\"><i class=\"fas fa-info-circle\"></i><strong>Key Difference</strong></div><p>Analog is continuous, like a ramp, while digital is in steps, like a staircase. Computers use digital signals.</p></div>",
+                        "image": "https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Bandwidth and Latency",
+                        "content": "<p><strong>Bandwidth</strong> is the maximum rate at which data can be transferred over a network, usually measured in bits per second (bps). <strong>Latency</strong> is the delay in data transmission, measured in milliseconds (ms).</p><div class=\"info-box tip\"><div class=\"info-box-header\"><i class=\"fas fa-lightbulb\"></i><strong>Analogy</strong></div><p>Think of bandwidth as the width of a highway and latency as the time it takes to travel from one point to another.</p></div>"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is bandwidth?",
+                        "options": [
+                            "The delay in data transmission",
+                            "The maximum rate of data transfer",
+                            "The type of signal used",
+                            "The physical medium of the network"
+                        ],
+                        "correct": 1,
+                        "explanation": "Bandwidth is the maximum rate at which data can be transferred over a network, essentially the network's capacity."
+                    },
+                    {
+                        "id": 2,
+                        "question": "Which type of signal do computers use internally?",
+                        "options": [
+                            "Analog",
+                            "Continuous",
+                            "Wave",
+                            "Digital"
+                        ],
+                        "correct": 3,
+                        "explanation": "Computers are digital machines and use digital signals, which represent data as a series of 0s and 1s."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-4",
+            "title": "Networking Devices",
+            "duration": "90 min",
+            "objectives": [
+                "Identify and understand the function of common networking devices",
+                "Differentiate between a router, switch, and hub",
+                "Learn the roles of access points and firewalls"
+            ],
+            "content": {
+                "overview": "This lesson introduces the essential hardware that makes up a network, explaining the role and function of each device.",
+                "sections": [
+                    {
+                        "title": "Routers, Switches, and Hubs",
+                        "content": "<p><strong>Hubs</strong> operate at the Physical Layer (Layer 1) and simply repeat incoming signals to all connected devices. <strong>Switches</strong> operate at the Data Link Layer (Layer 2) and intelligently forward data only to the intended recipient device using MAC addresses. <strong>Routers</strong> operate at the Network Layer (Layer 3) and connect different networks together, forwarding data between them based on IP addresses.</p>",
+                        "image": "https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Access Points and Firewalls",
+                        "content": "<p>A <strong>Wireless Access Point (WAP)</strong> allows wireless devices to connect to a wired network. A <strong>Firewall</strong> is a security device that monitors incoming and outgoing network traffic and decides whether to allow or block specific traffic based on a defined set of security rules.</p>"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "Which device connects different networks together and routes traffic between them?",
+                        "options": [
+                            "Hub",
+                            "Switch",
+                            "Router",
+                            "Access Point"
+                        ],
+                        "correct": 2,
+                        "explanation": "A router operates at the Network Layer (Layer 3) to connect different networks and make decisions on how to forward packets between them."
+                    },
+                    {
+                        "id": 2,
+                        "question": "What is the primary function of a firewall?",
+                        "options": [
+                            "To provide wireless connectivity",
+                            "To connect devices on the same network",
+                            "To monitor and control network traffic for security",
+                            "To repeat signals to all devices"
+                        ],
+                        "correct": 2,
+                        "explanation": "A firewall acts as a barrier between a trusted internal network and untrusted external networks, controlling access and protecting against threats."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-5",
+            "title": "IP Addressing (IPv4 & IPv6)",
+            "duration": "120 min",
+            "objectives": [
+                "Master IPv4 addressing and classes",
+                "Understand subnetting and CIDR notation",
+                "Learn IPv6 addressing structure",
+                "Distinguish between private and public IP addresses"
+            ],
+            "content": {
+                "overview": "IP addressing is fundamental to network communication. Learn how devices are identified on networks using IPv4 and IPv6 addressing schemes.",
+                "sections": [
+                    {
+                        "title": "IPv4 Addressing Basics",
+                        "content": "<p>Internet Protocol version 4 (IPv4) uses 32-bit addresses represented as four decimal numbers separated by dots (dotted decimal notation).</p><h3>IPv4 Address Structure:</h3><ul><li>32 bits total, divided into 4 octets (8 bits each)</li><li>Each octet ranges from 0-255</li><li>Example: 192.168.1.1</li></ul><h3>IPv4 Address Classes:</h3><ul><li><strong>Class A:</strong> 1.0.0.0 - 126.255.255.255</li><li><strong>Class B:</strong> 128.0.0.0 - 191.255.255.255</li><li><strong>Class C:</strong> 192.0.0.0 - 223.255.255.255</li></ul><div class=\"info-box tip\"><div class=\"info-box-header\"><i class=\"fas fa-lightbulb\"></i><strong>Class Identification</strong></div><p>Look at the first octet: Class A (1-126), Class B (128-191), Class C (192-223). Note that 127.x.x.x is reserved for loopback.</p></div>",
+                        "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Private vs Public IP Addresses",
+                        "content": "<h3>Private IP Address Ranges (RFC 1918):</h3><p>These addresses are not routed on the public Internet and can be used internally.</p><ul><li><strong>Class A Private:</strong> 10.0.0.0 - 10.255.255.255 (10.0.0.0/8)</li><li><strong>Class B Private:</strong> 172.16.0.0 - 172.31.255.255 (172.16.0.0/12)</li><li><strong>Class C Private:</strong> 192.168.0.0 - 192.168.255.255 (192.168.0.0/16)</li></ul><h3>Public IP Addresses:</h3><p>All other IP addresses that are globally routable on the Internet.</p><div class=\"info-box note\"><div class=\"info-box-header\"><i class=\"fas fa-info-circle\"></i><strong>NAT Usage</strong></div><p>Private addresses are used behind NAT (Network Address Translation) to conserve public IP addresses and provide security.</p></div>"
+                    },
+                    {
+                        "title": "IPv6 Addressing",
+                        "content": "<p>IPv6 was developed to address IPv4 exhaustion and provides a much larger address space.</p><h3>IPv6 Features:</h3><ul><li>128-bit addresses (vs 32-bit in IPv4)</li><li>Written in hexadecimal notation</li><li>Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</li></ul><div class=\"info-box warning\"><div class=\"info-box-header\"><i class=\"fas fa-exclamation-triangle\"></i><strong>IPv6 Adoption</strong></div><p>While IPv6 provides enormous address space, IPv4 is still widely used. Many networks run dual-stack (both IPv4 and IPv6) during transition.</p></div>",
+                        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "How many bits are in an IPv4 address?",
+                        "options": [
+                            "16 bits",
+                            "32 bits",
+                            "64 bits",
+                            "128 bits"
+                        ],
+                        "correct": 1,
+                        "explanation": "IPv4 addresses are 32 bits long, divided into four 8-bit octets."
+                    },
+                    {
+                        "id": 2,
+                        "question": "Which of the following is a private IP address?",
+                        "options": [
+                            "8.8.8.8",
+                            "172.20.10.1",
+                            "142.250.191.46",
+                            "200.100.50.25"
+                        ],
+                        "correct": 1,
+                        "explanation": "The range 172.16.0.0 to 172.31.255.255 is designated for private use."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-6",
+            "title": "MAC Address & ARP",
+            "duration": "60 min",
+            "objectives": [
+                "Understand the purpose of MAC addresses",
+                "Learn how the Address Resolution Protocol (ARP) works",
+                "View and interpret an ARP table"
+            ],
+            "content": {
+                "overview": "This lesson explains how devices on a local network identify each other using MAC addresses and the ARP protocol.",
+                "sections": [
+                    {
+                        "title": "MAC Addresses",
+                        "content": "<p>A <strong>MAC (Media Access Control) address</strong> is a unique 48-bit hardware identifier assigned to a network interface card (NIC). It is used for communication within the same local network segment. MAC addresses are typically written in hexadecimal format (e.g., 00:1A:2B:3C:4D:5E).</p>",
+                        "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Address Resolution Protocol (ARP)",
+                        "content": "<p><strong>ARP</strong> is a protocol used to map an IP address to a physical MAC address. When a device wants to send data to another device on the same local network, it uses ARP to find the destination device's MAC address.</p>"
+                    }
+                ]
+            },
+            "codeExamples": [
+                {
+                    "title": "Viewing the ARP Table",
+                    "language": "bash",
+                    "code": "# On Windows, Linux, and macOS\narp -a"
+                }
+            ],
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is a MAC address?",
+                        "options": [
+                            "A logical address used for routing between networks",
+                            "A unique hardware identifier for a NIC",
+                            "A protocol for resolving addresses",
+                            "A type of IP address"
+                        ],
+                        "correct": 1,
+                        "explanation": "A MAC address is a unique hardware address assigned by the manufacturer to a Network Interface Card (NIC)."
+                    },
+                    {
+                        "id": 2,
+                        "question": "What is the function of ARP?",
+                        "options": [
+                            "To assign IP addresses to devices",
+                            "To route traffic between networks",
+                            "To map an IP address to a MAC address",
+                            "To provide wireless connectivity"
+                        ],
+                        "correct": 2,
+                        "explanation": "The Address Resolution Protocol (ARP) is used to discover the MAC (hardware) address associated with a given IP address on a local network."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-7",
+            "title": "Subnetting in Detail",
+            "duration": "120 min",
+            "objectives": [
+                "Understand the purpose of subnetting",
+                "Learn how to calculate subnets",
+                "Explore Variable Length Subnet Masking (VLSM)",
+                "Work through practical subnetting scenarios"
+            ],
+            "content": {
+                "overview": "Subnetting is the process of dividing a large network into smaller, more manageable subnetworks. This lesson provides a deep dive into the calculations and practical applications of subnetting.",
+                "sections": [
+                    {
+                        "title": "Why Subnet?",
+                        "content": "<p>Subnetting improves network performance by reducing broadcast traffic, enhances security by isolating networks, and allows for more efficient use of IP addresses.</p>",
+                        "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Calculating Subnets",
+                        "content": "<p>Subnetting involves borrowing bits from the host portion of an IP address to create new subnetwork identifiers. The number of subnets and hosts per subnet depends on how many bits are borrowed.</p>"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is a primary benefit of subnetting?",
+                        "options": [
+                            "Increasing the total number of available IP addresses",
+                            "Reducing broadcast traffic and improving performance",
+                            "Simplifying IP address assignment",
+                            "Making the network faster"
+                        ],
+                        "correct": 1,
+                        "explanation": "By dividing a large broadcast domain into smaller ones, subnetting reduces the amount of broadcast traffic, which improves overall network performance."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-8",
+            "title": "DNS & DHCP",
+            "duration": "75 min",
+            "objectives": [
+                "Understand the role of the Domain Name System (DNS)",
+                "Learn how DHCP automatically assigns IP addresses",
+                "Explore the DNS resolution process"
+            ],
+            "content": {
+                "overview": "This lesson explains two of the most critical services on any network: DNS, which acts as the internet's phonebook, and DHCP, which automates IP configuration.",
+                "sections": [
+                    {
+                        "title": "Domain Name System (DNS)",
+                        "content": "<p><strong>DNS</strong> translates human-readable domain names (like www.google.com) into machine-readable IP addresses (like 142.250.191.46). Without DNS, we would have to remember the IP addresses of all the websites we visit.</p>",
+                        "image": "https://images.unsplash.com/photo-1585776245991-389791d49127?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Dynamic Host Configuration Protocol (DHCP)",
+                        "content": "<p><strong>DHCP</strong> is a network management protocol used to automate the process of configuring devices on IP networks. A DHCP server automatically assigns an IP address, subnet mask, default gateway, and DNS server information to client devices.</p>"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is the primary function of DNS?",
+                        "options": [
+                            "To assign IP addresses to devices",
+                            "To translate domain names to IP addresses",
+                            "To secure network traffic",
+                            "To route data between networks"
+                        ],
+                        "correct": 1,
+                        "explanation": "DNS (Domain Name System) acts as the phonebook of the internet, translating human-friendly domain names into the numerical IP addresses that computers use to communicate."
+                    },
+                    {
+                        "id": 2,
+                        "question": "What information does a DHCP server typically provide to a client?",
+                        "options": [
+                            "Only an IP address",
+                            "An IP address, subnet mask, default gateway, and DNS server",
+                            "A MAC address and a domain name",
+                            "A username and password"
+                        ],
+                        "correct": 1,
+                        "explanation": "A DHCP server automates network configuration by providing clients with essential information, including an IP address, subnet mask, default gateway, and DNS server addresses."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-9",
+            "title": "Routing Basics",
+            "duration": "90 min",
+            "objectives": [
+                "Understand the concept of routing",
+                "Differentiate between static and dynamic routing",
+                "Learn how routing tables work"
+            ],
+            "content": {
+                "overview": "Routing is the process of selecting a path for traffic in a network or between networks. This lesson covers the fundamentals of how routers make decisions.",
+                "sections": [
+                    {
+                        "title": "Static vs. Dynamic Routing",
+                        "content": "<p><strong>Static routing</strong> involves manually configuring routes in a router's routing table. It is simple but not scalable. <strong>Dynamic routing</strong> uses protocols (like OSPF and BGP) to automatically discover networks and update routing tables. It is more complex but scalable and resilient.</p>",
+                        "image": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Routing Tables",
+                        "content": "<p>A <strong>routing table</strong> is a data table stored in a router or a networked computer that lists the routes to particular network destinations, and in some cases, metrics (distances) associated with those routes.</p>"
+                    }
+                ]
+            },
+            "codeExamples": [
+                {
+                    "title": "Viewing the Routing Table",
+                    "language": "bash",
+                    "code": "# On Linux\nip route show\n\n# On Windows\nroute print"
+                }
+            ],
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is a key characteristic of dynamic routing?",
+                        "options": [
+                            "Routes are manually configured by an administrator",
+                            "It is best suited for small, simple networks",
+                            "It uses protocols to automatically learn and adapt to network changes",
+                            "It has lower CPU overhead than static routing"
+                        ],
+                        "correct": 2,
+                        "explanation": "Dynamic routing protocols allow routers to automatically learn about other networks and update their routing tables when the network topology changes, making them scalable and resilient."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-10",
+            "title": "Switching Basics",
+            "duration": "75 min",
+            "objectives": [
+                "Understand how switches learn MAC addresses",
+                "Learn about VLANs and their purpose",
+                "Understand the concept of trunking"
+            ],
+            "content": {
+                "overview": "This lesson focuses on Layer 2 of the OSI model, explaining how switches manage traffic within a local area network.",
+                "sections": [
+                    {
+                        "title": "MAC Address Tables",
+                        "content": "<p>A switch builds a <strong>MAC address table</strong> to map MAC addresses to the switch ports. This allows the switch to forward frames only to the port connected to the destination device, reducing unnecessary traffic.</p>",
+                        "image": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "VLANs and Trunking",
+                        "content": "<p>A <strong>VLAN (Virtual LAN)</strong> allows you to segment a physical network into multiple logical networks. This improves security and performance. <strong>Trunking</strong> is a method to carry traffic for multiple VLANs over a single link between switches.</p>"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is the primary purpose of a VLAN?",
+                        "options": [
+                            "To connect different physical networks together",
+                            "To segment a physical network into multiple logical broadcast domains",
+                            "To automatically assign IP addresses",
+                            "To translate domain names into IP addresses"
+                        ],
+                        "correct": 1,
+                        "explanation": "VLANs (Virtual LANs) allow a network administrator to logically segment a network, creating separate broadcast domains that can improve security and performance."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-11",
+            "title": "TCP vs UDP",
+            "duration": "60 min",
+            "objectives": [
+                "Understand TCP connection-oriented communication",
+                "Learn UDP connectionless communication",
+                "Compare reliability vs speed trade-offs",
+                "Identify appropriate use cases for each protocol"
+            ],
+            "content": {
+                "overview": "TCP and UDP are the two main transport layer protocols. Learn when to use each protocol and understand their fundamental differences.",
+                "sections": [
+                    {
+                        "title": "TCP (Transmission Control Protocol)",
+                        "content": "<p>TCP is a <strong>connection-oriented</strong>, reliable protocol that ensures data delivery and maintains order. It uses a three-way handshake to establish a connection before sending data.</p><h3>Use TCP When:</h3><ul><li>Reliability is critical (e.g., file transfers, email, web browsing)</li><li>Data integrity matters (e.g., financial transactions)</li></ul><div class=\"info-box tip\"><div class=\"info-box-header\"><i class=\"fas fa-lightbulb\"></i><strong>TCP Analogy</strong></div><p>TCP is like certified mail - you get confirmation of delivery, but it takes longer and has more overhead.</p></div>",
+                        "image": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "UDP (User Datagram Protocol)",
+                        "content": "<p>UDP is a <strong>connectionless</strong>, lightweight protocol that prioritizes speed over reliability. It does not guarantee delivery or order.</p><h3>Use UDP When:</h3><ul><li>Speed is the priority (e.g., online gaming, live streaming)</li><li>Real-time applications (e.g., VoIP, video calls)</li></ul><div class=\"info-box note\"><div class=\"info-box-header\"><i class=\"fas fa-info-circle\"></i><strong>UDP Analogy</strong></div><p>UDP is like regular mail - it's faster and has less overhead, but there's no guarantee it will arrive.</p></div>"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "Which protocol is connection-oriented and guarantees delivery?",
+                        "options": [
+                            "IP",
+                            "UDP",
+                            "TCP",
+                            "ARP"
+                        ],
+                        "correct": 2,
+                        "explanation": "TCP (Transmission Control Protocol) is a connection-oriented protocol that provides reliable, ordered, and error-checked delivery of a stream of octets between applications."
+                    },
+                    {
+                        "id": 2,
+                        "question": "Which application is a good use case for UDP?",
+                        "options": [
+                            "Sending an email",
+                            "Downloading a file",
+                            "Live video streaming",
+                            "Browsing a secure website"
+                        ],
+                        "correct": 2,
+                        "explanation": "Live video streaming is a good use case for UDP because it prioritizes speed and can tolerate minor packet loss without significant impact on the user experience."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-12",
+            "title": "Common Protocols",
+            "duration": "90 min",
+            "objectives": [
+                "Learn the functions of key application layer protocols",
+                "Understand the difference between HTTP and HTTPS",
+                "Explore protocols for file transfer and email"
+            ],
+            "content": {
+                "overview": "This lesson provides an overview of the common application layer protocols that power the services we use every day, from web browsing to email.",
+                "sections": [
+                    {
+                        "title": "Web and File Transfer Protocols",
+                        "content": "<ul><li><strong>HTTP (Hypertext Transfer Protocol):</strong> The foundation of data communication for the World Wide Web.</li><li><strong>HTTPS (HTTP Secure):</strong> The secure version of HTTP, which encrypts the data.</li><li><strong>FTP (File Transfer Protocol):</strong> Used to transfer files between a client and a server on a computer network.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1611004111955-523c5a7460a5?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Email Protocols",
+                        "content": "<ul><li><strong>SMTP (Simple Mail Transfer Protocol):</strong> Used for sending emails.</li><li><strong>POP3 (Post Office Protocol 3):</strong> Used for retrieving emails from a server, typically deleting them from the server after retrieval.</li><li><strong>IMAP (Internet Message Access Protocol):</strong> Used for retrieving emails, allowing for synchronization across multiple devices.</li></ul>"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is the main difference between HTTP and HTTPS?",
+                        "options": [
+                            "HTTPS is faster",
+                            "HTTP is used for file transfers",
+                            "HTTPS encrypts the data for security",
+                            "HTTP is a newer protocol"
+                        ],
+                        "correct": 2,
+                        "explanation": "The 'S' in HTTPS stands for Secure. It uses encryption (SSL/TLS) to protect the privacy and integrity of the data exchanged between the user's browser and the website."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-13",
+            "title": "Network Topologies",
+            "duration": "60 min",
+            "objectives": [
+                "Understand what a network topology is",
+                "Learn about different physical topologies like Star, Bus, and Mesh",
+                "Explore hybrid and wireless topologies"
+            ],
+            "content": {
+                "overview": "Network topology refers to the arrangement of the various elements (links, nodes, etc.) of a computer network. This lesson covers the common physical and logical layouts.",
+                "sections": [
+                    {
+                        "title": "Common Physical Topologies",
+                        "content": "<ul><li><strong>Bus Topology:</strong> All devices are connected to a single central cable, called the bus.</li><li><strong>Star Topology:</strong> All devices are connected to a central hub or switch. This is the most common topology in modern LANs.</li><li><strong>Ring Topology:</strong> All devices are connected in a circular fashion.</li><li><strong>Mesh Topology:</strong> Every device is connected to every other device, providing high redundancy.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1593444976582-94762c14c022?w=800&h=400&fit=crop"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "Which network topology is most commonly used in modern LANs?",
+                        "options": [
+                            "Bus",
+                            "Ring",
+                            "Star",
+                            "Mesh"
+                        ],
+                        "correct": 2,
+                        "explanation": "The star topology, where all devices connect to a central switch, is the most common and practical topology for modern local area networks due to its reliability and ease of management."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-14",
+            "title": "Firewalls & Security Basics",
+            "duration": "90 min",
+            "objectives": [
+                "Understand the role of firewalls in network security",
+                "Learn about packet filtering and Network Address Translation (NAT)",
+                "Get an introduction to Virtual Private Networks (VPNs)"
+            ],
+            "content": {
+                "overview": "This lesson introduces fundamental network security concepts, focusing on how firewalls, NAT, and VPNs protect networks and data.",
+                "sections": [
+                    {
+                        "title": "Firewalls and NAT",
+                        "content": "<p>A <strong>Firewall</strong> acts as a barrier, filtering traffic between networks. <strong>NAT (Network Address Translation)</strong> is a method of mapping multiple private IP addresses to a single public IP address, which helps conserve public IP addresses and adds a layer of security.</p>",
+                        "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Virtual Private Networks (VPNs)",
+                        "content": "<p>A <strong>VPN</strong> creates a secure, encrypted connection over a less secure network, such as the internet. It is commonly used to protect online privacy and to securely access a corporate network remotely.</p>"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is the primary function of NAT?",
+                        "options": [
+                            "To encrypt all network traffic",
+                            "To translate multiple private IP addresses to a single public IP",
+                            "To provide wireless connectivity",
+                            "To assign IP addresses automatically"
+                        ],
+                        "correct": 1,
+                        "explanation": "Network Address Translation (NAT) allows multiple devices on a private network to share a single public IP address, which helps conserve IPv4 addresses and can enhance security."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-15",
+            "title": "Wireless Networking",
+            "duration": "75 min",
+            "objectives": [
+                "Learn about Wi-Fi standards (802.11)",
+                "Understand wireless security protocols (WPA, WPA2, WPA3)",
+                "Explore best practices for securing a wireless network"
+            ],
+            "content": {
+                "overview": "This lesson covers the basics of wireless networking, focusing on the standards and security protocols that power the Wi-Fi we use every day.",
+                "sections": [
+                    {
+                        "title": "Wi-Fi Standards and Security",
+                        "content": "<p>Wi-Fi is based on the <strong>IEEE 802.11</strong> set of standards. For security, modern wireless networks use <strong>WPA2 (Wi-Fi Protected Access 2)</strong> or the newer <strong>WPA3</strong> protocol to encrypt traffic and protect against unauthorized access.</p>",
+                        "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "Which is the most secure and current wireless security protocol?",
+                        "options": [
+                            "WEP",
+                            "WPA",
+                            "WPA2",
+                            "WPA3"
+                        ],
+                        "correct": 3,
+                        "explanation": "WPA3 is the latest and most secure Wi-Fi security protocol, offering stronger encryption and better protection against modern threats than its predecessors, WPA2, WPA, and the deprecated WEP."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-16",
+            "title": "Network Troubleshooting Tools",
+            "duration": "90 min",
+            "objectives": [
+                "Learn how to use basic troubleshooting tools like ping and traceroute",
+                "Understand the function of nslookup",
+                "Get an introduction to the powerful packet analyzer, Wireshark"
+            ],
+            "content": {
+                "overview": "This lesson equips you with the fundamental command-line tools and software used to diagnose and resolve common network problems.",
+                "sections": [
+                    {
+                        "title": "Command-Line Tools",
+                        "content": "<ul><li><strong>ping:</strong> Tests connectivity to a host.</li><li><strong>traceroute/tracert:</strong> Traces the path that packets take to a destination.</li><li><strong>nslookup:</strong> Queries DNS servers to find domain name or IP address information.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1614741118884-62ac1620a2f5?w=800&h=400&fit=crop"
+                    },
+                    {
+                        "title": "Wireshark",
+                        "content": "<p><strong>Wireshark</strong> is a powerful, free, and open-source packet analyzer. It is used for network troubleshooting, analysis, software and communications protocol development, and education. It allows you to see what’s happening on your network at a microscopic level.</p>"
+                    }
+                ]
+            },
+            "codeExamples": [
+                {
+                    "title": "Basic Troubleshooting Commands",
+                    "language": "bash",
+                    "code": "# Test connectivity to Google's public DNS server\nping 8.8.8.8\n\n# Trace the route to google.com (use tracert on Windows)\ntraceroute google.com\n\n# Look up the IP address for google.com\nnslookup google.com"
+                }
+            ],
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "Which tool is used to test basic network connectivity to a specific host?",
+                        "options": [
+                            "nslookup",
+                            "traceroute",
+                            "ping",
+                            "ipconfig"
+                        ],
+                        "correct": 2,
+                        "explanation": "The ping command is used to send an ICMP Echo Request to a target host to determine if it is reachable and to measure the round-trip time."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-17",
+            "title": "Network Performance",
+            "duration": "60 min",
+            "objectives": [
+                "Understand Quality of Service (QoS)",
+                "Learn about throughput and packet loss",
+                "Explore factors that affect network performance"
+            ],
+            "content": {
+                "overview": "This lesson covers key metrics and concepts related to network performance, helping you understand how to measure and improve network efficiency.",
+                "sections": [
+                    {
+                        "title": "Key Performance Metrics",
+                        "content": "<ul><li><strong>Throughput:</strong> The actual rate of successful data transfer, as opposed to bandwidth, which is the maximum potential rate.</li><li><strong>Packet Loss:</strong> Occurs when one or more packets of data traveling across a computer network fail to reach their destination.</li><li><strong>QoS (Quality of Service):</strong> A set of technologies that work on a network to guarantee its ability to dependably run high-priority applications and traffic under limited network capacity.</li></ul>",
+                        "image": "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=800&h=400&fit=crop"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is Quality of Service (QoS)?",
+                        "options": [
+                            "A measure of the network's maximum speed",
+                            "A tool for troubleshooting network issues",
+                            "A set of technologies for managing network traffic to prioritize certain applications",
+                            "The physical layout of the network"
+                        ],
+                        "correct": 2,
+                        "explanation": "QoS (Quality of Service) is used to prioritize network traffic, ensuring that critical or time-sensitive applications (like VoIP or video conferencing) get the bandwidth they need."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-18",
+            "title": "Introduction to Cloud Networking",
+            "duration": "75 min",
+            "objectives": [
+                "Understand the concept of virtual networks",
+                "Get a basic introduction to Software-Defined Networking (SDN)",
+                "Learn how cloud providers like AWS and Azure handle networking"
+            ],
+            "content": {
+                "overview": "This lesson provides a high-level introduction to the concepts and technologies that underpin networking in the cloud.",
+                "sections": [
+                    {
+                        "title": "Virtual Networks and SDN",
+                        "content": "<p><strong>Virtual Networking</strong> allows for the creation of logically isolated network segments within a larger physical network. <strong>Software-Defined Networking (SDN)</strong> is an approach to network management that enables dynamic, programmatically efficient network configuration in order to improve network performance and monitoring.</p>",
+                        "image": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=400&fit=crop"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is a key benefit of Software-Defined Networking (SDN)?",
+                        "options": [
+                            "It eliminates the need for physical network hardware",
+                            "It centralizes network control and makes the network programmable",
+                            "It is only used for wireless networks",
+                            "It guarantees zero packet loss"
+                        ],
+                        "correct": 1,
+                        "explanation": "SDN separates the network's control plane from the data plane, allowing for centralized management and programmability, which makes the network more agile and easier to manage."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-19",
+            "title": "Hands-on Lab Setup",
+            "duration": "90 min",
+            "objectives": [
+                "Learn about network simulation tools like Packet Tracer and GNS3",
+                "Set up a basic virtual lab environment",
+                "Practice configuring routers and switches in a simulated environment"
+            ],
+            "content": {
+                "overview": "Theory is important, but practice is essential. This lesson guides you through setting up your own virtual networking lab to gain hands-on experience.",
+                "sections": [
+                    {
+                        "title": "Packet Tracer and GNS3",
+                        "content": "<p><strong>Cisco Packet Tracer</strong> is a network simulation tool that allows you to experiment with network behavior. <strong>GNS3</strong> is a more powerful network software emulator that allows you to run real network operating systems in a virtual environment.</p>",
+                        "image": "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=800&h=400&fit=crop"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "What is the primary purpose of tools like Packet Tracer and GNS3?",
+                        "options": [
+                            "To monitor live network traffic",
+                            "To provide a secure firewall",
+                            "To simulate network environments for practice and learning",
+                            "To automatically configure physical network devices"
+                        ],
+                        "correct": 2,
+                        "explanation": "Network simulators and emulators like Packet Tracer and GNS3 provide a safe, virtual environment where you can build, configure, and troubleshoot networks without needing expensive physical hardware."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson-20",
+            "title": "Final Networking Project",
+            "duration": "180 min",
+            "objectives": [
+                "Apply the knowledge gained throughout the course",
+                "Design a small office network from scratch",
+                "Simulate and test the network design"
+            ],
+            "content": {
+                "overview": "In this final capstone project, you will design, configure, and simulate a complete network for a small office, putting all your new skills to the test.",
+                "sections": [
+                    {
+                        "title": "Project Scenario",
+                        "content": "<p>You are tasked with designing a network for a new office with 3 departments: Sales, Marketing, and IT. The network must be secure, scalable, and provide both wired and wireless connectivity. Each department should be on its own subnet. You will need to create a network diagram, an IP addressing scheme, and configure the necessary devices in a simulator.</p>",
+                        "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=400&fit=crop"
+                    }
+                ]
+            },
+            "quiz": {
+                "passingScore": 70,
+                "questions": [
+                    {
+                        "id": 1,
+                        "question": "In the project scenario, why should each department be on its own subnet?",
+                        "options": [
+                            "To make the network more complicated",
+                            "To improve security and performance by creating separate broadcast domains",
+                            "To use more IP addresses",
+                            "It is the only way to provide wireless access"
+                        ],
+                        "correct": 1,
+                        "explanation": "Placing each department on its own subnet (or VLAN) creates separate broadcast domains. This enhances security by controlling traffic flow between departments and improves performance by reducing broadcast traffic."
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+// =====================================================
+// GLOBAL VARIABLES
+// =====================================================
+let currentUser = null;
+let currentLessonIndex = 0;
+let courseProgress = {};
+let userStats = {};
+let quizState = {
+    currentQuestion: 0,
+    answers: [],
+    score: 0,
+    isComplete: false
+};
+
+// Enhanced session tracking
+let courseSession = {
+    startTime: null,
+    totalStudyTime: 0,
+    lessonsStarted: 0,
+    lessonsCompleted: 0,
+    pageLoadTime: new Date(),
+    interactionCount: 0,
+    lastActivityTime: new Date()
+};
+
+// Music Player Variables
+let audioPlayer = new Audio();
+
+// Achievement notification system
+let notificationQueue = [];
+let isShowingNotification = false;
+
+// =====================================================
+// INITIALIZATION
+// =====================================================
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        showLoadingScreen();
+        await checkAuth();
+        
+        if (currentUser) {
+            // Initialize session tracking
+            startCourseSession();
+            
+            // Load course data and progress
+            await loadCourseData();
+            await loadUserProfile();
+            await loadProgress();
+            
+            // Initialize UI
+            initializeEventListeners();
+            renderSidebar();
+            loadLesson(currentLessonIndex);
+            
+            // Initialize additional features
+            initMusicPlayer();
+            addMusicIndicator();
+            initializeActivityTracking();
+            
+            hideLoadingScreen();
+        } else {
+            openAuthModal();
+        }
+    } catch (error) {
+        console.error('Error initializing course:', error);
+        hideLoadingScreen();
+        showToast('Failed to initialize course system', 'error');
+    }
+});
+
+// =====================================================
+// AUTHENTICATION SYSTEM
+// =====================================================
+async function checkAuth() {
+    try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+            console.error('Auth error:', error);
+            currentUser = null;
+            openAuthModal();
+            return;
+        }
+
+        if (!session) {
+            currentUser = null;
+            openAuthModal();
+            return;
+        }
+
+        currentUser = session.user;
+        updateUIWithUser();
+    } catch (error) {
+        console.error('Error checking auth:', error);
+        currentUser = null;
+        openAuthModal();
+    }
+}
+
+function updateUIWithUser() {
+    if (!currentUser) return;
+    
+    const name = currentUser.user_metadata?.full_name || currentUser.email.split('@')[0];
+    const userElements = document.querySelectorAll('[data-user-name]');
+    userElements.forEach(el => el.textContent = name);
+}
+
+// =====================================================
+// USER PROFILE & STATS MANAGEMENT
+// =====================================================
+async function loadUserProfile() {
+  try {
+    // 🔍 Step 1: Try to fetch existing profile
+    const { data: profile, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', currentUser.id)
+      .single();
+
+    if (error && error.code !== 'PGRST116') {
+      throw error;
+    }
+
+    if (!profile) {
+      // 🆕 Step 2: Create new profile if missing
+      await createUserProfile();
+    } else {
+      // ✅ Step 3: Use existing profile
+      userStats = profile;
+      await updateLastActivity();
+    }
+
+  } catch (error) {
+    console.error('❌ Error loading user profile:', error);
+    showToast('Failed to load user profile', 'error');
+  }
+}
+async function createUserProfile() {
+    try {
+        const newProfile = {
+            id: currentUser.id,
+            full_name: currentUser.user_metadata?.full_name || '',
+            email: currentUser.email,
+            level: 'Script Kiddie',
+            total_points: 0,
+            completed_courses: 0,
+            current_streak: 0,
+            total_certificates: 0,
+            total_achievements: 0,
+            sections_visited: 0,
+            bonus_points: 0,
+            in_progress_courses: 0,
+            settings_changed: 0,
+            midnight_sessions: 0,
+            early_sessions: 0,
+            weekend_sessions: 0,
+            last_activity: new Date().toISOString(),
+            created_at: new Date().toISOString()
+        };
+
+        const { error } = await supabase
+            .from('profiles')
+            .insert([newProfile]);
+
+        if (!error) {
+            userStats = newProfile;
+            // Award first login achievement
+            setTimeout(() => checkAndUnlockAchievement('first_login'), 1000);
+        }
+    } catch (error) {
+        console.error('Error creating user profile:', error);
+    }
+}
+
+async function updateLastActivity() {
+    try {
+        const now = new Date();
+        
+        // Update activity tracking
+        courseSession.lastActivityTime = now;
+        
+        // Update database
+        await supabase
+            .from('profiles')
+            .update({ 
+                last_activity: now.toISOString()
+            })
+            .eq('id', currentUser.id);
+
+        // Check time-based achievements
+        await checkTimeBasedAchievements(now);
+        
+    } catch (error) {
+        console.error('Error updating last activity:', error);
+    }
+}
+
+// =====================================================
+// COURSE SESSION MANAGEMENT
+// =====================================================
+function startCourseSession() {
+    courseSession.startTime = new Date();
+    courseSession.pageLoadTime = new Date();
+    
+    logUserActivity('course_session_start', {
+        course_id: COURSE_DATA.id,
+        course_title: COURSE_DATA.title,
+        user_agent: navigator.userAgent,
+        screen_resolution: `${screen.width}x${screen.height}`
+    });
+    
+    // Check daily streak
+    checkDailyStreak();
+}
+
+function initializeActivityTracking() {
+    // Track page focus/blur for accurate study time
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Track user interactions
+    ['click', 'keydown', 'scroll', 'mousemove'].forEach(event => {
+        document.addEventListener(event, trackUserInteraction, { passive: true });
+    });
+    
+    // Periodic activity updates
+    setInterval(updateStudyTime, 60000); // Every minute
+    
+    // Save session data before page unload
+    window.addEventListener('beforeunload', saveSessionData);
+}
+
+function handleVisibilityChange() {
+    if (document.hidden) {
+        courseSession.lastActivityTime = new Date();
+    } else {
+        // Page became visible again - update activity
+        updateLastActivity();
+    }
+}
+
+function trackUserInteraction() {
+    courseSession.interactionCount++;
+    courseSession.lastActivityTime = new Date();
+    
+    // Throttle activity updates
+    if (courseSession.interactionCount % 50 === 0) {
+        updateLastActivity();
+    }
+}
+
+function updateStudyTime() {
+    if (!courseSession.startTime || document.hidden) return;
+    
+    const now = new Date();
+    const sessionDuration = now - courseSession.startTime;
+    courseSession.totalStudyTime = Math.floor(sessionDuration / 1000 / 60); // in minutes
+    
+    // Update progress with study time
+    saveProgress();
+}
+
+function saveSessionData() {
+    if (!currentUser || !courseSession.startTime) return;
+    
+    const sessionData = {
+        user_id: currentUser.id,
+        course_id: COURSE_DATA.id,
+        session_duration: courseSession.totalStudyTime,
+        lessons_viewed: courseSession.lessonsStarted,
+        lessons_completed: courseSession.lessonsCompleted,
+        interactions: courseSession.interactionCount,
+        session_date: courseSession.startTime.toISOString().split('T')[0]
+    };
+    
+    // Store in localStorage as backup
+    localStorage.setItem('course_session_backup', JSON.stringify(sessionData));
+    
+    // Try to save to database
+    logUserActivity('course_session_end', sessionData);
+}
+
+// =====================================================
+// COURSE DATA & PROGRESS MANAGEMENT
+// =====================================================
+async function loadCourseData() {
+    try {
+        // Update course info in UI
+        document.getElementById('courseTitle').textContent = COURSE_DATA.title;
+        document.getElementById('totalLessons').textContent = COURSE_DATA.lessons.length;
+        
+        // Log course access
+        logUserActivity('course_access', {
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title
+        });
+        
+    } catch (error) {
+        console.error('Error loading course data:', error);
+    }
+}
+
+async function loadProgress() {
+    try {
+        // Get existing progress from database
+        const { data, error } = await supabase
+            .from('course_progress')
+            .select('*')
+            .eq('user_id', currentUser.id)
+            .eq('course_id', COURSE_DATA.id)
+            .single();
+
+        if (error && error.code !== 'PGRST116') {
+            throw error;
+        }
+
+        if (data) {
+            courseProgress = JSON.parse(data.lesson_progress || '{}');
+            currentLessonIndex = data.current_lesson || 0;
+            
+            // Update session tracking
+            courseSession.lessonsStarted = Object.keys(courseProgress).length;
+            courseSession.lessonsCompleted = Object.values(courseProgress).filter(p => p.completed).length;
+        } else {
+            // Initialize new progress
+            courseProgress = {};
+            currentLessonIndex = 0;
+            await saveProgress();
+            
+            // Award first course start achievement
+            await checkAndUnlockAchievement('first_course_start');
+        }
+
+        updateProgressDisplay();
+        
+    } catch (error) {
+        console.error('Error loading progress:', error);
+        showToast('Failed to load progress', 'error');
+    }
+}
+
+async function saveProgress() {
+    try {
+        if (!currentUser) return;
+
+        const now = new Date();
+        const progressData = {
+            user_id: currentUser.id,
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title,
+            current_lesson: currentLessonIndex,
+            lesson_progress: JSON.stringify(courseProgress),
+            progress: calculateOverallProgress(),
+            lessons_completed: getCompletedLessonsCount(),
+            lessons_started: Object.keys(courseProgress).length,
+            study_time_minutes: courseSession.totalStudyTime,
+            last_accessed: now.toISOString(),
+            updated_at: now.toISOString()
+        };
+
+        // Upsert progress
+        const { error } = await supabase
+            .from('course_progress')
+            .upsert([progressData]);
+
+        if (error) throw error;
+
+        // Update user stats
+        await updateUserStats();
+        
+        updateProgressDisplay();
+
+    } catch (error) {
+        console.error('Error saving progress:', error);
+        showToast('Failed to save progress', 'error');
+    }
+}
+
+async function updateUserStats() {
+    try {
+        // Get all course progress for this user
+        const { data: allProgress, error } = await supabase
+            .from('course_progress')
+            .select('progress, course_id, study_time_minutes')
+            .eq('user_id', currentUser.id);
+
+        if (error) throw error;
+
+        // Calculate stats
+        const completedCourses = allProgress?.filter(p => p.progress >= 100).length || 0;
+        const inProgressCourses = allProgress?.filter(p => p.progress > 0 && p.progress < 100).length || 0;
+        const totalStudyTime = allProgress?.reduce((sum, p) => sum + (p.study_time_minutes || 0), 0) || 0;
+
+        // Calculate points (500 per completed course + achievement points)
+        const coursePoints = completedCourses * 500;
+        const bonusPoints = userStats.bonus_points || 0;
+        const totalPoints = coursePoints + bonusPoints;
+
+        // Update profile
+        const updateData = {
+            completed_courses: completedCourses,
+            in_progress_courses: inProgressCourses,
+            total_points: totalPoints,
+            total_study_time: totalStudyTime,
+            last_activity: new Date().toISOString()
+        };
+
+        const { error: updateError } = await supabase
+            .from('profiles')
+            .update(updateData)
+            .eq('id', currentUser.id);
+
+        if (updateError) throw updateError;
+
+        // Update local stats
+        Object.assign(userStats, updateData);
+
+    } catch (error) {
+        console.error('Error updating user stats:', error);
+    }
+}
+
+function calculateOverallProgress() {
+    const completedLessons = getCompletedLessonsCount();
+    return Math.round((completedLessons / COURSE_DATA.lessons.length) * 100);
+}
+
+function getCompletedLessonsCount() {
+    return Object.values(courseProgress).filter(lesson => lesson.completed).length;
+}
+
+function updateProgressDisplay() {
+    const completedCount = getCompletedLessonsCount();
+    const progressPercent = calculateOverallProgress();
+    
+    // Update UI elements
+    const elements = {
+        'completedLessons': completedCount,
+        'courseProgressPercent': `${progressPercent}%`
+    };
+    
+    Object.entries(elements).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) element.textContent = value;
+    });
+    
+    // Update progress bar
+    const progressBar = document.getElementById('courseProgressFill');
+    if (progressBar) progressBar.style.width = `${progressPercent}%`;
+}
+
+// =====================================================
+// LESSON MANAGEMENT
+// =====================================================
+function loadLesson(index) {
+    if (index < 0 || index >= COURSE_DATA.lessons.length) return;
+
+    const lesson = COURSE_DATA.lessons[index];
+    currentLessonIndex = index;
+
+    // Mark lesson as started and track activity
+    if (!courseProgress[lesson.id]) {
+        courseProgress[lesson.id] = { 
+            started: true, 
+            completed: false,
+            startedAt: new Date().toISOString(),
+            timeSpent: 0
+        };
+        
+        courseSession.lessonsStarted++;
+        saveProgress();
+        
+        // Log lesson start
+        logUserActivity('lesson_start', {
+            lesson_id: lesson.id,
+            lesson_title: lesson.title,
+            lesson_index: index
+        });
+    }
+
+    // Update lesson start time for time tracking
+    courseProgress[lesson.id].currentSessionStart = new Date();
+
+    // Update sidebar and navigation
+    renderSidebar();
+    updateNavigationButtons();
+
+    // Update header info
+    updateLessonHeader(lesson, index);
+
+    // Render lesson content
+    renderLessonContent(lesson);
+
+    // Smooth scroll and animations
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('contentBody').scrollTop = 0;
+
+    const contentBody = document.getElementById('contentBody');
+    contentBody.classList.add('fade-in');
+    setTimeout(() => contentBody.classList.remove('fade-in'), 500);
+    
+    // Check lesson-based achievements
+    checkLessonAchievements(index + 1);
+}
+
+function updateLessonHeader(lesson, index) {
+    const elements = {
+        'currentLessonNumber': index + 1,
+        'currentLessonTitle': lesson.title,
+        'navInfo': `Lesson ${index + 1} of ${COURSE_DATA.lessons.length}`
+    };
+    
+    Object.entries(elements).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) element.textContent = value;
+    });
+}
+
+function renderSidebar() {
+    const lessonNav = document.getElementById('lessonNav');
+    if (!lessonNav) return;
+    
+    lessonNav.innerHTML = '';
+
+    COURSE_DATA.lessons.forEach((lesson, index) => {
+        const lessonItem = document.createElement('div');
+        lessonItem.className = 'lesson-item';
+        
+        // Determine lesson status
+        const lessonProgress = courseProgress[lesson.id];
+        const isCompleted = lessonProgress?.completed || false;
+        const isInProgress = lessonProgress?.started || false;
+        const isLocked = !isCompleted && !canAccessLesson(index);
+        const isActive = index === currentLessonIndex;
+
+        // Apply status classes
+        if (isCompleted) lessonItem.classList.add('completed');
+        if (isLocked) lessonItem.classList.add('locked');
+        if (isActive) lessonItem.classList.add('active');
+
+        // Determine status display
+        let statusClass = 'not-started';
+        let statusIcon = index + 1;
+        
+        if (isCompleted) {
+            statusClass = 'completed';
+            statusIcon = '✓';
+        } else if (isInProgress) {
+            statusClass = 'in-progress';
+            statusIcon = '◐';
+        }
+
+        // Create lesson item HTML
+        lessonItem.innerHTML = `
+            <div class="lesson-status ${statusClass}">${statusIcon}</div>
+            <div class="lesson-info">
+                <div class="lesson-title">${lesson.title}</div>
+                <div class="lesson-meta">
+                    ${isCompleted ? 'Completed' : 
+                      isInProgress ? 'In Progress' : 
+                      isLocked ? 'Locked' : 'Not Started'}
+                </div>
+            </div>
+            <div class="lesson-duration">${lesson.duration}</div>
+        `;
+
+        // Add click handler if not locked
+        if (!isLocked) {
+            lessonItem.addEventListener('click', () => {
+                if (index !== currentLessonIndex) {
+                    // Track lesson time before switching
+                    trackLessonTime();
+                    
+                    currentLessonIndex = index;
+                    loadLesson(index);
+                    closeSidebar();
+                }
+            });
+        }
+
+        lessonNav.appendChild(lessonItem);
+    });
+}
+
+function canAccessLesson(index) {
+    if (index === 0) return true; // First lesson always accessible
+    
+    // Can access if previous lesson is completed
+    const previousLessonId = COURSE_DATA.lessons[index - 1].id;
+    return courseProgress[previousLessonId]?.completed || false;
+}
+
+function trackLessonTime() {
+    const currentLesson = COURSE_DATA.lessons[currentLessonIndex];
+    const lessonProgress = courseProgress[currentLesson.id];
+    
+    if (lessonProgress?.currentSessionStart) {
+        const sessionTime = Math.floor((new Date() - new Date(lessonProgress.currentSessionStart)) / 1000 / 60);
+        lessonProgress.timeSpent = (lessonProgress.timeSpent || 0) + sessionTime;
+        delete lessonProgress.currentSessionStart;
+    }
+}
+
+// =====================================================
+// LESSON CONTENT RENDERING
+// =====================================================
+function renderLessonContent(lesson) {
+    const contentContainer = document.getElementById('lessonContent');
+    if (!contentContainer) return;
+    
+    let contentHTML = `
+        <div class="content-section">
+            <h2>Learning Objectives</h2>
+            <ul>
+                ${lesson.objectives.map(obj => `<li>${obj}</li>`).join('')}
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2>Overview</h2>
+            <p>${lesson.content.overview}</p>
+        </div>
+    `;
+
+    // Render content sections
+    lesson.content.sections.forEach(section => {
+        contentHTML += `
+            <div class="content-section">
+                <h2>${section.title}</h2>
+                ${section.content}
+                ${section.image ? `<img src="${section.image}" alt="${section.title}" class="content-image" loading="lazy">` : ''}
+            </div>
+        `;
+    });
+
+    // Render code examples
+    if (lesson.content.codeExamples && lesson.content.codeExamples.length > 0) {
+        contentHTML += `<div class="content-section"><h2>Code Examples</h2></div>`;
+        
+        lesson.content.codeExamples.forEach((example, index) => {
+            const codeId = `code-${lesson.id}-${index}`;
+            contentHTML += `
+                <div class="code-section">
+                    <div class="code-header">
+                        <span class="code-title">${example.title}</span>
+                        <button class="copy-btn" onclick="copyCode('${codeId}')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <pre class="code-block"><code id="${codeId}" class="language-${example.language}">${escapeHtml(example.code)}</code></pre>
+                </div>
+            `;
+        });
+    }
+
+    // Render quiz
+    contentHTML += renderQuiz(lesson.quiz);
+
+    contentContainer.innerHTML = contentHTML;
+
+    // Highlight code syntax if Prism is available
+    setTimeout(() => {
+        if (window.Prism) {
+            Prism.highlightAll();
+        }
+    }, 100);
+}
+
+// =====================================================
+// QUIZ SYSTEM
+// =====================================================
+function renderQuiz(quiz) {
+    const currentLessonProgress = courseProgress[COURSE_DATA.lessons[currentLessonIndex].id];
+    const isCompleted = currentLessonProgress?.completed || false;
+    
+    let quizHTML = `
+        <div class="quiz-section" id="quizSection">
+            <div class="quiz-header">
+                <h2 class="quiz-title">
+                    <i class="fas fa-clipboard-check"></i>
+                    Knowledge Check
+                </h2>
+                <p class="quiz-info">
+                    Complete this quiz with ${quiz.passingScore}% or higher to unlock the next lesson.
+                </p>
+            </div>
+    `;
+
+    if (isCompleted) {
+        const savedScore = currentLessonProgress.quizScore || 0;
+        quizHTML += `
+            <div class="quiz-results show">
+                <div class="quiz-score pass">${savedScore}%</div>
+                <div class="quiz-message">
+                    <strong>Lesson Completed!</strong><br>
+                    You've successfully passed this lesson's quiz.
+                </div>
+            </div>
+        `;
+    } else {
+        // Render quiz questions
+        quiz.questions.forEach((question, qIndex) => {
+            quizHTML += `
+                <div class="quiz-question ${qIndex === 0 ? 'active' : ''}" data-question="${qIndex}">
+                    <div class="question-header">
+                        <span class="question-number">Question ${qIndex + 1}</span>
+                        <span class="question-progress">${qIndex + 1}/${quiz.questions.length}</span>
+                    </div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="question-options">
+                        ${question.options.map((option, oIndex) => `
+                            <div class="option" data-option="${oIndex}" onclick="selectOption(${qIndex}, ${oIndex})">
+                                <span class="option-letter">${String.fromCharCode(65 + oIndex)}</span>
+                                <span class="option-text">${option}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        });
+
+        quizHTML += `
+            <div class="quiz-controls">
+                <button class="btn btn-secondary" id="prevQuestionBtn" onclick="previousQuestion()" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <div>
+                    <button class="btn btn-secondary" id="nextQuestionBtn" onclick="nextQuestion()" disabled>
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="btn btn-primary" id="submitQuizBtn" onclick="submitQuiz()" style="display: none;">
+                        <i class="fas fa-check"></i>
+                        Submit Quiz
+                    </button>
+                </div>
+            </div>
+
+            <div class="quiz-results" id="quizResults">
+                <div class="quiz-score" id="quizScore">0%</div>
+                <div class="quiz-message" id="quizMessage"></div>
+                <div class="quiz-actions">
+                    <button class="btn btn-primary" id="continueBtn" onclick="completeLesson()" style="display: none;">
+                        <i class="fas fa-arrow-right"></i>
+                        Continue to Next Lesson
+                    </button>
+                    <button class="btn btn-secondary" onclick="retakeQuiz()">
+                        <i class="fas fa-redo"></i>
+                        Retake Quiz
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    quizHTML += '</div>';
+    return quizHTML;
+}
+
+// Quiz interaction functions
+function selectOption(questionIndex, optionIndex) {
+    // Clear previous selections
+    document.querySelectorAll(`[data-question="${questionIndex}"] .option`).forEach(opt => {
+        opt.classList.remove('selected');
+    });
+
+    // Select current option
+    const selectedOption = document.querySelector(`[data-question="${questionIndex}"] [data-option="${optionIndex}"]`);
+    selectedOption.classList.add('selected');
+
+    // Store answer
+    quizState.answers[questionIndex] = optionIndex;
+
+    // Update navigation
+    const isLastQuestion = questionIndex === COURSE_DATA.lessons[currentLessonIndex].quiz.questions.length - 1;
+    if (isLastQuestion) {
+        document.getElementById('submitQuizBtn').style.display = 'inline-flex';
+        document.getElementById('nextQuestionBtn').style.display = 'none';
+    } else {
+        document.getElementById('nextQuestionBtn').disabled = false;
+    }
+}
+
+function nextQuestion() {
+    const currentQuestionEl = document.querySelector('.quiz-question.active');
+    const nextQuestionEl = currentQuestionEl.nextElementSibling;
+    
+    if (nextQuestionEl && nextQuestionEl.classList.contains('quiz-question')) {
+        currentQuestionEl.classList.remove('active');
+        nextQuestionEl.classList.add('active');
+        quizState.currentQuestion++;
+        updateQuizNavigation();
+    }
+}
+
+function previousQuestion() {
+    const currentQuestionEl = document.querySelector('.quiz-question.active');
+    const prevQuestionEl = currentQuestionEl.previousElementSibling;
+    
+    if (prevQuestionEl && prevQuestionEl.classList.contains('quiz-question')) {
+        currentQuestionEl.classList.remove('active');
+        prevQuestionEl.classList.add('active');
+        quizState.currentQuestion--;
+        updateQuizNavigation();
+    }
+}
+
+function updateQuizNavigation() {
+    const totalQuestions = COURSE_DATA.lessons[currentLessonIndex].quiz.questions.length;
+    const prevBtn = document.getElementById('prevQuestionBtn');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const submitBtn = document.getElementById('submitQuizBtn');
+
+    prevBtn.disabled = quizState.currentQuestion === 0;
+    
+    const hasAnswer = quizState.answers[quizState.currentQuestion] !== undefined;
+    const isLastQuestion = quizState.currentQuestion === totalQuestions - 1;
+    
+    if (isLastQuestion) {
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = hasAnswer ? 'inline-flex' : 'none';
+    } else {
+        nextBtn.style.display = 'inline-flex';
+        nextBtn.disabled = !hasAnswer;
+        submitBtn.style.display = 'none';
+    }
+}
+
+async function submitQuiz() {
+    const lesson = COURSE_DATA.lessons[currentLessonIndex];
+    const quiz = lesson.quiz;
+    let correctAnswers = 0;
+
+    // Hide questions and controls
+    document.querySelectorAll('.quiz-question').forEach(q => q.style.display = 'none');
+    document.querySelector('.quiz-controls').style.display = 'none';
+
+    // Calculate score and highlight answers
+    quiz.questions.forEach((question, index) => {
+        const userAnswer = quizState.answers[index];
+        const correctAnswer = question.correct;
+        const isCorrect = userAnswer === correctAnswer;
+        
+        if (isCorrect) correctAnswers++;
+
+        // Highlight answers
+        const questionEl = document.querySelector(`[data-question="${index}"]`);
+        const options = questionEl.querySelectorAll('.option');
+        
+        options[correctAnswer].classList.add('correct');
+        if (userAnswer !== correctAnswer && userAnswer !== undefined) {
+            options[userAnswer].classList.add('incorrect');
+        }
+    });
+
+    const score = Math.round((correctAnswers / quiz.questions.length) * 100);
+    const passed = score >= quiz.passingScore;
+
+    // Update quiz results UI
+    const quizScore = document.getElementById('quizScore');
+    const quizMessage = document.getElementById('quizMessage');
+    const quizActions = document.querySelector('.quiz-actions');
+
+    quizScore.textContent = `${score}%`;
+    quizScore.className = `quiz-score ${passed ? 'pass' : 'fail'}`;
+
+    if (passed) {
+        quizMessage.innerHTML = `
+            <strong>Congratulations!</strong><br>
+            You passed with ${score}%. You can now proceed to the next lesson.
+        `;
+        
+        quizActions.innerHTML = `
+            <button class="btn btn-primary" onclick="completeLesson()">
+                <i class="fas fa-arrow-right"></i>
+                Continue to Next Lesson
+            </button>
+        `;
+        
+        // Mark lesson as completed
+        await markLessonComplete(score);
+        
+    } else {
+        quizMessage.innerHTML = `
+            <strong>Not quite there yet.</strong><br>
+            You scored ${score}%. You need ${quiz.passingScore}% to pass. Review the material and try again.
+        `;
+        
+        quizActions.innerHTML = `
+            <button class="btn btn-secondary" onclick="retakeQuiz()">
+                <i class="fas fa-redo"></i>
+                Retake Quiz
+            </button>
+        `;
+    }
+
+    document.getElementById('quizResults').classList.add('show');
+    
+    // Log quiz completion
+    logUserActivity('quiz_completed', {
+        lesson_id: lesson.id,
+        lesson_title: lesson.title,
+        score: score,
+        passed: passed,
+        attempts: (courseProgress[lesson.id]?.quizAttempts || 0) + 1
+    });
+
+    // Scroll to results
+    document.getElementById('quizResults').scrollIntoView({ behavior: 'smooth' });
+}
+
+function retakeQuiz() {
+    // Reset quiz state
+    quizState = {
+        currentQuestion: 0,
+        answers: [],
+        score: 0,
+        isComplete: false
+    };
+
+    // Track quiz retry
+    const lessonId = COURSE_DATA.lessons[currentLessonIndex].id;
+    if (!courseProgress[lessonId]) courseProgress[lessonId] = {};
+    courseProgress[lessonId].quizAttempts = (courseProgress[lessonId].quizAttempts || 0) + 1;
+
+    // Reload lesson content
+    loadLesson(currentLessonIndex);
+    
+    // Scroll to quiz
+    setTimeout(() => {
+        document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth' });
+    }, 500);
+}
+
+async function markLessonComplete(score) {
+    const lesson = COURSE_DATA.lessons[currentLessonIndex];
+    const lessonId = lesson.id;
+    
+    // Track lesson completion time
+    trackLessonTime();
+    
+    // Update lesson progress
+    courseProgress[lessonId] = {
+        ...courseProgress[lessonId],
+        completed: true,
+        quizScore: score,
+        completedAt: new Date().toISOString(),
+        finalScore: score
+    };
+
+    // Update session tracking
+    courseSession.lessonsCompleted++;
+
+    // Save progress to database
+    await saveProgress();
+    
+    // Update UI
+    renderSidebar();
+    updateNavigationButtons();
+
+    // Check various achievements
+    await checkLessonCompletionAchievements();
+    await checkPerfectScoreAchievements(score);
+    await checkStudyTimeAchievements();
+    
+    // Log lesson completion
+    logUserActivity('lesson_completed', {
+        lesson_id: lessonId,
+        lesson_title: lesson.title,
+        final_score: score,
+        time_spent: courseProgress[lessonId].timeSpent || 0,
+        lesson_number: currentLessonIndex + 1
+    });
+    
+    showToast('Lesson completed successfully!', 'success');
+}
+
+async function completeLesson() {
+    if (currentLessonIndex < COURSE_DATA.lessons.length - 1) {
+        // Move to next lesson
+        currentLessonIndex++;
+        loadLesson(currentLessonIndex);
+        
+    } else {
+        // Course completion
+        await completeCourse();
+    }
+}
+
+async function completeCourse() {
+    try {
+        const completionTime = courseSession.totalStudyTime;
+        
+        // Update course progress to 100% completed
+        await supabase
+            .from('course_progress')
+            .update({
+                progress: 100,
+                completed_at: new Date().toISOString(),
+                completion_time_minutes: completionTime
+            })
+            .eq('user_id', currentUser.id)
+            .eq('course_id', COURSE_DATA.id);
+
+        // Award course completion achievements
+        await checkAndUnlockAchievement('course_completion_1');
+        await checkSpeedCompletionAchievements(completionTime);
+        await checkCourseStreakAchievements();
+        
+        // Update user stats
+        await updateUserStats();
+        
+        // Show completion message
+        showToast('Congratulations! Course completed successfully!', 'certificate');
+        
+        // Log course completion
+        logUserActivity('course_completed', {
+            course_id: COURSE_DATA.id,
+            course_title: COURSE_DATA.title,
+            completion_time_minutes: completionTime,
+            total_lessons: COURSE_DATA.lessons.length,
+            average_quiz_score: calculateAverageQuizScore()
+        });
+        
+        // Redirect to dashboard after delay
+        setTimeout(() => {
+            window.location.href = '/dashboard.html';
+        }, 3000);
+        
+    } catch (error) {
+        console.error('Error completing course:', error);
+        showToast('Error marking course as complete', 'error');
+    }
+}
+
+// =====================================================
+// ACHIEVEMENT INTEGRATION SYSTEM
+// =====================================================
+async function checkAndUnlockAchievement(achievementId, skipNotification = false) {
+    try {
+        // Prevent duplicate checks
+        const cacheKey = `achievement_${achievementId}_${currentUser.id}`;
+        if (sessionStorage.getItem(cacheKey)) return false;
+
+        // Check if already unlocked
+        const { data: existing, error } = await supabase
+            .from('user_achievements')
+            .select('id')
+            .eq('user_id', currentUser.id)
+            .eq('achievement_id', achievementId)
+            .single();
+
+        if (existing) {
+            sessionStorage.setItem(cacheKey, 'true');
+            return false;
+        }
+
+        // Award achievement
+        const achievementData = {
+            user_id: currentUser.id,
+            achievement_id: achievementId,
+            unlocked_at: new Date().toISOString(),
+            points_awarded: getAchievementPoints(achievementId),
+            context: 'course_system'
+        };
+
+        const { data, error: insertError } = await supabase
+            .from('user_achievements')
+            .insert([achievementData])
+            .select()
+            .single();
+
+        if (insertError) {
+            if (insertError.code === '23505') return false; // Already exists
+            throw insertError;
+        }
+
+        // Update user points
+      await supabase.rpc('increment_user_stats', {
+  user_id_param: currentUser.id,
+  points_to_add: achievementData.points_awarded,
+  achievements_to_add: 1
+});
+
+        // Cache and queue notification
+        sessionStorage.setItem(cacheKey, 'true');
+        
+        if (!skipNotification) {
+            queueAchievementNotification({
+                id: achievementId,
+                name: getAchievementName(achievementId),
+                description: getAchievementDescription(achievementId),
+                points: achievementData.points_awarded,
+                rarity: getAchievementRarity(achievementId),
+                icon: getAchievementIcon(achievementId)
+            });
+        }
+
+        return true;
+
+    } catch (error) {
+        console.error('Error unlocking achievement:', error);
+        return false;
+    }
+}
+
+// Helper functions for achievement data (replace with your actual achievement definitions)
+function getAchievementPoints(id) {
+    const pointsMap = {
+        'first_course_start': 75,
+        'first_lesson': 100,
+        'course_completion_1': 500,
+        'perfect_score': 250,
+        'speed_demon': 750,
+        'marathon_learner': 500,
+        'night_owl': 200,
+        'early_bird': 200,
+        'weekend_warrior': 150,
+        // Add more as needed
+    };
+    return pointsMap[id] || 100;
+}
+
+function getAchievementName(id) {
+    const nameMap = {
+        'first_course_start': 'Learning Initiated',
+        'first_lesson': 'First Steps',
+        'course_completion_1': 'Course Conqueror',
+        'perfect_score': 'Perfectionist',
+        'speed_demon': 'Speed Demon',
+        // Add more as needed
+    };
+    return nameMap[id] || 'Achievement Unlocked';
+}
+
+function getAchievementDescription(id) {
+    const descMap = {
+        'first_course_start': 'Start your first cybersecurity course',
+        'first_lesson': 'Complete your first lesson',
+        'course_completion_1': 'Complete your first course',
+        'perfect_score': 'Score 100% on any quiz',
+        'speed_demon': 'Complete a course in under 2 hours',
+        // Add more as needed
+    };
+    return descMap[id] || 'Achievement description';
+}
+
+function getAchievementRarity(id) {
+    const rarityMap = {
+        'first_course_start': 'common',
+        'first_lesson': 'bronze',
+        'course_completion_1': 'silver',
+        'perfect_score': 'gold',
+        'speed_demon': 'legendary',
+        // Add more as needed
+    };
+    return rarityMap[id] || 'common';
+}
+
+function getAchievementIcon(id) {
+    const iconMap = {
+        'first_course_start': 'fas fa-play',
+        'first_lesson': 'fas fa-baby',
+        'course_completion_1': 'fas fa-trophy',
+        'perfect_score': 'fas fa-star',
+        'speed_demon': 'fas fa-rocket',
+        // Add more as needed
+    };
+    return iconMap[id] || 'fas fa-award';
+}
+
+async function checkLessonAchievements(lessonNumber) {
+    if (lessonNumber === 1) {
+        await checkAndUnlockAchievement('first_lesson');
+    }
+    
+    // Check if user has completed multiple lessons in one day
+    const today = new Date().toISOString().split('T')[0];
+    const todayCompletions = Object.values(courseProgress).filter(p => 
+        p.completed && p.completedAt?.startsWith(today)
+    ).length;
+    
+    if (todayCompletions >= 3) {
+        await checkAndUnlockAchievement('lesson_marathon');
+    }
+}
+
+async function checkLessonCompletionAchievements() {
+    const completedCount = getCompletedLessonsCount();
+    
+    // Lesson-based achievements
+    const lessonMilestones = [1, 5, 10, 25, 50, 100];
+    for (const milestone of lessonMilestones) {
+        if (completedCount >= milestone) {
+            await checkAndUnlockAchievement(`lessons_${milestone}`);
+        }
+    }
+    
+    // Course completion achievements
+    if (completedCount === COURSE_DATA.lessons.length) {
+        await checkAndUnlockAchievement('course_completion_1');
+        
+        // Check for additional course completion achievements
+        const { data: allCourses } = await supabase
+            .from('course_progress')
+            .select('course_id')
+            .eq('user_id', currentUser.id)
+            .eq('progress', 100);
+        
+        const totalCompleted = allCourses?.length || 0;
+        
+        const courseMilestones = [1, 5, 10, 25];
+        for (const milestone of courseMilestones) {
+            if (totalCompleted >= milestone) {
+                await checkAndUnlockAchievement(`course_completion_${milestone}`);
+            }
+        }
+    }
+}
+
+async function checkPerfectScoreAchievements(score) {
+    if (score === 100) {
+        await checkAndUnlockAchievement('perfect_score');
+        
+        // Check for consecutive perfect scores
+        const recentScores = Object.values(courseProgress)
+            .filter(p => p.completed && p.quizScore)
+            .slice(-5) // Last 5 completed
+            .map(p => p.quizScore);
+        
+        if (recentScores.length >= 3 && recentScores.every(s => s === 100)) {
+            await checkAndUnlockAchievement('perfectionist_streak');
+        }
+    }
+}
+
+async function checkSpeedCompletionAchievements(completionTime) {
+    // Speed demon: Complete course in under 2 hours (120 minutes)
+    if (completionTime <= 120) {
+        await checkAndUnlockAchievement('speed_demon');
+    }
+    
+    // Quick learner: Complete course in under 4 hours (240 minutes)
+    if (completionTime <= 240) {
+        await checkAndUnlockAchievement('quick_learner');
+    }
+}
+
+async function checkStudyTimeAchievements() {
+    const totalTime = courseSession.totalStudyTime;
+    
+    // Marathon learner: Study for 8+ hours in a course session
+    if (totalTime >= 480) { // 8 hours
+        await checkAndUnlockAchievement('marathon_learner');
+    }
+    
+    // Dedicated learner: Study for 4+ hours
+    if (totalTime >= 240) { // 4 hours
+        await checkAndUnlockAchievement('dedicated_learner');
+    }
+}
+
+async function checkCourseStreakAchievements() {
+    try {
+        // Check for consecutive course completions
+        const { data: recentCourses, error } = await supabase
+            .from('course_progress')
+            .select('completed_at, course_id')
+            .eq('user_id', currentUser.id)
+            .eq('progress', 100)
+            .order('completed_at', { ascending: false })
+            .limit(10);
+
+        if (error || !recentCourses) return;
+
+        // Check for courses completed on consecutive days
+        let consecutiveDays = 1;
+        for (let i = 1; i < recentCourses.length; i++) {
+            const prevDate = new Date(recentCourses[i-1].completed_at).toDateString();
+            const currentDate = new Date(recentCourses[i].completed_at).toDateString();
+            const dayDiff = Math.abs(new Date(prevDate) - new Date(currentDate)) / (1000 * 60 * 60 * 24);
+            
+            if (dayDiff <= 1) {
+                consecutiveDays++;
+            } else {
+                break;
+            }
+        }
+
+        if (consecutiveDays >= 3) {
+            await checkAndUnlockAchievement('learning_streak');
+        }
+
+    } catch (error) {
+        console.error('Error checking course streak achievements:', error);
+    }
+}
+
+// =====================================================
+// TIME-BASED ACHIEVEMENTS
+// =====================================================
+async function checkTimeBasedAchievements(timestamp) {
+    const hour = timestamp.getHours();
+    const dayOfWeek = timestamp.getDay();
+
+    // Night owl (after midnight, before 6 AM)
+    if (hour >= 0 && hour < 6) {
+        await incrementTimeBasedCounter('midnight_sessions', 'night_owl');
+    }
+
+    // Early bird (4 AM to 6 AM)
+    if (hour >= 4 && hour < 6) {
+        await incrementTimeBasedCounter('early_sessions', 'early_bird');
+    }
+
+    // Weekend warrior (Saturday = 6, Sunday = 0)
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+        await incrementTimeBasedCounter('weekend_sessions', 'weekend_warrior');
+    }
+}
+
+async function incrementTimeBasedCounter(counterType, achievementId) {
+    try {
+        const dateStr = new Date().toISOString().split('T')[0];
+        const cacheKey = `${counterType}_${currentUser.id}_${dateStr}`;
+
+        // Prevent multiple increments per day
+        if (sessionStorage.getItem(cacheKey)) return;
+
+        // Update counter
+       await supabase.rpc('increment_profile_counter', {
+  user_id_param: currentUser.id,
+  counter_field: counterType,
+  increment_value: 1
+});
+
+        // Cache to prevent double counting
+        sessionStorage.setItem(cacheKey, 'true');
+
+        // Check related achievement
+        if (achievementId) {
+            await checkAndUnlockAchievement(achievementId, true);
+        }
+
+    } catch (error) {
+        console.error(`Error incrementing ${counterType}:`, error);
+    }
+}
+
+async function checkDailyStreak() {
+    try {
+        const { data: profile, error } = await supabase
+            .from('profiles')
+            .select('last_activity, current_streak, last_streak_date')
+            .eq('id', currentUser.id)
+            .single();
+
+        if (error) throw error;
+
+        const now = new Date();
+        const today = now.toDateString();
+        const lastActivity = profile.last_activity ? new Date(profile.last_activity) : null;
+        const lastStreakDate = profile.last_streak_date ? new Date(profile.last_streak_date).toDateString() : null;
+
+        let newStreak = profile.current_streak || 0;
+        let shouldUpdateStreak = false;
+
+        if (!lastActivity) {
+            // First time user
+            newStreak = 1;
+            shouldUpdateStreak = true;
+        } else {
+            const daysSinceLastActivity = Math.floor((now - lastActivity) / (1000 * 60 * 60 * 24));
+            
+            if (lastStreakDate === today) {
+                // Already counted today's streak
+                return newStreak;
+            } else if (daysSinceLastActivity === 1 || (daysSinceLastActivity === 0 && lastStreakDate !== today)) {
+                // Consecutive day or same day but not counted yet
+                newStreak += 1;
+                shouldUpdateStreak = true;
+            } else if (daysSinceLastActivity > 1) {
+                // Streak broken
+                newStreak = 1;
+                shouldUpdateStreak = true;
+            }
+        }
+
+        if (shouldUpdateStreak) {
+            await supabase
+                .from('profiles')
+                .update({
+                    current_streak: newStreak,
+                    last_activity: now.toISOString(),
+                    last_streak_date: now.toISOString()
+                })
+                .eq('id', currentUser.id);
+
+            userStats.current_streak = newStreak;
+            
+            showToast(`Daily streak: ${newStreak} days!`, 'success');
+            await checkStreakAchievements(newStreak);
+        }
+
+        return newStreak;
+        
+    } catch (error) {
+        console.error('Error checking daily streak:', error);
+        return 0;
+    }
+}
+
+async function checkStreakAchievements(currentStreak) {
+    const streakMilestones = [3, 7, 14, 30, 100, 365];
+    
+    for (const milestone of streakMilestones) {
+        if (currentStreak >= milestone) {
+            await checkAndUnlockAchievement(`streak_${milestone}`);
+        }
+    }
+}
+
+// =====================================================
+// USER ACTIVITY LOGGING
+// =====================================================
+async function logUserActivity(activityType, metadata = {}) {
+    try {
+        const now = new Date();
+        
+        const activityData = {
+            user_id: currentUser.id,
+            activity_type: activityType,
+            timestamp: now.toISOString(),
+            course_id: COURSE_DATA.id,
+            lesson_index: currentLessonIndex,
+            session_duration: courseSession.totalStudyTime,
+            metadata: JSON.stringify(metadata),
+            created_at: now.toISOString()
+        };
+
+        // Try to log to activities table
+        const { error } = await supabase
+            .from('user_activities')
+            .insert([activityData]);
+
+        if (error && error.code !== '42P01') {
+            console.warn('Activity logging failed:', error.message);
+        }
+
+        // Always update last activity in profile
+        await supabase
+            .from('profiles')
+            .update({ last_activity: now.toISOString() })
+            .eq('id', currentUser.id);
+
+    } catch (error) {
+        console.error('Error logging user activity:', error);
+    }
+}
+
+// =====================================================
+// NAVIGATION SYSTEM
+// =====================================================
+function updateNavigationButtons() {
+    const prevBtn = document.getElementById('prevLessonBtn');
+    const nextBtn = document.getElementById('nextLessonBtn');
+    
+    if (!prevBtn || !nextBtn) return;
+
+    // Previous button
+    prevBtn.disabled = currentLessonIndex === 0;
+    
+    // Next button logic
+    const isLastLesson = currentLessonIndex === COURSE_DATA.lessons.length - 1;
+    const canGoNext = currentLessonIndex < COURSE_DATA.lessons.length - 1 && 
+                     canAccessLesson(currentLessonIndex + 1);
+    
+    if (isLastLesson) {
+        const isCurrentCompleted = courseProgress[COURSE_DATA.lessons[currentLessonIndex].id]?.completed;
+        nextBtn.disabled = !isCurrentCompleted;
+        nextBtn.innerHTML = '<i class="fas fa-trophy"></i> Complete Course';
+    } else {
+        nextBtn.disabled = !canGoNext;
+        nextBtn.innerHTML = 'Next <i class="fas fa-chevron-right"></i>';
+    }
+}
+
+// Navigation button event handlers
+function goToPreviousLesson() {
+    if (currentLessonIndex > 0) {
+        trackLessonTime(); // Track time spent on current lesson
+        currentLessonIndex--;
+        loadLesson(currentLessonIndex);
+    }
+}
+
+function goToNextLesson() {
+    if (currentLessonIndex < COURSE_DATA.lessons.length - 1) {
+        const canGoNext = canAccessLesson(currentLessonIndex + 1);
+        if (canGoNext) {
+            trackLessonTime();
+            currentLessonIndex++;
+            loadLesson(currentLessonIndex);
+        } else {
+            showToast('Complete the current lesson quiz to proceed', 'warning');
+        }
+    } else {
+        // Complete course
+        completeCourse();
+    }
+}
+
+// =====================================================
+// SIDEBAR FUNCTIONS
+// =====================================================
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    
+    if (sidebar) sidebar.classList.toggle('open');
+    if (overlay) overlay.classList.toggle('active');
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    
+    if (sidebar) sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('active');
+}
+
+// =====================================================
+// ACHIEVEMENT NOTIFICATION SYSTEM
+// =====================================================
+function queueAchievementNotification(achievement) {
+    notificationQueue.push(achievement);
+    processNotificationQueue();
+}
+
+function processNotificationQueue() {
+    if (isShowingNotification || notificationQueue.length === 0) return;
+
+    isShowingNotification = true;
+    const achievement = notificationQueue.shift();
+    showAchievementNotification(achievement);
+
+    const duration = achievement.rarity === 'mythic' ? 8000 :
+                     achievement.rarity === 'legendary' ? 7000 : 6000;
+
+    setTimeout(() => {
+        isShowingNotification = false;
+        processNotificationQueue();
+    }, duration + 500);
+}
+
+function showAchievementNotification(achievement) {
+    const notification = document.getElementById('achievementNotification');
+    if (!notification) return;
+
+    const icon = document.getElementById('notificationIcon');
+    const title = document.getElementById('notificationTitle');
+    const description = document.getElementById('notificationDescription');
+    const points = document.getElementById('notificationPoints');
+
+    if (icon) {
+        icon.innerHTML = `<i class="${achievement.icon}"></i>`;
+        icon.className = `notification-icon ${achievement.rarity}`;
+    }
+    if (title) title.textContent = achievement.name;
+    if (description) description.textContent = achievement.description;
+    if (points) points.textContent = `+${achievement.points} Points`;
+
+    notification.className = `achievement-notification ${achievement.rarity}`;
+    notification.classList.add('show');
+
+    const duration = achievement.rarity === 'mythic' ? 8000 :
+                     achievement.rarity === 'legendary' ? 7000 : 6000;
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, duration);
+}
+
+// =====================================================
+// UTILITY FUNCTIONS
+// =====================================================
+function calculateAverageQuizScore() {
+    const scores = Object.values(courseProgress)
+        .filter(p => p.completed && p.quizScore)
+        .map(p => p.quizScore);
+    
+    if (scores.length === 0) return 0;
+    return Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length);
+}
+
+async function resetProgress() {
+    if (!confirm('Are you sure you want to reset your progress? This action cannot be undone.')) {
+        return;
+    }
+
+    try {
+        // Track lesson time before reset
+        trackLessonTime();
+        
+        // Reset local state
+        courseProgress = {};
+        currentLessonIndex = 0;
+        courseSession = {
+            startTime: new Date(),
+            totalStudyTime: 0,
+            lessonsStarted: 0,
+            lessonsCompleted: 0,
+            pageLoadTime: new Date(),
+            interactionCount: 0,
+            lastActivityTime: new Date()
+        };
+        
+        // Delete from database
+        await supabase
+            .from('course_progress')
+            .delete()
+            .eq('user_id', currentUser.id)
+            .eq('course_id', COURSE_DATA.id);
+
+        // Log reset activity
+        logUserActivity('progress_reset', {
+            course_id: COURSE_DATA.id,
+            reset_reason: 'manual'
+        });
+
+        // Reinitialize
+        await saveProgress();
+        renderSidebar();
+        loadLesson(0);
+        
+        showToast('Progress reset successfully', 'success');
+        
+    } catch (error) {
+        console.error('Error resetting progress:', error);
+        showToast('Failed to reset progress', 'error');
+    }
+}
+
+function copyCode(codeId) {
+    const codeElement = document.getElementById(codeId);
+    if (!codeElement) return;
+    
+    const text = codeElement.textContent;
+    
+    navigator.clipboard.writeText(text).then(() => {
+        showToast('Code copied to clipboard!', 'success');
+        
+        // Track code copy for achievements
+        logUserActivity('code_copied', {
+            code_section: codeId,
+            lesson_id: COURSE_DATA.lessons[currentLessonIndex].id
+        });
+        
+    }).catch(err => {
+        console.error('Failed to copy code:', err);
+        showToast('Failed to copy code', 'error');
+        
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast('Code copied to clipboard!', 'success');
+        } catch (fallbackError) {
+            showToast('Copy failed - please select and copy manually', 'error');
+        }
+        document.body.removeChild(textArea);
+    });
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// =====================================================
+// UI FEEDBACK SYSTEMS
+// =====================================================
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    const messageEl = document.getElementById('toastMessage');
+    
+    if (!toast || !messageEl) {
+        console.log(`Toast: ${message} (${type})`);
+        return;
+    }
+    
+    messageEl.textContent = message;
+    toast.className = `toast ${type} show`;
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 4000);
+}
+
+function showLoadingScreen() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) loadingScreen.classList.remove('hidden');
+}
+
+function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 1000);
+    }
+}
+
+// =====================================================
+// MUSIC PLAYER INTEGRATION
+// =====================================================
+function initMusicPlayer() {
+    const btnText = document.getElementById('music-button-text');
+    const icon = document.getElementById('music-icon');
+    const dropdown = document.getElementById('music-dropdown-content');
+    
+    if (!btnText || !icon || !dropdown) return;
+    
+    function setUI(state) {
+        btnText.textContent = state === "Playing" ? "PAUSE MUSIC" : "STUDY MUSIC";
+        icon.className = state === "Playing" ? "fa-solid fa-circle-pause" : "fa-solid fa-music";
+    }
+
+    // Load saved music state
+    const savedSrc = localStorage.getItem("cybersec_music_src");
+    const savedTime = parseFloat(localStorage.getItem("cybersec_music_time") || 0);
+    
+    if (savedSrc) {
+        audioPlayer.src = savedSrc;
+        audioPlayer.currentTime = savedTime;
+        audioPlayer.play()
+            .then(() => setUI("Playing"))
+            .catch(() => setUI("Stopped"));
+    }
+
+    // Music button click handler
+    document.getElementById('music-dropdown').querySelector('button').addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        
+        if (audioPlayer.src && !audioPlayer.paused) {
+            audioPlayer.pause();
+            setUI("Stopped");
+        } else if (audioPlayer.src) {
+            audioPlayer.play().then(() => setUI("Playing"));
+        }
+    });
+
+    // Music selection handlers
+    dropdown.querySelectorAll("a[data-src]").forEach((link) => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            audioPlayer.src = link.dataset.src;
+            audioPlayer.play().then(() => setUI("Playing"));
+            localStorage.setItem("cybersec_music_src", link.dataset.src);
+            dropdown.style.display = "none";
+        });
+    });
+
+    // Stop music handler
+    const stopLink = document.getElementById("stop-music-link");
+    if (stopLink) {
+        stopLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+            audioPlayer.removeAttribute("src");
+            setUI("Stopped");
+            localStorage.removeItem("cybersec_music_src");
+            localStorage.removeItem("cybersec_music_time");
+            dropdown.style.display = "none";
+        });
+    }
+
+    // Save music state before page unload
+    window.addEventListener("beforeunload", () => {
+        if (!audioPlayer.paused && audioPlayer.src) {
+            localStorage.setItem("cybersec_music_src", audioPlayer.src);
+            localStorage.setItem(
+                "cybersec_music_time",
+                audioPlayer.currentTime
+            );
+        }
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener("click", (e) => {
+        if (!e.target.closest("#music-dropdown")) {
+            dropdown.style.display = "none";
+        }
+    });
+}
+
+// Show initial music indicator
+function addMusicIndicator() {
+    const musicBtn = document.querySelector("#music-dropdown");
+    if (musicBtn) {
+        const indicator = document.createElement("div");
+        indicator.className = "music-indicator";
+        indicator.innerHTML = `<i class="fa-solid fa-music"></i> Try Study Music!`;
+
+        musicBtn.style.position = "relative";
+        musicBtn.appendChild(indicator);
+
+        setTimeout(() => indicator.remove(), 3000);
+    }
+}
+
+// Initialize Event Listeners
+function initializeEventListeners() {
+    // Navigation buttons
+    document.getElementById('prevLessonBtn')?.addEventListener('click', goToPreviousLesson);
+    document.getElementById('nextLessonBtn')?.addEventListener('click', goToNextLesson);
+
+    // Reset progress button
+    document.getElementById('resetProgressBtn')?.addEventListener('click', resetProgress);
+
+    // Mobile menu toggle
+    document.getElementById('menuToggle')?.addEventListener('click', toggleSidebar);
+    document.getElementById('sidebarOverlay')?.addEventListener('click', closeSidebar);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', handleKeyboardShortcuts);
+
+    // Window resize handler
+    window.addEventListener('resize', handleWindowResize);
+
+    // Content interaction tracking
+    document.getElementById('contentBody')?.addEventListener('scroll', debounce(() => {
+        trackUserInteraction();
+    }, 1000));
+}
+
+// Keyboard Shortcuts
+function handleKeyboardShortcuts(e) {
+    if (document.querySelector('.quiz-question.active')) return;
+
+    if (e.key === 'ArrowLeft' && e.ctrlKey) {
+        e.preventDefault();
+        goToPreviousLesson();
+    } else if (e.key === 'ArrowRight' && e.ctrlKey) {
+        e.preventDefault();
+        goToNextLesson();
+    }
+}
+
+// Window Resize Handler
+function handleWindowResize() {
+    if (window.innerWidth > 768) {
+        closeSidebar();
+    }
+}
+
+// Debounce Helper
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Initialize responsive behavior
+if (window.innerWidth <= 768) {
+    document.getElementById('menuToggle').style.display = 'inline-flex';
+}
+
+// Auto-save progress periodically
+setInterval(async () => {
+    if (currentUser && Object.keys(courseProgress).length > 0) {
+        await saveProgress();
+    }
+}, 60000); // Save every minute
+
+// System initialization logging
+console.log('CyberSec Academy Course System Initialized');
+console.log('Current Course:', COURSE_DATA.title);
+console.log('Total Lessons:', COURSE_DATA.lessons.length);
+
+// Google OAuth Integration
+const googleBtn = document.querySelector(".btn-google");
+if (googleBtn) {
+    googleBtn.addEventListener("click", async () => {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: window.location.origin + "/courses/computer-networking-basics",
+            },
+        });
+
+        if (error) {
+            console.error("Google login error:", error.message);
+            showToast("Google login failed: " + error.message, "error");
+        }
+    });
+}
+
+// Check for existing session
+supabase.auth.getSession().then(({ data }) => {
+    if (data.session) {
+        console.log("User already logged in:", data.session.user);
+        currentUser = data.session.user;
+        startCourseSession();
+    }
+});
+
+
+// Add missing auth modal functions
+function openAuthModal() {
+    const modal = document.getElementById('authModal');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function closeAuthModal() {
+    const modal = document.getElementById('authModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Add auth tab switching functionality
+document.getElementById('tabSignIn')?.addEventListener('click', () => {
+    document.getElementById('tabSignIn').classList.add('active');
+    document.getElementById('tabSignUp').classList.remove('active');
+    document.getElementById('signInForm').style.display = 'block';
+    document.getElementById('signUpForm').style.display = 'none';
+});
+
+document.getElementById('tabSignUp')?.addEventListener('click', () => {
+    document.getElementById('tabSignUp').classList.add('active');
+    document.getElementById('tabSignIn').classList.remove('active');
+    document.getElementById('signUpForm').style.display = 'block';
+    document.getElementById('signInForm').style.display = 'none';
+});
+
+document.getElementById('closeAuthModal')?.addEventListener('click', closeAuthModal);
+
+// Improved error handling for auth session
+supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN') {
+        currentUser = session.user;
+        closeAuthModal();
+        startCourseSession();
+    } else if (event === 'SIGNED_OUT') {
+        currentUser = null;
+        openAuthModal();
+    }
+});
+
+// Add form submission handlers
+document.getElementById('emailSignInForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('signInEmail').value;
+    const password = document.getElementById('signInPassword').value;
+    
+    try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password
+        });
+        
+        if (error) throw error;
+        
+        closeAuthModal();
+    } catch (error) {
+        showToast(error.message, 'error');
+    }
+});
+
+document.getElementById('emailSignUpForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('signUpEmail').value;
+    const password = document.getElementById('signUpPassword').value;
+    const name = document.getElementById('signUpName').value;
+    
+    try {
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    full_name: name
+                }
+            }
+        });
+        
+        if (error) throw error;
+        
+        showToast('Account created successfully! Please check your email.', 'success');
+    } catch (error) {
+        showToast(error.message, 'error');
+    }
+});
+    </script>
+</body>
+
+</html>

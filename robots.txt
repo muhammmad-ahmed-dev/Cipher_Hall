@@ -1,0 +1,22 @@
+User-agent: *
+
+# Block server directories and other non-public paths
+Disallow: /var/
+Disallow: /etc/
+Disallow: /dev/
+Disallow: /bin/
+Disallow: /captures/
+Disallow: /forensic_cases/
+Disallow: /private/
+Disallow: /sensitive_data/
+Disallow: /api/
+Disallow: /profiles/
+Disallow: /documents/
+Disallow: /home/
+Disallow: /modules/
+Disallow: /v1/
+
+# Block search results pages to prevent infinite URLs
+Disallow: /search
+
+Sitemap: https://cipherhall.com/sitemap.xml

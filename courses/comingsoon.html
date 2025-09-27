@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Courses Coming Soon - CyberSec Academy</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&family=Exo+2:wght@700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<meta name="robots" content="noindex, nofollow">
+    <style>
+        :root {
+            --color-black: #050505;
+            --color-dark-grey: #111111;
+            --color-green: #00ff41;
+            --color-red: #ff073a;
+            --color-white: #f0f0f0;
+            --color-gold: #ffd700;
+            --font-primary: "Exo 2", sans-serif;
+            --font-secondary: "Roboto Mono", monospace;
+            --sidebar-width: 280px;
+            --border-radius: 12px;
+            --shadow-light: 0 2px 10px rgba(0, 255, 65, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 255, 65, 0.15);
+            --shadow-heavy: 0 15px 35px rgba(0, 255, 65, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--color-black) 0%, #0a0a0a 100%);
+            color: var(--color-white);
+            font-family: var(--font-secondary);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+        
+        /* Sidebar and General Layout Styles (Copied for consistency) */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background: linear-gradient(135deg, var(--color-green), #00e63a);
+            color: var(--color-black);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-medium);
+            transition: var(--transition);
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--color-dark-grey) 0%, #0f0f0f 100%);
+            border-right: 1px solid rgba(0, 255, 65, 0.3);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar-header {
+            padding: 2rem;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .logo {
+            font-family: var(--font-primary);
+            font-size: 1.5rem;
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: var(--color-green);
+        }
+
+        .logo i {
+            color: var(--color-green);
+            margin-right: 8px;
+            font-size: 1.3rem;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: var(--color-green);
+            border-left-color: var(--color-green);
+        }
+
+        .nav-item i {
+            width: 20px;
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        .sidebar-footer {
+            padding: 2rem;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--color-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .page-header {
+            margin-bottom: 3rem;
+        }
+
+        .page-title-section h1 {
+            font-family: var(--font-primary);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--color-white), var(--color-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-green), #00e63a);
+            color: var(--color-black);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay { display: block; }
+            .main-content { margin-left: 0; padding: 1rem; padding-top: 5rem; }
+        }
+
+        /* --- COMING SOON PAGE STYLES --- */
+
+        .coming-soon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 70vh;
+            background: linear-gradient(135deg, var(--color-dark-grey), #0f0f0f);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            border-radius: var(--border-radius);
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .construction-icon {
+            font-size: 5rem;
+            color: var(--color-gold);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: icon-pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes icon-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .coming-soon-container h2 {
+            font-family: var(--font-primary);
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--color-white);
+        }
+        
+        .coming-soon-container p {
+            color: #aaa;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+        
+        /* Countdown Timer */
+        #countdown {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .countdown-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: var(--border-radius);
+            padding: 1rem 1.5rem;
+            min-width: 100px;
+        }
+        
+        .countdown-item span {
+            display: block;
+            font-family: var(--font-primary);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-gold);
+        }
+        
+        .countdown-item small {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        @media (max-width: 576px) {
+            #countdown {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button id="mobileMenuToggle" class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="/index" class="logo">
+                <i class="fas fa-shield-virus"></i>
+                CyberSec Academy
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/dashboard" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="/index" class="nav-item">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="/AllCourses" class="nav-item active"> <!-- Active Link -->
+                <i class="fas fa-book"></i> Courses
+            </a>
+            <a href="/Labs" class="nav-item">
+                <i class="fas fa-flask"></i> Lab Sessions
+            </a>
+            <a href="/news" class="nav-item">
+                <i class="fas fa-chart-line"></i> News
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="user-avatar"><i class="fas fa-user"></i></div>
+                <div>
+                    <div class="user-name">Hacker</div>
+                    <small class="user-level">Beginner</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="page-header">
+            <div class="page-title-section">
+                <h1>New Courses Inbound</h1>
+            </div>
+        </header>
+
+        <!-- Coming Soon Section -->
+        <section class="coming-soon-container">
+            <i class="fas fa-cogs construction-icon"></i>
+            <h2>More Courses Coming Soon!</h2>
+            <p>
+                Our team is working hard to develop the next wave of cutting-edge cybersecurity courses. New content is currently being finalized and will be deployed to the academy shortly.
+            </p>
+            <div id="countdown">
+                <div class="countdown-item">
+                    <span id="days">00</span>
+                    <small>Days</small>
+                </div>
+                <div class="countdown-item">
+                    <span id="hours">00</span>
+                    <small>Hours</small>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">00</span>
+                    <small>Minutes</small>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span>
+                    <small>Seconds</small>
+                </div>
+            </div>
+            <a href="/AllCourses" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> View All Available Courses
+            </a>
+        </section>
+    </main>
+
+    <script>
+        // --- Mobile Menu ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.getElementById('mobileMenuToggle');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+            }
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', () => sidebar.classList.remove('open'));
+            }
+        });
+
+        // --- Countdown Timer ---
+        function startCountdown() {
+            // Set a future date (2 days from now)
+            const countdownDate = new Date().getTime() + (2 * 24 * 60 * 60 * 1000);
+
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    document.getElementById('countdown').innerHTML = "<h3>New courses are now available!</h3>";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                const format = (num) => (num < 10 ? '0' + num : num);
+
+                document.getElementById('days').innerText = format(days);
+                document.getElementById('hours').innerText = format(hours);
+                document.getElementById('minutes').innerText = format(minutes);
+                document.getElementById('seconds').innerText = format(seconds);
+            }, 1000);
+        }
+
+        startCountdown();
+    </script>
+</body>
+</html>
